@@ -1,0 +1,5 @@
+    - user:
+        + uid:Key của mỗi user
+        + phoneNumber: số điện thoại của user
+        + photoURL: ảnh
+        + displayName: 

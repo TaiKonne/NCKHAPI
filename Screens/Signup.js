@@ -59,6 +59,7 @@ const Signup = ({ navigation }) => {
             placeholder='Nhập tên của bạn...'
             placeholderTextColor={'gray'}
             style={{
+                color: 'black',
                 paddingLeft: 15,
                 width: '80%',
                 height: 50,
@@ -76,6 +77,7 @@ const Signup = ({ navigation }) => {
             placeholder='Nhập email...'
             placeholderTextColor={'gray'}
             style={{
+                color: 'black',
                 paddingLeft: 15,
                 width: '80%',
                 height: 50,
@@ -93,6 +95,7 @@ const Signup = ({ navigation }) => {
             placeholder='Nhập mật khẩu...'
             placeholderTextColor={'gray'}
             style={{
+                color: 'black',
                 paddingLeft: 15,
                 width: '80%',
                 height: 50,

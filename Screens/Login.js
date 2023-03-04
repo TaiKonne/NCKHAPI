@@ -5,8 +5,8 @@ import messaging from '@react-native-firebase/messaging';
 let token = '';
 
 const Login = ({ navigation }) => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('taichuotchuoi@gmail.com')
+    const [password, setPassword] = useState('12345678')
 
     const checkLogin = () => { // build.gradle
         firestore()
@@ -20,6 +20,7 @@ const Login = ({ navigation }) => {
                     if (querySnapshot.docs[0]._data.email === email &&
                         querySnapshot.docs[0]._data.password === password) {
                         alert("Đăng nhập thành công!")
+                        navigation.navigate('Home')
                     }
                     else {
                         alert("Tài khoản hoặc mật khẩu đã sai hoặc không tồn tại tài khoản!")
@@ -58,6 +59,7 @@ const Login = ({ navigation }) => {
             placeholder='Nhập email...'
             placeholderTextColor={'gray'}
             style={{
+                color: 'black',
                 paddingLeft: 15,
                 width: '80%',
                 height: 50,
@@ -76,6 +78,7 @@ const Login = ({ navigation }) => {
             placeholder='Nhập mật khẩu...'
             placeholderTextColor={'gray'}
             style={{
+                color: 'black',
                 paddingLeft: 15,
                 width: '80%',
                 height: 50,

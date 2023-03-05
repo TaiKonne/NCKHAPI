@@ -20,7 +20,7 @@ const Login = ({ navigation }) => {
                     if (querySnapshot.docs[0]._data.email === email &&
                         querySnapshot.docs[0]._data.password === password) {
                         alert("Đăng nhập thành công!")
-                        navigation.navigate('Home')
+                        navigation.navigate('HomeSC')
                     }
                     else {
                         alert("Tài khoản hoặc mật khẩu đã sai hoặc không tồn tại tài khoản!")

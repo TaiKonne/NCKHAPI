@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import Splash from './Splash'
 import Login from './Login';
 import Signup from './Signup';
-import Home from './Home';
+import HomeSC from './HomeSC';
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
@@ -28,8 +28,8 @@ const AppNavigator = () => {
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
-                    name="Home"
-                    component={props => <Home {...props} />}
+                    name="HomeSC"
+                    component={props => <HomeSC {...props} />}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

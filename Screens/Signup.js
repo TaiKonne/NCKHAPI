@@ -28,13 +28,6 @@ const Signup = ({ navigation }) => {
                 token: token,
             })
             .then(() => {
-                // if (querySnapshot.docs[0]._data.email === email &&
-                //     querySnapshot.docs[0]._data.password === password) {
-                //     alert("Đăng nhập thành công!")
-                // }
-                // else {
-                //     alert("Tài khoản hoặc mật khẩu đã sai hoặc không tồn tại tài khoản!")
-                // }
                 console.log('User added!');
                 navigation.goBack();
             });

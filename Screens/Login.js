@@ -2,6 +2,8 @@ import { View, Text, TouchableOpacity, TextInput } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 let token = '';
 
 const Login = ({ navigation }) => {
@@ -19,7 +21,7 @@ const Login = ({ navigation }) => {
                 if (querySnapshot.docs.length > 0) {
                     if (querySnapshot.docs[0]._data.email === email &&
                         querySnapshot.docs[0]._data.password === password) {
-                        alert("Đăng nhập thành công!")
+                        // alert("Đăng nhập thành công!")
                         navigation.navigate('HomeSC')
                     }
                     else {
@@ -30,6 +32,8 @@ const Login = ({ navigation }) => {
                         + ' ' +
                         querySnapshot.docs[0]._data.password,
                     );
+                    AsyncStorage.setItem('name', JSON.stringify(querySnapshot.docs[0]._data.name));
+                    AsyncStorage.setItem('email', JSON.stringify(querySnapshot.docs[0]._data.email));
                 }
                 else {
                     console.log('account not found');

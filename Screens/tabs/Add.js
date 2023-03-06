@@ -1,10 +1,29 @@
 import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 import storage from '@react-native-firebase/storage'
 import firestore from '@react-native-firebase/firestore';
+import messaging from '@react-native-firebase/messaging';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+let token = '';
+let name = '';
+let email = '';
 const Add = () => {
     const [imageData, setImageData] = useState(null);
+    const [caption, setCaption] = useState('');
+
+    useEffect(() => {
+        getFcmToken();
+    }, [])
+
+    const getFcmToken = async () => {
+        // token = await messaging().getToken();
+        name = await AsyncStorage.getItem('NAME');
+        email = await AsyncStorage.getItem('EMAIL');
+        console.log(email, name);
+        console.log(token);
+    };
+
     const openCamera = async () => {
         const result = await launchCamera({ mediaType: 'photo' });
         setImageData(result);
@@ -23,27 +42,33 @@ const Add = () => {
             .ref(imageData.assets[0].fileName)
             .getDownloadURL();
         console.log(url);
+
         firestore()
             .collection('posts')
             .add({
                 image: url,
+                caption: caption,
+                email: email,
+                name: name,
             })
             .then(() => {
                 console.log('Post added!');
             });
-        firestore()
-            .collection('posts')
-            .get()
-            .then(querySnapshot => {
-                console.log('Total posts: ', querySnapshot.size);
 
-                querySnapshot.forEach(documentSnapshot => {
-                    console.log('User ID: ',
-                        documentSnapshot.id,
-                        documentSnapshot.data());
-                });
-            });
+        // firestore()
+        //     .collection('posts')
+        //     .get()
+        //     .then(querySnapshot => {
+        //         console.log('Total posts: ', querySnapshot.size);
+
+        //         querySnapshot.forEach(documentSnapshot => {
+        //             console.log('User ID: ',
+        //                 documentSnapshot.id,
+        //                 documentSnapshot.data());
+        //         });
+        //     });
     };
+
     return (
         <View style={{
             flex: 1,
@@ -69,8 +94,11 @@ const Add = () => {
                     fontSize: 18,
                     color: imageData !== null ? 'blue' : '#8e8e8e',
                 }} onPress={() => {
-                    if (imageData !== null) {
+                    if (imageData !== null || caption !== '') {
                         uploadImage();
+                    }
+                    else {
+                        alert('pls select pic or enter caption')
                     }
                 }}
 
@@ -107,6 +135,11 @@ const Add = () => {
                     />
                 )}
                 <TextInput
+                    value={caption}
+                    onChangeText={(txt) => {
+
+                        setCaption(txt);
+                    }}
                     placeholder='Caption here...'
                     placeholderTextColor={'gray'}
                     style={{

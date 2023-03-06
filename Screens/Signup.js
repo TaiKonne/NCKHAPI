@@ -2,13 +2,16 @@ import { View, Text, TouchableOpacity, TextInput } from 'react-native'
 import React, { useEffect, useState } from 'react'
 // import { TextInput } from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage'
 import messaging from '@react-native-firebase/messaging';
-let token = '';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+let token = '';
 const Signup = ({ navigation }) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
     useEffect(() => {
         getFcmToken();
     }, [])
@@ -29,10 +32,15 @@ const Signup = ({ navigation }) => {
             })
             .then(() => {
                 console.log('User added!');
+                saveLocalData();
                 navigation.goBack();
             });
+            AsyncStorage.setItem('name', JSON.stringify(name));
     }
-
+    const saveLocalData = async () => {
+        await AsyncStorage.setItem('NAME', name);
+        await AsyncStorage.setItem('EMAIL', email);
+    }
     return <View style={{ flex: 1 }}>
         <Text style={{
             color: 'black',

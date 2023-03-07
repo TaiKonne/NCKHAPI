@@ -31,6 +31,15 @@ const Signup = ({ navigation }) => {
             .then(() => {
 
                 console.log('User added!');
+            });
+            firestore()
+            .collection('tokens')
+            .add({
+                token: token,
+            })
+            .then(() => {
+
+                console.log('User added!');
                 saveLocalData();
                 navigation.goBack();
             });

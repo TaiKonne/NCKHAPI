@@ -5,6 +5,8 @@ import storage from '@react-native-firebase/storage'
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+
 let token = '';
 let name = '';
 let email = '';
@@ -36,6 +38,7 @@ const Add = () => {
     const uploadImage = async () => {
         const reference = storage().ref(imageData.assets[0].fileName);
         const pathToFile = imageData.assets[0].uri;
+        // upload file
         await reference.putFile(pathToFile);
         const url = await storage()
             .ref(imageData.assets[0].fileName)
@@ -52,20 +55,52 @@ const Add = () => {
             })
             .then(() => {
                 console.log('Post added!');
+                getAllTokens();
             });
-        // firestore()
-        //     .collection('posts')
-        //     .get()
-        //     .then(querySnapshot => {
-        //         console.log('Total posts: ', querySnapshot.size);
+    };
 
-        //         querySnapshot.forEach(documentSnapshot => {
-        //             console.log('User ID: ',
-        //                 documentSnapshot.id,
-        //                 documentSnapshot.data(),
-        //             );
-        //         });
-        //     });
+    const getAllTokens = () => {
+        let tempTokens = [];
+        firestore()
+            .collection('tokens')
+            .get()
+            .then(querySnapshot => {
+                querySnapshot.forEach(documentSnapshot => {
+                    senNotifications(documentSnapshot.data().token);
+                });
+                senNotifications(tempTokens);
+            });
+    };
+    const senNotifications = async token => {
+        var axios = require('axios');
+        var data = JSON.stringify({
+            data: {},
+            notification: {
+                body: 'click to open check Post',
+                title: 'New Post Added',
+            },
+            to: token,
+        });
+
+
+        var config = {
+            method: 'post',
+            url: 'https://fcm.googleapis.com/fcm/send',
+            headers: {
+                Authorization:
+                    'key=AAAAWjmxLf0:APA91bEbImxRwc9ToVcxOIzvUTRjOoag-BWdJTKzMLMIPsTU5mk4ee_2zH6w76JNA_L7w12bWM3nWpE8qX6i8FkMosDOamEbMAbw7ErARwo2vJLFeZrAez8CyeTjXcm9hVQe12LHWUjo',
+                'Content-Type': 'application/json',
+
+            }
+        }
+
+        axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     };
     return (
         <View style={{
@@ -94,6 +129,7 @@ const Add = () => {
                 }} onPress={() => {
                     if (imageData !== null || caption !== '') {
                         uploadImage();
+                        senNotifications();
                     }
                     else {
                         alert('pls select pic or enter caption')

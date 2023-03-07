@@ -2,8 +2,6 @@ import { View, Text, TouchableOpacity, TextInput } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 let token = '';
 
 const Login = ({ navigation }) => {
@@ -32,8 +30,6 @@ const Login = ({ navigation }) => {
                         + ' ' +
                         querySnapshot.docs[0]._data.password,
                     );
-                    AsyncStorage.setItem('name', JSON.stringify(querySnapshot.docs[0]._data.name));
-                    AsyncStorage.setItem('email', JSON.stringify(querySnapshot.docs[0]._data.email));
                 }
                 else {
                     console.log('account not found');

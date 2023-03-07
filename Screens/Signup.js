@@ -2,26 +2,24 @@ import { View, Text, TouchableOpacity, TextInput } from 'react-native'
 import React, { useEffect, useState } from 'react'
 // import { TextInput } from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
-import storage from '@react-native-firebase/storage'
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 let token = '';
-const Signup = ({ navigation }) => {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
 
+const Signup = ({ navigation }) => {
+    const [name, setName] = useState('Tai')
+    const [email, setEmail] = useState('taichuotchuoi@gmail.com')
+    const [password, setPassword] = useState('12345678')
     useEffect(() => {
         getFcmToken();
-    }, [])
+    }, []);
 
     const getFcmToken = async () => {
-        let token = await messaging().getToken();
+        token = await messaging().getToken();
         console.log(token);
     }
 
-    const saveData = () => { // build.gradle
+    const saveData = () => {
         firestore()
             .collection('Users')
             .add({
@@ -31,15 +29,16 @@ const Signup = ({ navigation }) => {
                 token: token,
             })
             .then(() => {
+
                 console.log('User added!');
                 saveLocalData();
                 navigation.goBack();
             });
-            AsyncStorage.setItem('name', JSON.stringify(name));
     }
     const saveLocalData = async () => {
         await AsyncStorage.setItem('NAME', name);
         await AsyncStorage.setItem('EMAIL', email);
+        // await AsyncStorage.setItem('TOKEN', token);
     }
     return <View style={{ flex: 1 }}>
         <Text style={{

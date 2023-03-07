@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 import storage from '@react-native-firebase/storage'
 import firestore from '@react-native-firebase/firestore';
@@ -14,15 +14,14 @@ const Add = () => {
 
     useEffect(() => {
         getFcmToken();
-    }, [])
+    }, []);
 
     const getFcmToken = async () => {
         // token = await messaging().getToken();
         name = await AsyncStorage.getItem('NAME');
         email = await AsyncStorage.getItem('EMAIL');
-        console.log(email, name);
-        console.log(token);
-    };
+        console.log(token, name, email);
+    }
 
     const openCamera = async () => {
         const result = await launchCamera({ mediaType: 'photo' });
@@ -42,7 +41,6 @@ const Add = () => {
             .ref(imageData.assets[0].fileName)
             .getDownloadURL();
         console.log(url);
-
         firestore()
             .collection('posts')
             .add({
@@ -50,11 +48,11 @@ const Add = () => {
                 caption: caption,
                 email: email,
                 name: name,
+                // token:token,
             })
             .then(() => {
                 console.log('Post added!');
             });
-
         // firestore()
         //     .collection('posts')
         //     .get()
@@ -64,11 +62,11 @@ const Add = () => {
         //         querySnapshot.forEach(documentSnapshot => {
         //             console.log('User ID: ',
         //                 documentSnapshot.id,
-        //                 documentSnapshot.data());
+        //                 documentSnapshot.data(),
+        //             );
         //         });
         //     });
     };
-
     return (
         <View style={{
             flex: 1,

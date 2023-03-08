@@ -10,6 +10,7 @@ import axios from 'axios';
 let token = '';
 let name = '';
 let email = '';
+let ui = '';
 const Add = () => {
     const [imageData, setImageData] = useState(null);
     const [caption, setCaption] = useState('');
@@ -22,7 +23,8 @@ const Add = () => {
         // token = await messaging().getToken();
         name = await AsyncStorage.getItem('NAME');
         email = await AsyncStorage.getItem('EMAIL');
-        console.log(token, name, email);
+        ui = await AsyncStorage.getItem('USERID');
+        console.log(name, email, ui);
     }
 
     const openCamera = async () => {

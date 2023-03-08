@@ -4,12 +4,14 @@ import React, { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'react-native-uuid';
 let token = '';
 
 const Signup = ({ navigation }) => {
     const [name, setName] = useState('Tai')
     const [email, setEmail] = useState('taichuotchuoi@gmail.com')
-    const [password, setPassword] = useState('12345678')
+    const [password, setPassword] = useState('12345678');
+    const [modalVisble, setModalVisble] = useState(false);
     useEffect(() => {
         getFcmToken();
     }, []);
@@ -20,6 +22,7 @@ const Signup = ({ navigation }) => {
     }
 
     const saveData = () => {
+        setModalVisble(true);
         firestore()
             .collection('Users')
             .add({
@@ -27,22 +30,24 @@ const Signup = ({ navigation }) => {
                 email: email,
                 password: password,
                 token: token,
+                userId: uuid.v4(),
             })
             .then(() => {
 
                 console.log('User added!');
             });
-            firestore()
+        firestore()
             .collection('tokens')
             .add({
                 token: token,
             })
             .then(() => {
-
+                setModalVisble(false);
                 console.log('User added!');
                 saveLocalData();
                 navigation.goBack();
             });
+        setModalVisble(false);
     }
     const saveLocalData = async () => {
         await AsyncStorage.setItem('NAME', name);

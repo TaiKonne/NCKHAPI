@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, TextInput } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 let token = '';
 
 const Login = ({ navigation }) => {
@@ -20,7 +21,9 @@ const Login = ({ navigation }) => {
                     if (querySnapshot.docs[0]._data.email === email &&
                         querySnapshot.docs[0]._data.password === password) {
                         // alert("Đăng nhập thành công!")
-                        navigation.navigate('HomeSC')
+                        goToHome(querySnapshot.docs[0]._data.userId);
+
+                        // navigation.navigate('HomeSC')
                     }
                     else {
                         alert("Tài khoản hoặc mật khẩu đã sai hoặc không tồn tại tài khoản!")
@@ -28,7 +31,9 @@ const Login = ({ navigation }) => {
                     console.log(
                         querySnapshot.docs[0]._data.email
                         + ' ' +
-                        querySnapshot.docs[0]._data.password,
+                        querySnapshot.docs[0]._data.password
+                        + ' ' +
+                        querySnapshot.docs[0]._data.userId
                     );
                 }
                 else {
@@ -39,6 +44,13 @@ const Login = ({ navigation }) => {
                 console.log(error);
             });
     }
+    const goToHome = async userId => {
+
+        await AsyncStorage.setItem('USERID', userId);
+        navigation.navigate('HomeSC')
+
+    }
+
 
     return <View style={{ flex: 1 }}>
         <Text style={{

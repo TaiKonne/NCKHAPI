@@ -22,15 +22,21 @@ const Signup = ({ navigation }) => {
     }
 
     const saveData = () => {
+        let id = uuid.v4();
         setModalVisble(true);
         firestore()
             .collection('Users')
-            .add({
+            .doc(id)
+            .set({
                 name: name,
                 email: email,
                 password: password,
                 token: token,
-                userId: uuid.v4(),
+                userId: id,
+                followers: [],
+                posts: [],
+                profilePic: '',
+                bio: '',
             })
             .then(() => {
 

@@ -7,6 +7,7 @@ import Login from './Login';
 import Signup from './Signup';
 import HomeSC from './HomeSC';
 import Comments from './Comments';
+import Profile from './tabs/Profile';
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {

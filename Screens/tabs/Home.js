@@ -5,7 +5,6 @@ import firestore from '@react-native-firebase/firestore';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 let userId = '';
-
 const Home = () => {
     const navigation = useNavigation();
     const [onLikeClick, setOnLikeCLick] = useState(false);
@@ -72,7 +71,6 @@ const Home = () => {
 
     const getLikesStaus = likes => {
         let status = false;
-
         likes.map(item => {
             if (item === userId) {
                 status = true;
@@ -82,7 +80,6 @@ const Home = () => {
         });
         return status;
     };
-
     return (
         <View style={{ flex: 1 }}>
             <View
@@ -92,7 +89,8 @@ const Home = () => {
                     justifyContent: 'center',
                     paddingLeft: 20,
                     backgroundColor: '#fff',
-                }}><Text style={{ fontSize: 20, color: '#000', fontWeight: '700' }}>
+                }}>
+                <Text style={{ fontSize: 20, color: '#000', fontWeight: '700', color: 'black' }}>
                     Firebase Demo
                 </Text>
             </View>
@@ -114,9 +112,9 @@ const Home = () => {
                                     marginBottom: postData.length - 1 == index ? 70 : 0,
                                 }}>
                                 {/* <Image
-              source={{uri: item.image}}
-              style={{width: '100%', height: '100%'}}
-            /> */}
+                  source={{uri: item.image}}
+                  style={{width: '100%', height: '100%'}}
+                /> */}
                                 <View
                                     style={{
                                         flexDirection: 'row',
@@ -124,7 +122,7 @@ const Home = () => {
                                         marginTop: 10,
                                     }}>
                                     <Image
-                                        source={require('../../front_end/icons/user_1.png')}
+                                        source={require('../images/user.png')}
                                         style={{
                                             width: 40,
                                             height: 40,
@@ -143,6 +141,7 @@ const Home = () => {
                                         marginLeft: 20,
                                         marginRight: 20,
                                         marginBottom: 10,
+                                        color: 'black',
                                     }}>
                                     {item.caption}
                                 </Text>
@@ -175,12 +174,12 @@ const Home = () => {
                                         </Text>
                                         {getLikesStaus(item.likes) ? (
                                             <Image
-                                                source={require('../../front_end/icons/like.png')}
+                                                source={require('../images/heart.png')}
                                                 style={{ width: 24, height: 24, tintColor: 'red' }}
                                             />
                                         ) : (
                                             <Image
-                                                source={require('../../front_end/icons/unlike.png')}
+                                                source={require('../images/love.png')}
                                                 style={{ width: 24, height: 24 }}
                                             />
                                         )}
@@ -193,11 +192,11 @@ const Home = () => {
                                                 comments: item.comments,
                                             });
                                         }}>
-                                        <Text style={{ marginRight: 10, color: 'black', }}>
+                                        <Text style={{ marginRight: 10, color: 'black' }}>
                                             {item.comments.length}
                                         </Text>
                                         <Image
-                                            source={require('../../front_end/icons/comment.png')}
+                                            source={require('../images/comment.png')}
                                             style={{ width: 24, height: 24 }}
                                         />
                                     </TouchableOpacity>
@@ -207,7 +206,7 @@ const Home = () => {
                     }}
                 />
             ) : (
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', color: 'black' }}>
                     <Text>No Post Found</Text>
                 </View>
             )}

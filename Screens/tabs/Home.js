@@ -5,6 +5,7 @@ import firestore from '@react-native-firebase/firestore';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 let userId = '';
+
 const Home = () => {
     const navigation = useNavigation();
     const [onLikeClick, setOnLikeCLick] = useState(false);
@@ -41,7 +42,7 @@ const Home = () => {
     const onLike = item => {
         let tempLikes = item.likes;
         if (tempLikes.length > 0) {
-            tempLikes && tempLikes.map(item1 => {
+            tempLikes.map(item1 => {
                 if (userId === item1) {
                     const index = tempLikes.indexOf(item1);
                     if (index > -1) {
@@ -71,6 +72,7 @@ const Home = () => {
 
     const getLikesStaus = likes => {
         let status = false;
+
         likes.map(item => {
             if (item === userId) {
                 status = true;
@@ -80,6 +82,7 @@ const Home = () => {
         });
         return status;
     };
+
     return (
         <View style={{ flex: 1 }}>
             <View
@@ -130,7 +133,7 @@ const Home = () => {
                                         }}
                                     />
                                     <Text
-                                        style={{ fontSize: 18, marginLeft: 15, fontWeight: '600' }}>
+                                        style={{ fontSize: 18, marginLeft: 15, fontWeight: '600', color: 'black' }}>
                                         {item.name}
                                     </Text>
                                 </View>
@@ -167,17 +170,17 @@ const Home = () => {
                                             onLike(item);
                                         }}
                                         style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        <Text style={{ marginRight: 10, fontSize: 18 }}>
+                                        <Text style={{ marginRight: 10, fontSize: 18, color: 'black' }}>
                                             {item.likes.length}
                                         </Text>
                                         {getLikesStaus(item.likes) ? (
                                             <Image
-                                                source={require('../../front_end/icons/unlike.png')}
+                                                source={require('../../front_end/icons/like.png')}
                                                 style={{ width: 24, height: 24, tintColor: 'red' }}
                                             />
                                         ) : (
                                             <Image
-                                                source={require('../../front_end/icons/like.png')}
+                                                source={require('../../front_end/icons/unlike.png')}
                                                 style={{ width: 24, height: 24 }}
                                             />
                                         )}
@@ -190,7 +193,7 @@ const Home = () => {
                                                 comments: item.comments,
                                             });
                                         }}>
-                                        <Text style={{ marginRight: 10 }}>
+                                        <Text style={{ marginRight: 10, color: 'black', }}>
                                             {item.comments.length}
                                         </Text>
                                         <Image

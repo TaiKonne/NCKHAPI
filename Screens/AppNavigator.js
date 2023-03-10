@@ -6,6 +6,7 @@ import Splash from './Splash'
 import Login from './Login';
 import Signup from './Signup';
 import HomeSC from './HomeSC';
+import Comments from './Comments';
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
@@ -30,6 +31,11 @@ const AppNavigator = () => {
                 <Stack.Screen
                     name="HomeSC"
                     component={props => <HomeSC {...props} />}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Comments"
+                    component={props => <Comments {...props} />}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

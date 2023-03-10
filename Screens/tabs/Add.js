@@ -5,16 +5,17 @@ import storage from '@react-native-firebase/storage'
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
-
+import uuid from 'react-native-uuid';
+import Loader from '../common/Loader'
 let token = '';
 let name = '';
 let email = '';
 let ui = '';
+
 const Add = () => {
     const [imageData, setImageData] = useState(null);
     const [caption, setCaption] = useState('');
-
+    const [modalVisivle, setModalVisible] = useState(false);
     useEffect(() => {
         getFcmToken();
     }, []);
@@ -37,10 +38,13 @@ const Add = () => {
         setImageData(result);
         console.log(result);
     };
+
     const uploadImage = async () => {
+        setModalVisible(true);
+        let id = uuid.v4();
         const reference = storage().ref(imageData.assets[0].fileName);
         const pathToFile = imageData.assets[0].uri;
-        // upload file
+        const userId = await AsyncStorage.getItem('USERID');
         await reference.putFile(pathToFile);
         const url = await storage()
             .ref(imageData.assets[0].fileName)
@@ -53,57 +57,62 @@ const Add = () => {
                 caption: caption,
                 email: email,
                 name: name,
-                // token:token,
+                userId: userId,
+                postId: id,
+                likes: [],
+                comments: [],
             })
             .then(() => {
                 console.log('Post added!');
-                getAllTokens();
-            });
-    };
-
-    const getAllTokens = () => {
-        let tempTokens = [];
-        firestore()
-            .collection('tokens')
-            .get()
-            .then(querySnapshot => {
-                querySnapshot.forEach(documentSnapshot => {
-                    senNotifications(documentSnapshot.data().token);
-                });
-                senNotifications(tempTokens);
-            });
-    };
-    const senNotifications = async token => {
-        var axios = require('axios');
-        var data = JSON.stringify({
-            data: {},
-            notification: {
-                body: 'click to open check Post',
-                title: 'New Post Added',
-            },
-            to: token,
-        });
-
-
-        var config = {
-            method: 'post',
-            url: 'https://fcm.googleapis.com/fcm/send',
-            headers: {
-                Authorization:
-                    'key=AAAAWjmxLf0:APA91bEbImxRwc9ToVcxOIzvUTRjOoag-BWdJTKzMLMIPsTU5mk4ee_2zH6w76JNA_L7w12bWM3nWpE8qX6i8FkMosDOamEbMAbw7ErARwo2vJLFeZrAez8CyeTjXcm9hVQe12LHWUjo',
-                'Content-Type': 'application/json',
-
-            }
-        }
-
-        axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
+                // getAllTokens();
+            }).catch(error => {
+                setModalVisible(false);
             })
-            .catch(function (error) {
-                console.log(error);
-            });
     };
+
+    // const getAllTokens = () => {
+    //     let tempTokens = [];
+    //     firestore()
+    //         .collection('tokens')
+    //         .get()
+    //         .then(querySnapshot => {
+    //             querySnapshot.forEach(documentSnapshot => {
+    //                 senNotifications(documentSnapshot.data().token);
+    //             });
+    //             senNotifications(tempTokens);
+    //         });
+    // };
+    // const senNotifications = async token => {
+    //     var axios = require('axios');
+    //     var data = JSON.stringify({
+    //         data: {},
+    //         notification: {
+    //             body: 'click to open check Post',
+    //             title: 'New Post Added',
+    //         },
+    //         to: token,
+    //     });
+
+
+    // var config = {
+    //     method: 'post',
+    //     url: 'https://fcm.googleapis.com/fcm/send',
+    //     headers: {
+    //         Authorization:
+    //             'key=AAAAWjmxLf0:APA91bEbImxRwc9ToVcxOIzvUTRjOoag-BWdJTKzMLMIPsTU5mk4ee_2zH6w76JNA_L7w12bWM3nWpE8qX6i8FkMosDOamEbMAbw7ErARwo2vJLFeZrAez8CyeTjXcm9hVQe12LHWUjo',
+    //         'Content-Type': 'application/json',
+
+    //     }
+    // }
+
+    // axios(config)
+    //     .then(function (response) {
+    //         console.log(JSON.stringify(response.data));
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error);
+    //     });
+    // };
     return (
         <View style={{
             flex: 1,
@@ -131,7 +140,7 @@ const Add = () => {
                 }} onPress={() => {
                     if (imageData !== null || caption !== '') {
                         uploadImage();
-                        senNotifications();
+                        // senNotifications();
                     }
                     else {
                         alert('pls select pic or enter caption')
@@ -228,6 +237,7 @@ const Add = () => {
                     color: 'black'
                 }}>Open Gallery</Text>
             </TouchableOpacity>
+            <Loader modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </View>
     );
 };

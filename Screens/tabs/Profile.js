@@ -6,19 +6,23 @@ import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import { useNavigation } from '@react-navigation/native';
 let userId = '';
+let names = '';
 const Profile = () => {
     const navigation = useNavigation();
     const [imageData, setImageData] = useState(null);
     const [imagePicked, setImagePicked] = useState(false);
-    const [uplaodedPicUrl, setUplaodedPicUrl] = useState('');
+    const [UploadedPicUrl, setUploadedPicUrl] = useState('');
     const [selectedTab, setSelectedTab] = useState(0);
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
+
     useEffect(() => {
         getProfileData();
     }, []);
+
     const getProfileData = async () => {
         userId = await AsyncStorage.getItem('USERID');
+        names = await AsyncStorage.getItem('NAME');
         firestore()
             .collection('Users')
             .doc(userId)
@@ -28,7 +32,7 @@ const Profile = () => {
 
                 if (documentSnapshot.exists) {
                     console.log('User data: ', documentSnapshot.data());
-                    setUplaodedPicUrl(documentSnapshot.data().profilePic);
+                    setUploadedPicUrl(documentSnapshot.data().profilePic);
                     setFollowers(documentSnapshot.data().followers);
                     setFollowing(documentSnapshot.data().following);
                     console.log('data ', documentSnapshot.data().following);
@@ -44,8 +48,13 @@ const Profile = () => {
     };
     const openGallery = async () => {
         const result = await launchImageLibrary({ mediaType: 'photo' });
-        setImageData(result);
-        console.log(result);
+        console.log("User selected image " + JSON.stringify(result));
+
+        // Check is user select picture yet
+        if (result.assets != null || result.didCancel == false) {
+            setImagePicked(true);
+            setImageData(result);
+        }
     };
     const uploadProfilePic = async () => {
         const reference = storage().ref(imageData.assets[0].fileName);
@@ -54,7 +63,12 @@ const Profile = () => {
         const url = await storage()
             .ref(imageData.assets[0].fileName)
             .getDownloadURL();
+
+        // Reset image url when uploaded
+        // Fix image auto change to old image before new image was uploaded
+        setUploadedPicUrl(url);
         saveProfileToStore(url);
+        setImagePicked(false);
     };
 
     const saveProfileToStore = async url => {
@@ -109,23 +123,32 @@ const Profile = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-                {imagePicked == true ? (
-                    <Image
-                        source={{ uri: imageData.assets[0].uri }}
-                        style={{ width: 100, height: 100, borderRadius: 50 }}
-                    />
-                ) : uplaodedPicUrl === '' ? (
-                    <Image
-                        source={require('../images/user.png')}
-                        style={{ width: 100, height: 100, borderRadius: 50 }}
-                    />
-                ) : (
-                    <Image
-                        source={{ uri: uplaodedPicUrl }}
-                        style={{ width: 100, height: 100, borderRadius: 50 }}
-                    />
-                )}
+                {
+                    imagePicked == true && imageData != null ? (
+                        <Image
+                            source={{ uri: imageData.assets[0].uri }}
+                            style={{ width: 100, height: 100, borderRadius: 50 }}
+                        />
+                    ) : UploadedPicUrl === '' ? (
+                        <Image
+                            source={require('../images/user.png')}
+                            style={{ width: 100, height: 100, borderRadius: 50 }}
+                        />
+                    ) : (
+                        <Image
+                            source={{ uri: UploadedPicUrl }}
+                            style={{ width: 100, height: 100, borderRadius: 50 }}
+                        />
+                    )}
+
             </TouchableOpacity>
+            <Text style={{
+                alignItems: 'center',
+                fontSize: 20,
+                color: 'black',
+            }}>
+                {names}
+            </Text>
             <TouchableOpacity
                 style={{
                     width: 200,
@@ -139,11 +162,13 @@ const Profile = () => {
                     borderColor: 'orange',
                 }}
                 onPress={() => {
+                    // Remove set status of selected image here
+                    // Reason: When you open a galary, user maybe not select any photo
+                    // so it can make imageData to null => You must check that user has selected
+                    // the photo or not. And then you'll set the status of selected and data of image.
                     if (imagePicked === false) {
                         openGallery();
-                        setImagePicked(true);
                     } else {
-                        setImagePicked(false);
                         uploadProfilePic();
                     }
                 }}>

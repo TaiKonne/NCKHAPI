@@ -90,7 +90,7 @@ const Home = () => {
                     paddingLeft: 20,
                     backgroundColor: '#fff',
                 }}>
-                <Text style={{ fontSize: 20, color: '#000', fontWeight: '700', color: 'black' }}>
+                <Text style={{ fontSize: 20, color: '#000', fontWeight: '700' }}>
                     Firebase Demo
                 </Text>
             </View>
@@ -131,7 +131,7 @@ const Home = () => {
                                         }}
                                     />
                                     <Text
-                                        style={{ fontSize: 18, marginLeft: 15, fontWeight: '600', color: 'black' }}>
+                                        style={{ fontSize: 18, marginLeft: 15, fontWeight: '600' }}>
                                         {item.name}
                                     </Text>
                                 </View>
@@ -141,7 +141,6 @@ const Home = () => {
                                         marginLeft: 20,
                                         marginRight: 20,
                                         marginBottom: 10,
-                                        color: 'black',
                                     }}>
                                     {item.caption}
                                 </Text>
@@ -169,7 +168,7 @@ const Home = () => {
                                             onLike(item);
                                         }}
                                         style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        <Text style={{ marginRight: 10, fontSize: 18, color: 'black' }}>
+                                        <Text style={{ marginRight: 10, fontSize: 18 }}>
                                             {item.likes.length}
                                         </Text>
                                         {getLikesStaus(item.likes) ? (
@@ -192,7 +191,7 @@ const Home = () => {
                                                 comments: item.comments,
                                             });
                                         }}>
-                                        <Text style={{ marginRight: 10, color: 'black' }}>
+                                        <Text style={{ marginRight: 10 }}>
                                             {item.comments.length}
                                         </Text>
                                         <Image
@@ -206,7 +205,7 @@ const Home = () => {
                     }}
                 />
             ) : (
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', color: 'black' }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text>No Post Found</Text>
                 </View>
             )}

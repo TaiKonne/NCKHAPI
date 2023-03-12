@@ -14,8 +14,6 @@ const Search = () => {
         userId = await AsyncStorage.getItem('USERID');
         firestore()
             .collection('Users')
-            // Filter results
-            // .where('userId', '==', userId)
             .get()
             .then(querySnapshot => {
                 querySnapshot._docs.map(item => {
@@ -25,7 +23,6 @@ const Search = () => {
                 });
                 setUsersList(tempUsers);
             });
-
     };
 
     const followUser = item => {

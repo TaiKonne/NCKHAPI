@@ -11,7 +11,7 @@ import uuid from 'react-native-uuid';
 let token = '';
 let name = '';
 let email = '';
-
+let profile = '';
 const Add = ({ onAdded }) => {
     const [imageData, setImageData] = useState(null);
     const [caption, setCaption] = useState('');
@@ -22,10 +22,9 @@ const Add = ({ onAdded }) => {
     const getFcmToken = async () => {
         name = await AsyncStorage.getItem('NAME');
         email = await AsyncStorage.getItem('EMAIL');
-        // token = await messaging().getToken();
-
+        profile = await AsyncStorage.getItem('PROFILE_PIC');
         console.log(email, name);
-        console.log(token);
+        console.log(profile);
     };
     const openCamera = async () => {
         const result = await launchCamera({ mediaType: 'photo' });
@@ -105,7 +104,7 @@ const Add = ({ onAdded }) => {
             url: 'https://fcm.googleapis.com/fcm/send',
             headers: {
                 Authorization:
-                    'key=AAAA6_lD8TM:APA91bHpYl_t1Z0L-FNrdENSWCP98Fyah0rFaLsHLitDl-Yk2gMZyVUKYW_8JG8LtU_G_EQnQd4xW-bAzVDWEaKGH6vnTxVS7w8Gd4UR4pmdLy4-cKGwDlB-JRJ8P6V8loXLtss4NKOg',
+                    'key=AAAAWjmxLf0:APA91bEbImxRwc9ToVcxOIzvUTRjOoag-BWdJTKzMLMIPsTU5mk4ee_2zH6w76JNA_L7w12bWM3nWpE8qX6i8FkMosDOamEbMAbw7ErARwo2vJLFeZrAez8CyeTjXcm9hVQe12LHWUjo',
                 'Content-Type': 'application/json',
             },
             data: data,

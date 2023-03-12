@@ -26,6 +26,7 @@ const Comments = () => {
         userId = await AsyncStorage.getItem('USERID');
         name = await AsyncStorage.getItem('NAME');
         profile = await AsyncStorage.getItem('PROFILE_PIC');
+
     };
     const postComment = () => {
         let temComments = comments;

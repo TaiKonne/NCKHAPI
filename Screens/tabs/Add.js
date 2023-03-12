@@ -105,7 +105,7 @@ const Add = ({ onAdded }) => {
             url: 'https://fcm.googleapis.com/fcm/send',
             headers: {
                 Authorization:
-                    'key=AAAAWjmxLf0:APA91bEbImxRwc9ToVcxOIzvUTRjOoag-BWdJTKzMLMIPsTU5mk4ee_2zH6w76JNA_L7w12bWM3nWpE8qX6i8FkMosDOamEbMAbw7ErARwo2vJLFeZrAez8CyeTjXcm9hVQe12LHWUjo',
+                    'key=AAAA6_lD8TM:APA91bHpYl_t1Z0L-FNrdENSWCP98Fyah0rFaLsHLitDl-Yk2gMZyVUKYW_8JG8LtU_G_EQnQd4xW-bAzVDWEaKGH6vnTxVS7w8Gd4UR4pmdLy4-cKGwDlB-JRJ8P6V8loXLtss4NKOg',
                 'Content-Type': 'application/json',
             },
             data: data,
@@ -178,8 +178,7 @@ const Add = ({ onAdded }) => {
                         setCaption(txt);
                     }}
                     placeholder="type Caption here..."
-                    placeholderTextColor={'gray'}
-                    style={{ width: '70%', color: 'black' }}
+                    style={{ width: '70%' }}
                 />
             </View>
             <TouchableOpacity
@@ -199,7 +198,7 @@ const Add = ({ onAdded }) => {
                     source={require('../images/camera.png')}
                     style={{ width: 24, height: 24, marginLeft: 20 }}
                 />
-                <Text style={{ marginLeft: 20, color: 'black' }}>Open Camera</Text>
+                <Text style={{ marginLeft: 20 }}>Open Camera</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={{
@@ -218,7 +217,7 @@ const Add = ({ onAdded }) => {
                     source={require('../images/gallery.png')}
                     style={{ width: 24, height: 24, marginLeft: 20 }}
                 />
-                <Text style={{ marginLeft: 20, color: 'black' }}>Open Gallery</Text>
+                <Text style={{ marginLeft: 20 }}>Open Gallery</Text>
             </TouchableOpacity>
             <Loader modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </View>

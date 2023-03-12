@@ -9,7 +9,7 @@ const Login = ({ navigation }) => {
     const [email, setEmail] = useState('taichuotchuoi@gmail.com')
     const [password, setPassword] = useState('12345678')
 
-    const checkLogin = () => { // build.gradle
+    const checkLogin = () => {
         firestore()
             .collection('Users')
             // Filter results

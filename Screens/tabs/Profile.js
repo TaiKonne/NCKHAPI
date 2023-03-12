@@ -96,7 +96,7 @@ const Profile = () => {
                     borderBottomColor: '#8e8e8e',
                     alignItems: 'center',
                 }}>
-                <Text style={{ marginLeft: 15, fontSize: 18, fontWeight: '600', color: 'black' }}>
+                <Text style={{ marginLeft: 15, fontSize: 18, fontWeight: '600' }}>
                     Profile
                 </Text>
             </View>
@@ -109,7 +109,7 @@ const Profile = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-                {imagePicked === true ? (
+                {imagePicked == true ? (
                     <Image
                         source={{ uri: imageData.assets[0].uri }}
                         style={{ width: 100, height: 100, borderRadius: 50 }}
@@ -125,17 +125,6 @@ const Profile = () => {
                         style={{ width: 100, height: 100, borderRadius: 50 }}
                     />
                 )}
-                {/* {imageData !== null ? (
-                    <Image
-                        source={{ uri: imageData.assets[0].uri }}
-                        style={{ width: 50, height: 50, borderRadius: 10, margin: 10 }}
-                    />
-                ) : (
-                    <Image
-                        source={require('../images/image.png')}
-                        style={{ width: 50, height: 50, borderRadius: 10, margin: 10 }}
-                    />
-                )} */}
             </TouchableOpacity>
             <TouchableOpacity
                 style={{
@@ -148,7 +137,6 @@ const Profile = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     borderColor: 'orange',
-                    color: 'black'
                 }}
                 onPress={() => {
                     if (imagePicked === false) {
@@ -184,7 +172,7 @@ const Profile = () => {
                     onPress={() => {
                         setSelectedTab(0);
                     }}>
-                    <Text style={{ fontSize: 18, color: 'black' }}>Followers</Text>
+                    <Text style={{ fontSize: 18 }}>Followers</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{
@@ -197,7 +185,7 @@ const Profile = () => {
                     onPress={() => {
                         setSelectedTab(1);
                     }}>
-                    <Text style={{ fontSize: 18, color: 'black' }}>Following</Text>
+                    <Text style={{ fontSize: 18 }}>Following</Text>
                 </TouchableOpacity>
             </View>
 
@@ -230,7 +218,7 @@ const Profile = () => {
                                             marginRight: 10,
                                         }}
                                     />
-                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black', backgroundColor: 'red' }}>
+                                    <Text style={{ fontSize: 18, fontWeight: '600' }}>
                                         {item.name}
                                     </Text>
                                 </View>
@@ -289,7 +277,7 @@ const Profile = () => {
                                             marginRight: 10,
                                         }}
                                     />
-                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
+                                    <Text style={{ fontSize: 18, fontWeight: '600' }}>
                                         {item.name}
                                     </Text>
                                 </View>

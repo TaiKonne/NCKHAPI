@@ -8,7 +8,7 @@ import uuid from 'react-native-uuid';
 let token = '';
 
 const Signup = ({ navigation }) => {
-    const [name, setName] = useState('Tai')
+    const [name, setName] = useState('tai')
     const [email, setEmail] = useState('taichuotchuoi@gmail.com')
     const [password, setPassword] = useState('12345678');
     const [modalVisble, setModalVisble] = useState(false);

@@ -1,11 +1,11 @@
-import {View, Text, Image} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {Bubble, GiftedChat, InputToolbar, Send} from 'react-native-gifted-chat';
-import {Router, urlencoded} from 'express';
+import { View, Text, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Bubble, GiftedChat, InputToolbar, Send } from 'react-native-gifted-chat';
+import { Router, urlencoded } from 'express';
 import firestore from '@react-native-firebase/firestore';
-import {useRoute} from '@react-navigation/native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { useRoute } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import uuid from 'react-native-uuid';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -23,7 +23,7 @@ const NewMessage = () => {
       .orderBy('createdAt', 'desc');
     querySnapShot.onSnapshot(snapShot => {
       const allMessages = snapShot.docs.map(snap => {
-        return {...snap.data(), createdAt: new Date()};
+        return { ...snap.data(), createdAt: new Date() };
       });
       setMessages(allMessages);
     });
@@ -62,9 +62,9 @@ const NewMessage = () => {
     setImageUrl('');
     setImageData(null);
   };
- 
+
   const openCamera = async () => {
-    const result = await launchCamera({mediaType: 'photo'});
+    const result = await launchCamera({ mediaType: 'photo' });
     console.log(result);
     if (result.didCancel && result.didCancel == true) {
     } else {
@@ -85,14 +85,14 @@ const NewMessage = () => {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: '#fff'}}>
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <GiftedChat
         alwaysShowSend
-       
+
         renderSend={props => {
           return (
             <View
-              style={{flexDirection: 'row', alignItems: 'center', height: 60}}>
+              style={{ flexDirection: 'row', alignItems: 'center', height: 60 }}>
               {imageUrl !== '' ? (
                 <View
                   style={{
@@ -103,7 +103,7 @@ const NewMessage = () => {
                     marginRight: 10,
                   }}>
                   <Image
-                    source={{uri: imageData.assets[0].uri}}
+                    source={{ uri: imageData.assets[0].uri }}
                     style={{
                       width: 40,
                       height: 40,
@@ -117,22 +117,22 @@ const NewMessage = () => {
                     }}>
                     <Image
                       source={require('../images/cross.png')}
-                      style={{width: 16, height: 16, tintColor: '#fff'}}
+                      style={{ width: 16, height: 16, tintColor: '#fff' }}
                     />
                   </TouchableOpacity>
                 </View>
               ) : null}
               <TouchableOpacity
-                style={{marginRight: 20}}
+                style={{ marginRight: 20 }}
                 onPress={() => {
                   openCamera();
                 }}>
                 <Image
                   source={require('../images/image.png')}
-                  style={{width: 24, height: 24}}
+                  style={{ width: 24, height: 24 }}
                 />
               </TouchableOpacity>
-              <Send {...props} containerStyle={{justifyContent: 'center'}}>
+              <Send {...props} containerStyle={{ justifyContent: 'center' }}>
                 <Image
                   source={require('../images/send.png')}
                   style={{

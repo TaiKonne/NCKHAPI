@@ -1,13 +1,15 @@
-import 'react-native-gesture-handler';
-import { View, Text } from 'react-native'
-import { createStackNavigator } from '@react-navigation/stack'
-import { NavigationContainer } from '@react-navigation/native'
-import Splash from './Splash'
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import Splash from './Splash';
 import Login from './Login';
 import Signup from './Signup';
 import HomeSC from './HomeSC';
 import Comments from './Comments';
-import Profile from './tabs/Profile';
+import Messages from './Messages';
+import MyMessages from './MyMessages';
+import NewMessage from './chat/NewMessage';
+
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
@@ -39,9 +41,24 @@ const AppNavigator = () => {
                     component={props => <Comments {...props} />}
                     options={{ headerShown: false }}
                 />
+                <Stack.Screen
+                    name="Messages"
+                    component={props => <Messages {...props} />}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="MyMessages"
+                    component={MyMessages}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="NewMessage"
+                    component={NewMessage}
+                    options={{ headerShown: false }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
-    )
-}
+    );
+};
 
 export default AppNavigator;

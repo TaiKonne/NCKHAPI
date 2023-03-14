@@ -10,6 +10,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@apollo/client": "^3.7.10",
+    "@hauvo/react-native-360-image-viewer": "^1.0.0",
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-firebase/app": "^17.3.1",
     "@react-native-firebase/database": "^17.3.2",
@@ -21,6 +23,8 @@
     "@react-navigation/drawer": "^6.6.1",
     "@react-navigation/native": "^6.1.5",
     "@react-navigation/stack": "^6.3.16",
+    "@skele/components": "^1.0.0-alpha.40",
+    "@svanboxel/visibility-sensor-react-native": "^1.0.2",
     "axios": "^1.3.3",
     "color-convert": "^2.0.1",
     "deepmerge": "^4.3.0",
@@ -29,6 +33,7 @@
     "firebase-admin": "^11.5.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
+    "ngrok": "^4.3.3",
     "react": "18.1.0",
     "react-native": "^0.70.6",
     "react-native-gesture-handler": "^2.9.0",

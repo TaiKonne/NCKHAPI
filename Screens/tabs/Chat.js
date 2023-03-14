@@ -20,16 +20,6 @@ const Chat = () => {
                 console.log(documentSnapshot);
                 setChatList(documentSnapshot._data.chatList);
             });
-        // firestore()
-        //   .collection('Users')
-        //   .doc(myId)
-        //   .then(snapshot => {
-        //     console.log(snapshot._docs);
-        //     setChatList(snapshot._docs);
-        //   })
-        //   .catch(err => {
-        //     console.log(err);
-        //   });
     };
     return (
         <View style={{ flex: 1 }}>

@@ -69,8 +69,10 @@ const Comments = () => {
                     borderBottomWidth: 0.5,
                     borderBottomColor: '#8e8e8e',
                     alignItems: 'center',
+                    justifyContent:'center',
+                    backgroundColor:'skyblue',
                 }}>
-                <Text style={{ marginLeft: 15, fontSize: 18, fontWeight: '600', color: 'black' }}>
+                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white' }}>
                     Comments
                 </Text>
             </View>
@@ -110,10 +112,10 @@ const Comments = () => {
                             )}
 
                             <View>
-                                <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
+                                <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>
                                     {item.name}
                                 </Text>
-                                <Text style={{ fontSize: 16, fontWeight: '600', marginTop: 5, color: 'black' }}>
+                                <Text style={{ fontSize: 15, marginTop: 5, color: 'black'}}>
                                     {item.comment}
                                 </Text>
                             </View>
@@ -144,7 +146,9 @@ const Comments = () => {
                     style={{ width: '80%', marginLeft: 20, color: 'black' }}
                 />
                 <Text
-                    style={{ marginRight: 10, fontSize: 18, fontWeight: '600', color: 'black' }}
+                    style={{ marginRight: 10, fontSize: 18, fontWeight: 'bold', 
+                            color: comment == '' ? 'grey' : 'blue',
+                    }}
                     onPress={() => {
                         postComment();
                     }}>

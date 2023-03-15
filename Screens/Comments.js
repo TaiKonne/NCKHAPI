@@ -112,7 +112,7 @@ const Comments = () => {
                             )}
 
                             <View>
-                                <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
+                                <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>
                                     {item.name}
                                 </Text>
                                 <Text style={{ fontSize: 15, marginTop: 5, color: 'black'}}>

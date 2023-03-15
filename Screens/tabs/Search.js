@@ -175,7 +175,7 @@ const Search = () => {
                     marginRight: 10,
                   }}
                 />
-                <Text style={{fontSize: 18, fontWeight: '600'}}>
+                <Text style={{fontSize: 18, fontWeight: 'bold', color:'black'}}>
                   {item._data.name}
                 </Text>
               </View>
@@ -191,7 +191,7 @@ const Search = () => {
                 onPress={() => {
                   followUser(item);
                 }}>
-                <Text style={{color: '#fff', marginLeft: 10, marginRight: 10}}>
+                <Text style={{color: '#fff', marginLeft: 10, marginRight: 10 , fontWeight:'bold'}}>
                   {getFollowStatus(item._data.followers)
                     ? 'Unfollow'
                     : 'Follow'}

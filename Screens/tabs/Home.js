@@ -140,6 +140,7 @@ const Home = () => {
                                         marginLeft: 20,
                                         marginRight: 20,
                                         marginBottom: 10,
+                                        color:'black',
                                     }}>
                                     {item.caption}
                                 </Text>

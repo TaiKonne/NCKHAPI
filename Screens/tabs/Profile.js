@@ -109,8 +109,10 @@ const Profile = () => {
                     borderBottomWidth: 0.5,
                     borderBottomColor: '#8e8e8e',
                     alignItems: 'center',
+                    backgroundColor:'skyblue',
+                    justifyContent:'center'
                 }}>
-                <Text style={{ marginLeft: 15, fontSize: 18, fontWeight: '600' }}>
+                <Text style={{fontSize: 20, fontWeight: 'bold',color:'white' }}>
                     Profile
                 </Text>
             </View>
@@ -146,6 +148,8 @@ const Profile = () => {
                 alignItems: 'center',
                 fontSize: 20,
                 color: 'black',
+                // justifyContent:'center',
+                textAlign:'center',
             }}>
                 {names}
             </Text>
@@ -153,7 +157,7 @@ const Profile = () => {
                 style={{
                     width: 200,
                     height: 40,
-                    borderWidth: 0.2,
+                    borderWidth: 0.3,
                     alignSelf: 'center',
                     borderRadius: 8,
                     marginTop: 20,
@@ -197,7 +201,7 @@ const Profile = () => {
                     onPress={() => {
                         setSelectedTab(0);
                     }}>
-                    <Text style={{ fontSize: 18 }}>Followers</Text>
+                    <Text style={{ fontSize: 18, color:'black' }}>Followers</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{
@@ -210,7 +214,7 @@ const Profile = () => {
                     onPress={() => {
                         setSelectedTab(1);
                     }}>
-                    <Text style={{ fontSize: 18 }}>Following</Text>
+                    <Text style={{ fontSize: 18 , color:'black' }}>Following</Text>
                 </TouchableOpacity>
             </View>
 
@@ -243,7 +247,7 @@ const Profile = () => {
                                             marginRight: 10,
                                         }}
                                     />
-                                    <Text style={{ fontSize: 18, fontWeight: '600' }}>
+                                    <Text style={{ fontSize: 18, fontWeight: '600' , color:'black' }}>
                                         {item.name}
                                     </Text>
                                 </View>
@@ -302,7 +306,7 @@ const Profile = () => {
                                             marginRight: 10,
                                         }}
                                     />
-                                    <Text style={{ fontSize: 18, fontWeight: '600' }}>
+                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black'}}>
                                         {item.name}
                                     </Text>
                                 </View>

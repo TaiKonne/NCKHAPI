@@ -31,6 +31,7 @@ const Signup = ({ navigation }) => {
                 token: token,
                 userId: id,
                 followers: [],
+                following:[],
                 posts: [],
                 profilePic: '',
                 bio: '',

@@ -87,11 +87,11 @@ const Home = () => {
                     width: '100%',
                     height: 60,
                     justifyContent: 'center',
-                    paddingLeft: 20,
-                    backgroundColor: '#fff',
+                    // paddingLeft: 20,
+                    backgroundColor: 'skyblue',
                 }}>
-                <Text style={{ fontSize: 20, color: '#000', fontWeight: '700' }}>
-                    Firebase Demo
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign:'center' }}>
+                    Newfeeds
                 </Text>
             </View>
 
@@ -104,7 +104,6 @@ const Home = () => {
                             <View
                                 style={{
                                     width: '90%',
-
                                     alignSelf: 'center',
                                     marginTop: 20,
                                     backgroundColor: '#fff',
@@ -131,7 +130,7 @@ const Home = () => {
                                         }}
                                     />
                                     <Text
-                                        style={{ fontSize: 18, marginLeft: 15, fontWeight: '600' }}>
+                                        style={{ fontSize: 18, marginLeft: 15, fontWeight: '600',color: 'black' }}>
                                         {item.name}
                                     </Text>
                                 </View>
@@ -167,8 +166,8 @@ const Home = () => {
                                         onPress={() => {
                                             onLike(item);
                                         }}
-                                        style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        <Text style={{ marginRight: 10, fontSize: 18 }}>
+                                        style={{ flexDirection: 'row', alignItems: 'center'}}>
+                                        <Text style={{ marginRight: 10, fontSize: 18 , color:'black'}}>
                                             {item.likes.length}
                                         </Text>
                                         {getLikesStaus(item.likes) ? (
@@ -191,7 +190,7 @@ const Home = () => {
                                                 comments: item.comments,
                                             });
                                         }}>
-                                        <Text style={{ marginRight: 10 }}>
+                                        <Text style={{ marginRight: 10 ,color:'black' }}>
                                             {item.comments.length}
                                         </Text>
                                         <Image

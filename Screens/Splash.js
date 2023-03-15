@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import React, { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -19,12 +19,16 @@ const Splash = ({ navigation }) => {
     };
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={{ fontSize: 30, fontWeight: '800', color: '#000' }}>
-                Firebase
-            </Text>
-            <Text style={{ fontSize: 14, fontWeight: '800', color: 'red' }}>
-                The Social App
-            </Text>
+            <Image
+                source={require('../front_end/tdmu_logo.png')}
+                style={{
+                    width: 260,
+                    height: 125,
+                    // alignSelf:'center'
+                    // marginHorizontal:10 cho xung quanh khoản cách là 10px
+                }}
+
+            />
         </View>
     );
 };

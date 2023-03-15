@@ -96,15 +96,17 @@ const Login = ({ navigation }) => {
                     marginTop: 100,
                     fontSize: 20,
                     fontWeight: '800',
+                    color:'red',
                 }}>
-                Firebase
+                WelCome to TDMU Social Media
             </Text>
             <TextInput
                 value={email}
                 onChangeText={txt => {
                     setEmail(txt);
                 }}
-                placeholder="Enter Email Id"
+                placeholder="Enter your Email"
+                placeholderTextColor={'grey'}
                 style={{
                     width: '84%',
                     height: 50,
@@ -113,6 +115,7 @@ const Login = ({ navigation }) => {
                     alignSelf: 'center',
                     paddingLeft: 15,
                     marginTop: 100,
+                    color:'black',
                 }}
             />
             <TextInput
@@ -120,7 +123,8 @@ const Login = ({ navigation }) => {
                 onChangeText={txt => {
                     setPassword(txt);
                 }}
-                placeholder="Enter Password"
+                placeholder="Enter your Password"
+                placeholderTextColor={'grey'}
                 style={{
                     width: '84%',
                     height: 50,
@@ -129,6 +133,7 @@ const Login = ({ navigation }) => {
                     borderWidth: 0.5,
                     alignSelf: 'center',
                     marginTop: 20,
+                    color:'black',
                 }}
             />
             <TouchableOpacity
@@ -153,6 +158,7 @@ const Login = ({ navigation }) => {
                     marginTop: 30,
                     textDecorationLine: 'underline',
                     alignSelf: 'center',
+                    color:'black',
                 }}
                 onPress={() => {
                     navigation.navigate('Signup');

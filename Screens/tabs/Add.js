@@ -136,7 +136,7 @@ const Add = ({ onAdded }) => {
                     style={{
                         marginRight: 20,
                         fontSize: 18,
-                        color: imageData !== null ? 'blue' : '#8e8e8e',
+                        color: imageData !== null || caption !=='' ? 'blue' : '#8e8e8e',
                     }}
                     onPress={() => {
                         if (imageData !== null || caption !== '') {
@@ -177,7 +177,8 @@ const Add = ({ onAdded }) => {
                         setCaption(txt);
                     }}
                     placeholder="type Caption here..."
-                    style={{ width: '70%' }}
+                    placeholderTextColor={'grey'}
+                    style={{ width: '70%' , color:'black'}}
                 />
             </View>
             <TouchableOpacity
@@ -197,7 +198,7 @@ const Add = ({ onAdded }) => {
                     source={require('../images/camera.png')}
                     style={{ width: 24, height: 24, marginLeft: 20 }}
                 />
-                <Text style={{ marginLeft: 20 }}>Open Camera</Text>
+                <Text style={{ marginLeft: 20 , color:'grey' }}>Open Camera</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={{
@@ -216,7 +217,7 @@ const Add = ({ onAdded }) => {
                     source={require('../images/gallery.png')}
                     style={{ width: 24, height: 24, marginLeft: 20 }}
                 />
-                <Text style={{ marginLeft: 20 }}>Open Gallery</Text>
+                <Text style={{ marginLeft: 20 , color:'grey'}}>Open Gallery</Text>
             </TouchableOpacity>
             <Loader modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </View>

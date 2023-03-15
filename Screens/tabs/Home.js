@@ -5,7 +5,8 @@ import firestore from '@react-native-firebase/firestore';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 let userId = '';
-const Home = () => {
+const Home = (props) => {
+    //props;
     const navigation = useNavigation();
     const [onLikeClick, setOnLikeCLick] = useState(false);
     const isFocused = useIsFocused();
@@ -80,6 +81,9 @@ const Home = () => {
         });
         return status;
     };
+    const [checkpost , setpost] = useState(0)
+
+
     return (
         <View style={{ flex: 1 }}>
             <View
@@ -94,7 +98,80 @@ const Home = () => {
                     Newfeeds
                 </Text>
             </View>
+           <View style={{
+                flexDirection:'row',
+                alignItems:'center',
+                justifyContent:'center',
+                marginTop:10,
+           }}>
+                <TouchableOpacity onPress={()=> {
+                    navigation.navigate('Add')
+                }}>
+                    <View style={{
 
+                        color:'black',
+                        borderWidth: 0.2, 
+                        borderRadius: 5,
+                        width:90,
+                        height: 35,
+                        alignItems:'center',
+                        justifyContent:'center',
+                        margin: 10,
+                        backgroundColor:'skyblue',
+
+                    }}>
+                        <Text style={{
+                            color:'black',
+                            fontWeight:'bold'
+                        }}> Posts</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=> {
+                    alert('Thêm ảnh')
+                }}>
+                    <View style={{
+
+                        color:'black',
+                        borderWidth: 0.2 , 
+                        borderRadius: 5,
+                        width:90,
+                        height: 35,
+                        alignItems:'center',
+                        justifyContent:'center',
+                        margin: 10,
+                        backgroundColor:'skyblue',
+
+                    }}>
+                        <Text style={{
+                            color:'black',
+                            fontWeight:'bold',
+                        }}> Images </Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=> {
+                    alert('Vào kho ảnh')
+                }}>
+                    <View style={{
+
+                        color:'black',
+                        borderWidth: 0.2 , 
+                        borderRadius: 5,
+                        width:90,
+                        height: 35,
+                        alignItems:'center',
+                        justifyContent:'center',
+                        margin: 10,
+                        backgroundColor:'skyblue',
+
+                    }}>
+                        <Text style={{
+                            color:'black',
+                            fontWeight:'bold',
+                        }}> Album </Text>
+                    </View>
+                </TouchableOpacity>
+           </View>
+            
             {postData.length > 0 ? (
                 <FlatList
                     showsVerticalScrollIndicator={false}
@@ -105,7 +182,7 @@ const Home = () => {
                                 style={{
                                     width: '90%',
                                     alignSelf: 'center',
-                                    marginTop: 20,
+                                    marginTop: 10,
                                     backgroundColor: '#fff',
                                     borderRadius: 20,
                                     marginBottom: postData.length - 1 == index ? 70 : 0,

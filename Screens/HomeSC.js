@@ -53,7 +53,7 @@ const HomeSC = () => {
             flex: 1,
         }}>
 
-            {sellectedTab === 0 ? (
+            {/* {sellectedTab === 0 ? (
                 <Home />
             ) : sellectedTab === 1 ? (
                 <Chat />
@@ -61,7 +61,14 @@ const HomeSC = () => {
                 <Add />
             ) : sellectedTab === 3 ? (
                 <Search />) : (
-                <Profile />)}
+                <Profile />)} */}
+                {sellectedTab === 0 ? (
+                <Home />
+            ) : sellectedTab === 1 ? (
+                <Chat />
+            ) : sellectedTab === 2 ? (
+                <Search />
+            ) : <Profile />}
 
             <View style={{
                 position: 'absolute',
@@ -120,7 +127,7 @@ const HomeSC = () => {
                             }}
                         /></View>
                 </TouchableOpacity>
-                <TouchableOpacity // icon house
+                {/* <TouchableOpacity // icon house
                     style={{
                         width: '20%',
                         height: '100%',
@@ -143,7 +150,7 @@ const HomeSC = () => {
                             }}
                         />
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity // icon house
                     style={{
                         width: '20%',

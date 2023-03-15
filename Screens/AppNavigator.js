@@ -9,7 +9,9 @@ import Comments from './Comments';
 import Messages from './Messages';
 import MyMessages from './MyMessages';
 import NewMessage from './chat/NewMessage';
-
+import Home from './tabs/Home';
+import Add from './tabs/Add';
+import Setting from './Setting';
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
@@ -54,6 +56,16 @@ const AppNavigator = () => {
                 <Stack.Screen
                     name="NewMessage"
                     component={NewMessage}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Add"
+                    component={Add}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Setting"
+                    component={Setting}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

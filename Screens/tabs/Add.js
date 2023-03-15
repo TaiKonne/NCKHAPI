@@ -6,13 +6,18 @@ import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from '../common/Loader';
+
+import { useNavigation } from '@react-navigation/native';
+import Home from './Home';
 const admin = require('firebase-admin');
 import uuid from 'react-native-uuid';
 let token = '';
 let name = '';
 let email = '';
 let profile = '';
+
 const Add = ({ onAdded }) => {
+    const navigation = useNavigation();
     const [imageData, setImageData] = useState(null);
     const [caption, setCaption] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
@@ -98,6 +103,7 @@ const Add = ({ onAdded }) => {
             .catch(error => {
                 setModalVisible(false);
             });
+
     };
     const getAllTokens = () => {
         let tempTokens = [];
@@ -170,8 +176,10 @@ const Add = ({ onAdded }) => {
                     onPress={() => {
                         if (imageData !== null) {
                             uplaodImage();
+                            navigation.navigate('HomeSC')
                         } else if (imageData === null && caption !== '') {
                             cap();
+                            navigation.navigate('HomeSC')
                         }
                         else {
                             alert('Please Select Pic or enter caption');

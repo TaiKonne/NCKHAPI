@@ -90,7 +90,7 @@ const Home = () => {
                     // paddingLeft: 20,
                     backgroundColor: 'skyblue',
                 }}>
-                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign:'center' }}>
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
                     Newfeeds
                 </Text>
             </View>
@@ -110,10 +110,7 @@ const Home = () => {
                                     borderRadius: 20,
                                     marginBottom: postData.length - 1 == index ? 70 : 0,
                                 }}>
-                                {/* <Image
-                  source={{uri: item.image}}
-                  style={{width: '100%', height: '100%'}}
-                /> */}
+
                                 <View
                                     style={{
                                         flexDirection: 'row',
@@ -130,7 +127,7 @@ const Home = () => {
                                         }}
                                     />
                                     <Text
-                                        style={{ fontSize: 18, marginLeft: 15, fontWeight: '600',color: 'black' }}>
+                                        style={{ fontSize: 18, marginLeft: 15, fontWeight: '600', color: 'black' }}>
                                         {item.name}
                                     </Text>
                                 </View>
@@ -147,7 +144,7 @@ const Home = () => {
                                     source={{ uri: item.image }}
                                     style={{
                                         width: '90%',
-                                        height: 120,
+                                        height: (item.image != '') ? 300 : 'auto',
                                         alignSelf: 'center',
                                         borderRadius: 10,
                                         marginBottom: 20,
@@ -166,8 +163,8 @@ const Home = () => {
                                         onPress={() => {
                                             onLike(item);
                                         }}
-                                        style={{ flexDirection: 'row', alignItems: 'center'}}>
-                                        <Text style={{ marginRight: 10, fontSize: 18 , color:'black'}}>
+                                        style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        <Text style={{ marginRight: 10, fontSize: 18, color: 'black' }}>
                                             {item.likes.length}
                                         </Text>
                                         {getLikesStaus(item.likes) ? (
@@ -190,7 +187,7 @@ const Home = () => {
                                                 comments: item.comments,
                                             });
                                         }}>
-                                        <Text style={{ marginRight: 10 ,color:'black' }}>
+                                        <Text style={{ marginRight: 10, color: 'black' }}>
                                             {item.comments.length}
                                         </Text>
                                         <Image

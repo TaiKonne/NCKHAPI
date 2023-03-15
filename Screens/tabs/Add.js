@@ -69,7 +69,36 @@ const Add = ({ onAdded }) => {
                 setModalVisible(false);
             });
     };
-
+    const cap = async () => {
+        setModalVisible(true);
+        let id = uuid.v4();
+        // const reference = storage().ref(imageData.assets[0].fileName);
+        // const pathToFile = imageData.assets[0].uri;
+        const userId = await AsyncStorage.getItem('USERID');
+        // uploads file
+        // await reference.putFile(pathToFile);
+        const url = '';
+        firestore()
+            .collection('posts')
+            .doc(id)
+            .set({
+                image: url,
+                caption: caption,
+                email: email,
+                name: name,
+                userId: userId,
+                postId: id,
+                likes: [],
+                comments: [],
+            })
+            .then(() => {
+                console.log('post added!');
+                getAllTokens();
+            })
+            .catch(error => {
+                setModalVisible(false);
+            });
+    };
     const getAllTokens = () => {
         let tempTokens = [];
         firestore()
@@ -136,12 +165,15 @@ const Add = ({ onAdded }) => {
                     style={{
                         marginRight: 20,
                         fontSize: 18,
-                        color: imageData !== null || caption !=='' ? 'blue' : '#8e8e8e',
+                        color: imageData !== null || caption !== '' ? 'blue' : '#8e8e8e',
                     }}
                     onPress={() => {
-                        if (imageData !== null || caption !== '') {
+                        if (imageData !== null) {
                             uplaodImage();
-                        } else {
+                        } else if (imageData === null && caption !== '') {
+                            cap();
+                        }
+                        else {
                             alert('Please Select Pic or enter caption');
                         }
                     }}>
@@ -178,7 +210,7 @@ const Add = ({ onAdded }) => {
                     }}
                     placeholder="type Caption here..."
                     placeholderTextColor={'grey'}
-                    style={{ width: '70%' , color:'black'}}
+                    style={{ width: '70%', color: 'black' }}
                 />
             </View>
             <TouchableOpacity
@@ -198,7 +230,7 @@ const Add = ({ onAdded }) => {
                     source={require('../images/camera.png')}
                     style={{ width: 24, height: 24, marginLeft: 20 }}
                 />
-                <Text style={{ marginLeft: 20 , color:'grey' }}>Open Camera</Text>
+                <Text style={{ marginLeft: 20, color: 'grey' }}>Open Camera</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={{
@@ -217,7 +249,7 @@ const Add = ({ onAdded }) => {
                     source={require('../images/gallery.png')}
                     style={{ width: 24, height: 24, marginLeft: 20 }}
                 />
-                <Text style={{ marginLeft: 20 , color:'grey'}}>Open Gallery</Text>
+                <Text style={{ marginLeft: 20, color: 'grey' }}>Open Gallery</Text>
             </TouchableOpacity>
             <Loader modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </View>

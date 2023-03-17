@@ -7,8 +7,8 @@ import Loader from './common/Loader';
 import uuid from 'react-native-uuid';
 let token = '';
 const Signup = ({ navigation }) => {
-    const [email, setEmail] = useState('taichuotchuoi@gmail.com');
-    const [password, setPassword] = useState('12345678');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [name, setName] = useState('tai');
     const [modalVisible, setModalVisible] = useState(false);
     useEffect(() => {
@@ -31,7 +31,7 @@ const Signup = ({ navigation }) => {
                 token: token,
                 userId: id,
                 followers: [],
-                following:[],
+                following: [],
                 posts: [],
                 profilePic: '',
                 bio: '',
@@ -55,6 +55,7 @@ const Signup = ({ navigation }) => {
     const saveLocalData = async () => {
         await AsyncStorage.setItem('NAME', name);
         await AsyncStorage.setItem('EMAIL', email);
+        await AsyncStorage.setItem('PASS', password);
         // await AsyncStorage.setItem('PROFILE_PIC', profilePic);
     };
     return (

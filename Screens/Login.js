@@ -6,8 +6,8 @@ import Loader from './common/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 let token = '';
 const Login = ({ navigation }) => {
-    const [email, setEmail] = useState('taichuotchuoi@gmail.com');
-    const [password, setPassword] = useState('12345678');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const checkLogin = () => {
         if (email !== '' && password !== '') {

@@ -26,14 +26,17 @@ function Setting(props) {
     const [addressInput, setAddressInput] = useState(0)
 
     const [usernames, setUsernames] = useState(0)
-
+    const [nameUser, setNameUser] = useState('');
     const [gender, setGender] = useState('Male')
     const [Genderview, setGenderview] = useState(0)
 
     const [emailInput, setEmailInput] = useState(0)
     const [phoneInput, setPhoneInput] = useState(0)
 
-    const [changepassword, setchangepassword] = useState(0)
+    const [changepassword, setchangepassword] = useState(0);
+    const [passUser, setPassUser] = useState(''); // check pass hien tai == pass api
+    const [reType1, setreType1] = useState('');
+    const [reType2, setreType2] = useState('');
     const [isEnabledChangePassword2factor, setEnabledChangePassword2factor] = useState(true)
     const [isEnabledFingerprint, setEnabledFingerprint] = useState(true)
     // test change avatar
@@ -111,6 +114,52 @@ function Setting(props) {
                 console.log(error);
             });
     };
+
+    const updateName = async () => {
+
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .update({
+                name: nameUser,
+            })
+            .then(() => {
+                console.log('change name thanh cong');
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+    const updatePass = async () => { // && (reType1 === reType2 && reType1 !== passUser
+        let oldPass = await AsyncStorage.getItem('PASS');
+
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .get()
+            .then()
+
+        if (oldPass === passUser) {
+            if (reType1 === reType2 && reType1 !== passUser) {
+                firestore()
+                    .collection('Users')
+                    .doc(userId)
+                    .update({
+                        password: reType1,
+                    })
+                    .then(() => {
+                        console.log('change name thanh cong');
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+            else {
+                alert('Mật khẩu không trùng khớp');
+            }
+        }
+        else { alert('Sai mật khẩu hiện tại' + oldPass); }
+    }
 
     return <View style={{
         flex: 1,
@@ -238,6 +287,10 @@ function Setting(props) {
                             width: 250,
                             color: 'black',
                         }}
+                        value={nameUser}
+                        onChangeText={txt => {
+                            setNameUser(txt);
+                        }}
                         autoFocus
                         placeholder='Type your new username'
                         placeholderTextColor={'grey'}
@@ -249,7 +302,8 @@ function Setting(props) {
                         marginBottom: 5
                     }}>
                         <TouchableOpacity onPress={() => {
-                            setUsernames(0)
+                            setUsernames(0);
+                            updateName();
                         }}>
                             <View style={{
                                 alignSelf: 'flex-end',
@@ -707,6 +761,10 @@ function Setting(props) {
                         autoFocus
                         placeholder='Type your old password'
                         placeholderTextColor={'grey'}
+                        value={passUser}
+                        onChangeText={txt => {
+                            setPassUser(txt);
+                        }}
                     />
                     <TextInput
                         style={{
@@ -723,6 +781,10 @@ function Setting(props) {
                         autoFocus
                         placeholder='Type your new password'
                         placeholderTextColor={'grey'}
+                        value={reType1}
+                        onChangeText={txt => {
+                            setreType1(txt);
+                        }}
                     />
                     <TextInput
                         style={{
@@ -739,6 +801,10 @@ function Setting(props) {
                         autoFocus
                         placeholder='Retype your new password'
                         placeholderTextColor={'grey'}
+                        value={reType2}
+                        onChangeText={txt => {
+                            setreType2(txt);
+                        }}
                     />
 
                     <View style={{
@@ -748,7 +814,8 @@ function Setting(props) {
                         marginBottom: 5
                     }}>
                         <TouchableOpacity onPress={() => {
-                            setchangepassword(0)
+                            setchangepassword(0);
+                            updatePass();
                         }}>
                             <View style={{
                                 alignSelf: 'flex-end',

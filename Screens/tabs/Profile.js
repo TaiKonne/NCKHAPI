@@ -103,18 +103,30 @@ const Profile = () => {
         <View style={{ flex: 1 }}>
             <View
                 style={{
+                    flexDirection: 'row',
                     width: '100%',
                     height: 60,
-                    flexDirection: 'row',
                     borderBottomWidth: 0.5,
                     borderBottomColor: '#8e8e8e',
                     alignItems: 'center',
-                    backgroundColor:'skyblue',
-                    justifyContent:'center'
+                    backgroundColor: 'skyblue',
+                    justifyContent: 'center',
                 }}>
-                <Text style={{fontSize: 20, fontWeight: 'bold',color:'white' }}>
+                <View style={{ flex: 1 }}></View>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
                     Profile
                 </Text>
+                <View style={{ flex: 1 }}></View>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate('Setting')
+                }}>
+                    <Image source={require('../../front_end/icons/settings.png')}
+                        style={{
+                            height: 25,
+                            width: 25,
+                            marginEnd: 10,
+                        }} />
+                </TouchableOpacity>
             </View>
             <TouchableOpacity
                 style={{
@@ -142,17 +154,18 @@ const Profile = () => {
                             style={{ width: 100, height: 100, borderRadius: 50 }}
                         />
                     )}
-
+              
             </TouchableOpacity>
             <Text style={{
                 alignItems: 'center',
                 fontSize: 20,
                 color: 'black',
                 // justifyContent:'center',
-                textAlign:'center',
+                textAlign: 'center',
             }}>
                 {names}
             </Text>
+            {/* edit avatars */}
             <TouchableOpacity
                 style={{
                     width: 200,
@@ -181,6 +194,7 @@ const Profile = () => {
                 </Text>
             </TouchableOpacity>
 
+            {/* follower */}
             <View
                 style={{
                     width: '100%',
@@ -201,7 +215,7 @@ const Profile = () => {
                     onPress={() => {
                         setSelectedTab(0);
                     }}>
-                    <Text style={{ fontSize: 18, color:'black' }}>Followers</Text>
+                    <Text style={{ fontSize: 18, color: 'black' }}>Followers</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{
@@ -214,7 +228,7 @@ const Profile = () => {
                     onPress={() => {
                         setSelectedTab(1);
                     }}>
-                    <Text style={{ fontSize: 18 , color:'black' }}>Following</Text>
+                    <Text style={{ fontSize: 18, color: 'black' }}>Following</Text>
                 </TouchableOpacity>
             </View>
 
@@ -247,7 +261,7 @@ const Profile = () => {
                                             marginRight: 10,
                                         }}
                                     />
-                                    <Text style={{ fontSize: 18, fontWeight: '600' , color:'black' }}>
+                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
                                         {item.name}
                                     </Text>
                                 </View>
@@ -306,7 +320,7 @@ const Profile = () => {
                                             marginRight: 10,
                                         }}
                                     />
-                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black'}}>
+                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
                                         {item.name}
                                     </Text>
                                 </View>

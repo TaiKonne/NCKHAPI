@@ -62,13 +62,10 @@ const HomeSC = () => {
             ) : sellectedTab === 3 ? (
                 <Search />) : (
                 <Profile />)} */}
-                {sellectedTab === 0 ? (
-                <Home />
-            ) : sellectedTab === 1 ? (
-                <Chat />
-            ) : sellectedTab === 2 ? (
-                <Search />
-            ) : <Profile />}
+                {sellectedTab === 0 ? (<Home /> ) 
+                    : sellectedTab === 1 ? (<Chat />) 
+                        : sellectedTab === 2 ? (<Search />) 
+                            : (<Profile/>)}
 
             <View style={{
                 position: 'absolute',
@@ -146,7 +143,7 @@ const HomeSC = () => {
                     }}>
                         <Image source={require('../front_end/icons/magnifying-glass.png')}
                             style={{
-                                width: 24, height: 24, tintColor: sellectedTab == 3 ? 'orange' : '#8e8e8e'
+                                width: 24, height: 24, tintColor: sellectedTab == 2 ? 'orange' : '#8e8e8e'
                             }}
                         />
                     </View>
@@ -169,7 +166,7 @@ const HomeSC = () => {
                         borderRadius: 10,
                     }}>
                         <Image source={require('../front_end/icons/user.png')}
-                            style={{ width: 24, height: 24, tintColor: sellectedTab == 4 ? 'orange' : '#8e8e8e' }}
+                            style={{ width: 24, height: 24, tintColor: sellectedTab == 3 ? 'orange' : '#8e8e8e' }}
                         />
                     </View>
                 </TouchableOpacity>

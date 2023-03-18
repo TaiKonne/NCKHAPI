@@ -67,8 +67,9 @@ const Messages = () => {
     };
 
     return (
-        <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <View style={{ flex: 1, backgroundColor: '#fff'}}>
             <GiftedChat
+                textInputStyle={{color:'black'}}
                 messages={messages}
                 onSend={messages => onSend(messages)}
                 user={{
@@ -128,7 +129,7 @@ const Messages = () => {
                     return (
                         <InputToolbar
                             {...props}
-                            containerStyle={{ borderRadius: 10 }}>
+                            containerStyle={{ borderRadius: 10}}>
 
                         </InputToolbar>
                     );

@@ -53,6 +53,7 @@ const MyMessages = () => {
     return (
         <View style={{ flex: 1 }}>
             <GiftedChat
+                textInputStyle={{color:'black'}}
                 messages={messages}
                 onSend={messages => onSend(messages)}
                 user={{

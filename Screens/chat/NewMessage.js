@@ -88,7 +88,7 @@ const NewMessage = () => {
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <GiftedChat
         alwaysShowSend
-
+        textInputStyle={{color:'black'}}
         renderSend={props => {
           return (
             <View

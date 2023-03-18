@@ -210,7 +210,7 @@ const Profile = () => {
             {/* Bio */}
             <View style={{
                 alignSelf: 'center',
-                marginTop: 20,
+                marginTop: 10,
                 justifyContent: 'center',
                 alignItems: 'center',
                 marginStart: 20,
@@ -237,7 +237,7 @@ const Profile = () => {
                 }}
             >
                 <View>
-                    <Text style={{ color: 'grey' }}>
+                    <Text style={{ color: 'grey' , fontSize:13}}>
                         More Information
                     </Text>
                 </View>
@@ -314,7 +314,7 @@ const Profile = () => {
                     justifyContent: 'space-evenly',
                     alignItems: 'center',
                     flexDirection: 'row',
-                    marginTop: 30,
+                    marginTop: 20,
                 }}>
                 <TouchableOpacity
                     style={{

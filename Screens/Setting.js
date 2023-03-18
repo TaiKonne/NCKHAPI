@@ -24,15 +24,11 @@ function Setting(props) {
     const navigation = useNavigation();
     const [language, setlanguage] = useState('English')
 
-    const [addressInput, setAddressInput] = useState(0)
-
     const [usernames, setUsernames] = useState(0)
     const [nameUser, setNameUser] = useState('');
+
     const [gender, setGender] = useState('Male')
     const [Genderview, setGenderview] = useState(0)
-
-    const [emailInput, setEmailInput] = useState(0)
-    const [phoneInput, setPhoneInput] = useState(0)
 
     const [oldPass, setOldPass] = useState('');
     const [changepassword, setchangepassword] = useState(0);
@@ -40,7 +36,16 @@ function Setting(props) {
     const [reType1, setreType1] = useState('');
     const [reType2, setreType2] = useState('');
 
-    const [bio , setbio] = useState(0);
+    const [bio, setbio] = useState(0);// update bio
+    const [upBio, setUpBio] = useState('');
+
+    const [phoneInput, setPhoneInput] = useState(0) //update number phone
+    const [upPhone, setUpPhone] = useState('');
+
+    const [emailInput, setEmailInput] = useState(0) //mail
+
+    const [addressInput, setAddressInput] = useState(0) // update address
+    const [upAddress, setUpAddress] = useState('');
 
 
     const [isEnabledChangePassword2factor, setEnabledChangePassword2factor] = useState(false)
@@ -122,6 +127,53 @@ function Setting(props) {
             });
     };
 
+    const updateBio = async () => {
+        const userId = await AsyncStorage.getItem('USERID');
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .update({
+                bio: upBio,
+            })
+            .then(() => {
+                console.log('update bio!!')
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+    const updatePhone = async () => {
+        const userId = await AsyncStorage.getItem('USERID');
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .update({
+                numberPhone: upPhone,
+            })
+            .then(() => {
+                console.log('update bio!!')
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+    const updateAddress = async () => {
+        const userId = await AsyncStorage.getItem('USERID');
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .update({
+                address: upAddress,
+            })
+            .then(() => {
+                console.log('update bio!!')
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
     const updateName = async () => {
 
         firestore()
@@ -152,9 +204,8 @@ function Setting(props) {
             })
 
         if (oldPass === passUser) {
-            if(reType1 !== passUser)
-            {
-                if (reType1 === reType2 ) {
+            if (reType1 !== passUser) {
+                if (reType1 === reType2) {
                     firestore()
                         .collection('Users')
                         .doc(userId)
@@ -169,17 +220,15 @@ function Setting(props) {
                         });
                 }
                 else {
-                    Alert.alert('Thông báo','Mật khẩu mới phải trùng khớp');
+                    Alert.alert('Thông báo', 'Mật khẩu mới phải trùng khớp');
                 }
             }
-            else 
-            {
-                Alert.alert('Thông báo','Mật khẩu mới phải khác mật khẩu hiện tại.')
+            else {
+                Alert.alert('Thông báo', 'Mật khẩu mới phải khác mật khẩu hiện tại.')
             }
         }
-        else 
-        { 
-            Alert.alert('Thông báo','Mật khẩu hiện tại không đúng'); 
+        else {
+            Alert.alert('Thông báo', 'Mật khẩu hiện tại không đúng');
         }
     }
 
@@ -198,7 +247,7 @@ function Setting(props) {
                 backgroundColor: 'skyblue',
                 justifyContent: 'center',
             }}>
-            <TouchableOpacity onPress={()=>{
+            <TouchableOpacity onPress={() => {
                 navigation.navigate('HomeSC')
             }}>
                 <Image source={require('../front_end/icons/return.png')}
@@ -216,7 +265,7 @@ function Setting(props) {
         </View>
         <ScrollView>
             {/* language */}
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             <View style={{
                 height: 40,
                 backgroundColor: 'rgba(0,0,0,0.2)',
@@ -231,7 +280,7 @@ function Setting(props) {
                     fontWeight: 'bold'
                 }}>Language</Text>
             </View>
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             <TouchableOpacity
                 onPress={() => {
                     if (language == 'English')
@@ -266,7 +315,7 @@ function Setting(props) {
                 </View>
             </TouchableOpacity>
             {/* Infor */}
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             <View style={{
                 height: 40,
                 backgroundColor: 'rgba(0,0,0,0.2)',
@@ -281,7 +330,7 @@ function Setting(props) {
                     fontWeight: 'bold'
                 }}>Information</Text>
             </View>
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* userName */}
             <TouchableOpacity onPress={() => {
                 usernames == 0 ? setUsernames(1) : setUsernames(0)
@@ -368,7 +417,7 @@ function Setting(props) {
                     </View>
                 </View>
             ) : ""}
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* Change Avatars */}
             <TouchableOpacity
                 onPress={() => {
@@ -406,7 +455,7 @@ function Setting(props) {
                         }} />
                 </View>
             </TouchableOpacity>
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* Bio */}
             <TouchableOpacity onPress={() => {
                 bio == 0 ? setbio(1) : setbio(0)
@@ -454,6 +503,10 @@ function Setting(props) {
                             width: 250,
                             color: 'black',
                         }}
+                        value={upBio}
+                        onChangeText={txt => {
+                            setUpBio(txt);
+                        }}
                         autoFocus
                         placeholder='Type your new bio'
                         placeholderTextColor={'grey'}
@@ -463,7 +516,8 @@ function Setting(props) {
                         marginBottom: 5
                     }}>
                         <TouchableOpacity onPress={() => {
-                            setbio(0)
+                            setbio(0);
+                            updateBio();
                         }}>
                             <View style={{
                                 alignSelf: 'flex-end',
@@ -486,7 +540,7 @@ function Setting(props) {
                     </View>
                 </View>
             ) : ""}
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* Gender */}
             <TouchableOpacity
                 onPress={() => {
@@ -567,7 +621,7 @@ function Setting(props) {
                     </View>
                 </TouchableOpacity>
             </View> : ""}
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             <View style={{
                 height: 40,
                 backgroundColor: 'rgba(0,0,0,0.2)',
@@ -582,7 +636,7 @@ function Setting(props) {
                     fontWeight: 'bold'
                 }}>Contact</Text>
             </View>
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* Email */}
             <TouchableOpacity onPress={() => {
                 emailInput == 0 ? setEmailInput(1) : setEmailInput(0)
@@ -662,7 +716,7 @@ function Setting(props) {
                     </View>
                 </View>
             ) : ""}
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* Phone number */}
             <TouchableOpacity onPress={() => {
                 phoneInput == 0 ? setPhoneInput(1) : setPhoneInput(0)
@@ -710,6 +764,10 @@ function Setting(props) {
                             color: 'black',
                         }}
                         autoFocus
+                        value={upPhone}
+                        onChangeText={txt => {
+                            setUpPhone(txt);
+                        }}
                         placeholder='Type your new phone number'
                         placeholderTextColor={'grey'}
                     />
@@ -719,6 +777,7 @@ function Setting(props) {
                     }}>
                         <TouchableOpacity onPress={() => {
                             setPhoneInput(0)
+                            updatePhone();
                         }}>
                             <View style={{
                                 alignSelf: 'flex-end',
@@ -741,7 +800,7 @@ function Setting(props) {
                     </View>
                 </View>
             ) : ""}
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* Address */}
             <TouchableOpacity onPress={() => {
                 addressInput == 0 ? setAddressInput(1) : setAddressInput(0)
@@ -789,6 +848,10 @@ function Setting(props) {
                             color: 'black',
                         }}
                         autoFocus
+                        value={upAddress}
+                        onChangeText={txt => {
+                            setUpAddress(txt);
+                        }}
                         placeholder='Type your new address'
                         placeholderTextColor={'grey'}
                     />
@@ -800,6 +863,7 @@ function Setting(props) {
                     }}>
                         <TouchableOpacity onPress={() => {
                             setAddressInput(0)
+                            updateAddress();
                         }}>
                             <View style={{
                                 alignSelf: 'flex-end',
@@ -822,7 +886,7 @@ function Setting(props) {
                     </View>
                 </View>
             ) : ""}
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             <View style={{
                 height: 40,
                 backgroundColor: 'rgba(0,0,0,0.2)',
@@ -837,7 +901,7 @@ function Setting(props) {
                     fontWeight: 'bold'
                 }}>Security</Text>
             </View>
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* Đổi mật khẩu */}
             <TouchableOpacity onPress={() => {
                 changepassword == 0 ? setchangepassword(1) : setchangepassword(0)
@@ -967,7 +1031,7 @@ function Setting(props) {
                     </View>
                 </View>
             ) : ""}
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* Bảo mật 2 lớp */}
             <View style={{
                 flexDirection: 'row',
@@ -999,7 +1063,7 @@ function Setting(props) {
                     }}
                 />
             </View>
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* Đăng nhập bằng vân tay */}
             <View style={{
                 flexDirection: 'row',
@@ -1031,7 +1095,7 @@ function Setting(props) {
                     }}
                 />
             </View>
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             <View style={{
                 height: 40,
                 backgroundColor: 'rgba(0,0,0,0.2)',
@@ -1046,7 +1110,7 @@ function Setting(props) {
                     fontWeight: 'bold'
                 }}>Other</Text>
             </View>
-            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             <TouchableOpacity
                 onPress={() => {
                     navigation.navigate('Login')

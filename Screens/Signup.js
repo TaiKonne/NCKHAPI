@@ -7,8 +7,8 @@ import Loader from './common/Loader';
 import uuid from 'react-native-uuid';
 let token = '';
 const Signup = ({ navigation }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('taichuotchuoi@gmail.com');
+    const [password, setPassword] = useState('123');
     const [name, setName] = useState('tai');
     const [modalVisible, setModalVisible] = useState(false);
     useEffect(() => {
@@ -35,6 +35,9 @@ const Signup = ({ navigation }) => {
                 posts: [],
                 profilePic: '',
                 bio: '',
+                address: '',
+                numberPhone: '',
+
             })
             .then(() => {
                 console.log('User added!');
@@ -56,6 +59,9 @@ const Signup = ({ navigation }) => {
         await AsyncStorage.setItem('NAME', name);
         await AsyncStorage.setItem('EMAIL', email);
         await AsyncStorage.setItem('PASS', password);
+        await AsyncStorage.setItem('ADD', address);
+        await AsyncStorage.setItem('PHONE', numberPhone);
+        await AsyncStorage.setItem('BIO', bio);
         // await AsyncStorage.setItem('PROFILE_PIC', profilePic);
     };
     return (
@@ -66,7 +72,7 @@ const Signup = ({ navigation }) => {
                     marginTop: 100,
                     fontSize: 25,
                     fontWeight: '800',
-                    color:'red',
+                    color: 'red',
                 }}>
                 Register
             </Text>
@@ -85,7 +91,7 @@ const Signup = ({ navigation }) => {
                     alignSelf: 'center',
                     paddingLeft: 15,
                     marginTop: 100,
-                    color:'black'
+                    color: 'black'
                 }}
             />
             <TextInput
@@ -103,7 +109,7 @@ const Signup = ({ navigation }) => {
                     alignSelf: 'center',
                     paddingLeft: 15,
                     marginTop: 20,
-                    color:'black'
+                    color: 'black'
                 }}
             />
             <TextInput
@@ -121,7 +127,7 @@ const Signup = ({ navigation }) => {
                     borderWidth: 0.5,
                     alignSelf: 'center',
                     marginTop: 20,
-                    color:'black'
+                    color: 'black'
                 }}
             />
             <TouchableOpacity

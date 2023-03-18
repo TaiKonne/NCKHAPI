@@ -7,6 +7,7 @@ import storage from '@react-native-firebase/storage';
 import { useNavigation } from '@react-navigation/native';
 let userId = '';
 let names = '';
+
 const Profile = () => {
     const navigation = useNavigation();
     const [imageData, setImageData] = useState(null);
@@ -15,9 +16,11 @@ const Profile = () => {
     const [selectedTab, setSelectedTab] = useState(0);
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
-
+    const [bio, setBio] = useState('');
+    const [numberPhone, setNumberPhone] = useState('');
     const [morInfo, setmorInfo] = useState(0);
-
+    const [address, setAddress] = useState('');
+    const [mail, setMail] = useState('');
     useEffect(() => {
         getProfileData();
     }, []);
@@ -37,6 +40,10 @@ const Profile = () => {
                     setUploadedPicUrl(documentSnapshot.data().profilePic);
                     setFollowers(documentSnapshot.data().followers);
                     setFollowing(documentSnapshot.data().following);
+                    setBio(documentSnapshot.data().bio);
+                    setNumberPhone(documentSnapshot.data().numberPhone);
+                    setAddress(documentSnapshot.data().address);
+                    setMail(documentSnapshot.data().email);
                     console.log('data ', documentSnapshot.data().following);
                 }
             });
@@ -208,7 +215,7 @@ const Profile = () => {
                     color: 'black',
                     textAlign: 'center',
                 }}>
-                    this is bio cua Nguyen quoc dung abc xyaf sfsdfsdfsdfsf sdfsd  sfs d sds dfsd
+                    {bio}
                 </Text>
             </View>
             {/* More  Information */}
@@ -231,68 +238,68 @@ const Profile = () => {
                 </View>
             </TouchableOpacity>
             {morInfo == 1 ? (<View style={{
-                                borderWidth: 0.2,
-                                borderColor: 'grey',
-                                marginStart:10,
-                                marginEnd:10,
-                            }}>
-                                <View style={{
-                                    flexDirection: 'row',
-                                    paddingVertical: 5,
-                                    alignItems: 'center',
-                                    marginStart: 20,
-                                    marginEnd: 20,
-                                }} >
-                                    <Image source={require('../../front_end/icons/mail.png')}
-                                    style={{
-                                        height: 18,
-                                        width: 18,
-                                        marginStart: 10,
-                                    }} />
-                                    <Text style={{
-                                        color: 'black',
-                                        fontSize: 14,
-                                        paddingStart: 5,
-                                    }}>nguyenquocdung26032003@gmail.com </Text>
-                                </View>
-                                <View style={{
-                                    flexDirection: 'row',
-                                    paddingVertical: 5,
-                                    alignItems: 'center',
-                                    marginStart: 20,
-                                    marginEnd: 20,
-                                }} >
-                                    <Image source={require('../../front_end/icons/telephone.png')}
-                                    style={{
-                                        height: 18,
-                                        width: 18,
-                                        marginStart: 10,
-                                    }} />
-                                    <Text style={{
-                                        color: 'black',
-                                        fontSize: 14,
-                                        paddingStart: 5,
-                                    }}>0901291640</Text>
-                                </View>
-                                <View style={{
-                                    flexDirection: 'row',
-                                    paddingVertical: 5,
-                                    alignItems: 'center',
-                                    marginStart: 20,
-                                    marginEnd: 20,
-                                }} >
-                                    <Image source={require('../../front_end/icons/location.png')}
-                                    style={{
-                                        height: 18,
-                                        width: 18,
-                                        marginStart: 10,
-                                    }} />
-                                    <Text style={{
-                                        color: 'black',
-                                        fontSize: 14,
-                                        paddingStart: 5,
-                                    }}> Thu Dau Mot city</Text>
-                                </View>
+                borderWidth: 0.2,
+                borderColor: 'grey',
+                marginStart: 10,
+                marginEnd: 10,
+            }}>
+                <View style={{
+                    flexDirection: 'row',
+                    paddingVertical: 5,
+                    alignItems: 'center',
+                    marginStart: 20,
+                    marginEnd: 20,
+                }} >
+                    <Image source={require('../../front_end/icons/mail.png')}
+                        style={{
+                            height: 18,
+                            width: 18,
+                            marginStart: 10,
+                        }} />
+                    <Text style={{
+                        color: 'black',
+                        fontSize: 14,
+                        paddingStart: 5,
+                    }}>{mail} </Text>
+                </View>
+                <View style={{
+                    flexDirection: 'row',
+                    paddingVertical: 5,
+                    alignItems: 'center',
+                    marginStart: 20,
+                    marginEnd: 20,
+                }} >
+                    <Image source={require('../../front_end/icons/telephone.png')}
+                        style={{
+                            height: 18,
+                            width: 18,
+                            marginStart: 10,
+                        }} />
+                    <Text style={{
+                        color: 'black',
+                        fontSize: 14,
+                        paddingStart: 5,
+                    }}>{numberPhone}</Text>
+                </View>
+                <View style={{
+                    flexDirection: 'row',
+                    paddingVertical: 5,
+                    alignItems: 'center',
+                    marginStart: 20,
+                    marginEnd: 20,
+                }} >
+                    <Image source={require('../../front_end/icons/location.png')}
+                        style={{
+                            height: 18,
+                            width: 18,
+                            marginStart: 10,
+                        }} />
+                    <Text style={{
+                        color: 'black',
+                        fontSize: 14,
+                        paddingStart: 5,
+                    }}>{address}</Text>
+                </View>
             </View>) : ""}
             {/* follower */}
             <View

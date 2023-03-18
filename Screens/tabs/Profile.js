@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, Image, FlatList, ImageBackground } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -137,34 +137,39 @@ const Profile = () => {
                         }} />
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity
-                style={{
-                    width: 100,
-                    height: 100,
-                    alignSelf: 'center',
-                    marginTop: 50,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}>
-                {
-                    imagePicked == true && imageData != null ? (
-                        <Image
-                            source={{ uri: imageData.assets[0].uri }}
-                            style={{ width: 100, height: 100, borderRadius: 50 }}
-                        />
-                    ) : UploadedPicUrl === '' ? (
-                        <Image
-                            source={require('../images/user.png')}
-                            style={{ width: 100, height: 100, borderRadius: 50 }}
-                        />
-                    ) : (
-                        <Image
-                            source={{ uri: UploadedPicUrl }}
-                            style={{ width: 100, height: 100, borderRadius: 50 }}
-                        />
-                    )}
-
-            </TouchableOpacity>
+            <ImageBackground 
+                source={require('../../front_end/hoa_giay_1.jpg')}
+                style={{width:'100%', height:200}}    
+            >
+                <TouchableOpacity
+                    style={{
+                        width: 100,
+                        height: 100,
+                        alignSelf: 'center',
+                        marginTop: 80,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginBottom:10,
+                    }}>
+                    {
+                        imagePicked == true && imageData != null ? (
+                            <Image
+                                source={{ uri: imageData.assets[0].uri }}
+                                style={{ width: 120, height: 120, borderRadius: 60 }}
+                            />
+                        ) : UploadedPicUrl === '' ? (
+                            <Image
+                                source={require('../images/user.png')}
+                                style={{ width: 120, height: 120, borderRadius: 60 }}
+                            />
+                        ) : (
+                            <Image
+                                source={{ uri: UploadedPicUrl }}
+                                style={{ width: 120, height: 120, borderRadius: 60 }}
+                            />
+                        )}
+                </TouchableOpacity>
+            </ImageBackground>
             <Text style={{
                 alignItems: 'center',
                 fontSize: 20,

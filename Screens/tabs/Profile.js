@@ -231,11 +231,11 @@ const Profile = () => {
                 </View>
             </TouchableOpacity>
             {morInfo == 1 ? (<View style={{
-                borderWidth: 0.2,
-                borderColor: 'grey',
-                marginStart:10,
-                marginEnd:10,
-            }}>
+                                borderWidth: 0.2,
+                                borderColor: 'grey',
+                                marginStart:10,
+                                marginEnd:10,
+                            }}>
                                 <View style={{
                                     flexDirection: 'row',
                                     paddingVertical: 5,
@@ -243,11 +243,12 @@ const Profile = () => {
                                     marginStart: 20,
                                     marginEnd: 20,
                                 }} >
-                                    <Text style={{
-                                        color: 'black',
-                                        fontSize: 16,
-                                        paddingStart: 5,
-                                    }}>Mail: </Text>
+                                    <Image source={require('../../front_end/icons/mail.png')}
+                                    style={{
+                                        height: 18,
+                                        width: 18,
+                                        marginStart: 10,
+                                    }} />
                                     <Text style={{
                                         color: 'black',
                                         fontSize: 14,
@@ -261,11 +262,12 @@ const Profile = () => {
                                     marginStart: 20,
                                     marginEnd: 20,
                                 }} >
-                                    <Text style={{
-                                        color: 'black',
-                                        fontSize: 16,
-                                        paddingStart: 5,
-                                    }}>Phone Number: </Text>
+                                    <Image source={require('../../front_end/icons/telephone.png')}
+                                    style={{
+                                        height: 18,
+                                        width: 18,
+                                        marginStart: 10,
+                                    }} />
                                     <Text style={{
                                         color: 'black',
                                         fontSize: 14,
@@ -279,11 +281,12 @@ const Profile = () => {
                                     marginStart: 20,
                                     marginEnd: 20,
                                 }} >
-                                    <Text style={{
-                                        color: 'black',
-                                        fontSize: 16,
-                                        paddingStart: 5,
-                                    }}>Address: </Text>
+                                    <Image source={require('../../front_end/icons/location.png')}
+                                    style={{
+                                        height: 18,
+                                        width: 18,
+                                        marginStart: 10,
+                                    }} />
                                     <Text style={{
                                         color: 'black',
                                         fontSize: 14,

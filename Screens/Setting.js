@@ -16,7 +16,7 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-
+import Loader from './common/Loader';
 
 function Setting(props) {
     const navigation = useNavigation();
@@ -32,7 +32,7 @@ function Setting(props) {
 
     const [emailInput, setEmailInput] = useState(0)
     const [phoneInput, setPhoneInput] = useState(0)
-
+    const [oldPass, setOldPass] = useState('');
     const [changepassword, setchangepassword] = useState(0);
     const [passUser, setPassUser] = useState(''); // check pass hien tai == pass api
     const [reType1, setreType1] = useState('');
@@ -131,13 +131,18 @@ function Setting(props) {
             });
     }
     const updatePass = async () => { // && (reType1 === reType2 && reType1 !== passUser
-        let oldPass = await AsyncStorage.getItem('PASS');
 
+        const userId = await AsyncStorage.getItem('USERID');
         firestore()
             .collection('Users')
             .doc(userId)
             .get()
-            .then()
+            .then(documentSnapshot => {
+                if (documentSnapshot.exists) {
+                    setOldPass(documentSnapshot.data().password);
+                    // console.log('pass', documentSnapshot.data().password);
+                }
+            })
 
         if (oldPass === passUser) {
             if (reType1 === reType2 && reType1 !== passUser) {

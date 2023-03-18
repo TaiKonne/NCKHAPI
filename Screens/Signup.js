@@ -64,10 +64,11 @@ const Signup = ({ navigation }) => {
                 style={{
                     alignSelf: 'center',
                     marginTop: 100,
-                    fontSize: 20,
+                    fontSize: 25,
                     fontWeight: '800',
+                    color:'red',
                 }}>
-                Firebase
+                Register
             </Text>
             <TextInput
                 value={name}
@@ -75,6 +76,7 @@ const Signup = ({ navigation }) => {
                     setName(txt);
                 }}
                 placeholder="Enter Name"
+                placeholderTextColor={'grey'}
                 style={{
                     width: '84%',
                     height: 50,
@@ -83,6 +85,7 @@ const Signup = ({ navigation }) => {
                     alignSelf: 'center',
                     paddingLeft: 15,
                     marginTop: 100,
+                    color:'black'
                 }}
             />
             <TextInput
@@ -91,6 +94,7 @@ const Signup = ({ navigation }) => {
                     setEmail(txt);
                 }}
                 placeholder="Enter Email Id"
+                placeholderTextColor={'grey'}
                 style={{
                     width: '84%',
                     height: 50,
@@ -99,6 +103,7 @@ const Signup = ({ navigation }) => {
                     alignSelf: 'center',
                     paddingLeft: 15,
                     marginTop: 20,
+                    color:'black'
                 }}
             />
             <TextInput
@@ -107,6 +112,7 @@ const Signup = ({ navigation }) => {
                     setPassword(txt);
                 }}
                 placeholder="Enter Password"
+                placeholderTextColor={'grey'}
                 style={{
                     width: '84%',
                     height: 50,
@@ -115,6 +121,7 @@ const Signup = ({ navigation }) => {
                     borderWidth: 0.5,
                     alignSelf: 'center',
                     marginTop: 20,
+                    color:'black'
                 }}
             />
             <TouchableOpacity

@@ -40,6 +40,9 @@ function Setting(props) {
     const [reType1, setreType1] = useState('');
     const [reType2, setreType2] = useState('');
 
+    const [bio , setbio] = useState(0);
+
+
     const [isEnabledChangePassword2factor, setEnabledChangePassword2factor] = useState(false)
     const [isEnabledFingerprint, setEnabledFingerprint] = useState(false)
 
@@ -403,6 +406,86 @@ function Setting(props) {
                         }} />
                 </View>
             </TouchableOpacity>
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
+            {/* Bio */}
+            <TouchableOpacity onPress={() => {
+                bio == 0 ? setbio(1) : setbio(0)
+            }}>
+                <View style={{
+                    flexDirection: 'row',
+                    paddingVertical: 10,
+                    alignItems: 'center'
+                }} >
+                    <Image source={require('../front_end/icons/bio.png')}
+                        style={{
+                            height: 18,
+                            width: 18,
+                            marginStart: 10,
+                        }} />
+                    <Text style={{
+                        color: 'black',
+                        fontSize: 15,
+                        paddingStart: 5,
+
+                    }}>Bio</Text>
+                    <View style={{ flex: 1 }} ></View>
+                    <Image source={require('../front_end/icons/exchange.png')}
+                        style={{
+                            height: 17,
+                            width: 17,
+                            marginEnd: 10,
+                        }} />
+
+                </View>
+            </TouchableOpacity>
+            {bio == 1 ? (
+                <View style={{
+                    flexDirection: 'row',
+                    flex: 1,
+                }}>
+                    <TextInput
+                        style={{
+                            backgroundColor: 'white',
+                            borderWidth: 1,
+                            borderColor: 'gray',
+                            marginStart: 30,
+                            // marginEnd: 30,
+                            height: 35,
+                            width: 250,
+                            color: 'black',
+                        }}
+                        autoFocus
+                        placeholder='Type your new bio'
+                        placeholderTextColor={'grey'}
+                    />
+                    <View style={{
+                        flex: 1,
+                        marginBottom: 5
+                    }}>
+                        <TouchableOpacity onPress={() => {
+                            setbio(0)
+                        }}>
+                            <View style={{
+                                alignSelf: 'flex-end',
+                                borderWidth: 0.2,
+                                borderRadius: 5,
+                                backgroundColor: 'skyblue',
+                                marginEnd: 30,
+                                height: 35
+
+                            }}>
+                                <Text style={{
+                                    color: 'white',
+                                    fontSize: 15,
+                                    padding: 5,
+                                    fontWeight: 'bold',
+
+                                }}>Save</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            ) : ""}
             <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             {/* Gender */}
             <TouchableOpacity

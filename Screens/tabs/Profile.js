@@ -16,6 +16,8 @@ const Profile = () => {
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
 
+    const [morInfo, setmorInfo] = useState(0);
+
     useEffect(() => {
         getProfileData();
     }, []);
@@ -193,7 +195,102 @@ const Profile = () => {
                     {imagePicked === true ? 'Save Pic' : 'Edit Profile'}
                 </Text>
             </TouchableOpacity> */}
+            {/* Bio */}
+            <View style={{
+                alignSelf: 'center',
+                marginTop: 20,
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginStart: 20,
+                marginEnd: 20,
+            }}>
+                <Text style={{
+                    color: 'black',
+                    textAlign: 'center',
+                }}>
+                    this is bio cua Nguyen quoc dung abc xyaf sfsdfsdfsdfsf sdfsd  sfs d sds dfsd
+                </Text>
+            </View>
+            {/* More  Information */}
+            <TouchableOpacity onPress={() => {
+                morInfo == 0 ? setmorInfo(1) : setmorInfo(0);
 
+            }}
+                style={{
+                    alignSelf: 'center',
+                    marginTop: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderColor: 'orange',
+                }}
+            >
+                <View>
+                    <Text style={{ color: 'grey' }}>
+                        More Information
+                    </Text>
+                </View>
+            </TouchableOpacity>
+            {morInfo == 1 ? (<View style={{
+                borderWidth: 0.2,
+                borderColor: 'grey',
+                marginStart:10,
+                marginEnd:10,
+            }}>
+                                <View style={{
+                                    flexDirection: 'row',
+                                    paddingVertical: 5,
+                                    alignItems: 'center',
+                                    marginStart: 20,
+                                    marginEnd: 20,
+                                }} >
+                                    <Text style={{
+                                        color: 'black',
+                                        fontSize: 16,
+                                        paddingStart: 5,
+                                    }}>Mail: </Text>
+                                    <Text style={{
+                                        color: 'black',
+                                        fontSize: 14,
+                                        paddingStart: 5,
+                                    }}>nguyenquocdung26032003@gmail.com </Text>
+                                </View>
+                                <View style={{
+                                    flexDirection: 'row',
+                                    paddingVertical: 5,
+                                    alignItems: 'center',
+                                    marginStart: 20,
+                                    marginEnd: 20,
+                                }} >
+                                    <Text style={{
+                                        color: 'black',
+                                        fontSize: 16,
+                                        paddingStart: 5,
+                                    }}>Phone Number: </Text>
+                                    <Text style={{
+                                        color: 'black',
+                                        fontSize: 14,
+                                        paddingStart: 5,
+                                    }}>0901291640</Text>
+                                </View>
+                                <View style={{
+                                    flexDirection: 'row',
+                                    paddingVertical: 5,
+                                    alignItems: 'center',
+                                    marginStart: 20,
+                                    marginEnd: 20,
+                                }} >
+                                    <Text style={{
+                                        color: 'black',
+                                        fontSize: 16,
+                                        paddingStart: 5,
+                                    }}>Address: </Text>
+                                    <Text style={{
+                                        color: 'black',
+                                        fontSize: 14,
+                                        paddingStart: 5,
+                                    }}> Thu Dau Mot city</Text>
+                                </View>
+            </View>) : ""}
             {/* follower */}
             <View
                 style={{

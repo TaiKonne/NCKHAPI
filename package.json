@@ -12,6 +12,7 @@
   "dependencies": {
     "@apollo/client": "^3.7.10",
     "@hauvo/react-native-360-image-viewer": "^1.0.0",
+    "@n1ru4l/react-in-center-of-screen": "^1.0.0-alpha.4",
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-firebase/app": "^17.3.1",
     "@react-native-firebase/database": "^17.3.2",

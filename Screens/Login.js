@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity , Alert} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
@@ -40,7 +40,7 @@ const Login = ({ navigation }) => {
                             );
                             // });
                         } else {
-                            alert('email id or password may wrong ');
+                            Alert.alert('Login','email id or password may wrong ');
                         }
                         console.log(
                             querySnapshot.docs[0]._data.email +
@@ -51,7 +51,7 @@ const Login = ({ navigation }) => {
                         );
                     } else {
                         console.log('account not found');
-                        alert('account not found');
+                        Alert.alert('Login','account not found');
                     }
                 })
                 .catch(error => {

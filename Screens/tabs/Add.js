@@ -182,7 +182,7 @@ const Add = ({ onAdded }) => {
                             navigation.navigate('HomeSC')
                         }
                         else {
-                            alert('Please Select Pic or enter caption');
+                            Alert.alert('Post','Please Select Pic or enter caption');
                         }
                     }}>
                     {' '}

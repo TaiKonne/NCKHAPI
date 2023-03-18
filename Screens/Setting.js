@@ -8,7 +8,8 @@ import {
     ScrollView,
     Switch,
     toggleSwitch,
-    TextInput
+    TextInput,
+    Alert,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker'
@@ -17,10 +18,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import Loader from './common/Loader';
+import { Title } from 'react-native-paper';
 
 function Setting(props) {
     const navigation = useNavigation();
-
     const [language, setlanguage] = useState('English')
 
     const [addressInput, setAddressInput] = useState(0)
@@ -32,13 +33,16 @@ function Setting(props) {
 
     const [emailInput, setEmailInput] = useState(0)
     const [phoneInput, setPhoneInput] = useState(0)
+
     const [oldPass, setOldPass] = useState('');
     const [changepassword, setchangepassword] = useState(0);
     const [passUser, setPassUser] = useState(''); // check pass hien tai == pass api
     const [reType1, setreType1] = useState('');
     const [reType2, setreType2] = useState('');
-    const [isEnabledChangePassword2factor, setEnabledChangePassword2factor] = useState(true)
-    const [isEnabledFingerprint, setEnabledFingerprint] = useState(true)
+
+    const [isEnabledChangePassword2factor, setEnabledChangePassword2factor] = useState(false)
+    const [isEnabledFingerprint, setEnabledFingerprint] = useState(false)
+
     // test change avatar
     const [imageData, setImageData] = useState(null);
     const [imagePicked, setImagePicked] = useState(false);
@@ -145,25 +149,35 @@ function Setting(props) {
             })
 
         if (oldPass === passUser) {
-            if (reType1 === reType2 && reType1 !== passUser) {
-                firestore()
-                    .collection('Users')
-                    .doc(userId)
-                    .update({
-                        password: reType1,
-                    })
-                    .then(() => {
-                        console.log('change name thanh cong');
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
+            if(reType1 !== passUser)
+            {
+                if (reType1 === reType2 ) {
+                    firestore()
+                        .collection('Users')
+                        .doc(userId)
+                        .update({
+                            password: reType1,
+                        })
+                        .then(() => {
+                            console.log('Đổi mật khẩu thành công');
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                }
+                else {
+                    Alert.alert('Thông báo','Mật khẩu mới phải trùng khớp');
+                }
             }
-            else {
-                alert('Mật khẩu không trùng khớp');
+            else 
+            {
+                Alert.alert('Thông báo','Mật khẩu mới phải khác mật khẩu hiện tại.')
             }
         }
-        else { alert('Sai mật khẩu hiện tại' + oldPass); }
+        else 
+        { 
+            Alert.alert('Thông báo','Mật khẩu hiện tại không đúng'); 
+        }
     }
 
     return <View style={{
@@ -172,18 +186,34 @@ function Setting(props) {
     }}>
         <View
             style={{
+                flexDirection: 'row',
                 width: '100%',
                 height: 60,
-                justifyContent: 'center',
-                // paddingLeft: 20,
+                borderBottomWidth: 0.5,
+                borderBottomColor: '#8e8e8e',
+                alignItems: 'center',
                 backgroundColor: 'skyblue',
+                justifyContent: 'center',
             }}>
+            <TouchableOpacity onPress={()=>{
+                navigation.navigate('HomeSC')
+            }}>
+                <Image source={require('../front_end/icons/return.png')}
+                    style={{
+                        height: 20,
+                        width: 20,
+                        marginStart: 10,
+                    }} />
+            </TouchableOpacity>
+            <View style={{ flex: 1 }}></View>
             <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
                 Setting
             </Text>
+            <View style={{ flex: 1, marginEnd: 10 }}></View>
         </View>
         <ScrollView>
             {/* language */}
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             <View style={{
                 height: 40,
                 backgroundColor: 'rgba(0,0,0,0.2)',
@@ -198,6 +228,7 @@ function Setting(props) {
                     fontWeight: 'bold'
                 }}>Language</Text>
             </View>
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             <TouchableOpacity
                 onPress={() => {
                     if (language == 'English')
@@ -232,6 +263,7 @@ function Setting(props) {
                 </View>
             </TouchableOpacity>
             {/* Infor */}
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             <View style={{
                 height: 40,
                 backgroundColor: 'rgba(0,0,0,0.2)',
@@ -246,6 +278,7 @@ function Setting(props) {
                     fontWeight: 'bold'
                 }}>Information</Text>
             </View>
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             {/* userName */}
             <TouchableOpacity onPress={() => {
                 usernames == 0 ? setUsernames(1) : setUsernames(0)
@@ -332,6 +365,7 @@ function Setting(props) {
                     </View>
                 </View>
             ) : ""}
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             {/* Change Avatars */}
             <TouchableOpacity
                 onPress={() => {
@@ -369,6 +403,7 @@ function Setting(props) {
                         }} />
                 </View>
             </TouchableOpacity>
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             {/* Gender */}
             <TouchableOpacity
                 onPress={() => {
@@ -449,7 +484,7 @@ function Setting(props) {
                     </View>
                 </TouchableOpacity>
             </View> : ""}
-
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             <View style={{
                 height: 40,
                 backgroundColor: 'rgba(0,0,0,0.2)',
@@ -464,6 +499,7 @@ function Setting(props) {
                     fontWeight: 'bold'
                 }}>Contact</Text>
             </View>
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             {/* Email */}
             <TouchableOpacity onPress={() => {
                 emailInput == 0 ? setEmailInput(1) : setEmailInput(0)
@@ -543,6 +579,7 @@ function Setting(props) {
                     </View>
                 </View>
             ) : ""}
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             {/* Phone number */}
             <TouchableOpacity onPress={() => {
                 phoneInput == 0 ? setPhoneInput(1) : setPhoneInput(0)
@@ -621,6 +658,7 @@ function Setting(props) {
                     </View>
                 </View>
             ) : ""}
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             {/* Address */}
             <TouchableOpacity onPress={() => {
                 addressInput == 0 ? setAddressInput(1) : setAddressInput(0)
@@ -701,6 +739,7 @@ function Setting(props) {
                     </View>
                 </View>
             ) : ""}
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             <View style={{
                 height: 40,
                 backgroundColor: 'rgba(0,0,0,0.2)',
@@ -715,6 +754,7 @@ function Setting(props) {
                     fontWeight: 'bold'
                 }}>Security</Text>
             </View>
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             {/* Đổi mật khẩu */}
             <TouchableOpacity onPress={() => {
                 changepassword == 0 ? setchangepassword(1) : setchangepassword(0)
@@ -844,6 +884,7 @@ function Setting(props) {
                     </View>
                 </View>
             ) : ""}
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             {/* Bảo mật 2 lớp */}
             <View style={{
                 flexDirection: 'row',
@@ -875,6 +916,7 @@ function Setting(props) {
                     }}
                 />
             </View>
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             {/* Đăng nhập bằng vân tay */}
             <View style={{
                 flexDirection: 'row',
@@ -906,6 +948,7 @@ function Setting(props) {
                     }}
                 />
             </View>
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             <View style={{
                 height: 40,
                 backgroundColor: 'rgba(0,0,0,0.2)',
@@ -920,6 +963,7 @@ function Setting(props) {
                     fontWeight: 'bold'
                 }}>Other</Text>
             </View>
+            <View style={{flex :1 , borderWidth:0.2 , borderColor:'grey', opacity:0.3}}></View>
             <TouchableOpacity
                 onPress={() => {
                     navigation.navigate('Login')

@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
 import firestore from '@react-native-firebase/firestore';
@@ -127,7 +127,7 @@ const Home = (props) => {
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=> {
-                    alert('Thêm ảnh')
+                    Alert.alert('Image','Add Picture')
                 }}>
                     <View style={{
 
@@ -149,7 +149,7 @@ const Home = (props) => {
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=> {
-                    alert('Vào kho ảnh')
+                    Alert.alert('Album','Go to album')
                 }}>
                     <View style={{
 

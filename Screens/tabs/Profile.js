@@ -166,7 +166,7 @@ const Profile = () => {
                 {names}
             </Text>
             {/* edit avatars */}
-            <TouchableOpacity
+            {/* <TouchableOpacity
                 style={{
                     width: 200,
                     height: 40,
@@ -192,7 +192,7 @@ const Profile = () => {
                 <Text style={{ color: 'orange' }}>
                     {imagePicked === true ? 'Save Pic' : 'Edit Profile'}
                 </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             {/* follower */}
             <View

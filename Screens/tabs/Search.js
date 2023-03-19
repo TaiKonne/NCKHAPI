@@ -1,5 +1,5 @@
-import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import { View, Text, FlatList, Image, TouchableOpacity, TextInput } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 let userId = '';
@@ -110,7 +110,7 @@ const Search = () => {
           .update({
             followers: tempFollowers,
           })
-          .then(res => {})
+          .then(res => { })
           .catch(error => {
             console.log(error);
           });
@@ -120,7 +120,7 @@ const Search = () => {
           .update({
             following: following,
           })
-          .then(res => {})
+          .then(res => { })
           .catch(error => {
             console.log(error);
           });
@@ -146,10 +146,37 @@ const Search = () => {
     return status;
   };
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
+      <View style={{
+                marginHorizontal : 10,
+                marginVertical: 10,
+                flexDirection : 'row',
+                alignItems : 'center'
+            }}> 
+                <TextInput
+                    autoCorrect= {false}
+                    // onChangeText = {(text) => {
+                    //     setsearchtext(text)
+                    // }}
+                    style={{
+                        backgroundColor: 'rgba(0,0,0,0.2)',
+                        height: 40,
+                        flex: 1,
+                        paddingStart: 20,
+                        marginEnd: 8,
+                        borderRadius: 5,
+                        color:'black',
+                    }} />
+                  <Image source={require('../../front_end/icons/magnifying-glass.png')}
+                    style={{
+                        height: 18,
+                        width: 18,
+                        marginStart: 10,
+                  }} />
+            </View>
       <FlatList
         data={usersList}
-        renderItem={({item, index}) => {
+        renderItem={({ item, index }) => {
           return (
             <View
               style={{
@@ -160,12 +187,12 @@ const Search = () => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image
                   source={
                     item._data.profilePic == ''
                       ? require('../images/user.png')
-                      : {uri: item._data.profilePic}
+                      : { uri: item._data.profilePic }
                   }
                   style={{
                     width: 40,
@@ -175,7 +202,7 @@ const Search = () => {
                     marginRight: 10,
                   }}
                 />
-                <Text style={{fontSize: 18, fontWeight: 'bold', color:'black'}}>
+                <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>
                   {item._data.name}
                 </Text>
               </View>
@@ -191,7 +218,7 @@ const Search = () => {
                 onPress={() => {
                   followUser(item);
                 }}>
-                <Text style={{color: '#fff', marginLeft: 10, marginRight: 10 , fontWeight:'bold'}}>
+                <Text style={{ color: '#fff', marginLeft: 10, marginRight: 10, fontWeight: 'bold' }}>
                   {getFollowStatus(item._data.followers)
                     ? 'Unfollow'
                     : 'Follow'}

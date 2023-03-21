@@ -143,7 +143,7 @@ const NewMessage = () => {
             style={{
               height: 25,
               width: 25,
-              marginEnd: 20,
+              marginEnd: 10,
               tintColor:'white'
             }} />
         </TouchableOpacity>

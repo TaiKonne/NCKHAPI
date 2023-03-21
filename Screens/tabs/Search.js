@@ -2,8 +2,10 @@ import { View, Text, FlatList, Image, TouchableOpacity, TextInput } from 'react-
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 let userId = '';
 const Search = () => {
+  const navigation = useNavigation();
   const [usersList, setUsersList] = useState([]);
   const [onFollowClick, setOnFollowClick] = useState(false);
   useEffect(() => {
@@ -172,12 +174,16 @@ const Search = () => {
               borderRadius: 5,
               color: 'black',
             }} />
-          <Image source={require('../../front_end/icons/magnifying-glass.png')}
-            style={{
-              height: 20,
-              width: 20,
-              marginStart: 10,
-            }} />
+          <TouchableOpacity onPress={()=>{
+            navigation.navigate('VisitUser')
+          }}>
+            <Image source={require('../../front_end/icons/magnifying-glass.png')}
+              style={{
+                height: 20,
+                width: 20,
+                marginStart: 10,
+              }} />
+          </TouchableOpacity>
         </View>
       </View>
       {/* <View style={{borderWidth:0.3 , borderColor:'grey'}}></View> */}

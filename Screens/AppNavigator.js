@@ -13,6 +13,7 @@ import Home from './tabs/Home';
 import Add from './tabs/Add';
 import Setting from './Setting';
 import Introduction from './Introduction';
+import VisitUser from './VisitUser';
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
@@ -69,9 +70,14 @@ const AppNavigator = () => {
                     component={Setting}
                     options={{ headerShown: false }}
                 />
-                  <Stack.Screen
+                <Stack.Screen
                     name="Introduction"
                     component={Introduction}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="VisitUser"
+                    component={VisitUser}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

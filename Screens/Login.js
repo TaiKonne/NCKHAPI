@@ -6,8 +6,8 @@ import Loader from './common/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 let token = '';
 const Login = ({ navigation }) => {
-    const [email, setEmail] = useState('nguyenquocdung26032003@gmail.com');
-    const [password, setPassword] = useState('1');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const checkLogin = () => {
         if (email !== '' && password !== '') {
@@ -25,7 +25,7 @@ const Login = ({ navigation }) => {
                             querySnapshot.docs[0]._data.email === email &&
                             querySnapshot.docs[0]._data.password === password
                         ) {
-                            alert('user logged in successfully !');
+                            // alert('user logged in successfully !');
                             // firestore()
                             //   .collection('tokens')
                             //   .add({

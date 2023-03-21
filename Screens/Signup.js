@@ -7,9 +7,9 @@ import Loader from './common/Loader';
 import uuid from 'react-native-uuid';
 let token = '';
 const Signup = ({ navigation }) => {
-    const [email, setEmail] = useState('taichuotchuoi@gmail.com');
-    const [password, setPassword] = useState('123');
-    const [name, setName] = useState('tai');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     useEffect(() => {
         getFcmToken();

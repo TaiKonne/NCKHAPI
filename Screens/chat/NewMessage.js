@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image , Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Bubble, GiftedChat, InputToolbar, Send } from 'react-native-gifted-chat';
 import { Router, urlencoded } from 'express';
@@ -86,9 +86,71 @@ const NewMessage = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          width: '100%',
+          height: 60,
+          borderBottomWidth: 0.5,
+          borderBottomColor: '#8e8e8e',
+          alignItems: 'center',
+          backgroundColor: 'skyblue',
+          justifyContent: 'center',
+        }}>
+        <View style={{
+          marginStart:10,
+        }}>
+          <Image source={require('../images/user.png')}
+              style={{
+                height: 50,
+                width: 50,
+                marginEnd: 10,
+              }} />
+        </View>
+        <View style={{
+            borderWidth:1,
+            borderColor:'#64b72e',
+            backgroundColor:'#64b72e',
+            height:12,
+            width:12,
+            borderRadius:6,
+            position:'absolute',
+            left:50,
+            bottom:6,
+          }}>
+          </View>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
+            Tai con 
+          </Text>
+        <View style={{ flex: 1 }}></View>
+        <TouchableOpacity onPress={() => {
+          Alert.alert('Messenger', 'Call')
+          // navigation.navigate('Setting')
+        }}>
+          <Image source={require('../../front_end/icons/phone-call.png')}
+            style={{
+              height: 25,
+              width: 25,
+              marginEnd: 20,
+              tintColor:'white'
+            }} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          Alert.alert('Messenger', 'Video call')
+          // navigation.navigate('Setting')
+        }}>
+          <Image source={require('../../front_end/icons/facetime-button.png')}
+            style={{
+              height: 25,
+              width: 25,
+              marginEnd: 20,
+              tintColor:'white'
+            }} />
+        </TouchableOpacity>
+      </View>
       <GiftedChat
         alwaysShowSend
-        textInputStyle={{color:'black'}}
+        textInputStyle={{ color: 'black' }}
         renderSend={props => {
           return (
             <View

@@ -14,7 +14,7 @@ const Splash = ({ navigation }) => {
         // if (userId !== '' || userId !== null || userId !== undefined) {
         //   navigation.navigate('HomeScreen');
         // } else {
-        navigation.navigate('Login');
+        navigation.navigate('Introduction');
         // }
     };
     return (

@@ -9,6 +9,9 @@ const Login = ({ navigation }) => {
     const [email, setEmail] = useState('nguyenquocdung26032003@gmail.com');
     const [password, setPassword] = useState('1');
     const [modalVisible, setModalVisible] = useState(false);
+
+    const [checkSignup , setCheckSignUp] = useState(0);
+
     const checkLogin = () => {
         if (email !== '' && password !== '') {
             setModalVisible(true);
@@ -148,6 +151,7 @@ const Login = ({ navigation }) => {
                     alignSelf: 'center',
                 }}
                 onPress={() => {
+                    checkSignup == 1 ? navigation.navigate('Introduction') : ''
                     checkLogin();
                 }}>
                 <Text style={{ fontSize: 20, color: '#000' }}>Login</Text>
@@ -162,6 +166,7 @@ const Login = ({ navigation }) => {
                 }}
                 onPress={() => {
                     navigation.navigate('Signup');
+                    setCheckSignUp(1);
                 }}>
                 Create New Account
             </Text>
@@ -169,5 +174,4 @@ const Login = ({ navigation }) => {
         </View>
     );
 };
-
 export default Login;

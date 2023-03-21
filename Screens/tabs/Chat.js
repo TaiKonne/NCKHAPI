@@ -5,10 +5,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 let myId = '';
 const Chat = () => {
+    const [followers, setFollowers] = useState([]);
+    const [UploadedPicUrl, setUploadedPicUrl] = useState('');
     const [chatList, setChatList] = useState([]);
     const navigation = useNavigation();
     useEffect(() => {
         getAllChats();
+        getFollower();
     }, []);
     const getAllChats = async () => {
         myId = await AsyncStorage.getItem('USERID');
@@ -21,43 +24,88 @@ const Chat = () => {
                 setChatList(documentSnapshot._data.chatList);
             });
     };
+    const getFollower = async () => {
+        userId = await AsyncStorage.getItem('USERID');
+        names = await AsyncStorage.getItem('NAME');
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .get()
+            .then(documentSnapshot => {
+                if (documentSnapshot.exists) {
+                    setFollowers(documentSnapshot.data().followers);
+                    setUploadedPicUrl(documentSnapshot.data().profilePic);
+                }
+            })
+    }
     return (
         <View style={{ flex: 1 }}>
+            <View
+                style={{
+                    width: '100%',
+                    height: 60,
+                    justifyContent: 'center',
+                    // paddingLeft: 20,
+                    backgroundColor: 'skyblue',
+                }}>
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
+                    Messenger
+                </Text>
+            </View>
             <FlatList
-                data={chatList}
+                data={followers}
                 renderItem={({ item, index }) => {
                     return (
-                        <TouchableOpacity
+                        <View
                             style={{
                                 width: '100%',
-                                height: 60,
+                                height: 70,
+                                backgroundColor: '#fff',
                                 flexDirection: 'row',
+                                justifyContent: 'space-between',
                                 alignItems: 'center',
-                            }}
-                            onPress={() => {
-                                navigation.navigate('Messages', {
-                                    data: {
-                                        name: item.senderName,
-                                        profilePic: item.profilePic,
-                                        userId: item.senderId,
-                                        chatId: item.chatId,
-                                        myId: myId,
-                                    },
-                                });
                             }}>
-                            <Image
-                                source={require('../images/user.png')}
-                                style={{
-                                    width: 40,
-                                    height: 40,
-                                    borderRadius: 20,
-                                    marginLeft: 20,
-                                }}
-                            />
-                            <Text style={{ marginLeft: 20, fontSize: 18 }}>
-                                {item.receieverName}
-                            </Text>
-                        </TouchableOpacity>
+
+                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                <Image
+                                    source={
+                                        item.profilePic == ''
+                                            ? require('../images/user.png')
+                                            : { uri: item.profilePic }
+                                    }
+style={{
+                                        width: 40,
+                                        height: 40,
+                                        borderRadius: 20,
+                                        marginLeft: 20,
+                                        marginRight: 10,
+                                    }}
+                                />
+                                <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
+                                    {item.name}
+                                </Text>
+                            </View>
+                            <TouchableOpacity
+                                style={{ marginRight: 20 }}
+                                onPress={() => {
+                                    navigation.navigate('NewMessage', {
+                                        data: {
+                                            userId: item.userId,
+                                            name: item.name,
+                                            myId: userId,
+                                            profilePic:
+                                                item.profilePic == '' || item.profilePic == null
+                                                    ? ''
+                                                    : item.profilePic,
+                                        },
+                                    });
+                                }}>
+                                <Image
+                                    source={require('../images/chat.png')}
+                                    style={{ width: 24, height: 24, tintColor: 'orange' }}
+                                />
+                            </TouchableOpacity>
+                        </View>
                     );
                 }}
             />

@@ -148,32 +148,51 @@ const Search = () => {
   return (
     <View style={{ flex: 1 }}>
       <View style={{
-                marginHorizontal : 10,
-                marginVertical: 10,
-                flexDirection : 'row',
-                alignItems : 'center'
-            }}> 
-                <TextInput
-                    autoCorrect= {false}
-                    // onChangeText = {(text) => {
-                    //     setsearchtext(text)
-                    // }}
-                    style={{
-                        backgroundColor: 'rgba(0,0,0,0.2)',
-                        height: 40,
-                        flex: 1,
-                        paddingStart: 20,
-                        marginEnd: 8,
-                        borderRadius: 5,
-                        color:'black',
-                    }} />
-                  <Image source={require('../../front_end/icons/magnifying-glass.png')}
-                    style={{
-                        height: 18,
-                        width: 18,
-                        marginStart: 10,
-                  }} />
-            </View>
+        backgroundColor:'skyblue'
+      }}>
+        <View style={{
+          marginHorizontal: 10,
+          marginVertical: 10,
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+          <TextInput
+            autoCorrect={false}
+            placeholder={'Enter search text'}
+            placeholderTextColor={'grey'}
+            // onChangeText = {(text) => {
+            //     setsearchtext(text)
+            // }}
+            style={{
+              backgroundColor: 'white',
+              height: 40,
+              flex: 1,
+              paddingStart: 20,
+              marginEnd: 8,
+              borderRadius: 5,
+              color: 'black',
+            }} />
+          <Image source={require('../../front_end/icons/magnifying-glass.png')}
+            style={{
+              height: 20,
+              width: 20,
+              marginStart: 10,
+            }} />
+        </View>
+      </View>
+      {/* <View style={{borderWidth:0.3 , borderColor:'grey'}}></View> */}
+      <View style={{
+        marginHorizontal: 10,
+        marginVertical: 10,
+        marginBottom: 10,
+        flexDirection: 'row',
+        alignItems: 'center'
+      }}>
+        <Text style={{
+          color: 'black',
+          fontSize: 15,
+        }}> Những người bạn có thể biết </Text>
+      </View>
       <FlatList
         data={usersList}
         renderItem={({ item, index }) => {
@@ -187,6 +206,7 @@ const Search = () => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}>
+
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image
                   source={

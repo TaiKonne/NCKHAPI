@@ -12,6 +12,7 @@ import NewMessage from './chat/NewMessage';
 import Home from './tabs/Home';
 import Add from './tabs/Add';
 import Setting from './Setting';
+import Introduction from './Introduction';
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
@@ -66,6 +67,11 @@ const AppNavigator = () => {
                 <Stack.Screen
                     name="Setting"
                     component={Setting}
+                    options={{ headerShown: false }}
+                />
+                  <Stack.Screen
+                    name="Introduction"
+                    component={Introduction}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

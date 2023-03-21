@@ -151,8 +151,8 @@ const Login = ({ navigation }) => {
                     alignSelf: 'center',
                 }}
                 onPress={() => {
-                    checkSignup == 1 ? navigation.navigate('Introduction') : ''
-                    checkLogin();
+                    checkSignup == 1 ? navigation.navigate('Introduction') :  checkLogin();
+                   
                 }}>
                 <Text style={{ fontSize: 20, color: '#000' }}>Login</Text>
             </TouchableOpacity>

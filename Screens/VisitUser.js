@@ -8,11 +8,14 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const VisitUser = (props) => {
+    const navigation = useNavigation();
     const [imageData, setImageData] = useState(null);
     const [imagePicked, setImagePicked] = useState(false);
     const [UploadedPicUrl, setUploadedPicUrl] = useState('');
     const [selectedTab, setSelectedTab] = useState(0);
     const [bio, setBio] = useState('');
+    const [followers, setFollowers] = useState([]);
+    const [following, setFollowing] = useState([]);
     const [numberPhone, setNumberPhone] = useState('');
     const [morInfo, setmorInfo] = useState(0);
     const [address, setAddress] = useState('');
@@ -21,7 +24,7 @@ const VisitUser = (props) => {
     const userID = props.route.params;
     useEffect(() => {
         getProfileVisit();
-    }, 10000);
+    }, 100);
     const getProfileVisit = async () => {
         firestore()
             .collection('Users')
@@ -35,6 +38,8 @@ const VisitUser = (props) => {
                     setAddress(documentSnapshot.data().address);
                     setMail(documentSnapshot.data().email);
                     setName(documentSnapshot.data().name);
+                    setFollowers(documentSnapshot.data().followers);
+                    setFollowing(documentSnapshot.data().following);
                 }
             })
     }
@@ -201,6 +206,121 @@ const VisitUser = (props) => {
                     }}>{address}</Text>
                 </View>
             </View>) : ""}
+            {/* follower */}
+            <View
+                style={{
+                    width: '100%',
+                    height: 60,
+                    justifyContent: 'space-evenly',
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                    marginTop: 20,
+                }}>
+                <TouchableOpacity
+                    style={{
+                        width: '50%',
+                        height: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: selectedTab == 0 ? '#fff' : 'rgba(0,0,0,0)',
+                    }}
+                    onPress={() => {
+                        setSelectedTab(0);
+                    }}>
+                    <Text style={{ fontSize: 18, color: 'black' }}>Followers</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                        width: '50%',
+                        height: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: selectedTab == 1 ? '#fff' : 'rgba(0,0,0,0)',
+                    }}
+                    onPress={() => {
+                        setSelectedTab(1);
+                    }}>
+                    <Text style={{ fontSize: 18, color: 'black' }}>Following</Text>
+                </TouchableOpacity>
+            </View>
+
+            {selectedTab == 1 ? null : (
+                <FlatList
+                    data={followers}
+                    renderItem={({ item, index }) => {
+                        return (
+                            <View
+                                style={{
+                                    width: '100%',
+                                    height: 70,
+                                    backgroundColor: '#fff',
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Image
+                                        source={
+                                            item.profilePic == ''
+                                                ? require('./images/user.png')
+                                                : { uri: item.profilePic }
+                                        }
+                                        style={{
+                                            width: 40,
+                                            height: 40,
+                                            borderRadius: 20,
+                                            marginLeft: 20,
+                                            marginRight: 10,
+                                        }}
+                                    />
+                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
+                                        {item.name}
+                                    </Text>
+                                </View>
+                            </View>
+                        );
+                    }}
+                />
+            )}
+
+            {selectedTab == 0 ? null : (
+                <FlatList
+                    data={following}
+                    renderItem={({ item, index }) => {
+                        return (
+                            <View
+                                style={{
+                                    width: '100%',
+                                    height: 70,
+                                    backgroundColor: '#fff',
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Image
+                                        source={
+                                            item.profilePic == ''
+                                                ? require('./images/user.png')
+                                                : { uri: item.profilePic }
+                                        }
+                                        style={{
+                                            width: 40,
+                                            height: 40,
+                                            borderRadius: 20,
+                                            marginLeft: 20,
+                                            marginRight: 10,
+                                        }}
+                                    />
+                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
+                                        {item.name}
+                                    </Text>
+                                </View>
+                            </View>
+                        );
+                    }}
+                />
+            )}
         </View>
     )
 }

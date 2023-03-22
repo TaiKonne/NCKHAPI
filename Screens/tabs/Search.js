@@ -11,6 +11,7 @@ const Search = () => {
   const [onFollowClick, setOnFollowClick] = useState(false);
   useEffect(() => {
     getUsers();
+
   }, [onFollowClick]);
   const getUsers = async () => {
     let tempUsers = [];
@@ -148,11 +149,6 @@ const Search = () => {
     });
     return status;
   };
-
-  const visit = async (user) => {
-    await AsyncStorage.getItem('USERID', user);
-    navigation.navigate('VisitUser');
-  }
 
   return (
     <View style={{ flex: 1 }}>

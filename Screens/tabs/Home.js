@@ -14,7 +14,7 @@ const Home = (props) => {
     useEffect(() => {
         getUserId();
         getData();
-    }, [onLikeClick]);
+    }, [onLikeClick],1000);
     const getUserId = async () => {
         userId = await AsyncStorage.getItem('USERID');
     };
@@ -195,7 +195,8 @@ const Home = (props) => {
                                         marginTop: 10,
                                     }}>
                                     <Image
-                                        source={require('../images/user.png')}
+                                        // source={require('../images/user.png')}
+                                        source={{uri:item.profilePic}}
                                         style={{
                                             width: 40,
                                             height: 40,

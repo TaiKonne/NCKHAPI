@@ -184,6 +184,10 @@ function Setting(props) {
             })
             .then(() => {
                 console.log('change name thanh cong');
+                firestore()
+                .collection('posts')
+                .doc()
+                
             })
             .catch(error => {
                 console.log(error);

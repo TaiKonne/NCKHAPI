@@ -137,9 +137,9 @@ const Profile = () => {
                         }} />
                 </TouchableOpacity>
             </View>
-            <ImageBackground 
+            <ImageBackground
                 source={require('../../front_end/hoa_giay_1.jpg')}
-                style={{width:'100%', height:200}}    
+                style={{ width: '100%', height: 200 }}
             >
                 <TouchableOpacity
                     style={{
@@ -149,7 +149,7 @@ const Profile = () => {
                         marginTop: 80,
                         justifyContent: 'center',
                         alignItems: 'center',
-                        marginBottom:10,
+                        marginBottom: 10,
                     }}>
                     {
                         imagePicked == true && imageData != null ? (
@@ -179,34 +179,6 @@ const Profile = () => {
             }}>
                 {names}
             </Text>
-            {/* edit avatars */}
-            {/* <TouchableOpacity
-                style={{
-                    width: 200,
-                    height: 40,
-                    borderWidth: 0.3,
-                    alignSelf: 'center',
-                    borderRadius: 8,
-                    marginTop: 20,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    borderColor: 'orange',
-                }}
-                onPress={() => {
-                    // Remove set status of selected image here
-                    // Reason: When you open a galary, user maybe not select any photo
-                    // so it can make imageData to null => You must check that user has selected
-                    // the photo or not. And then you'll set the status of selected and data of image.
-                    if (imagePicked === false) {
-                        openGallery();
-                    } else {
-                        uploadProfilePic();
-                    }
-                }}>
-                <Text style={{ color: 'orange' }}>
-                    {imagePicked === true ? 'Save Pic' : 'Edit Profile'}
-                </Text>
-            </TouchableOpacity> */}
             {/* Bio */}
             <View style={{
                 alignSelf: 'center',
@@ -237,7 +209,7 @@ const Profile = () => {
                 }}
             >
                 <View>
-                    <Text style={{ color: 'grey' , fontSize:13}}>
+                    <Text style={{ color: 'grey', fontSize: 13 }}>
                         More Information
                     </Text>
                 </View>

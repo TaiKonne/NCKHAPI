@@ -34,6 +34,7 @@ const Signup = ({ navigation }) => {
                 following: [],
                 posts: [],
                 profilePic: '',
+                picWall: '',
                 bio: '',
                 address: '',
                 numberPhone: '',
@@ -62,6 +63,7 @@ const Signup = ({ navigation }) => {
         await AsyncStorage.setItem('ADD', address);
         await AsyncStorage.setItem('PHONE', numberPhone);
         await AsyncStorage.setItem('BIO', bio);
+        await AsyncStorage.setItem('PICWAL', picWal);
         // await AsyncStorage.setItem('PROFILE_PIC', profilePic);
     };
     return (

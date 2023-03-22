@@ -62,6 +62,7 @@ const Add = ({ onAdded }) => {
                 email: email,
                 name: name,
                 userId: userId,
+                profilePic: profile,
                 postId: id,
                 likes: [],
                 comments: [],
@@ -92,6 +93,7 @@ const Add = ({ onAdded }) => {
                 email: email,
                 name: name,
                 userId: userId,
+                profilePic: profile,
                 postId: id,
                 likes: [],
                 comments: [],
@@ -165,12 +167,12 @@ const Add = ({ onAdded }) => {
                     flexDirection: 'row',
                     borderBottomWidth: 0.5,
                     borderBottomColor: '#8e8e8e',
-                    backgroundColor:'skyblue',
+                    backgroundColor: 'skyblue',
                 }}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onPress={() => {
-                    navigation.navigate('HomeSC')
-                }}>
+                        navigation.navigate('HomeSC')
+                    }}>
                     <Image source={require('../../front_end/icons/return.png')}
                         style={{
                             height: 20,
@@ -178,7 +180,7 @@ const Add = ({ onAdded }) => {
                             marginStart: 20,
                         }} />
                 </TouchableOpacity>
-                <Text style={{fontSize: 20, color: '#000' , fontWeight:'bold',marginStart:40}}>Post</Text>
+                <Text style={{ fontSize: 20, color: '#000', fontWeight: 'bold', marginStart: 40 }}>Post</Text>
                 <Text
                     style={{
                         marginEnd: 20,

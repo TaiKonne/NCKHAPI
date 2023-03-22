@@ -59,12 +59,21 @@ const VisitUser = (props) => {
                     backgroundColor: 'skyblue',
                     justifyContent: 'center',
                 }}>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate('HomeSC')
+                }}>
+                    <Image source={require('../front_end/icons/return.png')}
+                        style={{
+                            height: 20,
+                            width: 20,
+                            marginStart: 10,
+                        }} />
+                </TouchableOpacity>
                 <View style={{ flex: 1 }}></View>
                 <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
                     Profile
                 </Text>
                 <View style={{ flex: 1 }}></View>
-
             </View>
             <ImageBackground
                 source={require('../front_end/hoa_giay_1.jpg')}

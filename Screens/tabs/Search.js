@@ -183,6 +183,7 @@ const Search = () => {
                 height: 20,
                 width: 20,
                 marginStart: 10,
+                tintColor:'black',
               }} />
           </TouchableOpacity>
         </View>

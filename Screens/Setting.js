@@ -259,6 +259,7 @@ function Setting(props) {
                         height: 20,
                         width: 20,
                         marginStart: 10,
+                        tintColor:'black',
                     }} />
             </TouchableOpacity>
             <View style={{ flex: 1 }}></View>
@@ -303,6 +304,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -349,6 +351,7 @@ function Setting(props) {
                             height: 20,
                             width: 20,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -361,6 +364,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
+                            tintColor:'black',
                         }} />
                 </View>
             </TouchableOpacity>
@@ -442,6 +446,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -456,6 +461,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
+                            tintColor:'black',
                         }} />
                 </View>
             </TouchableOpacity>
@@ -474,6 +480,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -487,6 +494,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
+                            tintColor:'black',
                         }} />
 
                 </View>
@@ -560,6 +568,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -572,6 +581,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
+                            tintColor:'black',
                         }} />
                 </View>
             </TouchableOpacity>
@@ -655,6 +665,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -668,6 +679,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
+                            tintColor:'black',
                         }} />
 
                 </View>
@@ -735,6 +747,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -748,6 +761,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
+                            tintColor:'black',
                         }} />
                 </View>
             </TouchableOpacity>
@@ -819,6 +833,7 @@ function Setting(props) {
                             height: 20,
                             width: 20,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -832,6 +847,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
+                            tintColor:'black',
                         }} />
                 </View>
             </TouchableOpacity>
@@ -920,6 +936,7 @@ function Setting(props) {
                             height: 20,
                             width: 18,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -933,6 +950,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
+                            tintColor:'black',
                         }} />
                 </View>
             </TouchableOpacity>
@@ -1047,6 +1065,7 @@ function Setting(props) {
                         height: 20,
                         width: 20,
                         marginStart: 10,
+                        tintColor:'black',
                     }} />
                 <Text style={{
                     color: 'black',
@@ -1079,6 +1098,7 @@ function Setting(props) {
                         height: 20,
                         width: 20,
                         marginStart: 10,
+                        tintColor:'black',
                     }} />
                 <Text style={{
                     color: 'black',
@@ -1130,6 +1150,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',

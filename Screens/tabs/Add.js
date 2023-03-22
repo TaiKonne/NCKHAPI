@@ -178,6 +178,7 @@ const Add = ({ onAdded }) => {
                             height: 20,
                             width: 20,
                             marginStart: 20,
+                            tintColor:'black',
                         }} />
                 </TouchableOpacity>
                 <Text style={{ fontSize: 20, color: '#000', fontWeight: 'bold', marginStart: 40 }}>Post</Text>

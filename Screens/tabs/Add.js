@@ -165,11 +165,23 @@ const Add = ({ onAdded }) => {
                     flexDirection: 'row',
                     borderBottomWidth: 0.5,
                     borderBottomColor: '#8e8e8e',
+                    backgroundColor:'skyblue',
                 }}>
-                <Text style={{ marginLeft: 20, fontSize: 20, color: '#000' }}> Post</Text>
+                <TouchableOpacity 
+                    onPress={() => {
+                    navigation.navigate('HomeSC')
+                }}>
+                    <Image source={require('../../front_end/icons/return.png')}
+                        style={{
+                            height: 20,
+                            width: 20,
+                            marginStart: 20,
+                        }} />
+                </TouchableOpacity>
+                <Text style={{fontSize: 20, color: '#000' , fontWeight:'bold',marginStart:40}}>Post</Text>
                 <Text
                     style={{
-                        marginRight: 20,
+                        marginEnd: 20,
                         fontSize: 18,
                         color: imageData !== null || caption !== '' ? 'blue' : '#8e8e8e',
                     }}
@@ -182,7 +194,7 @@ const Add = ({ onAdded }) => {
                             navigation.navigate('HomeSC')
                         }
                         else {
-                            Alert.alert('Post','Please Select Pic or enter caption');
+                            Alert.alert('Post', 'Please Select Pic or enter caption');
                         }
                     }}>
                     {' '}

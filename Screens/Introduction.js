@@ -57,6 +57,45 @@ function Introduction(props) {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
+                <Image source={require('../front_end/Intro/comment.png')}
+                    style={{
+                        height: 600,
+                        width: 300,
+                        resizeMode: 'cover',
+                    }}
+                />
+            </View>
+            <View style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}>
+                <Image source={require('../front_end/Intro/Mess.png')}
+                    style={{
+                        height: 600,
+                        width: 300,
+                        resizeMode: 'cover',
+                    }}
+                />
+            </View>
+            <View style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}>
+                <Image source={require('../front_end/Intro/MessId.png')}
+                    style={{
+                        height: 600,
+                        width: 300,
+                        resizeMode: 'cover',
+                    }}
+                />
+            </View>
+            <View style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}>
                 <Image source={require('../front_end/Intro/search.png')}
                     style={{
                         height: 600,

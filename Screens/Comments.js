@@ -1,14 +1,16 @@
-import { View, Text, TextInput, FlatList, Image } from 'react-native';
+import { View, Text, TextInput, FlatList, Image , TouchableOpacity } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
+import { useNavigation } from '@react-navigation/native';
 let userId = '';
 let comments = [];
 let postId = '';
 let name = '';
 let profile = '';
 const Comments = () => {
+    const navigation = useNavigation();
     const route = useRoute();
     const [comment, setComment] = useState('');
     const inputRef = useRef();
@@ -62,20 +64,32 @@ const Comments = () => {
     return (
         <View style={{ flex: 1 }}>
             <View
-                style={{
-                    width: '100%',
-                    height: 60,
-                    flexDirection: 'row',
-                    borderBottomWidth: 0.5,
-                    borderBottomColor: '#8e8e8e',
-                    alignItems: 'center',
-                    justifyContent:'center',
-                    backgroundColor:'skyblue',
-                }}>
-                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white' }}>
-                    Comments
-                </Text>
-            </View>
+            style={{
+                flexDirection: 'row',
+                width: '100%',
+                height: 60,
+                borderBottomWidth: 0.5,
+                borderBottomColor: '#8e8e8e',
+                alignItems: 'center',
+                backgroundColor: 'skyblue',
+                justifyContent: 'center',
+            }}>
+            <TouchableOpacity onPress={() => {
+                navigation.navigate('HomeSC')
+            }}>
+                <Image source={require('../front_end/icons/return.png')}
+                    style={{
+                        height: 20,
+                        width: 20,
+                        marginStart: 10,
+                    }} />
+            </TouchableOpacity>
+            <View style={{ flex: 1 }}></View>
+            <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
+                Comment
+            </Text>
+            <View style={{ flex: 1, marginEnd: 10 }}></View>
+        </View>
             <FlatList
                 data={commentsList}
                 renderItem={({ item, index }) => {

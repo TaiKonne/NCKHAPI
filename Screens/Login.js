@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity , Alert} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
@@ -10,7 +10,7 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState('1');
     const [modalVisible, setModalVisible] = useState(false);
 
-    const [checkSignup , setCheckSignUp] = useState(0);
+    const [checkSignup, setCheckSignUp] = useState(0);
 
     const checkLogin = () => {
         if (email !== '' && password !== '') {
@@ -43,7 +43,7 @@ const Login = ({ navigation }) => {
                             );
                             // });
                         } else {
-                            Alert.alert('Login','email id or password may wrong ');
+                            Alert.alert('Login', 'email id or password may wrong ');
                         }
                         console.log(
                             querySnapshot.docs[0]._data.email +
@@ -54,7 +54,7 @@ const Login = ({ navigation }) => {
                         );
                     } else {
                         console.log('account not found');
-                        Alert.alert('Login','account not found');
+                        Alert.alert('Login', 'account not found');
                     }
                 })
                 .catch(error => {
@@ -99,7 +99,7 @@ const Login = ({ navigation }) => {
                     marginTop: 100,
                     fontSize: 20,
                     fontWeight: '800',
-                    color:'red',
+                    color: 'red',
                 }}>
                 WelCome to TDMU Social Media
             </Text>
@@ -118,7 +118,7 @@ const Login = ({ navigation }) => {
                     alignSelf: 'center',
                     paddingLeft: 15,
                     marginTop: 100,
-                    color:'black',
+                    color: 'black',
                 }}
             />
             <TextInput
@@ -136,7 +136,7 @@ const Login = ({ navigation }) => {
                     borderWidth: 0.5,
                     alignSelf: 'center',
                     marginTop: 20,
-                    color:'black',
+                    color: 'black',
                 }}
             />
             <TouchableOpacity
@@ -151,8 +151,8 @@ const Login = ({ navigation }) => {
                     alignSelf: 'center',
                 }}
                 onPress={() => {
-                    checkSignup == 1 ? navigation.navigate('Introduction') :  checkLogin();
-                   
+                    checkSignup == 1 ? navigation.navigate('Introduction') : checkLogin();
+
                 }}>
                 <Text style={{ fontSize: 20, color: '#000' }}>Login</Text>
             </TouchableOpacity>
@@ -162,7 +162,7 @@ const Login = ({ navigation }) => {
                     marginTop: 30,
                     textDecorationLine: 'underline',
                     alignSelf: 'center',
-                    color:'black',
+                    color: 'black',
                 }}
                 onPress={() => {
                     navigation.navigate('Signup');

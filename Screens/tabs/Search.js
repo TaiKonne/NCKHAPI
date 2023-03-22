@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
+import VisitUser from '../VisitUser';
 let userId = '';
 const Search = () => {
   const navigation = useNavigation();
@@ -147,6 +148,12 @@ const Search = () => {
     });
     return status;
   };
+
+  const visit = async (user) => {
+    await AsyncStorage.getItem('USERID', user);
+    navigation.navigate('VisitUser');
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{
@@ -228,7 +235,7 @@ const Search = () => {
                 />
                 <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}
                   onPress={() => {
-                    navigation.navigate('VisitUser')
+                    navigation.navigate('VisitUser',  item._data.userId )
                   }}
                 >
                   {item._data.name}

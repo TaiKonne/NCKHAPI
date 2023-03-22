@@ -253,7 +253,7 @@ const Add = ({ onAdded }) => {
                 }}>
                 <Image
                     source={require('../images/camera.png')}
-                    style={{ width: 24, height: 24, marginLeft: 20 }}
+                    style={{ width: 24, height: 24, marginLeft: 20 , tintColor:'black',}}
                 />
                 <Text style={{ marginLeft: 20, color: 'grey' }}>Open Camera</Text>
             </TouchableOpacity>
@@ -272,7 +272,7 @@ const Add = ({ onAdded }) => {
                 }}>
                 <Image
                     source={require('../images/gallery.png')}
-                    style={{ width: 24, height: 24, marginLeft: 20 }}
+                    style={{ width: 24, height: 24, marginLeft: 20 ,tintColor:'black', }}
                 />
                 <Text style={{ marginLeft: 20, color: 'grey' }}>Open Gallery</Text>
             </TouchableOpacity>

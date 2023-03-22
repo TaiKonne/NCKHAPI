@@ -150,7 +150,7 @@ const Search = () => {
   return (
     <View style={{ flex: 1 }}>
       <View style={{
-        backgroundColor:'skyblue'
+        backgroundColor: 'skyblue'
       }}>
         <View style={{
           marginHorizontal: 10,
@@ -174,9 +174,7 @@ const Search = () => {
               borderRadius: 5,
               color: 'black',
             }} />
-          <TouchableOpacity onPress={()=>{
-            navigation.navigate('VisitUser')
-          }}>
+          <TouchableOpacity>
             <Image source={require('../../front_end/icons/magnifying-glass.png')}
               style={{
                 height: 20,
@@ -228,7 +226,11 @@ const Search = () => {
                     marginRight: 10,
                   }}
                 />
-                <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>
+                <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}
+                  onPress={() => {
+                    navigation.navigate('VisitUser')
+                  }}
+                >
                   {item._data.name}
                 </Text>
               </View>

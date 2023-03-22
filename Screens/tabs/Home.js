@@ -14,7 +14,7 @@ const Home = (props) => {
     useEffect(() => {
         getUserId();
         getData();
-    }, [onLikeClick],1000);
+    }, 1000);
     const getUserId = async () => {
         userId = await AsyncStorage.getItem('USERID');
     };
@@ -81,8 +81,17 @@ const Home = (props) => {
         });
         return status;
     };
-    const [checkpost , setpost] = useState(0)
-
+    const [checkpost, setpost] = useState(0)
+    const coverTime = (timestamp) => {
+        let date = timestamp.toDate();
+        let mm = date.getMonth();
+        let dd = date.getDate();
+        let yyyy = date.getFullYear();
+        let munis = date.getMinutes();// phút
+        let hh = date.getHours(); // giờ
+        date = dd + '/' + mm + '/' + yyyy;``
+        return date;
+    }
 
     return (
         <View style={{ flex: 1 }}>
@@ -98,80 +107,80 @@ const Home = (props) => {
                     Newfeeds
                 </Text>
             </View>
-           <View style={{
-                flexDirection:'row',
-                alignItems:'center',
-                justifyContent:'center',
-                marginTop:10,
-           }}>
-                <TouchableOpacity onPress={()=> {
+            <View style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 10,
+            }}>
+                <TouchableOpacity onPress={() => {
                     navigation.navigate('Add')
                 }}>
                     <View style={{
 
-                        color:'black',
-                        borderWidth: 0.2, 
+                        color: 'black',
+                        borderWidth: 0.2,
                         borderRadius: 5,
-                        width:90,
+                        width: 90,
                         height: 35,
-                        alignItems:'center',
-                        justifyContent:'center',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         margin: 10,
-                        backgroundColor:'skyblue',
+                        backgroundColor: 'skyblue',
 
                     }}>
                         <Text style={{
-                            color:'black',
-                            fontWeight:'bold'
+                            color: 'black',
+                            fontWeight: 'bold'
                         }}> Posts</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> {
-                    Alert.alert('Image','Add Picture')
+                <TouchableOpacity onPress={() => {
+                    Alert.alert('Image', 'Add Picture')
                 }}>
                     <View style={{
 
-                        color:'black',
-                        borderWidth: 0.2 , 
+                        color: 'black',
+                        borderWidth: 0.2,
                         borderRadius: 5,
-                        width:90,
+                        width: 90,
                         height: 35,
-                        alignItems:'center',
-                        justifyContent:'center',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         margin: 10,
-                        backgroundColor:'skyblue',
+                        backgroundColor: 'skyblue',
 
                     }}>
                         <Text style={{
-                            color:'black',
-                            fontWeight:'bold',
+                            color: 'black',
+                            fontWeight: 'bold',
                         }}> Images </Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> {
-                    Alert.alert('Album','Go to album')
+                <TouchableOpacity onPress={() => {
+                    Alert.alert('Album', 'Go to album')
                 }}>
                     <View style={{
 
-                        color:'black',
-                        borderWidth: 0.2 , 
+                        color: 'black',
+                        borderWidth: 0.2,
                         borderRadius: 5,
-                        width:90,
+                        width: 90,
                         height: 35,
-                        alignItems:'center',
-                        justifyContent:'center',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         margin: 10,
-                        backgroundColor:'skyblue',
+                        backgroundColor: 'skyblue',
 
                     }}>
                         <Text style={{
-                            color:'black',
-                            fontWeight:'bold',
+                            color: 'black',
+                            fontWeight: 'bold',
                         }}> Album </Text>
                     </View>
                 </TouchableOpacity>
-           </View>
-            
+            </View>
+
             {postData.length > 0 ? (
                 <FlatList
                     showsVerticalScrollIndicator={false}
@@ -196,7 +205,7 @@ const Home = (props) => {
                                     }}>
                                     <Image
                                         // source={require('../images/user.png')}
-                                        source={{uri:item.profilePic}}
+                                        source={{ uri: item.profilePic }}
                                         style={{
                                             width: 40,
                                             height: 40,
@@ -208,6 +217,9 @@ const Home = (props) => {
                                         style={{ fontSize: 18, marginLeft: 15, fontWeight: '600', color: 'black' }}>
                                         {item.name}
                                     </Text>
+                                    <Text style={{ fontSize: 10, marginLeft: 15, fontWeight: '600', color: 'black' }}>
+                                        {coverTime(item.createdAt)}
+                                    </Text>
                                 </View>
                                 <Text
                                     style={{
@@ -215,7 +227,7 @@ const Home = (props) => {
                                         marginLeft: 20,
                                         marginRight: 20,
                                         marginBottom: 10,
-                                        color:'black',
+                                        color: 'black',
                                     }}>
                                     {item.caption}
                                 </Text>

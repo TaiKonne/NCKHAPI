@@ -66,6 +66,7 @@ const Add = ({ onAdded }) => {
                 postId: id,
                 likes: [],
                 comments: [],
+                createdAt: new Date(),
             })
             .then(() => {
                 console.log('post added!');
@@ -97,6 +98,7 @@ const Add = ({ onAdded }) => {
                 postId: id,
                 likes: [],
                 comments: [],
+                createdAt: new Date(),
             })
             .then(() => {
                 console.log('post added!');

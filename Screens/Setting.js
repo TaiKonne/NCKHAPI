@@ -466,6 +466,46 @@ function Setting(props) {
                 </View>
             </TouchableOpacity>
             <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
+            {/* Change background img */}
+            <TouchableOpacity
+                onPress={() => {
+                    alert('change avatars')
+                    // if (imagePicked === false) {
+                    //     openGallery();
+                    // } else {
+                    //     uploadProfilePic();
+                    // }
+                }}>
+                <View style={{
+                    flexDirection: 'row',
+                    paddingVertical: 10,
+                    alignItems: 'center'
+                }} >
+                    <Image source={require('../front_end/icons/picture.png')}
+                        style={{
+                            height: 18,
+                            width: 18,
+                            marginStart: 10,
+                            tintColor:'black',
+                        }} />
+                    <Text style={{
+                        color: 'black',
+                        fontSize: 15,
+                        paddingStart: 5,
+                    }}>
+                        {imagePicked === true ? 'Save change' : 'Change Background'}
+                    </Text>
+                    <View style={{ flex: 1 }} ></View>
+                    <Image source={require('../front_end/icons/exchange.png')}
+                        style={{
+                            height: 17,
+                            width: 17,
+                            marginEnd: 10,
+                            tintColor:'black',
+                        }} />
+                </View>
+            </TouchableOpacity>
+            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* Bio */}
             <TouchableOpacity onPress={() => {
                 bio == 0 ? setbio(1) : setbio(0)

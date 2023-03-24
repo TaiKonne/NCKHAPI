@@ -153,7 +153,7 @@ function Setting(props) {
         // Fix image auto change to old image before new image was uploaded
         setUploadedPicUrl1(url);
         saveProfileToStore1(url);
-        setImagePicked(false);
+        setImagePicked1(false);
     };
 
     const saveProfileToStore1 = async url => {

@@ -1,4 +1,4 @@
-import { View, Text, TextInput, FlatList, Image , TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, FlatList, Image, TouchableOpacity } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -15,6 +15,9 @@ const Comments = () => {
     const [comment, setComment] = useState('');
     const inputRef = useRef();
     const [commentsList, setCommentsList] = useState([]);
+
+    const [fakeLike, setfakeLike] = useState(0);
+    const [fakeLikevalue, setfakeLikevalue] = useState(0);
 
     useEffect(() => {
         getUserId();
@@ -64,37 +67,37 @@ const Comments = () => {
     return (
         <View style={{ flex: 1 }}>
             <View
-            style={{
-                flexDirection: 'row',
-                width: '100%',
-                height: 60,
-                borderBottomWidth: 0.5,
-                borderBottomColor: '#8e8e8e',
-                alignItems: 'center',
-                backgroundColor: 'skyblue',
-                justifyContent: 'center',
-            }}>
-            <TouchableOpacity onPress={() => {
-                navigation.navigate('HomeSC')
-            }}>
-                <Image source={require('../front_end/icons/return.png')}
-                    style={{
-                        height: 20,
-                        width: 20,
-                        marginStart: 10,
-                    }} />
-            </TouchableOpacity>
-            <View style={{ flex: 1 }}></View>
-            <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
-                Comment
-            </Text>
-            <View style={{ flex: 1, marginEnd: 10 }}></View>
-        </View>
+                style={{
+                    flexDirection: 'row',
+                    width: '100%',
+                    height: 60,
+                    borderBottomWidth: 0.5,
+                    borderBottomColor: '#8e8e8e',
+                    alignItems: 'center',
+                    backgroundColor: 'skyblue',
+                    justifyContent: 'center',
+                }}>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate('HomeSC')
+                }}>
+                    <Image source={require('../front_end/icons/return.png')}
+                        style={{
+                            height: 20,
+                            width: 20,
+                            marginStart: 10,
+                        }} />
+                </TouchableOpacity>
+                <View style={{ flex: 1 }}></View>
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
+                    Comment
+                </Text>
+                <View style={{ flex: 1, marginEnd: 10 }}></View>
+            </View>
             <FlatList
                 data={commentsList}
                 renderItem={({ item, index }) => {
                     return (
-                        <View
+                        <><View
                             style={{
                                 width: '100%',
                                 flexDirection: 'row',
@@ -110,8 +113,7 @@ const Comments = () => {
                                         marginLeft: 10,
                                         marginRight: 15,
                                         borderRadius: 20,
-                                    }}
-                                />
+                                    }} />
                             ) : (
                                 <Image
                                     source={{ uri: item.profile }}
@@ -121,19 +123,56 @@ const Comments = () => {
                                         marginLeft: 10,
                                         marginRight: 15,
                                         borderRadius: 20,
-                                    }}
-                                />
+                                    }} />
                             )}
-
                             <View>
                                 <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>
                                     {item.name}
                                 </Text>
-                                <Text style={{ fontSize: 15, marginTop: 5, color: 'black'}}>
+                                <Text style={{ fontSize: 15, marginTop: 5, color: 'black' }}>
                                     {item.comment}
                                 </Text>
                             </View>
                         </View>
+                            <View style={{
+                                flexDirection: 'row',
+                                marginStart: 40,
+                                marginEnd: 40,
+                                flex:1,
+                                // backgroundColor:'green'
+                            }}>
+                                <Text style={{color:'black' , marginEnd:60}}>2 hours</Text>
+                                <TouchableOpacity
+                                    style={{
+                                        flexDirection: 'row',
+                                        marginEnd:60,
+                                    }}
+                                    onPress={() => {
+                                        fakeLike == 0 ? (setfakeLike(1), setfakeLikevalue(fakeLikevalue+1)) : (setfakeLike(0), setfakeLikevalue(fakeLikevalue-1))
+                                    }}>
+                                    <Text style={{color:'black', marginEnd:5}}>{fakeLikevalue}</Text>
+                                    {fakeLike == 0 ? (
+                                        <Image
+                                            source={require('../Screens/images/love.png')}
+                                            style={{ width: 20, height: 20, tintColor: 'red', marginEnd: 10 }}
+                                        />
+                                    ) : (
+                                        <Image
+                                            source={require('../Screens/images/heart.png')}
+                                            style={{ width: 20, height: 20, tintColor: 'red', marginEnd: 10 }}
+                                        />
+                                    )}
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{
+                                    flexDirection: 'row',
+                                }}>
+                                    <Image
+                                        source={require('../Screens/images/comment.png')}
+                                        style={{ width: 19, height: 19, marginEnd: 10 }}
+                                    />
+                                </TouchableOpacity >
+
+                            </View></>
                     );
                 }}
             />
@@ -160,8 +199,9 @@ const Comments = () => {
                     style={{ width: '80%', marginLeft: 20, color: 'black' }}
                 />
                 <Text
-                    style={{ marginRight: 10, fontSize: 18, fontWeight: 'bold', 
-                            color: comment == '' ? 'grey' : 'blue',
+                    style={{
+                        marginRight: 10, fontSize: 18, fontWeight: 'bold',
+                        color: comment == '' ? 'grey' : 'blue',
                     }}
                     onPress={() => {
                         postComment();

@@ -10,17 +10,26 @@ let names = '';
 
 const Profile = () => {
     const navigation = useNavigation();
+    // image
     const [imageData, setImageData] = useState(null);
+    const [imageWall, setImageWall] = useState('');
     const [imagePicked, setImagePicked] = useState(false);
     const [UploadedPicUrl, setUploadedPicUrl] = useState('');
     const [selectedTab, setSelectedTab] = useState(0);
+    // follower
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
+    // bio
     const [bio, setBio] = useState('');
+    // number
     const [numberPhone, setNumberPhone] = useState('');
+    // info
     const [morInfo, setmorInfo] = useState(0);
+    //address
     const [address, setAddress] = useState('');
+    //mail
     const [mail, setMail] = useState('');
+
     useEffect(() => {
         getProfileData();
     }, []);
@@ -44,6 +53,7 @@ const Profile = () => {
                     setNumberPhone(documentSnapshot.data().numberPhone);
                     setAddress(documentSnapshot.data().address);
                     setMail(documentSnapshot.data().email);
+                    setImageWall(documentSnapshot.data().picWal);
                     console.log('data ', documentSnapshot.data().following);
                 }
             });
@@ -138,7 +148,8 @@ const Profile = () => {
                 </TouchableOpacity>
             </View>
             <ImageBackground
-                source={require('../../front_end/hoa_giay_1.jpg')}
+                // source={require('../../front_end/hoa_giay_1.jpg')}
+                source={{ uri:imageWall }}
                 style={{ width: '100%', height: 200 }}
             >
                 <TouchableOpacity

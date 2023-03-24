@@ -56,6 +56,10 @@ function Setting(props) {
     const [imagePicked, setImagePicked] = useState(false);
     const [UploadedPicUrl, setUploadedPicUrl] = useState('');
 
+    const [imageData1, setImageData1] = useState(null);
+    const [imagePicked1, setImagePicked1] = useState(false);
+    const [UploadedPicUrl1, setUploadedPicUrl1] = useState('');
+
     useEffect(() => {
         getProfileData();
     }, []);
@@ -127,6 +131,47 @@ function Setting(props) {
             });
     };
 
+    const openGallery1 = async () => {
+        const result = await launchImageLibrary({ mediaType: 'photo' });
+        console.log("User selected image " + JSON.stringify(result));
+
+        // Check is user select picture yet
+        if (result.assets != null || result.didCancel == false) {
+            setImagePicked1(true);
+            setImageData1(result);
+        }
+    };
+    const uploadProfilePic1 = async () => {
+        const reference = storage().ref(imageData1.assets[0].fileName);
+        const pathToFile = imageData1.assets[0].uri;
+        await reference.putFile(pathToFile);
+        const url = await storage()
+            .ref(imageData1.assets[0].fileName)
+            .getDownloadURL();
+
+        // Reset image url when uploaded
+        // Fix image auto change to old image before new image was uploaded
+        setUploadedPicUrl1(url);
+        saveProfileToStore1(url);
+        setImagePicked(false);
+    };
+
+    const saveProfileToStore1 = async url => {
+        const userId = await AsyncStorage.getItem('USERID');
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .update({
+                picWal: url,
+            })
+            .then(() => {
+                console.log('profile updated!');
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+
     const updateBio = async () => {
         const userId = await AsyncStorage.getItem('USERID');
         firestore()
@@ -185,9 +230,9 @@ function Setting(props) {
             .then(() => {
                 console.log('change name thanh cong');
                 firestore()
-                .collection('posts')
-                .doc()
-                
+                    .collection('posts')
+                    .doc()
+
             })
             .catch(error => {
                 console.log(error);
@@ -259,7 +304,7 @@ function Setting(props) {
                         height: 20,
                         width: 20,
                         marginStart: 10,
-                        tintColor:'black',
+                        tintColor: 'black',
                     }} />
             </TouchableOpacity>
             <View style={{ flex: 1 }}></View>
@@ -304,7 +349,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -351,7 +396,7 @@ function Setting(props) {
                             height: 20,
                             width: 20,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -364,7 +409,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                 </View>
             </TouchableOpacity>
@@ -446,7 +491,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -461,7 +506,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                 </View>
             </TouchableOpacity>
@@ -469,12 +514,12 @@ function Setting(props) {
             {/* Change background img */}
             <TouchableOpacity
                 onPress={() => {
-                    alert('change avatars')
-                    // if (imagePicked === false) {
-                    //     openGallery();
-                    // } else {
-                    //     uploadProfilePic();
-                    // }
+                    // alert('change avatars')
+                    if (imagePicked1 === false) {
+                        openGallery1();
+                    } else {
+                        uploadProfilePic1();
+                    }
                 }}>
                 <View style={{
                     flexDirection: 'row',
@@ -486,14 +531,14 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
                         fontSize: 15,
                         paddingStart: 5,
                     }}>
-                        {imagePicked === true ? 'Save change' : 'Change Background'}
+                        {imagePicked1 === true ? 'Save change' : 'Change Background'}
                     </Text>
                     <View style={{ flex: 1 }} ></View>
                     <Image source={require('../front_end/icons/exchange.png')}
@@ -501,7 +546,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                 </View>
             </TouchableOpacity>
@@ -520,7 +565,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -534,7 +579,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
 
                 </View>
@@ -608,7 +653,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -621,7 +666,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                 </View>
             </TouchableOpacity>
@@ -705,7 +750,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -719,7 +764,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
 
                 </View>
@@ -787,7 +832,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -801,7 +846,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                 </View>
             </TouchableOpacity>
@@ -873,7 +918,7 @@ function Setting(props) {
                             height: 20,
                             width: 20,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -887,7 +932,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                 </View>
             </TouchableOpacity>
@@ -976,7 +1021,7 @@ function Setting(props) {
                             height: 20,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -990,7 +1035,7 @@ function Setting(props) {
                             height: 17,
                             width: 17,
                             marginEnd: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                 </View>
             </TouchableOpacity>
@@ -1105,7 +1150,7 @@ function Setting(props) {
                         height: 20,
                         width: 20,
                         marginStart: 10,
-                        tintColor:'black',
+                        tintColor: 'black',
                     }} />
                 <Text style={{
                     color: 'black',
@@ -1138,7 +1183,7 @@ function Setting(props) {
                         height: 20,
                         width: 20,
                         marginStart: 10,
-                        tintColor:'black',
+                        tintColor: 'black',
                     }} />
                 <Text style={{
                     color: 'black',
@@ -1190,7 +1235,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',

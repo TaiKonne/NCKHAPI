@@ -89,7 +89,7 @@ const Home = (props) => {
         let yyyy = date.getFullYear();
         let munis = date.getMinutes();// phút
         let hh = date.getHours(); // giờ
-        date = dd + '/' + mm + '/' + yyyy;``
+        date = dd + '/' + mm + '/' + yyyy; ``
         return date;
     }
 

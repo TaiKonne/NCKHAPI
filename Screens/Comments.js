@@ -64,6 +64,18 @@ const Comments = () => {
                 setCommentsList(documentSnapshot.data().comments);
             });
     };
+
+    const coverTime = (timestamp) => {
+        let date = timestamp.toDate();
+        let mm = date.getMonth();
+        let dd = date.getDate();
+        let yyyy = date.getFullYear();
+        let munis = date.getMinutes();// phút
+        let hh = date.getHours(); // giờ
+        date = hh + ':' + munis; ``
+        return date;
+    }
+
     return (
         <View style={{ flex: 1 }}>
             <View

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, Image, TextInput, PermissionsAndroid } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
@@ -31,10 +31,18 @@ const Add = ({ onAdded }) => {
         console.log(email, name);
         console.log(profile);
     };
+    let options = {
+        saveToPhotos: true,
+        mediaType: 'photo',
+    };
     const openCamera = async () => {
-        const result = await launchCamera({ mediaType: 'photo' });
-        setImageData(result);
-        console.log(result);
+        const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA,);
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            const result = await launchCamera({ mediaType: 'photo' });
+            setImageData(result);
+        }
+        else
+            console.log('Tu choi camera');
     };
     const openGallery = async () => {
         const result = await launchImageLibrary({ mediaType: 'photo' });
@@ -180,7 +188,7 @@ const Add = ({ onAdded }) => {
                             height: 20,
                             width: 20,
                             marginStart: 20,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                 </TouchableOpacity>
                 <Text style={{ fontSize: 20, color: '#000', fontWeight: 'bold', marginStart: 40 }}>Post</Text>
@@ -253,7 +261,7 @@ const Add = ({ onAdded }) => {
                 }}>
                 <Image
                     source={require('../images/camera.png')}
-                    style={{ width: 24, height: 24, marginLeft: 20 , tintColor:'black',}}
+                    style={{ width: 24, height: 24, marginLeft: 20, tintColor: 'black', }}
                 />
                 <Text style={{ marginLeft: 20, color: 'grey' }}>Open Camera</Text>
             </TouchableOpacity>
@@ -272,7 +280,7 @@ const Add = ({ onAdded }) => {
                 }}>
                 <Image
                     source={require('../images/gallery.png')}
-                    style={{ width: 24, height: 24, marginLeft: 20 ,tintColor:'black', }}
+                    style={{ width: 24, height: 24, marginLeft: 20, tintColor: 'black', }}
                 />
                 <Text style={{ marginLeft: 20, color: 'grey' }}>Open Gallery</Text>
             </TouchableOpacity>

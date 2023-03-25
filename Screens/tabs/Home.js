@@ -37,9 +37,7 @@ const Home = (props) => {
                         documentSnapshot.data(),
                     );
                 });
-                // debugger
-                tempData.sort((a, b) => a.createdAt - b.createdAt);
-                // debugger
+                tempData.sort((a, b) => b.createdAt - a.createdAt);
                 setPostData(tempData);
             });
         return () => subscriber();

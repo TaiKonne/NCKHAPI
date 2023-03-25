@@ -217,6 +217,7 @@ const Search = () => {
     setFilteredData(filtered);
   };
   const renderItem = ({ item }) => <Item Items={item} titles={item._data.name} userids={item._data.userId} avatars={item._data.profilePic} followers={item._data.followers} />;
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{
@@ -258,11 +259,20 @@ const Search = () => {
           </TouchableOpacity>
         </View>
       </View>
-      {searchQuery != '' ? (<FlatList
-        data={filteredData}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />) : ''}
+      {searchQuery != '' ?
+        (filteredData.length > 0 ?
+          (<FlatList
+            data={filteredData}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+          />) : (<View style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <Text style={{ color: 'black' , fontSize:30 , fontWeight: 'bold'}}>NOT FOUND</Text>
+          </View>))
+        : ''}
       {/* <View style={{borderWidth:0.3 , borderColor:'grey'}}></View> */}
       {searchQuery == '' ? (
         <><View style={{
@@ -289,7 +299,6 @@ const Search = () => {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                   }}>
-
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Image
                       source={item._data.profilePic == ''
@@ -333,6 +342,7 @@ const Search = () => {
             }} /></>
       ) : ''}
     </View>
+
   );
 };
 

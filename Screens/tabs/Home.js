@@ -38,7 +38,7 @@ const Home = (props) => {
                     );
                 });
                 // debugger
-                tempData.sort((a, b) => a.createdAt - b.createdAt);
+                tempData.sort((a, b) => b.createdAt - a.createdAt);
                 // debugger
                 setPostData(tempData);
             });

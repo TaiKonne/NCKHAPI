@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react';
 import firestore from '@react-native-firebase/firestore';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import UpName from './UpName';
+import UpAv from './UpAv';
 let userId = '';
 const Home = (props) => {
     //props;
@@ -203,7 +206,7 @@ const Home = (props) => {
                                         alignItems: 'center',
                                         marginTop: 10,
                                     }}>
-                                    <Image
+                                    {/* <Image
                                         // source={require('../images/user.png')}
                                         source={{ uri: item.profilePic }}
                                         style={{
@@ -212,11 +215,13 @@ const Home = (props) => {
                                             borderRadius: 20,
                                             marginLeft: 15,
                                         }}
-                                    />
-                                    <Text
+                                    /> */}
+                                    <UpAv cons={item.userId} />
+                                    {/* <Text
                                         style={{ fontSize: 18, marginLeft: 15, fontWeight: '600', color: 'black' }}>
                                         {item.name}
-                                    </Text>
+                                    </Text> */}
+                                    <UpName cons={item.userId} />
                                     <Text style={{ fontSize: 10, marginLeft: 15, fontWeight: '600', color: 'black' }}>
                                         {coverTime(item.createdAt)}
                                     </Text>
@@ -231,6 +236,7 @@ const Home = (props) => {
                                     }}>
                                     {item.caption}
                                 </Text>
+
                                 <Image
                                     source={{ uri: item.image }}
                                     style={{

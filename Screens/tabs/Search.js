@@ -28,7 +28,7 @@ const Search = () => {
           }
         });
         setUsersList(tempUsers);
-        // debugger
+
       });
   };
 
@@ -150,63 +150,63 @@ const Search = () => {
     });
     return status;
   };
- 
-  // search user name
-  const Item = ({ Items ,titles , userids , avatars , followers}) => (
-    <View
-    style={{
-      width: '100%',
-      height: 70,
-      backgroundColor: '#fff',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    }}>
 
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <Image
-        source={
-          avatars == ''
-            ? require('../images/user.png')
-            : { uri: avatars }
-        }
-        style={{
-          width: 40,
-          height: 40,
-          borderRadius: 20,
-          marginLeft: 20,
-          marginRight: 10,
-        }}
-      />
-      <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}
-        onPress={() => {
-          navigation.navigate('VisitUser', userids)
-        }}
-      >
-        {titles}
-      </Text>
-    </View>
-    <TouchableOpacity
+  // search user name
+  const Item = ({ Items, titles, userids, avatars, followers }) => (
+    <View
       style={{
-        marginRight: 20,
-        backgroundColor: '#0099ff',
-        height: 35,
-        borderRadius: 6,
-        justifyContent: 'center',
+        width: '100%',
+        height: 70,
+        backgroundColor: '#fff',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
-      }}
-      onPress={() => {
-        followUser(Items);
       }}>
-      <Text style={{ color: '#fff', marginLeft: 10, marginRight: 10, fontWeight: 'bold' }}>
-        {getFollowStatus(followers)
-          ? 'Unfollow'
-          : 'Follow'}
-      </Text>
-    </TouchableOpacity>
-  </View>
+
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Image
+          source={
+            avatars == ''
+              ? require('../images/user.png')
+              : { uri: avatars }
+          }
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: 20,
+            marginLeft: 20,
+            marginRight: 10,
+          }}
+        />
+        <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}
+          onPress={() => {
+            navigation.navigate('VisitUser', userids)
+          }}
+        >
+          {titles}
+        </Text>
+      </View>
+      <TouchableOpacity
+        style={{
+          marginRight: 20,
+          backgroundColor: '#0099ff',
+          height: 35,
+          borderRadius: 6,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        onPress={() => {
+          followUser(Items);
+        }}>
+        <Text style={{ color: '#fff', marginLeft: 10, marginRight: 10, fontWeight: 'bold' }}>
+          {getFollowStatus(followers)
+            ? 'Unfollow'
+            : 'Follow'}
+        </Text>
+      </TouchableOpacity>
+    </View>
   );
-  
+
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredData, setFilteredData] = useState(usersList);
 
@@ -216,9 +216,7 @@ const Search = () => {
     );
     setFilteredData(filtered);
   };
-
-  const renderItem = ({ item }) => <Item Items={item} titles ={item._data.name} userids={item._data.userId} avatars ={item._data.profilePic} followers = {item._data.followers} />;
-  
+  const renderItem = ({ item }) => <Item Items={item} titles={item._data.name} userids={item._data.userId} avatars={item._data.profilePic} followers={item._data.followers} />;
   return (
     <View style={{ flex: 1 }}>
       <View style={{
@@ -260,83 +258,80 @@ const Search = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <FlatList
+      {searchQuery != '' ? (<FlatList
         data={filteredData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-      />
+      />) : ''}
       {/* <View style={{borderWidth:0.3 , borderColor:'grey'}}></View> */}
-      <View style={{
-        marginHorizontal: 10,
-        marginVertical: 10,
-        marginBottom: 10,
-        flexDirection: 'row',
-        alignItems: 'center'
-      }}>
-        <Text style={{
-          color: 'black',
-          fontSize: 15,
-        }}> Những người bạn có thể biết </Text>
-      </View>
-      <FlatList
-        data={usersList}
-        renderItem={({ item, index }) => {
-          return (
-            <View
-              style={{
-                width: '100%',
-                height: 70,
-                backgroundColor: '#fff',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
-
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image
-                  source={
-                    item._data.profilePic == ''
-                      ? require('../images/user.png')
-                      : { uri: item._data.profilePic }
-                  }
+      {searchQuery == '' ? (
+        <><View style={{
+          marginHorizontal: 10,
+          marginVertical: 10,
+          marginBottom: 10,
+          flexDirection: 'row',
+          alignItems: 'center'
+        }}>
+          <Text style={{
+            color: 'black',
+            fontSize: 15,
+          }}> Những người bạn có thể biết </Text>
+        </View><FlatList
+            data={usersList}
+            renderItem={({ item, index }) => {
+              return (
+                <View
                   style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 20,
-                    marginLeft: 20,
-                    marginRight: 10,
-                  }}
-                />
-                <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}
-                  onPress={() => {
-                    navigation.navigate('VisitUser', item._data.userId)
-                  }}
-                >
-                  {item._data.name}
-                </Text>
-              </View>
-              <TouchableOpacity
-                style={{
-                  marginRight: 20,
-                  backgroundColor: '#0099ff',
-                  height: 35,
-                  borderRadius: 6,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                onPress={() => {
-                  followUser(item);
-                }}>
-                <Text style={{ color: '#fff', marginLeft: 10, marginRight: 10, fontWeight: 'bold' }}>
-                  {getFollowStatus(item._data.followers)
-                    ? 'Unfollow'
-                    : 'Follow'}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          );
-        }}
-      />
+                    width: '100%',
+                    height: 70,
+                    backgroundColor: '#fff',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}>
+
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Image
+                      source={item._data.profilePic == ''
+                        ? require('../images/user.png')
+                        : { uri: item._data.profilePic }}
+                      style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: 20,
+                        marginLeft: 20,
+                        marginRight: 10,
+                      }} />
+                    <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}
+                      onPress={() => {
+                        navigation.navigate('VisitUser', item._data.userId);
+                      }}
+                    >
+                      {item._data.name}
+                    </Text>
+                  </View>
+                  <TouchableOpacity
+                    style={{
+                      marginRight: 20,
+                      backgroundColor: '#0099ff',
+                      height: 35,
+                      borderRadius: 6,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                    onPress={() => {
+                      followUser(item);
+                    }}>
+                    <Text style={{ color: '#fff', marginLeft: 10, marginRight: 10, fontWeight: 'bold' }}>
+                      {getFollowStatus(item._data.followers)
+                        ? 'Unfollow'
+                        : 'Follow'}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            }} /></>
+      ) : ''}
     </View>
   );
 };

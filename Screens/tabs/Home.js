@@ -123,6 +123,8 @@ const Home = (props) => {
     }
 
 
+
+    const [settingpost, setsettingpost] = useState(0)
     return (
         <View style={{ flex: 1 }}>
             <View
@@ -250,14 +252,16 @@ const Home = (props) => {
                                     </Text>
                                     <View style={{ flex: 1 }}></View>
                                     {/* update posts nè chú */}
+
                                     <TouchableOpacity
                                         onPress={() => {
-                                            deletePost(item.postId);
+                                            // deletePost(item.postId);
+                                            settingpost == 0 ? setsettingpost(1) : setsettingpost(0)
                                         }}
                                     >
                                         <Image
                                             style={{
-                                                backgroundColor: 'red',
+                                                // backgroundColor: 'red',
                                                 width: 25,
                                                 height: 25,
                                                 marginRight: 10,
@@ -265,8 +269,69 @@ const Home = (props) => {
                                             size={20}
                                             source={require('../../front_end/icons/dots.png')} />
                                     </TouchableOpacity>
+
                                 </View>
-                                
+
+                                {settingpost == 1 ?
+                                    (
+                                        <View style={{
+                                            flexDirection: 'row',
+                                            flex: 1,
+                                            backgroundColor: 'white',
+                                            marginStart: 180,
+                                            marginEnd: 21,
+                                            borderWidth: 0.3,
+                                            borderColor: 'grey',
+                                            borderRadius:5,
+                                        }}>
+                                            <View style={{ flexDirection: 'column' }}>
+                                                <TouchableOpacity
+                                                    onPress={() => {
+
+                                                    }}
+                                                    style={{
+                                                        flexDirection: 'row',
+                                                        padding:5 , 
+                                                        alignItems:'center'
+                                                    }}>
+                                                    <Image source={require('../../front_end/icons/pen.png')}
+                                                        style={{
+                                                            height: 18,
+                                                            width: 18,
+                                                            marginEnd: 10,
+                                                            tintColor: 'black',
+                                                        }} />
+                                                    <Text style={{ color: 'black', fontSize: 15 }}>Edit post</Text>
+                                                </TouchableOpacity>
+                                                <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', width: 123 ,}}></View>
+                                                <TouchableOpacity
+                                                    onPress={() => {
+                                                        deletePost(item.postId);
+                                                    }}
+                                                    style={{
+                                                        flexDirection: 'row',
+                                                        padding:5 , 
+                                                        alignItems:'center'
+                                                    }}>
+                                                    <Image source={require('../../front_end/icons/trash-can.png')}
+                                                        style={{
+                                                            height: 18,
+                                                            width: 18,
+                                                            marginEnd: 10,
+                                                            tintColor: 'black',
+                                                        }} />
+                                                    <Text style={{ color: 'black', fontSize: 15 }}>Delete post</Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                            {/* <View style={{
+                                                width: 100,
+                                                height: 100,
+                                                // backgroundColor: 'yellow',
+                                            }}>
+                                                <Text>abc</Text>
+                                            </View> */}
+                                        </View>
+                                    ) : ''}
                                 <Text
                                     style={{
                                         marginTop: 10,

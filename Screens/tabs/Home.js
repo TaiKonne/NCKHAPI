@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import UpName from './UpName';
 import UpAv from './UpAv';
+import { request } from 'express';
 let userId = '';
 const Home = (props) => {
     //props;
@@ -14,6 +15,7 @@ const Home = (props) => {
     const [onLikeClick, setOnLikeCLick] = useState(false);
     const isFocused = useIsFocused();
     const [postData, setPostData] = useState([]);
+    const [upCap, setUpCap] = useState('');
     useEffect(() => {
         getUserId();
         getData();
@@ -85,6 +87,7 @@ const Home = (props) => {
         });
         return status;
     };
+
     const [checkpost, setpost] = useState(0)
     const coverTime = (timestamp) => {
         let date = timestamp.toDate();
@@ -96,6 +99,29 @@ const Home = (props) => {
         date = dd + '/' + mm + '/' + yyyy;
         return date;
     }
+
+    // update posts
+    const deletePost = async link_post => {
+        firestore()
+            .collection('posts')
+            .doc(link_post)
+            .delete()
+            .then(() => {
+                console.log('Post deleted!');
+            })
+    }
+    const updatePost = async link_post => {
+        firestore()
+            .collection('posts')
+            .doc(link_post)
+            .update({
+                caption: upCap,
+            })
+            .then(() => {
+                console.log('Post updated!')
+            })
+    }
+
 
     return (
         <View style={{ flex: 1 }}>
@@ -218,15 +244,29 @@ const Home = (props) => {
                                         }}
                                     /> */}
                                     <UpAv cons={item.userId} />
-                                    {/* <Text
-                                        style={{ fontSize: 18, marginLeft: 15, fontWeight: '600', color: 'black' }}>
-                                        {item.name}
-                                    </Text> */}
                                     <UpName cons={item.userId} />
                                     <Text style={{ fontSize: 10, marginLeft: 15, fontWeight: '600', color: 'black' }}>
                                         {coverTime(item.createdAt)}
                                     </Text>
+                                    <View style={{ flex: 1 }}></View>
+                                    {/* update posts nè chú */}
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            deletePost(item.postId);
+                                        }}
+                                    >
+                                        <Image
+                                            style={{
+                                                backgroundColor: 'red',
+                                                width: 25,
+                                                height: 25,
+                                                marginRight: 10,
+                                            }}
+                                            size={20}
+                                            source={require('../../front_end/icons/dots.png')} />
+                                    </TouchableOpacity>
                                 </View>
+                                
                                 <Text
                                     style={{
                                         marginTop: 10,

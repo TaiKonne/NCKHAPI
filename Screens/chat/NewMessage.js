@@ -149,12 +149,13 @@ const NewMessage = () => {
         </TouchableOpacity>
       </View>
       <GiftedChat
+        // style={{marginTop:50}}
         alwaysShowSend
         textInputStyle={{ color: 'black' }}
         renderSend={props => {
           return (
             <View
-              style={{ flexDirection: 'row', alignItems: 'center', height: 60 }}>
+              style={{ flexDirection: 'row', alignItems: 'center', height: 50}}>
               {imageUrl !== '' ? (
                 <View
                   style={{
@@ -220,6 +221,7 @@ const NewMessage = () => {
               wrapperStyle={{
                 right: {
                   backgroundColor: 'orange',
+                  marginStart:50,
                 },
               }}
             />

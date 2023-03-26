@@ -235,26 +235,17 @@ const Home = (props) => {
                                         alignItems: 'center',
                                         marginTop: 10,
                                     }}>
-                                    {/* <Image
-                                        // source={require('../images/user.png')}
-                                        source={{ uri: item.profilePic }}
-                                        style={{
-                                            width: 40,
-                                            height: 40,
-                                            borderRadius: 20,
-                                            marginLeft: 15,
-                                        }}
-                                    /> */}
                                     <UpAv cons={item.userId} />
-                                    <UpName cons={item.userId} />
-                                    <Text style={{ fontSize: 10, marginLeft: 15, fontWeight: '600', color: 'grey' }}>
-                                        {coverTime(item.createdAt)}
-                                    </Text>
+                                    <View style={{flexDirection:'column'}}>
+                                        <UpName cons={item.userId} />
+                                        <Text style={{ fontSize: 10, marginLeft: 15, fontWeight: '600', color: 'grey' }}>
+                                            {coverTime(item.createdAt)}
+                                        </Text>
+                                    </View>
                                     <View style={{ flex: 1 }}></View>
                                     {/* update posts nè chú */}
                                     <TouchableOpacity
                                         onPress={() => {
-                                            // deletePost(item.postId);
                                             settingpost == 0 ? setsettingpost(1) : setsettingpost(0)
                                         }}
                                     >
@@ -360,7 +351,7 @@ const Home = (props) => {
                                             onLike(item);
                                         }}
                                         style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        <Text style={{ marginRight: 10, fontSize: 18, color: 'black' }}>
+                                        <Text style={{marginRight: 10, color: 'black' }}>
                                             {item.likes.length}
                                         </Text>
                                         {getLikesStaus(item.likes) ? (
@@ -376,7 +367,7 @@ const Home = (props) => {
                                         )}
                                     </TouchableOpacity>
                                     <TouchableOpacity
-                                        style={{ flexDirection: 'row' }}
+                                        style={{ flexDirection: 'row', alignItems: 'center' }}
                                         onPress={() => {
                                             navigation.navigate('Comments', {
                                                 postId: item.postId,
@@ -389,6 +380,22 @@ const Home = (props) => {
                                         <Image
                                             source={require('../images/comment.png')}
                                             style={{ width: 24, height: 24 }}
+                                        />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={{ flexDirection: 'row', alignItems: 'center' }}
+                                        onPress={() => {
+                                            navigation.navigate('Comments', {
+                                                postId: item.postId,
+                                                comments: item.comments,
+                                            });
+                                        }}>
+                                        <Text style={{ marginRight: 10, color: 'black' }}>
+                                            {item.comments.length}
+                                        </Text>
+                                        <Image
+                                            source={require('../../front_end/icons/share.png')}
+                                            style={{ width: 24, height: 24 , tintColor:'black' }}
                                         />
                                     </TouchableOpacity>
                                 </View>

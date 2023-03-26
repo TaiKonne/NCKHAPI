@@ -67,6 +67,7 @@ const VisitUser = (props) => {
                             height: 20,
                             width: 20,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                 </TouchableOpacity>
                 <View style={{ flex: 1 }}></View>
@@ -169,6 +170,7 @@ const VisitUser = (props) => {
                             height: 18,
                             width: 18,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -188,6 +190,7 @@ const VisitUser = (props) => {
                             height: 18,
                             width: 18,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -207,6 +210,7 @@ const VisitUser = (props) => {
                             height: 18,
                             width: 18,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',

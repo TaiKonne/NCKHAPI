@@ -1,4 +1,4 @@
-import { View, Text, Image , Alert } from 'react-native';
+import { View, Text, Image, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Bubble, GiftedChat, InputToolbar, Send } from 'react-native-gifted-chat';
 import { Router, urlencoded } from 'express';
@@ -10,7 +10,10 @@ import storage from '@react-native-firebase/storage';
 import uuid from 'react-native-uuid';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Video from 'react-native-video';
+import { useNavigation } from '@react-navigation/native';
+
 const NewMessage = () => {
+  const navigation = useNavigation();
   const [messages, setMessages] = useState([]);
   const [imageData, setImageData] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
@@ -97,31 +100,43 @@ const NewMessage = () => {
           backgroundColor: 'skyblue',
           justifyContent: 'center',
         }}>
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('HomeSC')
+        }}>
+          <Image source={require('../../front_end/icons/left.png')}
+            style={{
+              height: 25,
+              width: 25,
+              marginStart: 10,
+              tintColor: 'white',
+            }} />
+        </TouchableOpacity>
+        <View style={{ flex: 1 }}></View>
         <View style={{
-          marginStart:10,
+          marginStart: 10,
         }}>
           <Image source={require('../images/user.png')}
-              style={{
-                height: 50,
-                width: 50,
-                marginEnd: 10,
-              }} />
+            style={{
+              height: 50,
+              width: 50,
+              marginEnd: 10,
+            }} />
         </View>
         <View style={{
-            borderWidth:1,
-            borderColor:'#64b72e',
-            backgroundColor:'#64b72e',
-            height:12,
-            width:12,
-            borderRadius:6,
-            position:'absolute',
-            left:50,
-            bottom:6,
-          }}>
-          </View>
-          <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
-            Tai con 
-          </Text>
+          borderWidth: 1,
+          borderColor: '#64b72e',
+          backgroundColor: '#64b72e',
+          height: 12,
+          width: 12,
+          borderRadius: 6,
+          position: 'absolute',
+          left: 135,
+          bottom: 6,
+        }}>
+        </View>
+        <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
+          Tai con
+        </Text>
         <View style={{ flex: 1 }}></View>
         <TouchableOpacity onPress={() => {
           Alert.alert('Messenger', 'Call')
@@ -132,7 +147,7 @@ const NewMessage = () => {
               height: 25,
               width: 25,
               marginEnd: 20,
-              tintColor:'white'
+              tintColor: 'white'
             }} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {
@@ -144,7 +159,7 @@ const NewMessage = () => {
               height: 25,
               width: 25,
               marginEnd: 10,
-              tintColor:'white'
+              tintColor: 'white'
             }} />
         </TouchableOpacity>
       </View>
@@ -155,7 +170,7 @@ const NewMessage = () => {
         renderSend={props => {
           return (
             <View
-              style={{ flexDirection: 'row', alignItems: 'center', height: 50}}>
+              style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
               {imageUrl !== '' ? (
                 <View
                   style={{
@@ -185,6 +200,26 @@ const NewMessage = () => {
                   </TouchableOpacity>
                 </View>
               ) : null}
+              <TouchableOpacity
+                style={{ marginRight: 10 }}
+                onPress={() => {
+                  alert('attach clicked');
+                }}>
+                <Image
+                  source={require('../images/attach.png')}
+                  style={{ width: 20, height: 20 }}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{ marginRight: 10 }}
+                onPress={() => {
+                  alert('mic clicked');
+                }}>
+                <Image
+                  source={require('../images/mic.png')}
+                  style={{ width: 20, height: 20 }}
+                />
+              </TouchableOpacity>
               <TouchableOpacity
                 style={{ marginRight: 20 }}
                 onPress={() => {
@@ -221,7 +256,7 @@ const NewMessage = () => {
               wrapperStyle={{
                 right: {
                   backgroundColor: 'orange',
-                  marginStart:50,
+                  marginStart: 50,
                 },
               }}
             />

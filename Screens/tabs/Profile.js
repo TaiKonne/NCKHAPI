@@ -1,10 +1,12 @@
-import { View, Text, TouchableOpacity, Image, FlatList, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, Image, FlatList, ImageBackground , Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import { useNavigation } from '@react-navigation/native';
+import VisitUser from '../VisitUser';
+
 let userId = '';
 let names = '';
 
@@ -122,34 +124,33 @@ const Profile = () => {
         <View style={{ flex: 1 }}>
             <View
                 style={{
-                    flexDirection: 'row',
-                    width: '100%',
                     height: 60,
-                    borderBottomWidth: 0.5,
-                    borderBottomColor: '#8e8e8e',
-                    alignItems: 'center',
                     backgroundColor: 'skyblue',
-                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
                 }}>
-                <View style={{ flex: 1 }}></View>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
+                <View style={{ width: 30, height: 50 }} />
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
                     Profile
                 </Text>
-                <View style={{ flex: 1 }}></View>
                 <TouchableOpacity onPress={() => {
                     navigation.navigate('Setting')
                 }}>
                     <Image source={require('../../front_end/icons/settings.png')}
                         style={{
-                            height: 25,
-                            width: 25,
+                            height: 27,
+                            width: 27,
                             marginEnd: 10,
+                            tintColor: 'white',
+
                         }} />
                 </TouchableOpacity>
+
             </View>
             <ImageBackground
                 // source={require('../../front_end/hoa_giay_1.jpg')}
-                source={{ uri:imageWall }}
+                source={{ uri: imageWall }}
                 style={{ width: '100%', height: 200 }}
             >
                 <TouchableOpacity
@@ -187,6 +188,7 @@ const Profile = () => {
                 color: 'black',
                 // justifyContent:'center',
                 textAlign: 'center',
+                fontWeight:'bold'
             }}>
                 {names}
             </Text>
@@ -243,7 +245,7 @@ const Profile = () => {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -263,7 +265,7 @@ const Profile = () => {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -283,7 +285,7 @@ const Profile = () => {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -344,7 +346,12 @@ const Profile = () => {
                                     justifyContent: 'space-between',
                                     alignItems: 'center',
                                 }}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                <TouchableOpacity
+                                    style={{ flexDirection: 'row', alignItems: 'center' }}
+                                    onPress={() => {
+                                        // Alert.alert('Nút vào profile người khác','Vào profile')
+                                        navigation.navigate('VisitUser', item.userId);
+                                    }}>
                                     <Image
                                         source={
                                             item.profilePic == ''
@@ -362,7 +369,8 @@ const Profile = () => {
                                     <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
                                         {item.name}
                                     </Text>
-                                </View>
+
+                                </TouchableOpacity>
                                 <TouchableOpacity
                                     style={{ marginRight: 20 }}
                                     onPress={() => {
@@ -403,26 +411,30 @@ const Profile = () => {
                                     justifyContent: 'space-between',
                                     alignItems: 'center',
                                 }}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                    <Image
-                                        source={
-                                            item.profilePic == ''
-                                                ? require('../images/user.png')
-                                                : { uri: item.profilePic }
-                                        }
-                                        style={{
-                                            width: 40,
-                                            height: 40,
-                                            borderRadius: 20,
-                                            marginLeft: 20,
-                                            marginRight: 10,
-                                        }}
-                                    />
-                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
-                                        {item.name}
-                                    </Text>
-                                </View>
-                                <TouchableOpacity
+                                <TouchableOpacity 
+                                    style={{ flexDirection: 'row', alignItems: 'center' }}
+                                    onPress={()=>{
+                                        navigation.navigate('VisitUser', item.userId);
+                                    }}>
+                                        <Image
+                                            source={
+                                                item.profilePic == ''
+                                                    ? require('../images/user.png')
+                                                    : { uri: item.profilePic }
+                                            }
+                                            style={{
+                                                width: 40,
+                                                height: 40,
+                                                borderRadius: 20,
+                                                marginLeft: 20,
+                                                marginRight: 10,
+                                            }}
+                                        />
+                                        <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
+                                            {item.name}
+                                        </Text>
+                                </TouchableOpacity>
+                                {/* <TouchableOpacity
                                     style={{ marginRight: 20 }}
                                     onPress={() => {
                                         navigation.navigate('Messages', {
@@ -433,7 +445,7 @@ const Profile = () => {
                                         source={require('../images/chat.png')}
                                         style={{ width: 24, height: 24, tintColor: 'orange' }}
                                     />
-                                </TouchableOpacity>
+                                </TouchableOpacity> */}
                             </View>
                         );
                     }}

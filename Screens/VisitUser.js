@@ -22,6 +22,10 @@ const VisitUser = (props) => {
     const [mail, setMail] = useState('');
     const [name, setName] = useState([]);
     const userID = props.route.params;
+
+    //  Follow button :))) 
+    const [buafl, setbuafl] = useState(0)
+
     useEffect(() => {
         getProfileVisit();
     }, 100);
@@ -50,31 +54,28 @@ const VisitUser = (props) => {
         }}>
             <View
                 style={{
-                    flexDirection: 'row',
-                    width: '100%',
                     height: 60,
-                    borderBottomWidth: 0.5,
-                    borderBottomColor: '#8e8e8e',
-                    alignItems: 'center',
                     backgroundColor: 'skyblue',
-                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
                 }}>
                 <TouchableOpacity onPress={() => {
                     navigation.navigate('HomeSC')
                 }}>
-                    <Image source={require('../front_end/icons/return.png')}
+                    <Image source={require('../front_end/icons/left.png')}
                         style={{
-                            height: 20,
-                            width: 20,
+                            height: 25,
+                            width: 25,
+                            padding: 10,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'white',
                         }} />
                 </TouchableOpacity>
-                <View style={{ flex: 1 }}></View>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
                     Profile
                 </Text>
-                <View style={{ flex: 1 }}></View>
+                <View style={{ width: 50, height: 50 }} />
             </View>
             <ImageBackground
                 source={require('../front_end/hoa_giay_1.jpg')}
@@ -115,6 +116,7 @@ const VisitUser = (props) => {
                 color: 'black',
                 // justifyContent:'center',
                 textAlign: 'center',
+                fontWeight: 'bold'
             }}>
                 {name}
             </Text>
@@ -133,6 +135,26 @@ const VisitUser = (props) => {
                     {bio}
                 </Text>
             </View>
+            {/* bùa follow button */}
+            <TouchableOpacity
+                onPress={() => {
+                    buafl == 0 ? setbuafl(1) : setbuafl(0)
+                }}
+                style={{
+                    alignSelf: 'center',
+                    marginTop: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderColor: 'skyblue',
+                    borderWidth: 0.2,
+                    backgroundColor: 'skyblue',
+                    borderRadius: 10
+
+                }}>
+                {buafl == 0 ? 
+                    (<Text style={{ color: 'black', fontSize: 16, marginRight: 10, marginLeft: 10, marginTop: 5, marginBottom: 5 }}>Follow</Text>) : 
+                    (<Text style={{ color: 'black', fontSize: 16, marginRight: 10, marginLeft: 10, marginTop: 5, marginBottom: 5 }}>Unfollow</Text>)}
+            </TouchableOpacity>
             {/* More  Information */}
             <TouchableOpacity onPress={() => {
                 morInfo == 0 ? setmorInfo(1) : setmorInfo(0);
@@ -143,7 +165,7 @@ const VisitUser = (props) => {
                     marginTop: 10,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    borderColor: 'orange',
+
                 }}
             >
                 <View>
@@ -170,7 +192,7 @@ const VisitUser = (props) => {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -190,7 +212,7 @@ const VisitUser = (props) => {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -210,7 +232,7 @@ const VisitUser = (props) => {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor:'black',
+                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',

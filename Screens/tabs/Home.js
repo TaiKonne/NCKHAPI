@@ -136,7 +136,7 @@ const Home = (props) => {
                         <Text style={{
                             color: 'black',
                             fontWeight: 'bold'
-                        }}> Posts</Text>
+                        }}>Posts</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
@@ -223,7 +223,7 @@ const Home = (props) => {
                                         {item.name}
                                     </Text> */}
                                     <UpName cons={item.userId} />
-                                    <Text style={{ fontSize: 10, marginLeft: 15, fontWeight: '600', color: 'black' }}>
+                                    <Text style={{ fontSize: 10, marginLeft: 15, fontWeight: '600', color: 'grey' }}>
                                         {coverTime(item.createdAt)}
                                     </Text>
                                 </View>

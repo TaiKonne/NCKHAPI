@@ -243,6 +243,7 @@ const Profile = () => {
                             height: 18,
                             width: 18,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -262,6 +263,7 @@ const Profile = () => {
                             height: 18,
                             width: 18,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -281,6 +283,7 @@ const Profile = () => {
                             height: 18,
                             width: 18,
                             marginStart: 10,
+                            tintColor:'black',
                         }} />
                     <Text style={{
                         color: 'black',

@@ -252,7 +252,6 @@ const Home = (props) => {
                                     </Text>
                                     <View style={{ flex: 1 }}></View>
                                     {/* update posts nè chú */}
-
                                     <TouchableOpacity
                                         onPress={() => {
                                             // deletePost(item.postId);

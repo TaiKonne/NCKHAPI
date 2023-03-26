@@ -306,6 +306,7 @@ const Home = (props) => {
                                                 <TouchableOpacity
                                                     onPress={() => {
                                                         deletePost(item.postId);
+                                                        setsettingpost(0)
                                                     }}
                                                     style={{
                                                         flexDirection: 'row',
@@ -322,13 +323,6 @@ const Home = (props) => {
                                                     <Text style={{ color: 'black', fontSize: 15 }}>Delete post</Text>
                                                 </TouchableOpacity>
                                             </View>
-                                            {/* <View style={{
-                                                width: 100,
-                                                height: 100,
-                                                // backgroundColor: 'yellow',
-                                            }}>
-                                                <Text>abc</Text>
-                                            </View> */}
                                         </View>
                                     ) : ''}
                                 <Text

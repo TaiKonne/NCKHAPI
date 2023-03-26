@@ -29,16 +29,24 @@ const UpName = (props) => {
     let Av = props.cons;
     Avatar(Av);
     return (
-        <Image
-        // source={require('../images/user.png')}
-        source={{ uri: av }}
-        style={{
-            width: 40,
-            height: 40,
-            borderRadius: 20,
-            marginLeft: 15,
-        }}
-    />
+            av != '' ? (<Image
+            // source={require('../images/user.png')}
+            source={{ uri: av }}
+            style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                marginLeft: 15,
+            }}
+        />) : (<Image
+            source={require('../images/user.png')}
+            style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                marginLeft: 15,
+            }}
+            />)
     )
 }
 

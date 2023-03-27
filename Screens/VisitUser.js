@@ -262,7 +262,7 @@ const VisitUser = (props) => {
                     onPress={() => {
                         setSelectedTab(0);
                     }}>
-                    <Text style={{ fontSize: 18, color: 'black' }}>Followers</Text>
+                    <Text style={{ fontSize: 18, color: 'black' }}>Following</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{
@@ -275,7 +275,7 @@ const VisitUser = (props) => {
                     onPress={() => {
                         setSelectedTab(1);
                     }}>
-                    <Text style={{ fontSize: 18, color: 'black' }}>Following</Text>
+                    <Text style={{ fontSize: 18, color: 'black' }}>Followers</Text>
                 </TouchableOpacity>
             </View>
 

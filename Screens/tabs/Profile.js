@@ -315,7 +315,7 @@ const Profile = () => {
                     onPress={() => {
                         setSelectedTab(0);
                     }}>
-                    <Text style={{ fontSize: 18, color: 'black' }}>Followers</Text>
+                    <Text style={{ fontSize: 18, color: 'black' }}>Following</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{
@@ -328,7 +328,7 @@ const Profile = () => {
                     onPress={() => {
                         setSelectedTab(1);
                     }}>
-                    <Text style={{ fontSize: 18, color: 'black' }}>Following</Text>
+                    <Text style={{ fontSize: 18, color: 'black' }}>Followers</Text>
                 </TouchableOpacity>
             </View>
 
@@ -350,7 +350,7 @@ const Profile = () => {
                                     style={{ flexDirection: 'row', alignItems: 'center' }}
                                     onPress={() => {
                                         // Alert.alert('Nút vào profile người khác','Vào profile')
-                                        navigation.navigate('VisitUser', item.userId);
+                                        navigation.navigate('VisitUser', item.userId );
                                     }}>
                                     <Image
                                         source={
@@ -414,7 +414,7 @@ const Profile = () => {
                                 <TouchableOpacity 
                                     style={{ flexDirection: 'row', alignItems: 'center' }}
                                     onPress={()=>{
-                                        navigation.navigate('VisitUser', item.userId);
+                                        navigation.navigate('VisitUser', item.userId );
                                     }}>
                                         <Image
                                             source={

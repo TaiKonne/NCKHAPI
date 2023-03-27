@@ -483,12 +483,11 @@ function Setting(props) {
                     paddingVertical: 10,
                     alignItems: 'center'
                 }} >
-                    <Image source={require('../front_end/icons/picture.png')}
+                    <Image source={require('../Screens/images/user.png')}
                         style={{
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',

@@ -125,6 +125,8 @@ const Home = (props) => {
 
 
     const [settingpost, setsettingpost] = useState(0)
+    const [postids, setpostids] = useState('')
+
     return (
         <View style={{ flex: 1 }}>
             <View
@@ -236,7 +238,7 @@ const Home = (props) => {
                                         marginTop: 10,
                                     }}>
                                     <UpAv cons={item.userId} />
-                                    <View style={{flexDirection:'column'}}>
+                                    <View style={{ flexDirection: 'column' }}>
                                         <UpName cons={item.userId} />
                                         <Text style={{ fontSize: 10, marginLeft: 15, fontWeight: '600', color: 'grey' }}>
                                             {coverTime(item.createdAt)}
@@ -245,24 +247,26 @@ const Home = (props) => {
                                     <View style={{ flex: 1 }}></View>
                                     {/* update posts nè chú */}
                                     <TouchableOpacity
-                                        onPress={() => {
-                                            settingpost == 0 ? setsettingpost(1) : setsettingpost(0)
-                                        }}
+                                        onPress={() => { settingpost == 0 ? (setsettingpost(1), setpostids(item.postId)) : (setsettingpost(0), setpostids('')) }
+                                            // this.handlePress(item.postId , item.userId)
+                                        }
                                     >
-                                        <Image
-                                            style={{
-                                                // backgroundColor: 'red',
-                                                width: 25,
-                                                height: 25,
-                                                marginRight: 10,
-                                            }}
-                                            size={20}
-                                            source={require('../../front_end/icons/dots.png')} />
+                                        {userId == item.userId ? (
+                                            <Image
+                                                style={{
+                                                    // backgroundColor: 'red',
+                                                    width: 25,
+                                                    height: 25,
+                                                    marginRight: 10,
+                                                }}
+                                                size={20}
+                                                source={require('../../front_end/icons/dots.png')} />
+                                        ) : ''}
                                     </TouchableOpacity>
 
                                 </View>
 
-                                {settingpost == 1 ?
+                                {settingpost == 1 && userId == item.userId && postids == item.postId ?
                                     (
                                         <View style={{
                                             flexDirection: 'row',
@@ -272,17 +276,18 @@ const Home = (props) => {
                                             marginEnd: 21,
                                             borderWidth: 0.3,
                                             borderColor: 'grey',
-                                            borderRadius:5,
+                                            borderRadius: 5,
                                         }}>
                                             <View style={{ flexDirection: 'column' }}>
                                                 <TouchableOpacity
                                                     onPress={() => {
-
+                                                        navigation.navigate('Editpost')
+                                                        setsettingpost(0)
                                                     }}
                                                     style={{
                                                         flexDirection: 'row',
-                                                        padding:5 , 
-                                                        alignItems:'center'
+                                                        padding: 5,
+                                                        alignItems: 'center'
                                                     }}>
                                                     <Image source={require('../../front_end/icons/pen.png')}
                                                         style={{
@@ -293,7 +298,7 @@ const Home = (props) => {
                                                         }} />
                                                     <Text style={{ color: 'black', fontSize: 15 }}>Edit post</Text>
                                                 </TouchableOpacity>
-                                                <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', width: 123 ,}}></View>
+                                                <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', width: 123, }}></View>
                                                 <TouchableOpacity
                                                     onPress={() => {
                                                         deletePost(item.postId);
@@ -301,8 +306,8 @@ const Home = (props) => {
                                                     }}
                                                     style={{
                                                         flexDirection: 'row',
-                                                        padding:5 , 
-                                                        alignItems:'center'
+                                                        padding: 5,
+                                                        alignItems: 'center'
                                                     }}>
                                                     <Image source={require('../../front_end/icons/trash-can.png')}
                                                         style={{
@@ -351,7 +356,7 @@ const Home = (props) => {
                                             onLike(item);
                                         }}
                                         style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        <Text style={{marginRight: 10, color: 'black' }}>
+                                        <Text style={{ marginRight: 10, color: 'black' }}>
                                             {item.likes.length}
                                         </Text>
                                         {getLikesStaus(item.likes) ? (
@@ -395,7 +400,7 @@ const Home = (props) => {
                                         </Text>
                                         <Image
                                             source={require('../../front_end/icons/share.png')}
-                                            style={{ width: 24, height: 24 , tintColor:'black' }}
+                                            style={{ width: 24, height: 24, tintColor: 'black' }}
                                         />
                                     </TouchableOpacity>
                                 </View>

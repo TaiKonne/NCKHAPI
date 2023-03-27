@@ -4,6 +4,7 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import { useNavigation } from '@react-navigation/native';
 import UpName from './tabs/UpName';
 import UpAv from './tabs/UpAv';
 const GetPost = (props) => {
@@ -11,7 +12,7 @@ const GetPost = (props) => {
         getUser();
         getPost();
     }, []);
-
+     const navigation = useNavigation();
     // post
     const [caption, setCaption] = useState('');
     const [cmt, setCmt] = useState([]);
@@ -65,6 +66,37 @@ const GetPost = (props) => {
             })
 
     }
+    const onLike = item => {
+        let tempLikes = item.likes;
+        if (tempLikes.length > 0) {
+            tempLikes.map(item1 => {
+                if (userId === item1) {
+                    const index = tempLikes.indexOf(item1);
+                    if (index > -1) {
+                        // only splice array when item is found
+                        tempLikes.splice(index, 1); // 2nd parameter means remove one item only
+                    }
+                } else {
+                    console.log('diliked');
+                    tempLikes.push(userId);
+                }
+            });
+        } else {
+            tempLikes.push(userId);
+        }
+
+        console.log(tempLikes);
+        firestore()
+            .collection('posts')
+            .doc(item.postId)
+            .update({
+                likes: tempLikes,
+            })
+            .then(() => { })
+            .catch(error => { });
+        setOnLikeCLick(!onLikeClick);
+    };
+
     const getLikesStaus = likes => {
         let status = false;
         likes.map(item => {
@@ -76,6 +108,7 @@ const GetPost = (props) => {
         });
         return status;
     };
+
     const [settingpost, setsettingpost] = useState(0)
     return (
         <View

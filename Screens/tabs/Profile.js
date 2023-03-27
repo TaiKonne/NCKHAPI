@@ -319,6 +319,7 @@ const Profile = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         backgroundColor: (selectedTabPost == 1 || tabdefault == 1) ? '#fff' : 'rgba(0,0,0,0)',
+                        flexDirection: 'column'
                     }}
                     onPress={() => {
                         setSelectedTabPost(1)
@@ -327,6 +328,7 @@ const Profile = () => {
                         settabdefault(0)
                     }}>
                     <Text style={{ fontSize: 18, color: 'black' }}>My Post</Text>
+                    <Text style={{ fontSize: 15, color: 'grey' }}>{GetPost.length}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{
@@ -335,6 +337,7 @@ const Profile = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         backgroundColor: selectedTabFollowing == 1 ? '#fff' : 'rgba(0,0,0,0)',
+                        flexDirection:'column'
                     }}
                     onPress={() => {
                         setSelectedTabPost(0)
@@ -343,6 +346,7 @@ const Profile = () => {
                         settabdefault(0)
                     }}>
                     <Text style={{ fontSize: 18, color: 'black'}}>Following</Text>
+                    <Text style={{ fontSize: 15, color: 'grey' }}>{followers.length}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{
@@ -351,6 +355,7 @@ const Profile = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         backgroundColor: selectedTabFollower == 1 ? '#fff' : 'rgba(0,0,0,0)',
+                        flexDirection:'column'
                     }}
                     onPress={() => {
                         setSelectedTabPost(0)
@@ -359,6 +364,7 @@ const Profile = () => {
                         settabdefault(0)
                     }}>
                     <Text style={{ fontSize: 18, color: 'black' }}>Followers</Text>
+                    <Text style={{ fontSize: 15, color: 'grey' }}>{following.length}</Text>
                 </TouchableOpacity>
             </View>
             {(selectedTabPost == 0  && tabdefault == 0 )? null : (

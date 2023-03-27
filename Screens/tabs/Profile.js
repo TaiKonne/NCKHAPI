@@ -8,7 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 import VisitUser from '../VisitUser';
 import GetPost from '../GetPost'
 let userId = '';
-let names = '';
 
 const Profile = () => {
     const navigation = useNavigation();
@@ -18,7 +17,7 @@ const Profile = () => {
     const [imagePicked, setImagePicked] = useState(false);
     const [UploadedPicUrl, setUploadedPicUrl] = useState('');
     // selectedTab
-    const [tabdefault , settabdefault] = useState(1)
+    const [tabdefault, settabdefault] = useState(1)
     const [selectedTabPost, setSelectedTabPost] = useState(0);
     const [selectedTabFollower, setSelectedTabFollower] = useState(0);
     const [selectedTabFollowing, setSelectedTabFollowing] = useState(0);
@@ -37,14 +36,14 @@ const Profile = () => {
     const [mail, setMail] = useState('');
     // post
     const [PS, setPS] = useState([]);
-
+    // name
+    const [Name, setName] = useState('');
     useEffect(() => {
         getProfileData();
     }, []);
 
     const getProfileData = async () => {
         userId = await AsyncStorage.getItem('USERID');
-        names = await AsyncStorage.getItem('NAME');
         firestore()
             .collection('Users')
             .doc(userId)
@@ -63,6 +62,7 @@ const Profile = () => {
                     setMail(documentSnapshot.data().email);
                     setImageWall(documentSnapshot.data().picWal);
                     setPS(documentSnapshot.data().posts);
+                    setName(documentSnapshot.data().name);
                     console.log('data ', documentSnapshot.data().following);
                 }
             });
@@ -197,7 +197,7 @@ const Profile = () => {
                 textAlign: 'center',
                 fontWeight: 'bold'
             }}>
-                {names}
+                {Name}
             </Text>
             {/* Bio */}
             <View style={{
@@ -311,7 +311,7 @@ const Profile = () => {
                     flexDirection: 'row',
                     marginTop: 20,
                 }}>
-                    
+
                 <TouchableOpacity
                     style={{
                         width: '33.3%',
@@ -337,7 +337,7 @@ const Profile = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         backgroundColor: selectedTabFollowing == 1 ? '#fff' : 'rgba(0,0,0,0)',
-                        flexDirection:'column'
+                        flexDirection: 'column'
                     }}
                     onPress={() => {
                         setSelectedTabPost(0)
@@ -345,7 +345,7 @@ const Profile = () => {
                         setSelectedTabFollowing(1)
                         settabdefault(0)
                     }}>
-                    <Text style={{ fontSize: 18, color: 'black'}}>Following</Text>
+                    <Text style={{ fontSize: 18, color: 'black' }}>Following</Text>
                     <Text style={{ fontSize: 15, color: 'grey' }}>{followers.length}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -355,7 +355,7 @@ const Profile = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         backgroundColor: selectedTabFollower == 1 ? '#fff' : 'rgba(0,0,0,0)',
-                        flexDirection:'column'
+                        flexDirection: 'column'
                     }}
                     onPress={() => {
                         setSelectedTabPost(0)
@@ -367,15 +367,15 @@ const Profile = () => {
                     <Text style={{ fontSize: 15, color: 'grey' }}>{following.length}</Text>
                 </TouchableOpacity>
             </View>
-            {(selectedTabPost == 0  && tabdefault == 0 )? null : (
+            {(selectedTabPost == 0 && tabdefault == 0) ? null : (
                 <FlatList
                     data={PS}
                     renderItem={({ item, index }) => {
                         return (
-                        <GetPost cons={item} />
-                    );
-                }}
-            />
+                            <GetPost cons={item} />
+                        );
+                    }}
+                />
             )}
             {selectedTabFollowing == 0 ? null : (
                 <FlatList
@@ -484,7 +484,7 @@ const Profile = () => {
                     }}
                 />
             )}
-            
+
         </View>
     );
 };

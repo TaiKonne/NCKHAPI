@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, TextInput, PermissionsAndroid, Alert} from 'react-native';
+import { View, Text, TouchableOpacity, Image, TextInput, PermissionsAndroid, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
@@ -17,7 +17,8 @@ let name = '';
 let email = '';
 let profile = '';
 
-const Editpost = ({ onAdded }) => {
+const Editpost = (props) => {
+
     const navigation = useNavigation();
     const [imageData, setImageData] = useState(null);
     const [caption, setCaption] = useState('');
@@ -25,10 +26,13 @@ const Editpost = ({ onAdded }) => {
     useEffect(() => {
         getFcmToken();
     }, []);
+
+    let postId = props.route.params.post;
+    let userId = props.route.params.user;
+
+
     const getFcmToken = async () => {
         name = await AsyncStorage.getItem('NAME');
-        email = await AsyncStorage.getItem('EMAIL');
-        profile = await AsyncStorage.getItem('PROFILE_PIC');
         console.log(email, name);
         console.log(profile);
     };
@@ -64,59 +68,35 @@ const Editpost = ({ onAdded }) => {
         console.log(url);
         firestore()
             .collection('posts')
-            .doc(id)
-            .set({
+            .doc(postId)
+            .update({
                 image: url,
                 caption: caption,
-                email: email,
-                name: name,
-                userId: userId,
-                profilePic: profile,
-                postId: id,
-                likes: [],
-                comments: [],
-                createdAt: new Date(),
             })
             .then(() => {
-                console.log('post added!');
-                getAllTokens();
+                console.log('post updated!');
             })
             .catch(error => {
-                setModalVisible(false);
+                console.log(error);
             });
     };
-    const cap = async () => {
+
+    const cap = async postId => {
         setModalVisible(true);
-        let id = uuid.v4();
-        // const reference = storage().ref(imageData.assets[0].fileName);
-        // const pathToFile = imageData.assets[0].uri;
-        const userId = await AsyncStorage.getItem('USERID');
-        // uploads file
-        // await reference.putFile(pathToFile);
         const url = '';
         firestore()
             .collection('posts')
-            .doc(id)
-            .set({
+            .doc(postId)
+            .update({
                 image: url,
                 caption: caption,
-                email: email,
-                name: name,
-                userId: userId,
-                profilePic: profile,
-                postId: id,
-                likes: [],
-                comments: [],
-                createdAt: new Date(),
             })
             .then(() => {
-                console.log('post added!');
-                getAllTokens();
+                console.log('post updated!');
             })
             .catch(error => {
-                setModalVisible(false);
+                console.log(error);
             });
-
     };
     const getAllTokens = () => {
         let tempTokens = [];
@@ -134,7 +114,7 @@ const Editpost = ({ onAdded }) => {
                 setModalVisible(false);
             });
         setModalVisible(false);
-        onAdded();
+        // onAdded();
     };
     const sendNotifications = async token => {
         var axios = require('axios');
@@ -189,7 +169,7 @@ const Editpost = ({ onAdded }) => {
                             tintColor: 'white',
                         }} />
                 </TouchableOpacity>
-                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold'}}>Edit Post</Text>
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>Edit Post</Text>
                 <Text
                     style={{
                         marginEnd: 10,
@@ -201,7 +181,7 @@ const Editpost = ({ onAdded }) => {
                             uplaodImage();
                             navigation.navigate('HomeSC')
                         } else if (imageData === null && caption !== '') {
-                            cap();
+                            cap(postId);
                             navigation.navigate('HomeSC')
                         }
                         else {

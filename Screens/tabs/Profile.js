@@ -328,7 +328,9 @@ const Profile = () => {
                         settabdefault(0)
                     }}>
                     <Text style={{ fontSize: 18, color: 'black' }}>My Post</Text>
-                    <Text style={{ fontSize: 15, color: 'grey' }}>{GetPost.length}</Text>
+                    {/* chiều dài của post */}
+                    <Text style={{ fontSize: 15, color: 'grey' }}>{PS.length}</Text>
+
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{

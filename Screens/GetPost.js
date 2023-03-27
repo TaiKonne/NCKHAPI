@@ -7,12 +7,13 @@ import storage from '@react-native-firebase/storage';
 import { useNavigation } from '@react-navigation/native';
 import UpName from './tabs/UpName';
 import UpAv from './tabs/UpAv';
+
 const GetPost = (props) => {
     useEffect(() => {
         getUser();
         getPost();
     }, []);
-     const navigation = useNavigation();
+    const navigation = useNavigation();
     // post
     const [caption, setCaption] = useState('');
     const [cmt, setCmt] = useState([]);
@@ -21,7 +22,8 @@ const GetPost = (props) => {
     // user
     const [name, setName] = useState('');
     const [profilePic, setProfilePic] = useState('');
-
+    const [Item, setItem] = useState([]);
+    const [onLikeClick, setOnLikeCLick] = useState(false);
     let postId = props.cons.postId;
     let time = props.cons.time;
     let userId = props.cons.userId;
@@ -61,9 +63,10 @@ const GetPost = (props) => {
                     setCaption(document.data().caption);
                     setCmt(document.data().comments);
                     setImage(document.data().image);
-                    setLike(document.data().likes)
+                    setLike(document.data().likes);
+                    setItem(document.data());
                 }
-            })
+            });
 
     }
     const onLike = item => {
@@ -240,7 +243,7 @@ const GetPost = (props) => {
                 }}>
                 <TouchableOpacity
                     onPress={() => {
-                        onLike(item);
+                        onLike(Item);
                     }}
                     style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={{ marginRight: 10, color: 'black' }}>
@@ -271,7 +274,7 @@ const GetPost = (props) => {
                     </Text>
                     <Image
                         source={require('./images/comment.png')}
-                        style={{ width: 20, height: 20 , tintColor:'black' }}
+                        style={{ width: 20, height: 20, tintColor: 'black' }}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity

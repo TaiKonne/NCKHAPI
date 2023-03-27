@@ -91,7 +91,7 @@ const Home = (props) => {
     const [checkpost, setpost] = useState(0)
     const coverTime = (timestamp) => {
         let date = timestamp.toDate();
-        let mm = date.getMonth();
+        let mm = date.getMonth() + 1;
         let dd = date.getDate();
         let yyyy = date.getFullYear();
         let munis = date.getMinutes();// phút

@@ -27,7 +27,7 @@ const GetPost = (props) => {
 
     const coverTime = (timestamp) => {
         let date = timestamp.toDate();
-        let mm = date.getMonth();
+        let mm = date.getMonth() + 1;
         let dd = date.getDate();
         let yyyy = date.getFullYear();
         let munis = date.getMinutes();// phút
@@ -98,7 +98,7 @@ const GetPost = (props) => {
                 <View style={{ flexDirection: 'column' }}>
                     <UpName cons={userId} />
                     <Text style={{ fontSize: 10, marginLeft: 15, fontWeight: '600', color: 'grey' }}>
-                        {/* {coverTime(item.createdAt)} */}
+                        {coverTime(time)}
                     </Text>
                 </View>
                 <View style={{ flex: 1 }}></View>

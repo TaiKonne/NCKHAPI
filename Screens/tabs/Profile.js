@@ -17,7 +17,10 @@ const Profile = () => {
     const [imageWall, setImageWall] = useState('');
     const [imagePicked, setImagePicked] = useState(false);
     const [UploadedPicUrl, setUploadedPicUrl] = useState('');
-    const [selectedTab, setSelectedTab] = useState(0);
+    // selectedTab
+    const [selectedTabPost, setSelectedTabPost] = useState(0);
+    const [selectedTabFollower, setSelectedTabFollower] = useState(0);
+    const [selectedTabFollowing, setSelectedTabFollowing] = useState(0);
     // follower
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
@@ -307,35 +310,65 @@ const Profile = () => {
                     flexDirection: 'row',
                     marginTop: 20,
                 }}>
+                    
                 <TouchableOpacity
                     style={{
-                        width: '50%',
+                        width: '33.3%',
                         height: '100%',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        backgroundColor: selectedTab == 0 ? '#fff' : 'rgba(0,0,0,0)',
+                        backgroundColor: selectedTabPost == 1 ? '#fff' : 'rgba(0,0,0,0)',
                     }}
                     onPress={() => {
-                        setSelectedTab(0);
+                        setSelectedTabPost(1)
+                        setSelectedTabFollower(0)
+                        setSelectedTabFollowing(0)
+                    }}>
+                    <Text style={{ fontSize: 18, color: 'black' }}>My Post</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                        width: '33.3%',
+                        height: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: selectedTabFollowing == 1 ? '#fff' : 'rgba(0,0,0,0)',
+                        
+                    }}
+                    onPress={() => {
+                        setSelectedTabPost(0)
+                        setSelectedTabFollower(0)
+                        setSelectedTabFollowing(1)
                     }}>
                     <Text style={{ fontSize: 18, color: 'black' }}>Following</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{
-                        width: '50%',
+                        width: '33.3%',
                         height: '100%',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        backgroundColor: selectedTab == 1 ? '#fff' : 'rgba(0,0,0,0)',
+                        backgroundColor: selectedTabFollower == 1 ? '#fff' : 'rgba(0,0,0,0)',
                     }}
                     onPress={() => {
-                        setSelectedTab(1);
+                        setSelectedTabPost(0)
+                        setSelectedTabFollower(1)
+                        setSelectedTabFollowing(0)
                     }}>
                     <Text style={{ fontSize: 18, color: 'black' }}>Followers</Text>
                 </TouchableOpacity>
             </View>
-
-            {selectedTab == 1 ? null : (
+            {selectedTabPost == 0 ? null : (
+                <FlatList
+                    data={PS}
+                    renderItem={({ item, index }) => {
+                        return (
+                        <GetPost cons={item} />
+                    );
+                }}
+            />
+            )}
+            {selectedTabFollowing == 0 ? null : (
                 <FlatList
                     data={followers}
                     renderItem={({ item, index }) => {
@@ -400,7 +433,7 @@ const Profile = () => {
                 />
             )}
 
-            {selectedTab == 0 ? null : (
+            {selectedTabFollower == 0 ? null : (
                 <FlatList
                     data={following}
                     renderItem={({ item, index }) => {
@@ -437,32 +470,12 @@ const Profile = () => {
                                         {item.name}
                                     </Text>
                                 </TouchableOpacity>
-                                {/* <TouchableOpacity
-                                    style={{ marginRight: 20 }}
-                                    onPress={() => {
-                                        navigation.navigate('Messages', {
-                                            data: item,
-                                        });
-                                    }}>
-                                    <Image
-                                        source={require('../images/chat.png')}
-                                        style={{ width: 24, height: 24, tintColor: 'orange' }}
-                                    />
-                                </TouchableOpacity> */}
                             </View>
                         );
                     }}
                 />
             )}
-            <FlatList
-                data={PS}
-                renderItem={({ item, index }) => {
-                    return (
-                        <GetPost cons={item} />
-                    );
-                }}
-
-            />
+            
         </View>
     );
 };

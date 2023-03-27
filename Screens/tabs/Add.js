@@ -79,23 +79,29 @@ const Add = ({ onAdded }) => {
                 createdAt: new Date(),
             })
             .then(() => {
-                console.log('post added!');
+                firestore()
+                    .collection('Users')
+                    .doc(userId)
+                    .get()
+                    .then(tt => {
+                        PS = tt.data().posts;
+                        PS.push({
+                            postId: id,
+                            time: time,
+                            userId: userId,
+                        });
+                        firestore()
+                            .collection('Users')
+                            .doc(userId)
+                            .update({
+                                posts: PS,
+                            })
+                    })
                 getAllTokens();
             })
             .catch(error => {
                 setModalVisible(false);
             });
-        PS.push({
-            postId: id,
-            time: time,
-            userId: userId,
-        });
-        firestore()
-            .collection('Users')
-            .doc(userId)
-            .update({
-                posts: PS,
-            })
     };
     const cap = async () => {
         setModalVisible(true);
@@ -121,23 +127,29 @@ const Add = ({ onAdded }) => {
                 createdAt: new Date(),
             })
             .then(() => {
-                console.log('post added!');
+                firestore()
+                    .collection('Users')
+                    .doc(userId)
+                    .get()
+                    .then(tt => {
+                        PS = tt.data().posts;
+                        PS.push({
+                            postId: id,
+                            time: time,
+                            userId: userId,
+                        });
+                        firestore()
+                            .collection('Users')
+                            .doc(userId)
+                            .update({
+                                posts: PS,
+                            })
+                    })
                 getAllTokens();
             })
             .catch(error => {
                 setModalVisible(false);
             });
-        PS.push({
-            postId: id,
-            time: time,
-            userId: userId,
-        });
-        firestore()
-            .collection('Users')
-            .doc(userId)
-            .update({
-                posts: PS,
-            })
 
     };
     const getAllTokens = () => {

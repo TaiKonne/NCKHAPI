@@ -249,12 +249,12 @@ const GetPost = (props) => {
                     {getLikesStaus(like) ? (
                         <Image
                             source={require('./images/heart.png')}
-                            style={{ width: 24, height: 24, tintColor: 'red' }}
+                            style={{ width: 22, height: 22, tintColor: 'red' }}
                         />
                     ) : (
                         <Image
                             source={require('./images/love.png')}
-                            style={{ width: 24, height: 24 }}
+                            style={{ width: 22, height: 22 }}
                         />
                     )}
                 </TouchableOpacity>
@@ -271,7 +271,7 @@ const GetPost = (props) => {
                     </Text>
                     <Image
                         source={require('./images/comment.png')}
-                        style={{ width: 24, height: 24 }}
+                        style={{ width: 20, height: 20 , tintColor:'black' }}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -287,7 +287,7 @@ const GetPost = (props) => {
                     </Text>
                     <Image
                         source={require('../front_end/icons/share.png')}
-                        style={{ width: 24, height: 24, tintColor: 'black' }}
+                        style={{ width: 22, height: 22, tintColor: 'black' }}
                     />
                 </TouchableOpacity>
             </View>

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, FlatList, ImageBackground , Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Image, FlatList, ImageBackground, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -6,7 +6,7 @@ import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import { useNavigation } from '@react-navigation/native';
 import VisitUser from '../VisitUser';
-
+import GetPost from '../GetPost'
 let userId = '';
 let names = '';
 
@@ -29,8 +29,10 @@ const Profile = () => {
     const [morInfo, setmorInfo] = useState(0);
     //address
     const [address, setAddress] = useState('');
-    //mail
+    // mail
     const [mail, setMail] = useState('');
+    // post
+    const [PS, setPS] = useState([]);
 
     useEffect(() => {
         getProfileData();
@@ -56,6 +58,7 @@ const Profile = () => {
                     setAddress(documentSnapshot.data().address);
                     setMail(documentSnapshot.data().email);
                     setImageWall(documentSnapshot.data().picWal);
+                    setPS(documentSnapshot.data().posts);
                     console.log('data ', documentSnapshot.data().following);
                 }
             });
@@ -188,7 +191,7 @@ const Profile = () => {
                 color: 'black',
                 // justifyContent:'center',
                 textAlign: 'center',
-                fontWeight:'bold'
+                fontWeight: 'bold'
             }}>
                 {names}
             </Text>
@@ -350,7 +353,7 @@ const Profile = () => {
                                     style={{ flexDirection: 'row', alignItems: 'center' }}
                                     onPress={() => {
                                         // Alert.alert('Nút vào profile người khác','Vào profile')
-                                        navigation.navigate('VisitUser', item.userId );
+                                        navigation.navigate('VisitUser', item.userId);
                                     }}>
                                     <Image
                                         source={
@@ -411,28 +414,28 @@ const Profile = () => {
                                     justifyContent: 'space-between',
                                     alignItems: 'center',
                                 }}>
-                                <TouchableOpacity 
+                                <TouchableOpacity
                                     style={{ flexDirection: 'row', alignItems: 'center' }}
-                                    onPress={()=>{
-                                        navigation.navigate('VisitUser', item.userId );
+                                    onPress={() => {
+                                        navigation.navigate('VisitUser', item.userId);
                                     }}>
-                                        <Image
-                                            source={
-                                                item.profilePic == ''
-                                                    ? require('../images/user.png')
-                                                    : { uri: item.profilePic }
-                                            }
-                                            style={{
-                                                width: 40,
-                                                height: 40,
-                                                borderRadius: 20,
-                                                marginLeft: 20,
-                                                marginRight: 10,
-                                            }}
-                                        />
-                                        <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
-                                            {item.name}
-                                        </Text>
+                                    <Image
+                                        source={
+                                            item.profilePic == ''
+                                                ? require('../images/user.png')
+                                                : { uri: item.profilePic }
+                                        }
+                                        style={{
+                                            width: 40,
+                                            height: 40,
+                                            borderRadius: 20,
+                                            marginLeft: 20,
+                                            marginRight: 10,
+                                        }}
+                                    />
+                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
+                                        {item.name}
+                                    </Text>
                                 </TouchableOpacity>
                                 {/* <TouchableOpacity
                                     style={{ marginRight: 20 }}
@@ -451,6 +454,15 @@ const Profile = () => {
                     }}
                 />
             )}
+            <FlatList
+                data={PS}
+                renderItem={({ item, index }) => {
+                    return (
+                        <GetPost cons={item} />
+                    );
+                }}
+
+            />
         </View>
     );
 };

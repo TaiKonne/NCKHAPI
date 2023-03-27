@@ -64,6 +64,7 @@ const Signup = ({ navigation }) => {
         await AsyncStorage.setItem('PHONE', numberPhone);
         await AsyncStorage.setItem('BIO', bio);
         await AsyncStorage.setItem('PICWAL', picWal);
+        await AsyncStorage.setItem('POSTS', posts);
         // await AsyncStorage.setItem('PROFILE_PIC', profilePic);
     };
     return (

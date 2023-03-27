@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, TextInput, PermissionsAndroid, Alert} from 'react-native';
+import { View, Text, TouchableOpacity, Image, TextInput, PermissionsAndroid, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
@@ -52,6 +52,8 @@ const Add = ({ onAdded }) => {
     const uplaodImage = async () => {
         setModalVisible(true);
         let id = uuid.v4();
+        let PS = [];
+        let time = new Date();
         const reference = storage().ref(imageData.assets[0].fileName);
         const pathToFile = imageData.assets[0].uri;
         const userId = await AsyncStorage.getItem('USERID');
@@ -83,15 +85,25 @@ const Add = ({ onAdded }) => {
             .catch(error => {
                 setModalVisible(false);
             });
+        PS.push({
+            postId: id,
+            time: time,
+            userId: userId,
+        });
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .update({
+                posts: PS,
+            })
     };
     const cap = async () => {
         setModalVisible(true);
         let id = uuid.v4();
-        // const reference = storage().ref(imageData.assets[0].fileName);
-        // const pathToFile = imageData.assets[0].uri;
+        let PS = [];
+        let time = new Date();
         const userId = await AsyncStorage.getItem('USERID');
-        // uploads file
-        // await reference.putFile(pathToFile);
+
         const url = '';
         firestore()
             .collection('posts')
@@ -115,6 +127,17 @@ const Add = ({ onAdded }) => {
             .catch(error => {
                 setModalVisible(false);
             });
+        PS.push({
+            postId: id,
+            time: time,
+            userId: userId,
+        });
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .update({
+                posts: PS,
+            })
 
     };
     const getAllTokens = () => {

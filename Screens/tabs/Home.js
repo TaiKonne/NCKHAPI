@@ -255,8 +255,8 @@ const Home = (props) => {
                                             <Image
                                                 style={{
                                                     // backgroundColor: 'red',
-                                                    width: 25,
-                                                    height: 25,
+                                                    width: 22,
+                                                    height: 22,
                                                     marginRight: 10,
                                                 }}
                                                 size={20}
@@ -362,12 +362,12 @@ const Home = (props) => {
                                         {getLikesStaus(item.likes) ? (
                                             <Image
                                                 source={require('../images/heart.png')}
-                                                style={{ width: 24, height: 24, tintColor: 'red' }}
+                                                style={{ width: 22, height: 22, tintColor: 'red' }}
                                             />
                                         ) : (
                                             <Image
                                                 source={require('../images/love.png')}
-                                                style={{ width: 24, height: 24 }}
+                                                style={{ width: 22, height: 22 }}
                                             />
                                         )}
                                     </TouchableOpacity>
@@ -384,7 +384,7 @@ const Home = (props) => {
                                         </Text>
                                         <Image
                                             source={require('../images/comment.png')}
-                                            style={{ width: 24, height: 24 }}
+                                            style={{ width: 20, height: 20 , tintColor:'black' }}
                                         />
                                     </TouchableOpacity>
                                     <TouchableOpacity
@@ -400,7 +400,7 @@ const Home = (props) => {
                                         </Text>
                                         <Image
                                             source={require('../../front_end/icons/share.png')}
-                                            style={{ width: 24, height: 24, tintColor: 'black' }}
+                                            style={{ width: 22, height: 22, tintColor: 'black' }}
                                         />
                                     </TouchableOpacity>
                                 </View>

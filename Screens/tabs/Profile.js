@@ -18,6 +18,7 @@ const Profile = () => {
     const [imagePicked, setImagePicked] = useState(false);
     const [UploadedPicUrl, setUploadedPicUrl] = useState('');
     // selectedTab
+    const [tabdefault , settabdefault] = useState(1)
     const [selectedTabPost, setSelectedTabPost] = useState(0);
     const [selectedTabFollower, setSelectedTabFollower] = useState(0);
     const [selectedTabFollowing, setSelectedTabFollowing] = useState(0);
@@ -317,12 +318,13 @@ const Profile = () => {
                         height: '100%',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        backgroundColor: selectedTabPost == 1 ? '#fff' : 'rgba(0,0,0,0)',
+                        backgroundColor: (selectedTabPost == 1 || tabdefault == 1) ? '#fff' : 'rgba(0,0,0,0)',
                     }}
                     onPress={() => {
                         setSelectedTabPost(1)
                         setSelectedTabFollower(0)
                         setSelectedTabFollowing(0)
+                        settabdefault(0)
                     }}>
                     <Text style={{ fontSize: 18, color: 'black' }}>My Post</Text>
                 </TouchableOpacity>
@@ -333,14 +335,14 @@ const Profile = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         backgroundColor: selectedTabFollowing == 1 ? '#fff' : 'rgba(0,0,0,0)',
-                        
                     }}
                     onPress={() => {
                         setSelectedTabPost(0)
                         setSelectedTabFollower(0)
                         setSelectedTabFollowing(1)
+                        settabdefault(0)
                     }}>
-                    <Text style={{ fontSize: 18, color: 'black' }}>Following</Text>
+                    <Text style={{ fontSize: 18, color: 'black'}}>Following</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{
@@ -354,11 +356,12 @@ const Profile = () => {
                         setSelectedTabPost(0)
                         setSelectedTabFollower(1)
                         setSelectedTabFollowing(0)
+                        settabdefault(0)
                     }}>
                     <Text style={{ fontSize: 18, color: 'black' }}>Followers</Text>
                 </TouchableOpacity>
             </View>
-            {selectedTabPost == 0 ? null : (
+            {(selectedTabPost == 0  && tabdefault == 0 )? null : (
                 <FlatList
                     data={PS}
                     renderItem={({ item, index }) => {

@@ -118,7 +118,7 @@ const GetPost = (props) => {
                 marginTop: 10,
                 backgroundColor: '#fff',
                 borderRadius: 20,
-                marginBottom: 70,
+                // marginBottom: 70,
             }}>
 
             <View
@@ -151,7 +151,6 @@ const GetPost = (props) => {
                         size={20}
                         source={require('../front_end/icons/dots.png')} />
                 </TouchableOpacity>
-
             </View>
 
             {settingpost == 1 ?

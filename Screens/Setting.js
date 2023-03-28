@@ -27,7 +27,8 @@ function Setting(props) {
     const [usernames, setUsernames] = useState(0)
     const [nameUser, setNameUser] = useState('');
 
-    const [gender, setGender] = useState('Male')
+    const [gender, setGender] = useState('')
+    // const [genderUser, setgenderUser] = useState('');
     const [Genderview, setGenderview] = useState(0)
 
     const [oldPass, setOldPass] = useState('');
@@ -237,6 +238,23 @@ function Setting(props) {
             .catch(error => {
                 console.log(error);
             });
+    }
+    const updateGender = async () => {
+
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .update({
+                gender: gender,
+            })
+            .then(() => {
+                console.log('Update gender');
+
+            })
+            .catch(error => {
+                console.log(error);
+            });
+            debugger
     }
     const updatePass = async () => { // && (reType1 === reType2 && reType1 !== passUser
 
@@ -696,8 +714,9 @@ function Setting(props) {
                             opacity: 0.3,
                             height: 40,
                         }}
-                        onValueChange={(itemValue, itemIndex) => setGender(itemValue)
-                        }>
+                        value={gender}
+                        onValueChange={(itemValue) => setGender(itemValue)}
+                    >
                         <Picker.Item label="Male" value="Male" />
                         <Picker.Item label="Female" value="Female" />
                         <Picker.Item label="Others" value="Others" />
@@ -705,6 +724,7 @@ function Setting(props) {
                 </View>
                 <TouchableOpacity onPress={() => {
                     setGenderview(0)
+                    updateGender()
                 }}>
                     <View style={{
                         alignSelf: 'flex-end',

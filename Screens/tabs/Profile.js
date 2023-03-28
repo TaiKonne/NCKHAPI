@@ -32,6 +32,8 @@ const Profile = () => {
     const [morInfo, setmorInfo] = useState(0);
     //address
     const [address, setAddress] = useState('');
+    // Gender
+    const [gender , setgender] = useState('');
     // mail
     const [mail, setMail] = useState('');
     // post
@@ -63,6 +65,7 @@ const Profile = () => {
                     setImageWall(documentSnapshot.data().picWal);
                     setPS(documentSnapshot.data().posts);
                     setName(documentSnapshot.data().name);
+                    setgender(documentSnapshot.data().gender);
                     console.log('data ', documentSnapshot.data().following);
                 }
             });
@@ -128,7 +131,7 @@ const Profile = () => {
         return status;
     };
     return (
-        <View>
+        <>
         <View
             style={{
                 height: 60,
@@ -327,6 +330,26 @@ const Profile = () => {
                             paddingStart: 5,
                         }}>{address}</Text>
                     </View>
+                    <View style={{
+                        flexDirection: 'row',
+                        paddingVertical: 5,
+                        alignItems: 'center',
+                        marginStart: 20,
+                        marginEnd: 20,
+                    }}>
+                        <Image source={require('../../front_end/icons/sex.png')}
+                            style={{
+                                height: 18,
+                                width: 18,
+                                marginStart: 10,
+                                tintColor: 'black',
+                            }} />
+                        <Text style={{
+                            color: 'black',
+                            fontSize: 14,
+                            paddingStart: 5,
+                        }}>{gender} </Text>
+                    </View>
                 </View>) : ""}
                 {/* follower */}
                 <View
@@ -503,7 +526,7 @@ const Profile = () => {
                         }} />
                 )}
             </ScrollView>
-            </View>
+            </>
     );
 };
 

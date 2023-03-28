@@ -161,9 +161,9 @@ const Profile = () => {
                     (<ImageBackground
                         source={require('../../front_end/hoa_giay_1.jpg')}
                         // source={{ uri: imageWall }}
-                        style={{ width: '100%', height: 200 }}
+                        style={{ width: '100%', height: 200, }}
                     >
-                        <TouchableOpacity
+                        <View
                             style={{
                                 width: 100,
                                 height: 100,
@@ -172,6 +172,7 @@ const Profile = () => {
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 marginBottom: 10,
+                                
                             }}>
                             {imagePicked == true && imageData != null ? (
                                 <Image
@@ -186,14 +187,14 @@ const Profile = () => {
                                     source={{ uri: UploadedPicUrl }}
                                     style={{ width: 120, height: 120, borderRadius: 60 }} />
                             )}
-                        </TouchableOpacity>
+                        </View>
                     </ImageBackground>) :
                     (<ImageBackground
                         // source={require('../../front_end/hoa_giay_1.jpg')}
                         source={{ uri: imageWall }}
                         style={{ width: '100%', height: 200 }}
                     >
-                        <TouchableOpacity
+                        <View
                             style={{
                                 width: 100,
                                 height: 100,
@@ -216,7 +217,7 @@ const Profile = () => {
                                     source={{ uri: UploadedPicUrl }}
                                     style={{ width: 120, height: 120, borderRadius: 60 }} />
                             )}
-                        </TouchableOpacity>
+                        </View>
                     </ImageBackground>)}
 
                 <Text style={{
@@ -463,11 +464,28 @@ const Profile = () => {
                                             {item.name}
                                         </Text>
                                     </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={{ marginRight: 20 }}
+                                        onPress={() => {
+                                            navigation.navigate('NewMessage', {
+                                                data: {
+                                                    userId: item.userId,
+                                                    name: item.name,
+                                                    myId: userId,
+                                                    profilePic: item.profilePic == '' || item.profilePic == null
+                                                        ? ''
+                                                        : item.profilePic,
+                                                },
+                                            });
+                                        }}>
+                                        <Image
+                                            source={require('../images/chat.png')}
+                                            style={{ width: 24, height: 24, tintColor: 'orange' }} />
+                                    </TouchableOpacity>
                                 </View>
                             );
                         }} />
                 )}
-
                 {selectedTabFollower == 0 ? null : (
                     <FlatList
                         data={following}

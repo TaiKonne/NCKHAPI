@@ -254,7 +254,6 @@ function Setting(props) {
             .catch(error => {
                 console.log(error);
             });
-            debugger
     }
     const updatePass = async () => { // && (reType1 === reType2 && reType1 !== passUser
 

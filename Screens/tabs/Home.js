@@ -444,7 +444,7 @@ const Home = (props) => {
                                             sharePost(item);
                                         }}>
                                         <Text style={{ marginRight: 10, color: 'black' }}>
-                                            {/* {item.comments.length} */}
+                                            {item.comments.length}
                                         </Text>
                                         <Image
                                             source={require('../../front_end/icons/share.png')}

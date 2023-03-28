@@ -348,7 +348,6 @@ const Profile = () => {
                         settabdefault(0)
                     }}>
                     <Text style={{ fontSize: 18, color: 'black'}}>Follower</Text>
-                    <Text style={{ fontSize: 18, color: 'black' }}>Following</Text>
                     <Text style={{ fontSize: 15, color: 'grey' }}>{followers.length}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity

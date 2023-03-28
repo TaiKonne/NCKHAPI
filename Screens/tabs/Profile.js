@@ -128,7 +128,8 @@ const Profile = () => {
         return status;
     };
     return (
-        <><View
+        <View>
+        <View
             style={{
                 height: 60,
                 backgroundColor: 'skyblue',
@@ -138,7 +139,7 @@ const Profile = () => {
             }}>
             <View style={{ width: 30, height: 50 }} />
             <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
-                Profile
+                Trang cá nhân
             </Text>
             <TouchableOpacity onPress={() => {
                 navigation.navigate('Setting');
@@ -501,7 +502,8 @@ const Profile = () => {
                             );
                         }} />
                 )}
-            </ScrollView></>
+            </ScrollView>
+            </View>
     );
 };
 

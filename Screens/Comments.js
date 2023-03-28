@@ -80,30 +80,28 @@ const Comments = () => {
         <View style={{ flex: 1 }}>
             <View
                 style={{
-                    flexDirection: 'row',
-                    width: '100%',
                     height: 60,
-                    borderBottomWidth: 0.5,
-                    borderBottomColor: '#8e8e8e',
-                    alignItems: 'center',
                     backgroundColor: 'skyblue',
-                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
                 }}>
                 <TouchableOpacity onPress={() => {
                     navigation.navigate('HomeSC')
                 }}>
-                    <Image source={require('../front_end/icons/return.png')}
+                    <Image source={require('../front_end/icons/left.png')}
                         style={{
-                            height: 20,
-                            width: 20,
+                            height: 25,
+                            width: 25,
+                            padding: 10,
                             marginStart: 10,
+                            tintColor: 'white',
                         }} />
                 </TouchableOpacity>
-                <View style={{ flex: 1 }}></View>
                 <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
-                    Comment
+                    Bình luận
                 </Text>
-                <View style={{ flex: 1, marginEnd: 10 }}></View>
+                <View style={{ width: 50, height: 50 }} />
             </View>
             <FlatList
                 data={commentsList}

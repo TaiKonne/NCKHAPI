@@ -9,6 +9,9 @@ import UpName from './tabs/UpName';
 import UpAv from './tabs/UpAv';
 
 const GetPost = (props) => {
+    const postId = props.cons.postId;
+    const time = props.cons.time;
+    const userId = props.cons.userId;
     useEffect(() => {
         getUser();
         getPost();
@@ -24,12 +27,9 @@ const GetPost = (props) => {
     const [profilePic, setProfilePic] = useState('');
     const [Item, setItem] = useState([]);
     const [onLikeClick, setOnLikeCLick] = useState(false);
-    let postId = props.cons.postId;
-    let time = props.cons.time;
-    let userId = props.cons.userId;
 
-    const coverTime = (timestamp) => {
-        let date = timestamp.toDate();
+    const coverTime = time => {
+        let date = time.toDate();
         let mm = date.getMonth() + 1;
         let dd = date.getDate();
         let yyyy = date.getFullYear();

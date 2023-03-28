@@ -44,6 +44,7 @@ const Profile = () => {
 
     const getProfileData = async () => {
         userId = await AsyncStorage.getItem('USERID');
+        let tempData = [];
         firestore()
             .collection('Users')
             .doc(userId)
@@ -61,9 +62,11 @@ const Profile = () => {
                     setAddress(documentSnapshot.data().address);
                     setMail(documentSnapshot.data().email);
                     setImageWall(documentSnapshot.data().picWal);
-                    setPS(documentSnapshot.data().posts);
+                    tempData.push(documentSnapshot.data().posts);
                     setName(documentSnapshot.data().name);
                     console.log('data ', documentSnapshot.data().following);
+                    tempData.sort((a, b) => a.time - b.time);
+                    setPS(tempData);
                 }
             });
     };
@@ -347,7 +350,7 @@ const Profile = () => {
                         setSelectedTabFollowing(1)
                         settabdefault(0)
                     }}>
-                    <Text style={{ fontSize: 18, color: 'black'}}>Follower</Text>
+                    <Text style={{ fontSize: 18, color: 'black' }}>Follower</Text>
                     <Text style={{ fontSize: 15, color: 'grey' }}>{followers.length}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -425,66 +428,66 @@ const Profile = () => {
 
             {selectedTabFollower == 0 ? null : (
                 <FlatList
-                data={following}
-                renderItem={({ item, index }) => {
-                    return (
-                        <View
-                            style={{
-                                width: '100%',
-                                height: 70,
-                                backgroundColor: '#fff',
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                            }}>
-                            <TouchableOpacity
-                                style={{ flexDirection: 'row', alignItems: 'center' }}
-                                onPress={() => {
-                                    // Alert.alert('Nút vào profile người khác','Vào profile')
-                                    navigation.navigate('VisitUser', item.userId);
+                    data={following}
+                    renderItem={({ item, index }) => {
+                        return (
+                            <View
+                                style={{
+                                    width: '100%',
+                                    height: 70,
+                                    backgroundColor: '#fff',
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
                                 }}>
-                                <Image
-                                    source={
-                                        item.profilePic == ''
-                                            ? require('../images/user.png')
-                                            : { uri: item.profilePic }
-                                    }
-                                    style={{
-                                        width: 40,
-                                        height: 40,
-                                        borderRadius: 20,
-                                        marginLeft: 20,
-                                        marginRight: 10,
-                                    }}
-                                />
-                                <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
-                                    {item.name}
-                                </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={{ marginRight: 20 }}
-                                onPress={() => {
-                                    navigation.navigate('NewMessage', {
-                                        data: {
-                                            userId: item.userId,
-                                            name: item.name,
-                                            myId: userId,
-                                            profilePic:
-                                                item.profilePic == '' || item.profilePic == null
-                                                    ? ''
-                                                    : item.profilePic,
-                                        },
-                                    });
-                                }}>
-                                <Image
-                                    source={require('../images/chat.png')}
-                                    style={{ width: 24, height: 24, tintColor: 'orange' }}
-                                />
-                            </TouchableOpacity>
-                        </View>
-                    );
-                }}
-            />
+                                <TouchableOpacity
+                                    style={{ flexDirection: 'row', alignItems: 'center' }}
+                                    onPress={() => {
+                                        // Alert.alert('Nút vào profile người khác','Vào profile')
+                                        navigation.navigate('VisitUser', item.userId);
+                                    }}>
+                                    <Image
+                                        source={
+                                            item.profilePic == ''
+                                                ? require('../images/user.png')
+                                                : { uri: item.profilePic }
+                                        }
+                                        style={{
+                                            width: 40,
+                                            height: 40,
+                                            borderRadius: 20,
+                                            marginLeft: 20,
+                                            marginRight: 10,
+                                        }}
+                                    />
+                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
+                                        {item.name}
+                                    </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={{ marginRight: 20 }}
+                                    onPress={() => {
+                                        navigation.navigate('NewMessage', {
+                                            data: {
+                                                userId: item.userId,
+                                                name: item.name,
+                                                myId: userId,
+                                                profilePic:
+                                                    item.profilePic == '' || item.profilePic == null
+                                                        ? ''
+                                                        : item.profilePic,
+                                            },
+                                        });
+                                    }}>
+                                    <Image
+                                        source={require('../images/chat.png')}
+                                        style={{ width: 24, height: 24, tintColor: 'orange' }}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        );
+                    }}
+                />
             )}
 
         </View>

@@ -147,6 +147,29 @@ const Home = (props) => {
             })
     }
 
+    const sharePost = async item => {
+        let time = new Date();
+        let PS = [];
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .get()
+            .then(item_post => {
+                PS = item_post._data.posts;
+                PS.push({
+                    postId: item.postId,
+                    time: time,
+                    userId: item.userId,
+                });
+                firestore()
+                    .collection('Users')
+                    .doc(userId)
+                    .update({
+                        posts: PS,
+                    })
+            })
+    }
+
     const [settingpost, setsettingpost] = useState(0)
     const [postids, setpostids] = useState('')
 
@@ -414,13 +437,14 @@ const Home = (props) => {
                                     <TouchableOpacity
                                         style={{ flexDirection: 'row', alignItems: 'center' }}
                                         onPress={() => {
-                                            navigation.navigate('Comments', {
-                                                postId: item.postId,
-                                                comments: item.comments,
-                                            });
+                                            // navigation.navigate('Comments', {
+                                            //     postId: item.postId,
+                                            //     comments: item.comments,
+                                            // });
+                                            sharePost(item);
                                         }}>
                                         <Text style={{ marginRight: 10, color: 'black' }}>
-                                            {item.comments.length}
+                                            {/* {item.comments.length} */}
                                         </Text>
                                         <Image
                                             source={require('../../front_end/icons/share.png')}

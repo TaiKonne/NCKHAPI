@@ -122,8 +122,6 @@ const Home = (props) => {
             })
     }
 
-
-
     const [settingpost, setsettingpost] = useState(0)
     const [postids, setpostids] = useState('')
 
@@ -247,9 +245,10 @@ const Home = (props) => {
                                     <View style={{ flex: 1 }}></View>
                                     {/* update posts nè chú */}
                                     <TouchableOpacity
-                                        onPress={() => { settingpost == 0 ? (setsettingpost(1), setpostids(item.postId)) : (setsettingpost(0), setpostids('')) }
-                                            // this.handlePress(item.postId , item.userId)
-                                        }
+                                        onPress={() => {
+                                            settingpost == 0 ? (setsettingpost(1), setpostids(item.postId)) : (setsettingpost(0), setpostids(''))
+
+                                        }}
                                     >
                                         {userId == item.userId ? (
                                             <Image
@@ -281,7 +280,7 @@ const Home = (props) => {
                                             <View style={{ flexDirection: 'column' }}>
                                                 <TouchableOpacity
                                                     onPress={() => {
-                                                        navigation.navigate('Editpost')
+                                                        navigation.navigate('Editpost', { post: item.postId, user: item.userId })
                                                         setsettingpost(0)
                                                     }}
                                                     style={{
@@ -384,7 +383,7 @@ const Home = (props) => {
                                         </Text>
                                         <Image
                                             source={require('../images/comment.png')}
-                                            style={{ width: 20, height: 20 , tintColor:'black' }}
+                                            style={{ width: 20, height: 20, tintColor: 'black' }}
                                         />
                                     </TouchableOpacity>
                                     <TouchableOpacity
@@ -413,7 +412,7 @@ const Home = (props) => {
                     <Text>No Post Found</Text>
                 </View>
             )}
-        </View>
+        </View >
     );
 };
 

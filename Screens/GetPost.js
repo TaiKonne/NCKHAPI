@@ -111,6 +111,30 @@ const GetPost = (props) => {
         });
         return status;
     };
+    const deletePost = async link_post => {
+        let temp = [];
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .get()
+            .then(item => {
+                let temp1 = [];
+                temp = item._data.posts;
+                temp.map(item1 => {
+                    if (item1.postId !== link_post) {
+                        temp1.push(item1);
+                    }
+                })
+                firestore()
+                    .collection('Users')
+                    .doc(userId)
+                    .update({
+                        posts: temp1,
+                    })
+            })
+    }
+
+
 
     const [settingpost, setsettingpost] = useState(0)
     return (
@@ -171,7 +195,7 @@ const GetPost = (props) => {
                         <View style={{ flexDirection: 'column' }}>
                             <TouchableOpacity
                                 onPress={() => {
-
+                                    navigation.navigate('Editpost', { post: postId, user: userId })
                                 }}
                                 style={{
                                     flexDirection: 'row',
@@ -190,7 +214,7 @@ const GetPost = (props) => {
                             <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', width: 123, }}></View>
                             <TouchableOpacity
                                 onPress={() => {
-                                    // deletePost(item.postId);
+                                    deletePost(postId);
                                     setsettingpost(0)
                                 }}
                                 style={{

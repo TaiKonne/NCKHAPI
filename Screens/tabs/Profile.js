@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, FlatList, ImageBackground, Alert  ,ScrollView} from 'react-native';
+import { View, Text, TouchableOpacity, Image, FlatList, ImageBackground, Alert, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -142,7 +142,7 @@ const Profile = () => {
             </Text>
             <TouchableOpacity onPress={() => {
                 navigation.navigate('Setting');
-            } }>
+            }}>
                 <Image source={require('../../front_end/icons/settings.png')}
                     style={{
                         height: 27,
@@ -152,37 +152,69 @@ const Profile = () => {
                     }} />
             </TouchableOpacity>
         </View>
-        <ScrollView style={{ flex: 1, marginBottom: 70 }}>
-                <ImageBackground
-                    // source={require('../../front_end/hoa_giay_1.jpg')}
-                    source={{ uri: imageWall }}
-                    style={{ width: '100%', height: 200 }}
-                >
-                    <TouchableOpacity
-                        style={{
-                            width: 100,
-                            height: 100,
-                            alignSelf: 'center',
-                            marginTop: 80,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            marginBottom: 10,
-                        }}>
-                        {imagePicked == true && imageData != null ? (
-                            <Image
-                                source={{ uri: imageData.assets[0].uri }}
-                                style={{ width: 120, height: 120, borderRadius: 60 }} />
-                        ) : UploadedPicUrl === '' ? (
-                            <Image
-                                source={require('../images/user.png')}
-                                style={{ width: 120, height: 120, borderRadius: 60 }} />
-                        ) : (
-                            <Image
-                                source={{ uri: UploadedPicUrl }}
-                                style={{ width: 120, height: 120, borderRadius: 60 }} />
-                        )}
-                    </TouchableOpacity>
-                </ImageBackground>
+            <ScrollView style={{ flex: 1, marginBottom: 70 }}>
+                {imageWall == '' ?
+                    (<ImageBackground
+                        source={require('../../front_end/hoa_giay_1.jpg')}
+                        // source={{ uri: imageWall }}
+                        style={{ width: '100%', height: 200 }}
+                    >
+                        <TouchableOpacity
+                            style={{
+                                width: 100,
+                                height: 100,
+                                alignSelf: 'center',
+                                marginTop: 80,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginBottom: 10,
+                            }}>
+                            {imagePicked == true && imageData != null ? (
+                                <Image
+                                    source={{ uri: imageData.assets[0].uri }}
+                                    style={{ width: 120, height: 120, borderRadius: 60 }} />
+                            ) : UploadedPicUrl === '' ? (
+                                <Image
+                                    source={require('../images/user.png')}
+                                    style={{ width: 120, height: 120, borderRadius: 60 }} />
+                            ) : (
+                                <Image
+                                    source={{ uri: UploadedPicUrl }}
+                                    style={{ width: 120, height: 120, borderRadius: 60 }} />
+                            )}
+                        </TouchableOpacity>
+                    </ImageBackground>) :
+                    (<ImageBackground
+                        // source={require('../../front_end/hoa_giay_1.jpg')}
+                        source={{ uri: imageWall }}
+                        style={{ width: '100%', height: 200 }}
+                    >
+                        <TouchableOpacity
+                            style={{
+                                width: 100,
+                                height: 100,
+                                alignSelf: 'center',
+                                marginTop: 80,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginBottom: 10,
+                            }}>
+                            {imagePicked == true && imageData != null ? (
+                                <Image
+                                    source={{ uri: imageData.assets[0].uri }}
+                                    style={{ width: 120, height: 120, borderRadius: 60 }} />
+                            ) : UploadedPicUrl === '' ? (
+                                <Image
+                                    source={require('../images/user.png')}
+                                    style={{ width: 120, height: 120, borderRadius: 60 }} />
+                            ) : (
+                                <Image
+                                    source={{ uri: UploadedPicUrl }}
+                                    style={{ width: 120, height: 120, borderRadius: 60 }} />
+                            )}
+                        </TouchableOpacity>
+                    </ImageBackground>)}
+
                 <Text style={{
                     alignItems: 'center',
                     fontSize: 20,
@@ -213,7 +245,7 @@ const Profile = () => {
                 <TouchableOpacity onPress={() => {
                     morInfo == 0 ? setmorInfo(1) : setmorInfo(0);
 
-                } }
+                }}
                     style={{
                         alignSelf: 'center',
                         marginTop: 10,
@@ -320,7 +352,7 @@ const Profile = () => {
                             setSelectedTabFollower(0);
                             setSelectedTabFollowing(0);
                             settabdefault(0);
-                        } }>
+                        }}>
                         <Text style={{ fontSize: 18, color: 'black' }}>My Post</Text>
                         {/* chiều dài của post */}
                         <Text style={{ fontSize: 15, color: 'grey' }}>{PS.length}</Text>
@@ -340,7 +372,7 @@ const Profile = () => {
                             setSelectedTabFollower(0);
                             setSelectedTabFollowing(1);
                             settabdefault(0);
-                        } }>
+                        }}>
                         <Text style={{ fontSize: 18, color: 'black' }}>Follower</Text>
                         <Text style={{ fontSize: 15, color: 'grey' }}>{followers.length}</Text>
                     </TouchableOpacity>
@@ -358,7 +390,7 @@ const Profile = () => {
                             setSelectedTabFollower(1);
                             setSelectedTabFollowing(0);
                             settabdefault(0);
-                        } }>
+                        }}>
                         <Text style={{ fontSize: 18, color: 'black' }}>Following</Text>
                         <Text style={{ fontSize: 15, color: 'grey' }}>{following.length}</Text>
                     </TouchableOpacity>
@@ -370,7 +402,7 @@ const Profile = () => {
                             return (
                                 <GetPost cons={item} />
                             );
-                        } } />
+                        }} />
                 )}
                 {selectedTabFollowing == 0 ? null : (
                     <FlatList
@@ -391,7 +423,7 @@ const Profile = () => {
                                         onPress={() => {
                                             // Alert.alert('Nút vào profile người khác','Vào profile')
                                             navigation.navigate('VisitUser', item.userId);
-                                        } }>
+                                        }}>
                                         <Image
                                             source={item.profilePic == ''
                                                 ? require('../images/user.png')
@@ -409,7 +441,7 @@ const Profile = () => {
                                     </TouchableOpacity>
                                 </View>
                             );
-                        } } />
+                        }} />
                 )}
 
                 {selectedTabFollower == 0 ? null : (
@@ -431,7 +463,7 @@ const Profile = () => {
                                         onPress={() => {
                                             // Alert.alert('Nút vào profile người khác','Vào profile')
                                             navigation.navigate('VisitUser', item.userId);
-                                        } }>
+                                        }}>
                                         <Image
                                             source={item.profilePic == ''
                                                 ? require('../images/user.png')
@@ -460,14 +492,14 @@ const Profile = () => {
                                                         : item.profilePic,
                                                 },
                                             });
-                                        } }>
+                                        }}>
                                         <Image
                                             source={require('../images/chat.png')}
                                             style={{ width: 24, height: 24, tintColor: 'orange' }} />
                                     </TouchableOpacity>
                                 </View>
                             );
-                        } } />
+                        }} />
                 )}
             </ScrollView></>
     );

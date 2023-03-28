@@ -196,7 +196,7 @@ function Setting(props) {
                 numberPhone: upPhone,
             })
             .then(() => {
-                console.log('update bio!!')
+                console.log('update number phone!!')
             })
             .catch(error => {
                 console.log(error);
@@ -212,7 +212,7 @@ function Setting(props) {
                 address: upAddress,
             })
             .then(() => {
-                console.log('update bio!!')
+                console.log('update Address!!')
             })
             .catch(error => {
                 console.log(error);
@@ -269,15 +269,15 @@ function Setting(props) {
                         });
                 }
                 else {
-                    Alert.alert('Thông báo', 'Mật khẩu mới phải trùng khớp');
+                    Alert.alert('', 'Mật khẩu mới phải trùng khớp');
                 }
             }
             else {
-                Alert.alert('Thông báo', 'Mật khẩu mới phải khác mật khẩu hiện tại.')
+                Alert.alert('', 'Mật khẩu mới phải khác mật khẩu hiện tại.')
             }
         }
         else {
-            Alert.alert('Thông báo', 'Mật khẩu hiện tại không đúng');
+            Alert.alert('', 'Mật khẩu hiện tại không đúng');
         }
     }
 
@@ -423,7 +423,7 @@ function Setting(props) {
                             borderColor: 'gray',
                             marginStart: 30,
                             // marginEnd: 30,
-                            height: 35,
+                            height: 37,
                             width: 250,
                             color: 'black',
                         }}
@@ -442,8 +442,16 @@ function Setting(props) {
                         marginBottom: 5
                     }}>
                         <TouchableOpacity onPress={() => {
-                            setUsernames(0);
-                            updateName();
+                            if(nameUser !='')
+                            {
+                                setUsernames(0);
+                                updateName();
+                            }
+                            else 
+                            {
+                                Alert.alert('','Username không được để trống!');
+                                setUsernames(0);
+                            }
                         }}>
                             <View style={{
                                 alignSelf: 'flex-end',
@@ -592,7 +600,7 @@ function Setting(props) {
                             borderColor: 'gray',
                             marginStart: 30,
                             // marginEnd: 30,
-                            height: 35,
+                            height: 37,
                             width: 250,
                             color: 'black',
                         }}
@@ -777,7 +785,7 @@ function Setting(props) {
                             borderColor: 'gray',
                             marginStart: 30,
                             // marginEnd: 30,
-                            height: 35,
+                            height: 37,
                             width: 250,
                             color: 'black',
                         }}
@@ -858,7 +866,7 @@ function Setting(props) {
                             borderColor: 'gray',
                             marginStart: 30,
                             // marginEnd: 30,
-                            height: 35,
+                            height: 37,
                             width: 250,
                             color: 'black',
                         }}
@@ -944,7 +952,7 @@ function Setting(props) {
                             borderWidth: 1,
                             borderColor: 'gray',
                             marginStart: 30,
-                            height: 35,
+                            height: 37,
                             width: 250,
                             color: 'black',
                         }}
@@ -1048,7 +1056,7 @@ function Setting(props) {
                             borderColor: 'gray',
                             marginStart: 30,
                             // marginEnd: 30,
-                            height: 35,
+                            height: 37,
                             width: 250,
                             color: 'black',
                             marginBottom: 10,
@@ -1068,7 +1076,7 @@ function Setting(props) {
                             borderColor: 'gray',
                             marginStart: 30,
                             // marginEnd: 30,
-                            height: 35,
+                            height: 37,
                             width: 250,
                             color: 'black',
                             marginBottom: 10,
@@ -1088,7 +1096,7 @@ function Setting(props) {
                             borderColor: 'gray',
                             marginStart: 30,
                             // marginEnd: 30,
-                            height: 35,
+                            height: 37,
                             width: 250,
                             color: 'black',
                             marginBottom: 10,

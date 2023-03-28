@@ -317,7 +317,6 @@ const VisitUser = (props) => {
                     }}
                 />
             )}
-
             {selectedTab == 0 ? null : (
                 <FlatList
                     data={following}

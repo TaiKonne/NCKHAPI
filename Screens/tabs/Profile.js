@@ -44,7 +44,6 @@ const Profile = () => {
 
     const getProfileData = async () => {
         userId = await AsyncStorage.getItem('USERID');
-        let tempData = [];
         firestore()
             .collection('Users')
             .doc(userId)
@@ -62,11 +61,9 @@ const Profile = () => {
                     setAddress(documentSnapshot.data().address);
                     setMail(documentSnapshot.data().email);
                     setImageWall(documentSnapshot.data().picWal);
-                    tempData.push(documentSnapshot.data().posts);
+                    setPS(documentSnapshot.data().posts);
                     setName(documentSnapshot.data().name);
                     console.log('data ', documentSnapshot.data().following);
-                    tempData.sort((a, b) => a.time - b.time);
-                    setPS(tempData);
                 }
             });
     };
@@ -154,7 +151,8 @@ const Profile = () => {
                         tintColor: 'white',
                     }} />
             </TouchableOpacity>
-        </View><ScrollView style={{ flex: 1, marginBottom: 70 }}>
+        </View>
+        <ScrollView style={{ flex: 1, marginBottom: 70 }}>
                 <ImageBackground
                     // source={require('../../front_end/hoa_giay_1.jpg')}
                     source={{ uri: imageWall }}
@@ -243,165 +241,6 @@ const Profile = () => {
                         marginStart: 20,
                         marginEnd: 20,
                     }}>
-                    <Text style={{ fontSize: 18, color: 'black' }}>My Post</Text>
-                    {/* chiều dài của post */}
-                    <Text style={{ fontSize: 15, color: 'grey' }}>{PS.length}</Text>
-
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={{
-                        width: '33.3%',
-                        height: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: selectedTabFollowing == 1 ? '#fff' : 'rgba(0,0,0,0)',
-                        flexDirection: 'column'
-                    }}
-                    onPress={() => {
-                        setSelectedTabPost(0)
-                        setSelectedTabFollower(0)
-                        setSelectedTabFollowing(1)
-                        settabdefault(0)
-                    }}>
-                    <Text style={{ fontSize: 18, color: 'black' }}>Follower</Text>
-                    <Text style={{ fontSize: 15, color: 'grey' }}>{followers.length}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={{
-                        width: '33.3%',
-                        height: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: selectedTabFollower == 1 ? '#fff' : 'rgba(0,0,0,0)',
-                        flexDirection: 'column'
-                    }}
-                    onPress={() => {
-                        setSelectedTabPost(0)
-                        setSelectedTabFollower(1)
-                        setSelectedTabFollowing(0)
-                        settabdefault(0)
-                    }}>
-                    <Text style={{ fontSize: 18, color: 'black' }}>Following</Text>
-                    <Text style={{ fontSize: 15, color: 'grey' }}>{following.length}</Text>
-                </TouchableOpacity>
-            </View>
-            {(selectedTabPost == 0 && tabdefault == 0) ? null : (
-                <FlatList
-                    data={PS}
-                    renderItem={({ item, index }) => {
-                        return (
-                            <GetPost cons={item} />
-                        );
-                    }}
-                />
-            )}
-            {selectedTabFollowing == 0 ? null : (
-                <FlatList
-                    data={followers}
-                    renderItem={({ item, index }) => {
-                        return (
-                            <View
-                                style={{
-                                    width: '100%',
-                                    height: 70,
-                                    backgroundColor: '#fff',
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                }}>
-                                <TouchableOpacity
-                                    style={{ flexDirection: 'row', alignItems: 'center' }}
-                                    onPress={() => {
-                                        // Alert.alert('Nút vào profile người khác','Vào profile')
-                                        navigation.navigate('VisitUser', item.userId);
-                                    }}>
-                                    <Image
-                                        source={
-                                            item.profilePic == ''
-                                                ? require('../images/user.png')
-                                                : { uri: item.profilePic }
-                                        }
-                                        style={{
-                                            width: 40,
-                                            height: 40,
-                                            borderRadius: 20,
-                                            marginLeft: 20,
-                                            marginRight: 10,
-                                        }}
-                                    />
-                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
-                                        {item.name}
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        );
-                    }}
-                />
-            )}
-
-            {selectedTabFollower == 0 ? null : (
-                <FlatList
-                    data={following}
-                    renderItem={({ item, index }) => {
-                        return (
-                            <View
-                                style={{
-                                    width: '100%',
-                                    height: 70,
-                                    backgroundColor: '#fff',
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                }}>
-                                <TouchableOpacity
-                                    style={{ flexDirection: 'row', alignItems: 'center' }}
-                                    onPress={() => {
-                                        // Alert.alert('Nút vào profile người khác','Vào profile')
-                                        navigation.navigate('VisitUser', item.userId);
-                                    }}>
-                                    <Image
-                                        source={
-                                            item.profilePic == ''
-                                                ? require('../images/user.png')
-                                                : { uri: item.profilePic }
-                                        }
-                                        style={{
-                                            width: 40,
-                                            height: 40,
-                                            borderRadius: 20,
-                                            marginLeft: 20,
-                                            marginRight: 10,
-                                        }}
-                                    />
-                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
-                                        {item.name}
-                                    </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={{ marginRight: 20 }}
-                                    onPress={() => {
-                                        navigation.navigate('NewMessage', {
-                                            data: {
-                                                userId: item.userId,
-                                                name: item.name,
-                                                myId: userId,
-                                                profilePic:
-                                                    item.profilePic == '' || item.profilePic == null
-                                                        ? ''
-                                                        : item.profilePic,
-                                            },
-                                        });
-                                    }}>
-                                    <Image
-                                        source={require('../images/chat.png')}
-                                        style={{ width: 24, height: 24, tintColor: 'orange' }}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                        );
-                    }}
-                />
-            )}
                         <Image source={require('../../front_end/icons/mail.png')}
                             style={{
                                 height: 18,

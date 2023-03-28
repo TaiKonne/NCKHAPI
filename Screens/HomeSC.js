@@ -76,6 +76,7 @@ const HomeSC = () => {
                 alignItems: 'center',
                 flexDirection: 'row',
                 backgroundColor: 'skyblue',
+                // marginTop:100,
             }}>
                 <TouchableOpacity // icon house
                     style={{

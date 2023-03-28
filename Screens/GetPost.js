@@ -125,6 +125,7 @@ const GetPost = (props) => {
                         temp1.push(item1);
                     }
                 })
+                deletePostHome(link_post);
                 firestore()
                     .collection('Users')
                     .doc(userId)
@@ -133,7 +134,15 @@ const GetPost = (props) => {
                     })
             })
     }
-
+    const deletePostHome = async link_post => {
+        firestore()
+            .collection('posts')
+            .doc(link_post)
+            .delete()
+            .then(() => {
+                deletePostProfile(link_post);
+            })
+    }
 
 
     const [settingpost, setsettingpost] = useState(0)

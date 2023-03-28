@@ -107,9 +107,34 @@ const Home = (props) => {
             .doc(link_post)
             .delete()
             .then(() => {
-                console.log('Post deleted!');
+                deletePostProfile(link_post);
             })
     }
+
+    const deletePostProfile = async link_post => {
+        let temp = [];
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .get()
+            .then(item => {
+                let temp1 = [];
+                temp = item._data.posts;
+                temp.map(item1 => {
+                    if (item1.postId !== link_post) {
+                        temp1.push(item1);
+                    }
+                })
+                firestore()
+                    .collection('Users')
+                    .doc(userId)
+                    .update({
+                        posts: temp1,
+                    })
+            })
+    }
+
+
     const updatePost = async link_post => {
         firestore()
             .collection('posts')

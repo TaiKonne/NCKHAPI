@@ -38,7 +38,7 @@ const Signup = ({ navigation }) => {
                 bio: '',
                 address: '',
                 numberPhone: '',
-
+                gender: '',
             })
             .then(() => {
                 console.log('User added!');

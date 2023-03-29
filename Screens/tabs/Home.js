@@ -334,7 +334,7 @@ const Home = (props) => {
                                             <View style={{ flexDirection: 'column' }}>
                                                 <TouchableOpacity
                                                     onPress={() => {
-                                                        navigation.navigate('Editpost', { post: item.postId, user: item.userId })
+                                                        navigation.navigate('Editpost', { post: item.postId, user: item.userId,caption:item.caption,image:item.image })
                                                         setsettingpost(0)
                                                     }}
                                                     style={{

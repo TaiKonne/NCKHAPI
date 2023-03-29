@@ -205,40 +205,38 @@ const Add = ({ onAdded }) => {
         <View style={{ flex: 1 }}>
             <View
                 style={{
-                    width: '100%',
                     height: 60,
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    flexDirection: 'row',
-                    borderBottomWidth: 0.5,
-                    borderBottomColor: '#8e8e8e',
                     backgroundColor: 'skyblue',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
                 }}>
                 <TouchableOpacity
                     onPress={() => {
                         navigation.navigate('HomeSC')
                     }}>
-                    <Image source={require('../../front_end/icons/return.png')}
+                    <Image source={require('../../front_end/icons/left.png')}
                         style={{
-                            height: 20,
-                            width: 20,
-                            marginStart: 20,
-                            tintColor: 'black',
+                            height: 25,
+                            width: 25,
+                            marginStart: 10,
+                            tintColor: 'white',
                         }} />
                 </TouchableOpacity>
-                <Text style={{ fontSize: 20, color: '#000', fontWeight: 'bold', marginStart: 40 }}>Post</Text>
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>Edit Post</Text>
                 <Text
                     style={{
-                        marginEnd: 20,
+                        marginEnd: 10,
                         fontSize: 18,
                         color: imageData !== null || caption !== '' ? 'blue' : '#8e8e8e',
+                        fontWeight:'bold',
                     }}
                     onPress={() => {
                         if (imageData !== null) {
                             uplaodImage();
                             navigation.navigate('HomeSC')
                         } else if (imageData === null && caption !== '') {
-                            cap();
+                            cap(postId);
                             navigation.navigate('HomeSC')
                         }
                         else {

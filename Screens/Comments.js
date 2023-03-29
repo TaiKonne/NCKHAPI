@@ -1,4 +1,4 @@
-import { View, Text, TextInput, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, FlatList, Image, TouchableOpacity, Alert } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -23,8 +23,8 @@ const Comments = () => {
     const [fakeLike, setfakeLike] = useState(0);
     const [fakeLikevalue, setfakeLikevalue] = useState(0);
     const [fakeLikechoose, setfakeLikechoose] = useState('');
-    const [check,setcheck]=useState([]);
-    const [test,settest]=useState('red')
+    const [check, setcheck] = useState([]);
+    const [test, settest] = useState('red')
     useEffect(() => {
         getUserId();
         comments = route.params.comments;
@@ -71,10 +71,9 @@ const Comments = () => {
             .then(documentSnapshot => {
                 setCommentsList(documentSnapshot.data().comments);
             });
-        let check1=[]
-        for(let i=0;i<commentsList.length;i++)
-        {
-            check1[i]='../Screens/images/love.png';
+        let check1 = []
+        for (let i = 0; i < commentsList.length; i++) {
+            check1[i] = '../Screens/images/love.png';
         }
         setcheck(check1);
     };
@@ -128,32 +127,9 @@ const Comments = () => {
                                 height: 60,
                                 alignItems: 'center',
                             }}>
-                            {/* {item.profile == null ? (
-                                <Image
-                                    source={require('../front_end/icons/user_1.png')}
-                                    style={{
-                                        width: 40,
-                                        height: 40,
-                                        marginLeft: 10,
-                                        marginRight: 15,
-                                        borderRadius: 20,
-                                    }} />
-                            ) : (
-                                <Image
-                                    source={{ uri: item.profile }}
-                                    style={{
-                                        width: 40,
-                                        height: 40,
-                                        marginLeft: 10,
-                                        marginRight: 15,
-                                        borderRadius: 20,
-                                    }} />
-                            )} */}
                             <UpAv cons={item.userId} />
                             <View>
-                                {/* <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>
-                                    {item.name}
-                                </Text> */}
+
                                 <UpName cons={item.userId} />
                                 <Text style={{ fontSize: 15, marginTop: 5, color: 'black', marginStart: 15 }}>
                                     {item.comment}
@@ -165,7 +141,7 @@ const Comments = () => {
                                 marginStart: 40,
                                 marginEnd: 40,
                                 flex: 1,
-                                // backgroundColor:'green'
+
                             }}>
                                 <Text style={{ color: 'black', marginEnd: 60 }}>2 hours</Text>
                                 <TouchableOpacity
@@ -174,34 +150,35 @@ const Comments = () => {
                                         marginEnd: 60,
                                     }}
                                     onPress={() => {
-                                        //check.push(item.cmtId)
-                                        check[index]=='../Screens/images/love.png' ? check[index]='../Screens/images/heart.png' : check[index]='../Screens/images/love.png'
-                                        //check[index]='red'
-                                        
+                                        check[index] == '../Screens/images/love.png' ? check[index] = '../Screens/images/heart.png' : check[index] = '../Screens/images/love.png'
                                         fakeLike == 0 ? (setfakeLike(1), setfakeLikechoose(item.cmtId))
-                                            : (setfakeLike(0), setfakeLikechoose(item.cmtId)) 
-                                    }}>    
+                                            : (setfakeLike(0), setfakeLikechoose(item.cmtId))
+                                    }}>
                                     {
-                                        check[index]=='../Screens/images/love.png' ?
-                                        (
-                                            <>
-                                            <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
-                                            <Image
-                                                source={require('../Screens/images/heart.png')}
-                                                style={{ width: 20, height: 20, marginEnd: 10, 
-                                                 tintColor:'red'}} />
-                                            </>
-                                        ):
-                                        (
-                                            <>
-                                             <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
-                                            
-                                            <Image
-                                                source={require('../Screens/images/love.png')}
-                                                style={{ width: 20, height: 20, marginEnd: 10, 
-                                                 tintColor: 'black'}} />
-                                            </>
-                                        )
+                                        check[index] == '../Screens/images/love.png' ?
+                                            (
+                                                <>
+                                                    <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
+                                                    <Image
+                                                        source={require('../Screens/images/heart.png')}
+                                                        style={{
+                                                            width: 20, height: 20, marginEnd: 10,
+                                                            tintColor: 'red'
+                                                        }} />
+                                                </>
+                                            ) :
+                                            (
+                                                <>
+                                                    <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
+
+                                                    <Image
+                                                        source={require('../Screens/images/love.png')}
+                                                        style={{
+                                                            width: 20, height: 20, marginEnd: 10,
+                                                            tintColor: 'black'
+                                                        }} />
+                                                </>
+                                            )
                                     }
 
                                 </TouchableOpacity>
@@ -246,7 +223,7 @@ const Comments = () => {
                         color: comment == '' ? 'grey' : 'blue',
                     }}
                     onPress={() => {
-                        postComment();
+                        comment !='' ? (postComment(),setComment('')) : (Alert.alert('','Nội dung rỗng!'))
                     }}>
                     Send
                 </Text>

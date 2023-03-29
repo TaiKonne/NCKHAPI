@@ -16,20 +16,25 @@ let token = '';
 let name = '';
 let email = '';
 let profile = '';
-
+let temp = 0;
 const Editpost = (props) => {
+
+    let postId = props.route.params.post;
+    let userId = props.route.params.user;
+    let imageId = props.route.params.image;
+    let captionId = props.route.params.caption;
 
     const navigation = useNavigation();
     const [imageData, setImageData] = useState(null);
-    const [caption, setCaption] = useState('');
+    const [caption, setCaption] = useState(captionId);
     const [modalVisible, setModalVisible] = useState(false);
     useEffect(() => {
         getFcmToken();
     }, []);
 
-    let postId = props.route.params.post;
-    let userId = props.route.params.user;
 
+    // setCaption(captionId);
+    // setImageData(props.route.params.image);
 
     const getFcmToken = async () => {
         name = await AsyncStorage.getItem('NAME');
@@ -63,8 +68,8 @@ const Editpost = (props) => {
         // uploads file
         await reference.putFile(pathToFile);
         const url = await storage()
-            .ref(imageData.assets[0].fileName)
-            .getDownloadURL();
+        .ref(imageData.assets[0].fileName)
+        .getDownloadURL();
         console.log(url);
         firestore()
             .collection('posts')
@@ -79,6 +84,7 @@ const Editpost = (props) => {
             .catch(error => {
                 console.log(error);
             });
+            temp=0;
     };
 
     const cap = async postId => {
@@ -175,6 +181,7 @@ const Editpost = (props) => {
                         marginEnd: 10,
                         fontSize: 18,
                         color: imageData !== null || caption !== '' ? 'blue' : '#8e8e8e',
+                        fontWeight: 'bold'
                     }}
                     onPress={() => {
                         if (imageData !== null) {
@@ -203,7 +210,11 @@ const Editpost = (props) => {
                     borderWidth: 0.2,
                     flexDirection: 'row',
                 }}>
-                {imageData !== null ? (
+
+                {imageId !== '' && temp === 0 ? (<Image
+                    source={{ uri: imageId }}
+                    style={{ width: 50, height: 50, borderRadius: 10, margin: 10 }}
+                />) : imageData !== null ? (
                     <Image
                         source={{ uri: imageData.assets[0].uri }}
                         style={{ width: 50, height: 50, borderRadius: 10, margin: 10 }}
@@ -236,6 +247,7 @@ const Editpost = (props) => {
                 }}
                 onPress={() => {
                     openCamera();
+                    temp = 1;
                 }}>
                 <Image
                     source={require('../Screens/images/camera.png')}
@@ -255,6 +267,7 @@ const Editpost = (props) => {
                 }}
                 onPress={() => {
                     openGallery();
+                    temp = 1;
                 }}>
                 <Image
                     source={require('../Screens/images/gallery.png')}

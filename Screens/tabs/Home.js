@@ -283,13 +283,19 @@ const Home = (props) => {
                                         alignItems: 'center',
                                         marginTop: 10,
                                     }}>
-                                    <UpAv cons={item.userId} />
-                                    <View style={{ flexDirection: 'column' }}>
-                                        <UpName cons={item.userId} />
-                                        <Text style={{ fontSize: 10, marginLeft: 15, fontWeight: '600', color: 'grey' }}>
-                                            {coverTime(item.createdAt)}
-                                        </Text>
-                                    </View>
+                                    <TouchableOpacity style={{
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        marginTop: 10,
+                                    }}> 
+                                        <UpAv cons={item.userId} />
+                                        <View style={{ flexDirection: 'column' }}>
+                                            <UpName cons={item.userId} />
+                                            <Text style={{ fontSize: 10, marginLeft: 15, fontWeight: '600', color: 'grey' }}>
+                                                {coverTime(item.createdAt)}
+                                            </Text>
+                                        </View>
+                                    </TouchableOpacity>
                                     <View style={{ flex: 1 }}></View>
                                     {/* update posts nè chú */}
                                     <TouchableOpacity

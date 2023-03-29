@@ -21,6 +21,7 @@ const Comments = () => {
 
     const [fakeLike, setfakeLike] = useState(0);
     const [fakeLikevalue, setfakeLikevalue] = useState(0);
+    const [fakeLikechoose , setfakeLikechoose] = useState('');
 
     useEffect(() => {
         getUserId();
@@ -45,7 +46,7 @@ const Comments = () => {
             postId: postId,
             name: name,
             profile: profile,
-            cmtId: id
+            cmtId: id,
         });
         firestore()
             .collection('posts')
@@ -165,18 +166,22 @@ const Comments = () => {
                                         marginEnd: 60,
                                     }}
                                     onPress={() => {
-                                        fakeLike == 0 ? (setfakeLike(1), setfakeLikevalue(fakeLikevalue + 1)) : (setfakeLike(0), setfakeLikevalue(fakeLikevalue - 1))
+                                        fakeLike == 0 ? (setfakeLike(1), setfakeLikechoose(item.cmtId) , setfakeLikevalue(fakeLikevalue-1)) 
+                                                    :   (setfakeLike(0), setfakeLikechoose(item.cmtId) , setfakeLikevalue(fakeLikevalue+1))
                                     }}>
                                     <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
-                                    {fakeLike == 0 && userId == item.userId ? (
-                                        <Image
-                                            source={require('../Screens/images/love.png')}
-                                            style={{ width: 20, height: 20, tintColor: 'black', marginEnd: 10 }}
-                                        />
-                                    ) : (
+                                    {fakeLike == 0 && fakeLikechoose == item.cmtId  ? 
+                                    (
+                                        
                                         <Image
                                             source={require('../Screens/images/heart.png')}
-                                            style={{ width: 20, height: 20, tintColor: 'red', marginEnd: 10 }}
+                                            style={{ width: 20, height: 20, marginEnd: 10, tintColor:'red'}}
+                                        />
+                                    ) : 
+                                    (
+                                        <Image
+                                            source={require('../Screens/images/love.png')}
+                                            style={{ width: 20, height: 20, marginEnd: 10 }}
                                         />
                                     )}
                                 </TouchableOpacity>

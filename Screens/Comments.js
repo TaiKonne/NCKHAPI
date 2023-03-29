@@ -49,6 +49,7 @@ const Comments = () => {
             name: name,
             profile: profile,
             cmtId: id,
+            time : new Date(),
         });
         firestore()
             .collection('posts')
@@ -85,8 +86,11 @@ const Comments = () => {
         let yyyy = date.getFullYear();
         let munis = date.getMinutes();// phút
         let hh = date.getHours(); // giờ
-        date = hh + ':' + munis; ``
-        return date;
+        if(hh < '10') 
+            hh = '0' + hh;
+        if(munis < '10')
+            munis = '0' + munis;
+        return (hh + ':' + munis);
     }
 
     return (
@@ -116,7 +120,8 @@ const Comments = () => {
                 </Text>
                 <View style={{ width: 50, height: 50 }} />
             </View>
-            <FlatList
+            <FlatList 
+                style={{marginBottom: 70}}
                 data={commentsList}
                 renderItem={({ item, index }) => {
                     return (
@@ -143,7 +148,7 @@ const Comments = () => {
                                 flex: 1,
 
                             }}>
-                                <Text style={{ color: 'black', marginEnd: 60 }}>2 hours</Text>
+                                <Text style={{ color: 'grey', marginEnd: 60 , fontSize:15}}>{coverTime(item.time)}</Text>
                                 <TouchableOpacity
                                     style={{
                                         flexDirection: 'row',
@@ -155,6 +160,7 @@ const Comments = () => {
                                             : (setfakeLike(0), setfakeLikechoose(item.cmtId))
                                     }}>
                                     {
+                                    
                                         check[index] == '../Screens/images/love.png' ?
                                             (
                                                 <>
@@ -180,14 +186,13 @@ const Comments = () => {
                                                 </>
                                             )
                                     }
-
                                 </TouchableOpacity>
                                 <TouchableOpacity style={{
                                     flexDirection: 'row',
                                 }}>
                                     <Image
                                         source={require('../Screens/images/comment.png')}
-                                        style={{ width: 19, height: 19, marginEnd: 10 }}
+                                        style={{ width: 19, height: 19, marginEnd: 10 , tintColor:'black' }}
                                     />
                                 </TouchableOpacity >
 

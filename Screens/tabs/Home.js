@@ -180,7 +180,6 @@ const Home = (props) => {
                     width: '100%',
                     height: 60,
                     justifyContent: 'center',
-                    // paddingLeft: 20,
                     backgroundColor: 'skyblue',
                 }}>
                 <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, FlatList, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, Image, FlatList, ImageBackground, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -56,9 +56,7 @@ const VisitUser = (props) => {
     }
 
     return (
-        <View style={{
-            flex: 1
-        }}>
+        <>
             <View
                 style={{
                     height: 60,
@@ -68,7 +66,7 @@ const VisitUser = (props) => {
                     alignItems: 'center'
                 }}>
                 <TouchableOpacity onPress={() => {
-                    navigation.navigate('HomeSC')
+                    navigation.navigate('HomeSC');
                 }}>
                     <Image source={require('../front_end/icons/left.png')}
                         style={{
@@ -84,172 +82,169 @@ const VisitUser = (props) => {
                 </Text>
                 <View style={{ width: 50, height: 50 }} />
             </View>
-            <ImageBackground
-                source={require('../front_end/hoa_giay_1.jpg')}
-                style={{ width: '100%', height: 200 }}
-            >
-                <TouchableOpacity
-                    style={{
-                        width: 100,
-                        height: 100,
-                        alignSelf: 'center',
-                        marginTop: 80,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginBottom: 10,
-                    }}>
-                    {
-                        imagePicked == true && imageData != null ? (
+            <ScrollView style={{
+                flex: 1
+            }}>
+                <ImageBackground
+                    source={require('../front_end/hoa_giay_1.jpg')}
+                    style={{ width: '100%', height: 200 }}
+                >
+                    <TouchableOpacity
+                        style={{
+                            width: 100,
+                            height: 100,
+                            alignSelf: 'center',
+                            marginTop: 80,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginBottom: 10,
+                        }}>
+                        {imagePicked == true && imageData != null ? (
                             <Image
                                 source={{ uri: imageData.assets[0].uri }}
-                                style={{ width: 120, height: 120, borderRadius: 60 }}
-                            />
+                                style={{ width: 120, height: 120, borderRadius: 60 }} />
                         ) : UploadedPicUrl === '' ? (
                             <Image
                                 source={require('./images/user.png')}
-                                style={{ width: 120, height: 120, borderRadius: 60 }}
-                            />
+                                style={{ width: 120, height: 120, borderRadius: 60 }} />
                         ) : (
                             <Image
                                 source={{ uri: UploadedPicUrl }}
-                                style={{ width: 120, height: 120, borderRadius: 60 }}
-                            />
+                                style={{ width: 120, height: 120, borderRadius: 60 }} />
                         )}
-                </TouchableOpacity>
-            </ImageBackground>
-            <Text style={{
-                alignItems: 'center',
-                fontSize: 20,
-                color: 'black',
-                // justifyContent:'center',
-                textAlign: 'center',
-                fontWeight: 'bold'
-            }}>
-                {name}
-            </Text>
-            <View style={{
-                alignSelf: 'center',
-                marginTop: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginStart: 20,
-                marginEnd: 20,
-            }}>
+                    </TouchableOpacity>
+                </ImageBackground>
                 <Text style={{
+                    alignItems: 'center',
+                    fontSize: 20,
                     color: 'black',
+                    // justifyContent:'center',
                     textAlign: 'center',
+                    fontWeight: 'bold'
                 }}>
-                    {bio}
+                    {name}
                 </Text>
-            </View>
-            {/* bùa follow button */}
-            <TouchableOpacity
-                onPress={() => {
-                    buafl == 0 ? setbuafl(1) : setbuafl(0)
-                }}
-                style={{
+                <View style={{
                     alignSelf: 'center',
                     marginTop: 10,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    borderColor: 'skyblue',
-                    borderWidth: 0.2,
-                    backgroundColor: 'skyblue',
-                    borderRadius: 10
-
+                    marginStart: 20,
+                    marginEnd: 20,
                 }}>
-                {buafl == 0 ? 
-                    (<Text style={{ color: 'black', fontSize: 16, marginRight: 10, marginLeft: 10, marginTop: 5, marginBottom: 5 }}>Follow</Text>) : 
-                    (<Text style={{ color: 'black', fontSize: 16, marginRight: 10, marginLeft: 10, marginTop: 5, marginBottom: 5 }}>Unfollow</Text>)}
-            </TouchableOpacity>
-            {/* More  Information */}
-            <TouchableOpacity onPress={() => {
-                morInfo == 0 ? setmorInfo(1) : setmorInfo(0);
-
-            }}
-                style={{
-                    alignSelf: 'center',
-                    marginTop: 10,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-
-                }}
-            >
-                <View>
-                    <Text style={{ color: 'grey', fontSize: 13 }}>
-                        More Information
+                    <Text style={{
+                        color: 'black',
+                        textAlign: 'center',
+                    }}>
+                        {bio}
                     </Text>
                 </View>
-            </TouchableOpacity>
-            {morInfo == 1 ? (<View style={{
-                borderWidth: 0.2,
-                borderColor: 'grey',
-                marginStart: 10,
-                marginEnd: 10,
-            }}>
-                <View style={{
-                    flexDirection: 'row',
-                    paddingVertical: 5,
-                    alignItems: 'center',
-                    marginStart: 20,
-                    marginEnd: 20,
-                }} >
-                    <Image source={require('../front_end/icons/mail.png')}
-                        style={{
-                            height: 18,
-                            width: 18,
-                            marginStart: 10,
-                            tintColor: 'black',
-                        }} />
-                    <Text style={{
-                        color: 'black',
-                        fontSize: 14,
-                        paddingStart: 5,
-                    }}>{mail} </Text>
-                </View>
-                <View style={{
-                    flexDirection: 'row',
-                    paddingVertical: 5,
-                    alignItems: 'center',
-                    marginStart: 20,
-                    marginEnd: 20,
-                }} >
-                    <Image source={require('../front_end/icons/telephone.png')}
-                        style={{
-                            height: 18,
-                            width: 18,
-                            marginStart: 10,
-                            tintColor: 'black',
-                        }} />
-                    <Text style={{
-                        color: 'black',
-                        fontSize: 14,
-                        paddingStart: 5,
-                    }}>{numberPhone}</Text>
-                </View>
-                <View style={{
-                    flexDirection: 'row',
-                    paddingVertical: 5,
-                    alignItems: 'center',
-                    marginStart: 20,
-                    marginEnd: 20,
-                }} >
-                    <Image source={require('../front_end/icons/location.png')}
-                        style={{
-                            height: 18,
-                            width: 18,
-                            marginStart: 10,
-                            tintColor: 'black',
-                        }} />
-                    <Text style={{
-                        color: 'black',
-                        fontSize: 14,
-                        paddingStart: 5,
-                    }}>{address}</Text>
-                </View>
-            </View>) : ""}
-            {/* follower */}
-                         <View
+                {/* bùa follow button */}
+                <TouchableOpacity
+                    onPress={() => {
+                        buafl == 0 ? setbuafl(1) : setbuafl(0);
+                    }}
+                    style={{
+                        alignSelf: 'center',
+                        marginTop: 10,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderColor: 'skyblue',
+                        borderWidth: 0.2,
+                        backgroundColor: 'skyblue',
+                        borderRadius: 10
+                    }}>
+                    {buafl == 0 ?
+                        (<Text style={{ color: 'black', fontSize: 16, marginRight: 10, marginLeft: 10, marginTop: 5, marginBottom: 5 }}>Follow</Text>) :
+                        (<Text style={{ color: 'black', fontSize: 16, marginRight: 10, marginLeft: 10, marginTop: 5, marginBottom: 5 }}>Unfollow</Text>)}
+                </TouchableOpacity>
+                {/* More  Information */}
+                <TouchableOpacity onPress={() => {
+                    morInfo == 0 ? setmorInfo(1) : setmorInfo(0);
+
+                }}
+                    style={{
+                        alignSelf: 'center',
+                        marginTop: 10,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <View>
+                        <Text style={{ color: 'grey', fontSize: 13 }}>
+                            More Information
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+                {morInfo == 1 ? (<View style={{
+                    borderWidth: 0.2,
+                    borderColor: 'grey',
+                    marginStart: 10,
+                    marginEnd: 10,
+                }}>
+                    <View style={{
+                        flexDirection: 'row',
+                        paddingVertical: 5,
+                        alignItems: 'center',
+                        marginStart: 20,
+                        marginEnd: 20,
+                    }}>
+                        <Image source={require('../front_end/icons/mail.png')}
+                            style={{
+                                height: 18,
+                                width: 18,
+                                marginStart: 10,
+                                tintColor: 'black',
+                            }} />
+                        <Text style={{
+                            color: 'black',
+                            fontSize: 14,
+                            paddingStart: 5,
+                        }}>{mail} </Text>
+                    </View>
+                    <View style={{
+                        flexDirection: 'row',
+                        paddingVertical: 5,
+                        alignItems: 'center',
+                        marginStart: 20,
+                        marginEnd: 20,
+                    }}>
+                        <Image source={require('../front_end/icons/telephone.png')}
+                            style={{
+                                height: 18,
+                                width: 18,
+                                marginStart: 10,
+                                tintColor: 'black',
+                            }} />
+                        <Text style={{
+                            color: 'black',
+                            fontSize: 14,
+                            paddingStart: 5,
+                        }}>{numberPhone}</Text>
+                    </View>
+                    <View style={{
+                        flexDirection: 'row',
+                        paddingVertical: 5,
+                        alignItems: 'center',
+                        marginStart: 20,
+                        marginEnd: 20,
+                    }}>
+                        <Image source={require('../front_end/icons/location.png')}
+                            style={{
+                                height: 18,
+                                width: 18,
+                                marginStart: 10,
+                                tintColor: 'black',
+                            }} />
+                        <Text style={{
+                            color: 'black',
+                            fontSize: 14,
+                            paddingStart: 5,
+                        }}>{address}</Text>
+                    </View>
+                </View>) : ""}
+                {/* follower */}
+                <View
                     style={{
                         width: '100%',
                         height: 60,
@@ -421,7 +416,8 @@ const VisitUser = (props) => {
                             );
                         }} />
                 )}
-        </View>
+            </ScrollView>
+        </>
     )
 }
 

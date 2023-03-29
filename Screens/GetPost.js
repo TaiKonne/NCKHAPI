@@ -71,7 +71,7 @@ const GetPost = (props) => {
     }
     const onLike = item => {
         let tempLikes = item.likes;
-        if (tempLikes.length> 0) {
+        if (tempLikes.length > 0) {
             tempLikes.map(item1 => {
                 if (userId === item1) {
                     const index = tempLikes.indexOf(item1);
@@ -171,7 +171,7 @@ const GetPost = (props) => {
                 </View>
                 <View style={{ flex: 1 }}></View>
                 {/* update posts nè chú */}
-                {/* <TouchableOpacity
+                <TouchableOpacity
                     onPress={() => {
                         settingpost == 0 ? setsettingpost(1) : setsettingpost(0)
                     }}
@@ -185,10 +185,10 @@ const GetPost = (props) => {
                         }}
                         size={20}
                         source={require('../front_end/icons/dots.png')} />
-                </TouchableOpacity> */}
+                </TouchableOpacity>
             </View>
 
-            {/* {settingpost == 1 ?
+            {settingpost == 1 ?
                 (
                     <View style={{
                         flexDirection: 'row',
@@ -241,7 +241,7 @@ const GetPost = (props) => {
                             </TouchableOpacity>
                         </View>
                     </View>
-                ) : ''} */}
+                ) : ''}
             <Text
                 style={{
                     marginTop: 10,

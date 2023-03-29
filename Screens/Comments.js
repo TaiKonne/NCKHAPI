@@ -161,10 +161,10 @@ const Comments = () => {
                                         fakeLike == 0 ? (setfakeLike(1), setfakeLikevalue(fakeLikevalue+1)) : (setfakeLike(0), setfakeLikevalue(fakeLikevalue-1))
                                     }}>
                                     <Text style={{color:'black', marginEnd:5}}>{fakeLikevalue}</Text>
-                                    {fakeLike == 0 ? (
+                                    {fakeLike == 0 && userId == item.userId ? (
                                         <Image
                                             source={require('../Screens/images/love.png')}
-                                            style={{ width: 20, height: 20, tintColor: 'red', marginEnd: 10 }}
+                                            style={{ width: 20, height: 20, tintColor: 'black', marginEnd: 10 }}
                                         />
                                     ) : (
                                         <Image

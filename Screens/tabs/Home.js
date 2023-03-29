@@ -424,6 +424,7 @@ const Home = (props) => {
                                             navigation.navigate('Comments', {
                                                 postId: item.postId,
                                                 comments: item.comments,
+                                                userId: item.userId,
                                             });
                                         }}>
                                         <Text style={{ marginRight: 10, color: 'black' }}>

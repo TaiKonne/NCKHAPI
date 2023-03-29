@@ -4,10 +4,10 @@ import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
 import Loader from './common/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let token = '';
+
 const Login = ({ navigation }) => {
-    const [email, setEmail] = useState('dung@gmail.com');
-    const [password, setPassword] = useState('1');
+    const [email, setEmail] = useState('t');
+    const [password, setPassword] = useState('12');
     const [modalVisible, setModalVisible] = useState(false);
 
     const [checkSignup, setCheckSignUp] = useState(0);
@@ -28,14 +28,6 @@ const Login = ({ navigation }) => {
                             querySnapshot.docs[0]._data.email === email &&
                             querySnapshot.docs[0]._data.password === password
                         ) {
-                            // alert('user logged in successfully !');
-                            // firestore()
-                            //   .collection('tokens')
-                            //   .add({
-                            //     token: token,
-                            //     email: email,
-                            //   })
-                            //   .then(() => {
                             goToHome(
                                 querySnapshot.docs[0]._data.userId,
                                 querySnapshot.docs[0]._data.name,

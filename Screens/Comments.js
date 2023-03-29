@@ -4,6 +4,8 @@ import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
+import UpName from './tabs/UpName';
+import UpAv from './tabs/UpAv';
 let userId = '';
 let comments = [];
 let postId = '';
@@ -25,12 +27,14 @@ const Comments = () => {
         console.log(comments);
         setCommentsList(comments);
         postId = route.params.postId;
+
     }, []);
 
     const getUserId = async () => {
         userId = await AsyncStorage.getItem('USERID');
         name = await AsyncStorage.getItem('NAME');
         profile = await AsyncStorage.getItem('PROFILE_PIC');
+
 
     };
     const postComment = () => {
@@ -75,7 +79,16 @@ const Comments = () => {
         date = hh + ':' + munis; ``
         return date;
     }
-
+    // const getName = async userId => {
+    //     let nameUser = '';
+    //     firestore()
+    //         .collection('Users')
+    //         .doc(userId)
+    //         .get()
+    //         .then(Snapshot => {
+    //             nameUser = (Snapshot.data().name);
+    //         })
+    // }
     return (
         <View style={{ flex: 1 }}>
             <View
@@ -114,9 +127,9 @@ const Comments = () => {
                                 height: 60,
                                 alignItems: 'center',
                             }}>
-                            {item.profile == null ? (
+                            {/* {item.profile == null ? (
                                 <Image
-                                    source={require('../front_end/icons/user_1.png')}
+                                    source={require('./images/user.png')}
                                     style={{
                                         width: 40,
                                         height: 40,
@@ -134,11 +147,13 @@ const Comments = () => {
                                         marginRight: 15,
                                         borderRadius: 20,
                                     }} />
-                            )}
+                            )} */}
+                            <UpAv cons={item.userId} />
                             <View>
-                                <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>
-                                    {item.name}
-                                </Text>
+                                {/* <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>
+                                    {getName(item.userId)};
+                                </Text> */}
+                                <UpName cons={item.userId} />
                                 <Text style={{ fontSize: 15, marginTop: 5, color: 'black' }}>
                                     {item.comment}
                                 </Text>
@@ -148,19 +163,19 @@ const Comments = () => {
                                 flexDirection: 'row',
                                 marginStart: 40,
                                 marginEnd: 40,
-                                flex:1,
+                                flex: 1,
                                 // backgroundColor:'green'
                             }}>
-                                <Text style={{color:'black' , marginEnd:60}}>2 hours</Text>
+                                <Text style={{ color: 'black', marginEnd: 60 }}>2 hours</Text>
                                 <TouchableOpacity
                                     style={{
                                         flexDirection: 'row',
-                                        marginEnd:60,
+                                        marginEnd: 60,
                                     }}
                                     onPress={() => {
-                                        fakeLike == 0 ? (setfakeLike(1), setfakeLikevalue(fakeLikevalue+1)) : (setfakeLike(0), setfakeLikevalue(fakeLikevalue-1))
+                                        fakeLike == 0 ? (setfakeLike(1), setfakeLikevalue(fakeLikevalue + 1)) : (setfakeLike(0), setfakeLikevalue(fakeLikevalue - 1))
                                     }}>
-                                    <Text style={{color:'black', marginEnd:5}}>{fakeLikevalue}</Text>
+                                    <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
                                     {fakeLike == 0 ? (
                                         <Image
                                             source={require('../Screens/images/love.png')}

@@ -4,6 +4,7 @@ import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
+import uuid from 'react-native-uuid';
 import UpAv from './tabs/UpAv'
 import UpName from './tabs/UpName'
 let userId = '';
@@ -37,12 +38,14 @@ const Comments = () => {
     };
     const postComment = () => {
         let temComments = comments;
+        let id = uuid.v4();
         temComments.push({
             userId: userId,
             comment: comment,
             postId: postId,
             name: name,
             profile: profile,
+            cmtId: id
         });
         firestore()
             .collection('posts')

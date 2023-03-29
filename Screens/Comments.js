@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import uuid from 'react-native-uuid';
 import UpAv from './tabs/UpAv'
 import UpName from './tabs/UpName'
+import { set } from 'lodash';
 let userId = '';
 let comments = [];
 let postId = '';
@@ -21,8 +22,9 @@ const Comments = () => {
 
     const [fakeLike, setfakeLike] = useState(0);
     const [fakeLikevalue, setfakeLikevalue] = useState(0);
-    const [fakeLikechoose , setfakeLikechoose] = useState('');
-
+    const [fakeLikechoose, setfakeLikechoose] = useState('');
+    const [check,setcheck]=useState([]);
+    const [test,settest]=useState('red')
     useEffect(() => {
         getUserId();
         comments = route.params.comments;
@@ -69,6 +71,12 @@ const Comments = () => {
             .then(documentSnapshot => {
                 setCommentsList(documentSnapshot.data().comments);
             });
+        let check1=[]
+        for(let i=0;i<commentsList.length;i++)
+        {
+            check1[i]='../Screens/images/love.png';
+        }
+        setcheck(check1);
     };
 
     const coverTime = (timestamp) => {
@@ -147,7 +155,7 @@ const Comments = () => {
                                     {item.name}
                                 </Text> */}
                                 <UpName cons={item.userId} />
-                                <Text style={{ fontSize: 15, marginTop: 5, color: 'black' }}>
+                                <Text style={{ fontSize: 15, marginTop: 5, color: 'black', marginStart: 15 }}>
                                     {item.comment}
                                 </Text>
                             </View>
@@ -166,24 +174,69 @@ const Comments = () => {
                                         marginEnd: 60,
                                     }}
                                     onPress={() => {
-                                        fakeLike == 0 ? (setfakeLike(1), setfakeLikechoose(item.cmtId) , setfakeLikevalue(fakeLikevalue-1)) 
-                                                    :   (setfakeLike(0), setfakeLikechoose(item.cmtId) , setfakeLikevalue(fakeLikevalue+1))
-                                    }}>
-                                    <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
-                                    {fakeLike == 0 && fakeLikechoose == item.cmtId  ? 
-                                    (
+                                        //check.push(item.cmtId)
+                                        check[index]=='../Screens/images/love.png' ? check[index]='../Screens/images/heart.png' : check[index]='../Screens/images/love.png'
+                                        //check[index]='red'
                                         
-                                        <Image
-                                            source={require('../Screens/images/heart.png')}
-                                            style={{ width: 20, height: 20, marginEnd: 10, tintColor:'red'}}
-                                        />
-                                    ) : 
-                                    (
-                                        <Image
-                                            source={require('../Screens/images/love.png')}
-                                            style={{ width: 20, height: 20, marginEnd: 10 }}
-                                        />
-                                    )}
+                                        fakeLike == 0 ? (setfakeLike(1), setfakeLikechoose(item.cmtId))
+                                            : (setfakeLike(0), setfakeLikechoose(item.cmtId)) 
+                                    }}>
+                                        
+                                    {
+                                        
+                                        check[index]=='../Screens/images/love.png' ?
+                                        (
+                                            <>
+                                            <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
+                                            <Image
+                                                source={require('../Screens/images/heart.png')}
+                                                style={{ width: 20, height: 20, marginEnd: 10, 
+                                                 tintColor:'red'}} />
+                                            </>
+                                        ):
+                                        (
+                                            <>
+                                             <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
+                                            
+                                            <Image
+                                                source={require('../Screens/images/love.png')}
+                                                style={{ width: 20, height: 20, marginEnd: 10, 
+                                                 tintColor: 'black'}} />
+                                            </>
+                                        )
+                                        // fakeLikechoose == item.cmtId
+                                        // ?
+                                        // (
+                                        //     <>
+                                        //         <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
+                                        //         <Image
+                                        //             source={require('../Screens/images/love.png')}
+                                        //             style={{ width: 20, height: 20, marginEnd: 10 }} />
+                                        //     </>
+                                        // )
+                                        // :
+                                        // (<>
+                                        //     <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
+                                        //     <Image
+                                        //         source={require('../Screens/images/heart.png')}
+                                        //         style={{ width: 20, height: 20, marginEnd: 10, tintColor:'red'  }} />
+                                        // </>)
+                                        
+                                        // check.map(bien => bien==item.cmtId ? <>
+                                        //      <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
+                                        //          <Image
+                                        //      source={require('../Screens/images/heart.png')}
+                                        //         style={{ width: 20, height: 20, marginEnd: 10, tintColor:'red'  }} />
+                                        // </>: 
+                                        //     <>
+                                        //         <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
+                                        //         <Image
+                                        //             source={require('../Screens/images/love.png')}
+                                        //             style={{ width: 20, height: 20, marginEnd: 10 }} />
+                                        //     </>
+                                        // )
+                                    }
+
                                 </TouchableOpacity>
                                 <TouchableOpacity style={{
                                     flexDirection: 'row',

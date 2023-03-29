@@ -4,6 +4,8 @@ import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
+import UpAv from './tabs/UpAv'
+import UpName from './tabs/UpName'
 let userId = '';
 let comments = [];
 let postId = '';
@@ -114,7 +116,7 @@ const Comments = () => {
                                 height: 60,
                                 alignItems: 'center',
                             }}>
-                            {item.profile == null ? (
+                            {/* {item.profile == null ? (
                                 <Image
                                     source={require('../front_end/icons/user_1.png')}
                                     style={{
@@ -134,11 +136,13 @@ const Comments = () => {
                                         marginRight: 15,
                                         borderRadius: 20,
                                     }} />
-                            )}
+                            )} */}
+                            <UpAv cons={item.userId} />
                             <View>
-                                <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>
+                                {/* <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>
                                     {item.name}
-                                </Text>
+                                </Text> */}
+                                <UpName cons={item.userId} />
                                 <Text style={{ fontSize: 15, marginTop: 5, color: 'black' }}>
                                     {item.comment}
                                 </Text>

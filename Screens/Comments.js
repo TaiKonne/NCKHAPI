@@ -180,10 +180,8 @@ const Comments = () => {
                                         
                                         fakeLike == 0 ? (setfakeLike(1), setfakeLikechoose(item.cmtId))
                                             : (setfakeLike(0), setfakeLikechoose(item.cmtId)) 
-                                    }}>
-                                        
+                                    }}>    
                                     {
-                                        
                                         check[index]=='../Screens/images/love.png' ?
                                         (
                                             <>
@@ -204,37 +202,6 @@ const Comments = () => {
                                                  tintColor: 'black'}} />
                                             </>
                                         )
-                                        // fakeLikechoose == item.cmtId
-                                        // ?
-                                        // (
-                                        //     <>
-                                        //         <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
-                                        //         <Image
-                                        //             source={require('../Screens/images/love.png')}
-                                        //             style={{ width: 20, height: 20, marginEnd: 10 }} />
-                                        //     </>
-                                        // )
-                                        // :
-                                        // (<>
-                                        //     <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
-                                        //     <Image
-                                        //         source={require('../Screens/images/heart.png')}
-                                        //         style={{ width: 20, height: 20, marginEnd: 10, tintColor:'red'  }} />
-                                        // </>)
-                                        
-                                        // check.map(bien => bien==item.cmtId ? <>
-                                        //      <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
-                                        //          <Image
-                                        //      source={require('../Screens/images/heart.png')}
-                                        //         style={{ width: 20, height: 20, marginEnd: 10, tintColor:'red'  }} />
-                                        // </>: 
-                                        //     <>
-                                        //         <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
-                                        //         <Image
-                                        //             source={require('../Screens/images/love.png')}
-                                        //             style={{ width: 20, height: 20, marginEnd: 10 }} />
-                                        //     </>
-                                        // )
                                     }
 
                                 </TouchableOpacity>

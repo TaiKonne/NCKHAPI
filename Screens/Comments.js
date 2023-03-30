@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import uuid from 'react-native-uuid';
 import UpAv from './tabs/UpAv'
 import UpName from './tabs/UpName'
-import { set } from 'lodash';
+import { set, times } from 'lodash';
 let userId = '';
 let comments = [];
 let postId = '';
@@ -24,13 +24,13 @@ const Comments = () => {
     const [fakeLikevalue, setfakeLikevalue] = useState(0);
     const [fakeLikechoose, setfakeLikechoose] = useState('');
     const [check, setcheck] = useState([]);
-    const [test, settest] = useState('red')
+    // const [test, settest] = useState('red')
     useEffect(() => {
         getUserId();
         comments = route.params.comments;
+        postId = route.params.postId;
         console.log(comments);
         setCommentsList(comments);
-        postId = route.params.postId;
     }, []);
 
     const getUserId = async () => {
@@ -39,7 +39,9 @@ const Comments = () => {
         profile = await AsyncStorage.getItem('PROFILE_PIC');
 
     };
+
     const postComment = () => {
+        let times = coverTime(new Date());
         let temComments = comments;
         let id = uuid.v4();
         temComments.push({
@@ -49,7 +51,7 @@ const Comments = () => {
             name: name,
             profile: profile,
             cmtId: id,
-            time : new Date(),
+            time: times,
         });
         firestore()
             .collection('posts')
@@ -78,19 +80,20 @@ const Comments = () => {
         }
         setcheck(check1);
     };
-
     const coverTime = (timestamp) => {
-        let date = timestamp.toDate();
-        let mm = date.getMonth();
+        let date = new Date();
+        let mm = date.getMonth() + 1;
         let dd = date.getDate();
         let yyyy = date.getFullYear();
         let munis = date.getMinutes();// phút
         let hh = date.getHours(); // giờ
-        if(hh < '10') 
-            hh = '0' + hh;
-        if(munis < '10')
-            munis = '0' + munis;
-        return (hh + ':' + munis);
+        if (dd < '10')
+            dd = '0' + dd;
+        if (mm < '10')
+            mm = '0' + mm;
+        let dates = dd + '/' + mm + '/' + yyyy + ' ' + hh + ':' + munis;
+        return dates;
+
     }
 
     return (
@@ -120,8 +123,8 @@ const Comments = () => {
                 </Text>
                 <View style={{ width: 50, height: 50 }} />
             </View>
-            <FlatList 
-                style={{marginBottom: 70}}
+            <FlatList
+                style={{ marginBottom: 70 }}
                 data={commentsList}
                 renderItem={({ item, index }) => {
                     return (
@@ -129,74 +132,89 @@ const Comments = () => {
                             style={{
                                 width: '100%',
                                 flexDirection: 'row',
-                                height: 60,
+                                // height: 60,
                                 alignItems: 'center',
+                                marginTop: 10,
                             }}>
-                            <UpAv cons={item.userId} />
-                            <View>
-
-                                <UpName cons={item.userId} />
-                                <Text style={{ fontSize: 15, marginTop: 5, color: 'black', marginStart: 15 }}>
-                                    {item.comment}
-                                </Text>
-                            </View>
-                        </View>
                             <View style={{
-                                flexDirection: 'row',
-                                marginStart: 40,
-                                marginEnd: 40,
-                                flex: 1,
-
+                                flexDirection: 'column',
                             }}>
-                                <Text style={{ color: 'grey', marginEnd: 60 , fontSize:15}}>{coverTime(item.time)}</Text>
-                                <TouchableOpacity
-                                    style={{
-                                        flexDirection: 'row',
-                                        marginEnd: 60,
-                                    }}
-                                    onPress={() => {
-                                        check[index] == '../Screens/images/love.png' ? check[index] = '../Screens/images/heart.png' : check[index] = '../Screens/images/love.png'
-                                        fakeLike == 0 ? (setfakeLike(1), setfakeLikechoose(item.cmtId))
-                                            : (setfakeLike(0), setfakeLikechoose(item.cmtId))
-                                    }}>
-                                    {
-                                    
-                                        check[index] == '../Screens/images/love.png' ?
-                                            (
-                                                <>
-                                                    <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
-                                                    <Image
-                                                        source={require('../Screens/images/heart.png')}
-                                                        style={{
-                                                            width: 20, height: 20, marginEnd: 10,
-                                                            tintColor: 'red'
-                                                        }} />
-                                                </>
-                                            ) :
-                                            (
-                                                <>
-                                                    <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
-
-                                                    <Image
-                                                        source={require('../Screens/images/love.png')}
-                                                        style={{
-                                                            width: 20, height: 20, marginEnd: 10,
-                                                            tintColor: 'black'
-                                                        }} />
-                                                </>
-                                            )
-                                    }
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{
+                                <View style={{
                                     flexDirection: 'row',
                                 }}>
-                                    <Image
-                                        source={require('../Screens/images/comment.png')}
-                                        style={{ width: 19, height: 19, marginEnd: 10 , tintColor:'black' }}
-                                    />
-                                </TouchableOpacity >
+                                    <UpAv cons={item.userId} />
+                                    <View style={{
+                                        flexDirection: 'column',
+                                    }}>
+                                        <UpName cons={item.userId} />
+                                        <Text style={{ color: 'grey', fontSize: 12, marginStart: 15 }}>{item.time}</Text>
+                                    </View>
+                                </View>
+                                <View style={{ flexDirection: 'column', marginBottom: 10 }}>
+                                    <Text style={{ fontSize: 15, color: 'black', marginStart: 70 }}>
+                                        {item.comment}
+                                    </Text>
+                                    <View
+                                        style={{
+                                            flexDirection: 'row',
+                                            
+                                            flex: 1,
+                                            marginTop: 5,
+                                        }}>
+                                        <TouchableOpacity
+                                            style={{
+                                                flexDirection: 'row',
+                                                marginStart:40,
+                                            }}
+                                            onPress={() => {
+                                                check[index] == '../Screens/images/love.png' ? check[index] = '../Screens/images/heart.png' : check[index] = '../Screens/images/love.png'
+                                                fakeLike == 0 ? (setfakeLike(1), setfakeLikechoose(item.cmtId))
+                                                    : (setfakeLike(0), setfakeLikechoose(item.cmtId))
+                                            }}>
+                                            {
 
-                            </View></>
+                                                check[index] == '../Screens/images/love.png' ?
+                                                    (
+                                                        <>
+                                                            <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
+                                                            <Image
+                                                                source={require('../Screens/images/heart.png')}
+                                                                style={{
+                                                                    width: 20, height: 20, marginEnd: 10,
+                                                                    tintColor: 'red'
+                                                                }} />
+                                                        </>
+                                                    ) :
+                                                    (
+                                                        <>
+                                                            <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
+
+                                                            <Image
+                                                                source={require('../Screens/images/love.png')}
+                                                                style={{
+                                                                    width: 20, height: 20, marginEnd: 10,
+                                                                    tintColor: 'black'
+                                                                }} />
+                                                        </>
+                                                    )
+                                            }
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={{
+                                            flexDirection: 'row',
+                                            marginEnd:40,
+                                        }}>
+                                            <Image
+                                                source={require('../Screens/images/comment.png')}
+                                                style={{ width: 19, height: 19, marginEnd: 10, tintColor: 'black' }}
+                                            />
+                                        </TouchableOpacity >
+                                    </View>
+                                </View>
+
+                            </View>
+                        </View>
+
+                        </>
                     );
                 }}
             />
@@ -228,9 +246,9 @@ const Comments = () => {
                         color: comment == '' ? 'grey' : 'blue',
                     }}
                     onPress={() => {
-                        comment !='' ? (postComment(),setComment('')) : (Alert.alert('','Nội dung hiện đang rỗng'))
+                        comment != '' ? (postComment(), setComment('')) : (Alert.alert('', 'Nội dung hiện đang rỗng'))
                     }}>
-                    Send
+                    Đăng
                 </Text>
             </View>
         </View>

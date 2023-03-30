@@ -20,7 +20,8 @@ const Home = (props) => {
     useEffect(() => {
         getUserId();
         getData();
-    }, 1000);
+    }, []);
+    
     const getUserId = async () => {
         userId = await AsyncStorage.getItem('USERID');
     };
@@ -439,8 +440,8 @@ const Home = (props) => {
                     }}
                 />
             ) : (
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text>No Post Found</Text>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={{color:'black', fontSize:30, fontWeight:'bold'}}>NO POST FOUND</Text>
                 </View>
             )}
         </View >

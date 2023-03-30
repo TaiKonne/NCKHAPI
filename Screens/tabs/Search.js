@@ -270,7 +270,7 @@ const Search = () => {
             justifyContent: 'center',
             alignItems: 'center'
           }}>
-            <Text style={{ color: 'black' , fontSize:30 , fontWeight: 'bold'}}>NOT FOUND</Text>
+            <Text style={{ color: 'black' , fontSize:30 , fontWeight: 'bold'}}>NOT USER FOUND</Text>
           </View>))
         : ''}
       {/* <View style={{borderWidth:0.3 , borderColor:'grey'}}></View> */}

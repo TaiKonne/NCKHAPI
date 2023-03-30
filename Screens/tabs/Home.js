@@ -183,7 +183,7 @@ const Home = (props) => {
                     backgroundColor: 'skyblue',
                 }}>
                 <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
-                    Newfeeds
+                    Bảng tin
                 </Text>
             </View>
             <View style={{
@@ -192,74 +192,47 @@ const Home = (props) => {
                 justifyContent: 'center',
                 marginTop: 10,
             }}>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate('Add')
-                }}>
+                <UpAv cons={userId} />
+                <TouchableOpacity
+                    style={{ flexDirection: 'row' }}
+                    onPress={() => {
+                        navigation.navigate('Add')
+                    }}>
+                    
                     <View style={{
 
                         color: 'black',
-                        borderWidth: 0.2,
-                        borderRadius: 5,
-                        width: 90,
+                        borderWidth: 0.5,
+                        borderRadius: 10,
+                        borderColor: 'black',
+                        width: 250,
                         height: 35,
                         alignItems: 'center',
                         justifyContent: 'center',
-                        margin: 10,
-                        backgroundColor: 'skyblue',
-
+                        marginStart: 10,
+                        marginRight:10,
+                        marginTop: 3,
                     }}>
-                        <Text style={{
-                            color: 'black',
-                            fontWeight: 'bold'
-                        }}>Posts</Text>
+                        <Text style={{color:'grey'}}>Bạn đang nghĩ gì ?</Text>
                     </View>
+                    
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => {
-                    Alert.alert('Image', 'Add Picture')
-                }}>
-                    <View style={{
-
-                        color: 'black',
-                        borderWidth: 0.2,
-                        borderRadius: 5,
-                        width: 90,
-                        height: 35,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        margin: 10,
-                        backgroundColor: 'skyblue',
-
+                <View style={{
+                        height:35,
+                        marginTop:3,
+                        justifyContent:'center'
                     }}>
-                        <Text style={{
-                            color: 'black',
-                            fontWeight: 'bold',
-                        }}> Images </Text>
+                        <Image
+                                source={require('../../front_end/icons/image-gallery.png')}
+                                style={{
+                                    width: 25,
+                                    height: 25,
+                                    marginRight:15,
+                                    tintColor:'green',
+                                }}
+                            />
                     </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => {
-                    Alert.alert('Album', 'Go to album')
-                }}>
-                    <View style={{
-
-                        color: 'black',
-                        borderWidth: 0.2,
-                        borderRadius: 5,
-                        width: 90,
-                        height: 35,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        margin: 10,
-                        backgroundColor: 'skyblue',
-
-                    }}>
-                        <Text style={{
-                            color: 'black',
-                            fontWeight: 'bold',
-                        }}> Album </Text>
-                    </View>
-                </TouchableOpacity>
             </View>
-
             {postData.length > 0 ? (
                 <FlatList
                     showsVerticalScrollIndicator={false}
@@ -286,7 +259,7 @@ const Home = (props) => {
                                         flexDirection: 'row',
                                         alignItems: 'center',
                                         marginTop: 10,
-                                    }}> 
+                                    }}>
                                         <UpAv cons={item.userId} />
                                         <View style={{ flexDirection: 'column' }}>
                                             <UpName cons={item.userId} />
@@ -333,7 +306,7 @@ const Home = (props) => {
                                             <View style={{ flexDirection: 'column' }}>
                                                 <TouchableOpacity
                                                     onPress={() => {
-                                                        navigation.navigate('Editpost', { post: item.postId, user: item.userId,caption:item.caption,image:item.image })
+                                                        navigation.navigate('Editpost', { post: item.postId, user: item.userId, caption: item.caption, image: item.image })
                                                         setsettingpost(0)
                                                     }}
                                                     style={{
@@ -348,7 +321,7 @@ const Home = (props) => {
                                                             marginEnd: 10,
                                                             tintColor: 'black',
                                                         }} />
-                                                    <Text style={{ color: 'black', fontSize: 15 }}>Edit post</Text>
+                                                    <Text style={{ color: 'black', fontSize: 15 }}>Chỉnh sửa</Text>
                                                 </TouchableOpacity>
                                                 <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', width: 123, }}></View>
                                                 <TouchableOpacity
@@ -368,7 +341,7 @@ const Home = (props) => {
                                                             marginEnd: 10,
                                                             tintColor: 'black',
                                                         }} />
-                                                    <Text style={{ color: 'black', fontSize: 15 }}>Delete post</Text>
+                                                    <Text style={{ color: 'black', fontSize: 15 }}>Xóa bài viết</Text>
                                                 </TouchableOpacity>
                                             </View>
                                         </View>

@@ -22,7 +22,7 @@ import { Title } from 'react-native-paper';
 
 function Setting(props) {
     const navigation = useNavigation();
-    const [language, setlanguage] = useState('English')
+    const [language, setlanguage] = useState('Vietnamese')
 
     const [usernames, setUsernames] = useState(0)
     const [nameUser, setNameUser] = useState('');
@@ -111,11 +111,11 @@ function Setting(props) {
         // Reset image url when uploaded
         // Fix image auto change to old image before new image was uploaded
         setUploadedPicUrl(url);
-        saveProfileToStore(url);
+        LưuProfileToStore(url);
         setImagePicked(false);
     };
 
-    const saveProfileToStore = async url => {
+    const LưuProfileToStore = async url => {
         const userId = await AsyncStorage.getItem('USERID');
         console.log(userId, ' ' + url);
         firestore()
@@ -153,11 +153,11 @@ function Setting(props) {
         // Reset image url when uploaded
         // Fix image auto change to old image before new image was uploaded
         setUploadedPicUrl1(url);
-        saveProfileToStore1(url);
+        LưuProfileToStore1(url);
         setImagePicked1(false);
     };
 
-    const saveProfileToStore1 = async url => {
+    const LưuProfileToStore1 = async url => {
         const userId = await AsyncStorage.getItem('USERID');
         firestore()
             .collection('Users')
@@ -323,7 +323,7 @@ function Setting(props) {
                     }} />
             </TouchableOpacity>
             <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
-                Setting
+                Cài đặt
             </Text>
             <View style={{width:50 , height: 50 }} />
         </View>
@@ -342,7 +342,7 @@ function Setting(props) {
                     color: 'red',
                     paddingStart: 10,
                     fontWeight: 'bold'
-                }}>Language</Text>
+                }}>Ngôn ngữ</Text>
             </View>
             <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             <TouchableOpacity
@@ -369,7 +369,7 @@ function Setting(props) {
                         color: 'black',
                         fontSize: 15,
                         paddingStart: 5,
-                    }}>Language</Text>
+                    }}>Ngôn ngữ mặc định</Text>
                     <View style={{ flex: 1 }} ></View>
                     <Text style={{
                         color: 'grey',
@@ -393,7 +393,7 @@ function Setting(props) {
                     color: 'red',
                     paddingStart: 10,
                     fontWeight: 'bold'
-                }}>Information</Text>
+                }}>Thông tin cá nhân</Text>
             </View>
             <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* userName */}
@@ -416,7 +416,7 @@ function Setting(props) {
                         color: 'black',
                         fontSize: 15,
                         paddingStart: 5,
-                    }}>Usernames</Text>
+                    }}>Tên người dùng</Text>
                     <View style={{ flex: 1 }} ></View>
                     <Image source={require('../front_end/icons/exchange.png')}
                         style={{
@@ -443,13 +443,14 @@ function Setting(props) {
                             height: 37,
                             width: 250,
                             color: 'black',
+                            borderRadius:10
                         }}
                         value={nameUser}
                         onChangeText={txt => {
                             setNameUser(txt);
                         }}
                         autoFocus
-                        placeholder='Type your new username'
+                        placeholder='Nhập tên mới'
                         placeholderTextColor={'grey'}
                     />
                     <View style={{
@@ -486,7 +487,7 @@ function Setting(props) {
                                     padding: 5,
                                     fontWeight: 'bold',
 
-                                }}>Save</Text>
+                                }}>Lưu</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -519,7 +520,7 @@ function Setting(props) {
                         fontSize: 15,
                         paddingStart: 5,
                     }}>
-                        {imagePicked === true ? 'Save change' : 'Change Avatar'}
+                        {imagePicked === true ? 'Lưu thay đổi' : 'Ảnh đại diện'}
                     </Text>
                     <View style={{ flex: 1 }} ></View>
                     <Image source={require('../front_end/icons/exchange.png')}
@@ -559,7 +560,7 @@ function Setting(props) {
                         fontSize: 15,
                         paddingStart: 5,
                     }}>
-                        {imagePicked1 === true ? 'Save change' : 'Change Background'}
+                        {imagePicked1 === true ? 'Lưu thay đổi' : 'Ảnh bìa'}
                     </Text>
                     <View style={{ flex: 1 }} ></View>
                     <Image source={require('../front_end/icons/exchange.png')}
@@ -593,7 +594,7 @@ function Setting(props) {
                         fontSize: 15,
                         paddingStart: 5,
 
-                    }}>Bio</Text>
+                    }}>Tiểu sử</Text>
                     <View style={{ flex: 1 }} ></View>
                     <Image source={require('../front_end/icons/exchange.png')}
                         style={{
@@ -620,13 +621,14 @@ function Setting(props) {
                             height: 37,
                             width: 250,
                             color: 'black',
+                            borderRadius:10,
                         }}
                         value={upBio}
                         onChangeText={txt => {
                             setUpBio(txt);
                         }}
                         autoFocus
-                        placeholder='Type your new bio'
+                        placeholder='Nhập tiểu sử mới'
                         placeholderTextColor={'grey'}
                     />
                     <View style={{
@@ -652,7 +654,7 @@ function Setting(props) {
                                     padding: 5,
                                     fontWeight: 'bold',
 
-                                }}>Save</Text>
+                                }}>Lưu</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -680,7 +682,7 @@ function Setting(props) {
                         color: 'black',
                         fontSize: 15,
                         paddingStart: 5,
-                    }}>Gender</Text>
+                    }}>Giới tính</Text>
                     <View style={{ flex: 1 }} ></View>
                     <Image source={require('../front_end/icons/exchange.png')}
                         style={{
@@ -716,6 +718,7 @@ function Setting(props) {
                         value={gender}
                         onValueChange={(itemValue) => setGender(itemValue)}
                     >
+                        <Picker.Item label="------------Options-------------" value=" " />
                         <Picker.Item label="Male" value="Male" />
                         <Picker.Item label="Female" value="Female" />
                         <Picker.Item label="Others" value="Others" />
@@ -739,7 +742,7 @@ function Setting(props) {
                             fontSize: 15,
                             padding: 5,
                             fontWeight: 'bold',
-                        }}>Save</Text>
+                        }}>Lưu</Text>
                     </View>
                 </TouchableOpacity>
             </View> : ""}
@@ -755,8 +758,8 @@ function Setting(props) {
                     fontSize: 18,
                     color: 'red',
                     paddingStart: 10,
-                    fontWeight: 'bold'
-                }}>Contact</Text>
+                    fontWeight: 'bold',
+                }}>Thông tin liên hệ</Text>
             </View>
             <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* Email */}
@@ -807,9 +810,10 @@ function Setting(props) {
                             height: 37,
                             width: 250,
                             color: 'black',
+                            borderRadius:10,
                         }}
                         autoFocus
-                        placeholder='Type your new email'
+                        placeholder='Nhập địa chỉ mail mới'
                         placeholderTextColor={'grey'}
                     />
                     <View style={{
@@ -834,7 +838,7 @@ function Setting(props) {
                                     padding: 5,
                                     fontWeight: 'bold',
 
-                                }}>Save</Text>
+                                }}>Lưu</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -862,7 +866,7 @@ function Setting(props) {
                         fontSize: 15,
                         paddingStart: 5,
 
-                    }}>Phone number</Text>
+                    }}>Số điện thoại</Text>
                     <View style={{ flex: 1 }} ></View>
                     <Image source={require('../front_end/icons/exchange.png')}
                         style={{
@@ -888,13 +892,14 @@ function Setting(props) {
                             height: 37,
                             width: 250,
                             color: 'black',
+                            borderRadius:10,
                         }}
                         autoFocus
                         value={upPhone}
                         onChangeText={txt => {
                             setUpPhone(txt);
                         }}
-                        placeholder='Type your new phone number'
+                        placeholder='Nhập số điện thoại mới'
                         placeholderTextColor={'grey'}
                     />
                     <View style={{
@@ -920,7 +925,7 @@ function Setting(props) {
                                     padding: 5,
                                     fontWeight: 'bold',
 
-                                }}>Save</Text>
+                                }}>Lưu</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -948,7 +953,7 @@ function Setting(props) {
                         fontSize: 15,
                         paddingStart: 10,
 
-                    }}>Address</Text>
+                    }}>Địa chỉ</Text>
                     <View style={{ flex: 1 }} ></View>
                     <Image source={require('../front_end/icons/exchange.png')}
                         style={{
@@ -974,13 +979,14 @@ function Setting(props) {
                             height: 37,
                             width: 250,
                             color: 'black',
+                            borderRadius:10,
                         }}
                         autoFocus
                         value={upAddress}
                         onChangeText={txt => {
                             setUpAddress(txt);
                         }}
-                        placeholder='Type your new address'
+                        placeholder='Nhập địa chỉ mới'
                         placeholderTextColor={'grey'}
                     />
                     <View style={{
@@ -1008,7 +1014,7 @@ function Setting(props) {
                                     fontSize: 15,
                                     padding: 5,
                                     fontWeight: 'bold',
-                                }}>Save</Text>
+                                }}>Lưu</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -1027,7 +1033,7 @@ function Setting(props) {
                     color: 'red',
                     paddingStart: 10,
                     fontWeight: 'bold'
-                }}>Security</Text>
+                }}>Bảo mật</Text>
             </View>
             <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* Đổi mật khẩu */}
@@ -1051,7 +1057,7 @@ function Setting(props) {
                         fontSize: 15,
                         paddingStart: 5,
 
-                    }}>Change Password</Text>
+                    }}>Đổi mật khẩu</Text>
                     <View style={{ flex: 1 }} ></View>
                     <Image source={require('../front_end/icons/exchange.png')}
                         style={{
@@ -1079,9 +1085,10 @@ function Setting(props) {
                             width: 250,
                             color: 'black',
                             marginBottom: 10,
+                            borderRadius:10,
                         }}
                         autoFocus
-                        placeholder='Type your old password'
+                        placeholder='Nhập mật khẩu cũ'
                         placeholderTextColor={'grey'}
                         value={passUser}
                         onChangeText={txt => {
@@ -1099,9 +1106,10 @@ function Setting(props) {
                             width: 250,
                             color: 'black',
                             marginBottom: 10,
+                            borderRadius:10,
                         }}
                         autoFocus
-                        placeholder='Type your new password'
+                        placeholder='Nhập mật khẩu mới'
                         placeholderTextColor={'grey'}
                         value={reType1}
                         onChangeText={txt => {
@@ -1119,9 +1127,10 @@ function Setting(props) {
                             width: 250,
                             color: 'black',
                             marginBottom: 10,
+                            borderRadius:10,
                         }}
                         autoFocus
-                        placeholder='Retype your new password'
+                        placeholder='Nhập lại mật khẩu mới'
                         placeholderTextColor={'grey'}
                         value={reType2}
                         onChangeText={txt => {
@@ -1155,7 +1164,7 @@ function Setting(props) {
                                     padding: 5,
                                     fontWeight: 'bold',
 
-                                }}>Save</Text>
+                                }}>Lưu</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -1180,7 +1189,7 @@ function Setting(props) {
                     fontSize: 15,
                     paddingStart: 5,
 
-                }}>Two-factor authentication</Text>
+                }}>Bảo mật hai lớp</Text>
                 <View style={{ flex: 1 }} ></View>
                 <Switch
                     trackColor={{ false: 'grey', true: 'skyblue' }}
@@ -1213,7 +1222,7 @@ function Setting(props) {
                     fontSize: 15,
                     paddingStart: 5,
 
-                }}>Fingerprint</Text>
+                }}>Vân tay</Text>
                 <View style={{ flex: 1 }} ></View>
                 <Switch
                     trackColor={{ false: 'grey', true: 'skyblue' }}
@@ -1240,7 +1249,7 @@ function Setting(props) {
                     color: 'red',
                     paddingStart: 10,
                     fontWeight: 'bold'
-                }}>Other</Text>
+                }}>khác</Text>
             </View>
             <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             <TouchableOpacity
@@ -1264,7 +1273,7 @@ function Setting(props) {
                         color: 'black',
                         fontSize: 15,
                         paddingStart: 5,
-                    }}>Sign out</Text>
+                    }}>Đăng xuất</Text>
                 </View>
             </TouchableOpacity>
         </ScrollView>

@@ -223,7 +223,7 @@ const Add = ({ onAdded }) => {
                             tintColor: 'white',
                         }} />
                 </TouchableOpacity>
-                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>Edit Post</Text>
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>Tạo bài viết</Text>
                 <Text
                     style={{
                         marginEnd: 10,
@@ -236,15 +236,15 @@ const Add = ({ onAdded }) => {
                             uplaodImage();
                             navigation.navigate('HomeSC')
                         } else if (imageData === null && caption !== '') {
-                            cap(postId);
+                            cap();
                             navigation.navigate('HomeSC')
                         }
                         else {
-                            Alert.alert('Post', 'Please Select Pic or enter caption');
+                            Alert.alert('', 'Nội dung hiện đang rỗng');
                         }
                     }}>
                     {' '}
-                    Upload
+                    Đăng
                 </Text>
             </View>
             <View

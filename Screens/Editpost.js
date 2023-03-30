@@ -175,7 +175,7 @@ const Editpost = (props) => {
                             tintColor: 'white',
                         }} />
                 </TouchableOpacity>
-                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>Edit Post</Text>
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>Chỉnh sửa bài viết</Text>
                 <Text
                     style={{
                         marginEnd: 10,
@@ -196,7 +196,7 @@ const Editpost = (props) => {
                         }
                     }}>
                     {' '}
-                    Save
+                    Lưu
                 </Text>
             </View>
             <View

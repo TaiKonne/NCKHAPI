@@ -93,14 +93,14 @@ const Login = ({ navigation }) => {
                     fontWeight: '800',
                     color: 'red',
                 }}>
-                WelCome to TDMU Social Media
+                WELCOME TO TDMU SOCIAL MEDIA
             </Text>
             <TextInput
                 value={email}
                 onChangeText={txt => {
                     setEmail(txt);
                 }}
-                placeholder="Enter your Email"
+                placeholder="Nhập email đã đăng ký tài khoản"
                 placeholderTextColor={'grey'}
                 style={{
                     width: '84%',
@@ -118,7 +118,7 @@ const Login = ({ navigation }) => {
                 onChangeText={txt => {
                     setPassword(txt);
                 }}
-                placeholder="Enter your Password"
+                placeholder="Nhập mật khẩu của bạn"
                 placeholderTextColor={'grey'}
                 style={{
                     width: '84%',
@@ -146,7 +146,7 @@ const Login = ({ navigation }) => {
                     checkSignup == 1 ? navigation.navigate('Introduction') : checkLogin();
 
                 }}>
-                <Text style={{ fontSize: 20, color: '#000' }}>Login</Text>
+                <Text style={{ fontSize: 20, color: '#000' }}>Đăng nhập</Text>
             </TouchableOpacity>
             <Text
                 style={{
@@ -160,7 +160,7 @@ const Login = ({ navigation }) => {
                     navigation.navigate('Signup');
                     setCheckSignUp(1);
                 }}>
-                Create New Account
+                Đăng ký tài khoản
             </Text>
             <Loader modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </View>

@@ -228,7 +228,7 @@ const Comments = () => {
                         color: comment == '' ? 'grey' : 'blue',
                     }}
                     onPress={() => {
-                        comment !='' ? (postComment(),setComment('')) : (Alert.alert('','Nội dung rỗng!'))
+                        comment !='' ? (postComment(),setComment('')) : (Alert.alert('','Nội dung hiện đang rỗng'))
                     }}>
                     Send
                 </Text>

@@ -39,6 +39,7 @@ const Signup = ({ navigation }) => {
                 address: '',
                 numberPhone: '',
                 gender: '',
+                chatList: [],
             })
             .then(() => {
                 console.log('User added!');

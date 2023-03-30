@@ -4,40 +4,62 @@ import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 let myId = '';
+let listChat = [];
+let setchat = [];
 const Chat = () => {
+    useEffect(() => {
+        listChat=[];
+        setchat=[];
+        getAllChats();
+        // getFollower();
+    }, []);
     const [followers, setFollowers] = useState([]);
     const [UploadedPicUrl, setUploadedPicUrl] = useState('');
     const [chatList, setChatList] = useState([]);
     const navigation = useNavigation();
-    useEffect(() => {
-        getAllChats();
-        getFollower();
-    }, []);
+    // 
     const getAllChats = async () => {
         myId = await AsyncStorage.getItem('USERID');
-        console.log(myId);
         firestore()
             .collection('Users')
             .doc(myId)
             .onSnapshot(documentSnapshot => {
                 console.log(documentSnapshot);
-                setChatList(documentSnapshot._data.chatList);
+                setchat = documentSnapshot._data.chatList;
+
+                setchat.map(item => {
+                    firestore()
+                        .collection('Users')
+                        .doc(item.chatUserId)
+                        .get()
+                        .then(Snapp => {
+                            let tmp = 0;
+                            console.log(Snapp);
+                            listChat.push({
+                                userId: Snapp._data.userId,
+                                name: Snapp._data.name,
+                                profilePic: Snapp._data.profilePic,
+                            })
+                        })
+
+                })
             });
     };
-    const getFollower = async () => {
-        userId = await AsyncStorage.getItem('USERID');
-        names = await AsyncStorage.getItem('NAME');
-        firestore()
-            .collection('Users')
-            .doc(userId)
-            .get()
-            .then(documentSnapshot => {
-                if (documentSnapshot.exists) {
-                    setFollowers(documentSnapshot.data().followers);
-                    setUploadedPicUrl(documentSnapshot.data().profilePic);
-                }
-            })
-    }
+    // const getFollower = async () => {
+    //     userId = await AsyncStorage.getItem('USERID');
+    //     names = await AsyncStorage.getItem('NAME');
+    //     firestore()
+    //         .collection('Users')
+    //         .doc(userId)
+    //         .get()
+    //         .then(documentSnapshot => {
+    //             if (documentSnapshot.exists) {
+    //                 setFollowers(documentSnapshot.data().followers);
+    //                 setUploadedPicUrl(documentSnapshot.data().profilePic);
+    //             }
+    //         })
+    // }
+    //
     return (
         <View style={{ flex: 1 }}>
             <View
@@ -53,7 +75,7 @@ const Chat = () => {
                 </Text>
             </View>
             <FlatList
-                data={followers}
+                data={listChat}
                 renderItem={({ item, index }) => {
                     return (
                         <View
@@ -65,7 +87,6 @@ const Chat = () => {
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
                             }}>
-
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <Image
                                     source={
@@ -73,7 +94,7 @@ const Chat = () => {
                                             ? require('../images/user.png')
                                             : { uri: item.profilePic }
                                     }
-style={{
+                                    style={{
                                         width: 40,
                                         height: 40,
                                         borderRadius: 20,
@@ -92,7 +113,7 @@ style={{
                                         data: {
                                             userId: item.userId,
                                             name: item.name,
-                                            myId: userId,
+                                            myId: myId,
                                             profilePic:
                                                 item.profilePic == '' || item.profilePic == null
                                                     ? ''

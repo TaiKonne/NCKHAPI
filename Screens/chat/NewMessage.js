@@ -11,19 +11,42 @@ import uuid from 'react-native-uuid';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Video from 'react-native-video';
 import { useNavigation } from '@react-navigation/native';
+import UpName from '../tabs/UpName'
+import UpAv from '../tabs/UpAv'
 
-const NewMessage = () => {
+const NewMessage = (props) => {
+  let Data = props.route.params.data;
+  let user1 = Data.myId;
+  let user2 = Data.userId;
+  let chatUser = user1 + "|" + user2;
+  let get = uuid.v1();
+  // 5a346a5a-b545-4dc1-a821-fdead8c1bead
+  // 9fda510a-409f-4cbe-9fa9-5ec52d6105a7
+  // user1|user2
+  //   data: {
+  //     userId: item.userId,
+  //     name: item.name,
+  //     myId: userId,
+  //     profilePic:
+  //         item.profilePic == '' || item.profilePic == null
+  //             ? ''
+  //             : item.profilePic,
+  // },
+
   const navigation = useNavigation();
   const [messages, setMessages] = useState([]);
   const [imageData, setImageData] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
+  const [chatedUser1, setChatedUser1] = useState([]);
+  const [chatedUser2, setChatedUser2] = useState([]);
   const route = useRoute();
   useEffect(() => {
+
     const querySnapShot = firestore()
       .collection('chats')
-      .doc('123456789')
+      .doc(chatUser)
       .collection('messages')
-      .orderBy('createdAt', 'desc');
+      .orderBy('createdAt', 'desc')
     querySnapShot.onSnapshot(snapShot => {
       const allMessages = snapShot.docs.map(snap => {
         return { ...snap.data(), createdAt: new Date() };
@@ -33,7 +56,7 @@ const NewMessage = () => {
   }, []);
 
   const onSend = messageArray => {
-    console.log('fsfsf');
+
     let myMsg = null;
     if (imageUrl !== '') {
       const msg = messageArray[0];
@@ -54,9 +77,22 @@ const NewMessage = () => {
     }
 
     setMessages(previousMessages => GiftedChat.append(previousMessages, myMsg));
+    let tmpChatuser1 = chatUser;
+    let tmpChatuser2 = user2 + "|" + user1;
+    let tam = [];
+    // firestore()
+    //   .collection('chats')
+    //   .doc(tmpChatuser1)
+    //   .get()
+    //   .then(Queryy => {
+    //     if (Queryy.exists) {
+    //       tam = Queryy._data;
+    //       debugger
+    //     }
+    //   })
     firestore()
       .collection('chats')
-      .doc('123456789')
+      .doc(chatUser)
       .collection('messages')
       .add({
         ...myMsg,
@@ -64,6 +100,49 @@ const NewMessage = () => {
       });
     setImageUrl('');
     setImageData(null);
+    let temp = [];
+    let co = 0;
+    firestore()
+      .collection('Users')
+      .doc(user1)
+      .get()
+      .then(Snap => {
+        temp = Snap._data.chatList;
+        temp.map(item => {
+
+          if (item.chatUserId === user2) {
+            co = 1;
+          }
+        })
+        if (co === 0) {
+          temp.push({
+            chatUserId: user2,
+          })
+          firestore()
+            .collection('Users')
+            .doc(user1)
+            .update({
+              chatList: temp,
+            })
+          let temp1 = [];
+          firestore()
+            .collection('Users')
+            .doc(user2)
+            .get()
+            .then(Snap => {
+              temp1 = Snap._data.chatList;
+              temp1.push({
+                chatUserId: user1,
+              })
+              firestore()
+                .collection('Users')
+                .doc(user2)
+                .update({
+                  chatList: temp1,
+                })
+            })
+        }
+      })
   };
 
   const openCamera = async () => {
@@ -111,17 +190,19 @@ const NewMessage = () => {
               tintColor: 'white',
             }} />
         </TouchableOpacity>
-        <View style={{ flex: 1 }}></View>
-        <View style={{
+        {/* <View style={{ flex: 1 }}></View> */}
+        {/* <View style={{
           marginStart: 10,
         }}>
-          <Image source={require('../images/user.png')}
+        <Image source={require('../images/user.png')}
             style={{
               height: 50,
               width: 50,
               marginEnd: 10,
             }} />
-        </View>
+        </View> */}
+        {<UpAv cons={user2} />}
+
         <View style={{
           borderWidth: 1,
           borderColor: '#64b72e',
@@ -134,9 +215,11 @@ const NewMessage = () => {
           bottom: 6,
         }}>
         </View>
-        <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
+        {/* <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
           Tai con
-        </Text>
+        </Text> */}
+        {<UpName cons={user2} />}
+
         <View style={{ flex: 1 }}></View>
         <TouchableOpacity onPress={() => {
           Alert.alert('Messenger', 'Call')

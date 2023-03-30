@@ -1,9 +1,10 @@
-import { View, Text, FlatList, Image, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, Alert , StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
 import firestore from '@react-native-firebase/firestore';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 import UpName from './UpName';
 import UpAv from './UpAv';
@@ -173,6 +174,9 @@ const Home = (props) => {
     const [settingpost, setsettingpost] = useState(0)
     const [postids, setpostids] = useState('')
 
+    const [selectedValue, setSelectedValue] = useState(null);
+
+
     return (
         <View style={{ flex: 1 }}>
             <View
@@ -290,7 +294,6 @@ const Home = (props) => {
                                     </TouchableOpacity>
 
                                 </View>
-
                                 {settingpost == 1 && userId == item.userId && postids == item.postId ?
                                     (
                                         <View style={{

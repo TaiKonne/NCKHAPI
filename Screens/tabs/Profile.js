@@ -378,7 +378,7 @@ const Profile = () => {
                             setSelectedTabFollowing(0);
                             settabdefault(0);
                         }}>
-                        <Text style={{ fontSize: 18, color: 'black' }}>Bài viết của tôi</Text>
+                        <Text style={{ fontSize: 16, color: 'black' }}>Bài viết của tôi</Text>
                         {/* chiều dài của post */}
                         <Text style={{ fontSize: 15, color: 'grey' }}>{PS.length}</Text>
 
@@ -398,7 +398,7 @@ const Profile = () => {
                             setSelectedTabFollowing(1);
                             settabdefault(0);
                         }}>
-                        <Text style={{ fontSize: 18, color: 'black' }}>Người theo dõi</Text>
+                        <Text style={{ fontSize: 16, color: 'black' }}>Người theo dõi</Text>
                         <Text style={{ fontSize: 15, color: 'grey' }}>{followers.length}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -416,7 +416,7 @@ const Profile = () => {
                             setSelectedTabFollowing(0);
                             settabdefault(0);
                         }}>
-                        <Text style={{ fontSize: 18, color: 'black' }}>Đang theo dõi</Text>
+                        <Text style={{ fontSize: 16, color: 'black' }}>Đang theo dõi</Text>
                         <Text style={{ fontSize: 15, color: 'grey' }}>{following.length}</Text>
                     </TouchableOpacity>
                 </View>

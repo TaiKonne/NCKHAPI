@@ -191,7 +191,7 @@ const NewMessage = (props) => {
         </View> */}
         {<UpAv cons={user2} />}
 
-        <View style={{
+        {/* <View style={{
           borderWidth: 1,
           borderColor: '#64b72e',
           backgroundColor: '#64b72e',
@@ -202,7 +202,8 @@ const NewMessage = (props) => {
           left: 135,
           bottom: 6,
         }}>
-        </View>
+        </View> */}
+        
         {/* <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
           Tai con
         </Text> */}

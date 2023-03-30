@@ -18,7 +18,7 @@ const NewMessage = (props) => {
   let Data = props.route.params.data;
   let user1 = Data.myId;
   let user2 = Data.userId;
-  let chatUser = user1 + "|" + user2;
+  let chatUser = user1 > user2 ? user1 + "-" + user2 : user2 + "-" + user1
   let get = uuid.v1();
   // 5a346a5a-b545-4dc1-a821-fdead8c1bead
   // 9fda510a-409f-4cbe-9fa9-5ec52d6105a7
@@ -78,8 +78,6 @@ const NewMessage = (props) => {
 
     setMessages(previousMessages => GiftedChat.append(previousMessages, myMsg));
     let chatUser2 = user2 + "|" + user1;
-    let tam = [];
-    
     firestore()
       .collection('chats')
       .doc(chatUser)

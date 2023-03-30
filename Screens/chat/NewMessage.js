@@ -77,19 +77,9 @@ const NewMessage = (props) => {
     }
 
     setMessages(previousMessages => GiftedChat.append(previousMessages, myMsg));
-    let tmpChatuser1 = chatUser;
-    let tmpChatuser2 = user2 + "|" + user1;
+    let chatUser2 = user2 + "|" + user1;
     let tam = [];
-    // firestore()
-    //   .collection('chats')
-    //   .doc(tmpChatuser1)
-    //   .get()
-    //   .then(Queryy => {
-    //     if (Queryy.exists) {
-    //       tam = Queryy._data;
-    //       debugger
-    //     }
-    //   })
+    
     firestore()
       .collection('chats')
       .doc(chatUser)

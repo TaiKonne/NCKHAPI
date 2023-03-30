@@ -89,7 +89,7 @@ const Editpost = (props) => {
 
     const cap = async postId => {
         setModalVisible(true);
-        const url = '';
+        const url = imageId;
         firestore()
             .collection('posts')
             .doc(postId)

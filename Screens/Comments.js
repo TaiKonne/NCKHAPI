@@ -157,14 +157,16 @@ const Comments = () => {
                                     <View
                                         style={{
                                             flexDirection: 'row',
-                                            
+                                            marginStart: 10,
+                                            marginEnd: 10,
                                             flex: 1,
                                             marginTop: 5,
                                         }}>
                                         <TouchableOpacity
                                             style={{
                                                 flexDirection: 'row',
-                                                marginStart:40,
+                                                marginStart:80,
+                                                marginEnd:110,
                                             }}
                                             onPress={() => {
                                                 check[index] == '../Screens/images/love.png' ? check[index] = '../Screens/images/heart.png' : check[index] = '../Screens/images/love.png'
@@ -201,7 +203,7 @@ const Comments = () => {
                                         </TouchableOpacity>
                                         <TouchableOpacity style={{
                                             flexDirection: 'row',
-                                            marginEnd:40,
+                                            // marginEnd:60,
                                         }}>
                                             <Image
                                                 source={require('../Screens/images/comment.png')}

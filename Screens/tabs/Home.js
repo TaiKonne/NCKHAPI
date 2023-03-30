@@ -21,7 +21,7 @@ const Home = (props) => {
         getUserId();
         getData();
     }, []);
-    
+
     const getUserId = async () => {
         userId = await AsyncStorage.getItem('USERID');
     };
@@ -98,7 +98,15 @@ const Home = (props) => {
         let yyyy = date.getFullYear();
         let munis = date.getMinutes();// phút
         let hh = date.getHours(); // giờ
-        date = dd + '/' + mm + '/' + yyyy;
+        if (dd < '10')
+            dd = '0' + dd;
+        if (mm < '10')
+            mm = '0' + mm;
+        if (hh < '10')
+            hh = '0' + hh;
+        if (munis < '10')
+            munis = '0' + munis;
+        date = dd + '/' + mm + '/' + yyyy + ' ' + hh + ':' + mm;
         return date;
     }
 

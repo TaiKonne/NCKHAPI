@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Image, TouchableOpacity, Alert , StyleSheet } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
 import firestore from '@react-native-firebase/firestore';
@@ -211,7 +211,7 @@ const Home = (props) => {
                     onPress={() => {
                         navigation.navigate('Add')
                     }}>
-                    
+
                     <View style={{
 
                         color: 'black',
@@ -223,28 +223,28 @@ const Home = (props) => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         marginStart: 10,
-                        marginRight:10,
+                        marginRight: 10,
                         marginTop: 3,
                     }}>
-                        <Text style={{color:'grey'}}>Bạn đang nghĩ gì ?</Text>
+                        <Text style={{ color: 'grey' }}>Bạn đang nghĩ gì ?</Text>
                     </View>
-                    
+
                 </TouchableOpacity>
                 <View style={{
-                        height:35,
-                        marginTop:3,
-                        justifyContent:'center'
-                    }}>
-                        <Image
-                                source={require('../../front_end/icons/image-gallery.png')}
-                                style={{
-                                    width: 25,
-                                    height: 25,
-                                    marginRight:15,
-                                    tintColor:'green',
-                                }}
-                            />
-                    </View>
+                    height: 35,
+                    marginTop: 3,
+                    justifyContent: 'center'
+                }}>
+                    <Image
+                        source={require('../../front_end/icons/image-gallery.png')}
+                        style={{
+                            width: 25,
+                            height: 25,
+                            marginRight: 15,
+                            tintColor: 'green',
+                        }}
+                    />
+                </View>
             </View>
             {postData.length > 0 ? (
                 <FlatList
@@ -415,6 +415,7 @@ const Home = (props) => {
                                                 postId: item.postId,
                                                 comments: item.comments,
                                                 userId: item.userId,
+                                                likes: item.comments.likes,
                                             });
                                         }}>
                                         <Text style={{ marginRight: 10, color: 'black' }}>
@@ -435,7 +436,7 @@ const Home = (props) => {
                                             sharePost(item);
                                         }}>
                                         <Text style={{ marginRight: 10, color: 'black' }}>
-                                            {item.comments.length}
+                                            {/* {item.comments.length} */}
                                         </Text>
                                         <Image
                                             source={require('../../front_end/icons/share.png')}
@@ -448,8 +449,8 @@ const Home = (props) => {
                     }}
                 />
             ) : (
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={{color:'black', fontSize:30, fontWeight:'bold'}}>NO POST FOUND</Text>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ color: 'black', fontSize: 30, fontWeight: 'bold' }}>NO POST FOUND</Text>
                 </View>
             )}
         </View >

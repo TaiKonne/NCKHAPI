@@ -229,7 +229,7 @@ const Add = ({ onAdded }) => {
                         marginEnd: 10,
                         fontSize: 18,
                         color: imageData !== null || caption !== '' ? 'blue' : '#8e8e8e',
-                        fontWeight:'bold',
+                        fontWeight: 'bold',
                     }}
                     onPress={() => {
                         if (imageData !== null) {

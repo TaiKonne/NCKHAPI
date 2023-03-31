@@ -13,6 +13,7 @@ let comments = [];
 let postId = '';
 let name = '';
 let profile = '';
+let likes = '';
 const Comments = () => {
     const navigation = useNavigation();
     const route = useRoute();
@@ -24,11 +25,12 @@ const Comments = () => {
     const [fakeLikevalue, setfakeLikevalue] = useState(0);
     const [fakeLikechoose, setfakeLikechoose] = useState('');
     const [check, setcheck] = useState([]);
-    // const [test, settest] = useState('red')
+
     useEffect(() => {
         getUserId();
         comments = route.params.comments;
         postId = route.params.postId;
+        likes = route.params.comments.likes;
         console.log(comments);
         setCommentsList(comments);
     }, []);
@@ -36,7 +38,6 @@ const Comments = () => {
     const getUserId = async () => {
         userId = await AsyncStorage.getItem('USERID');
         name = await AsyncStorage.getItem('NAME');
-        profile = await AsyncStorage.getItem('PROFILE_PIC');
 
     };
 
@@ -52,6 +53,7 @@ const Comments = () => {
             profile: profile,
             cmtId: id,
             time: times,
+            likes: [],
         });
         firestore()
             .collection('posts')
@@ -80,13 +82,56 @@ const Comments = () => {
         }
         setcheck(check1);
     };
+
+    const onLike = item => {
+        let tempLikes = item;
+        if (tempLikes.likes.length > 0) {
+            tempLikes.likes.map(item1 => {
+                if (userId === item1) {
+                    const index = tempLikes.likes.indexOf(item1);
+                    if (index > -1) {
+                        // only splice array when item is found
+                        tempLikes.likes.splice(index, 1); // 2nd parameter means remove one item only
+                    }
+                } else {
+                    console.log('diliked');
+                    tempLikes.likes.push(userId);
+                }
+            });
+        } else {
+            tempLikes.likes.push(userId);
+        }
+
+        firestore()
+            .collection('posts')
+            .doc(item.postId)
+            .update({
+                comments: tempLikes,
+            })
+            .then(() => { })
+            .catch(error => { });
+
+    };
+
+    const getLikesStaus = likes => {
+        let status = false;
+        likes.map(item => {
+            if (item === userId) {
+                status = true;
+            } else {
+                status == false;
+            }
+        });
+        return status;
+    };
+
     const coverTime = (timestamp) => {
         let date = new Date();
         let mm = date.getMonth() + 1;
         let dd = date.getDate();
         let yyyy = date.getFullYear();
-        let munis = date.getMinutes();// phút
-        let hh = date.getHours(); // giờ
+        let munis = date.getMinutes();
+        let hh = date.getHours();
         if (dd < '10')
             dd = '0' + dd;
         if (mm < '10')
@@ -165,20 +210,18 @@ const Comments = () => {
                                         <TouchableOpacity
                                             style={{
                                                 flexDirection: 'row',
-                                                marginStart:80,
-                                                marginEnd:110,
+                                                marginStart: 80,
+                                                marginEnd: 110,
                                             }}
                                             onPress={() => {
-                                                check[index] == '../Screens/images/love.png' ? check[index] = '../Screens/images/heart.png' : check[index] = '../Screens/images/love.png'
-                                                fakeLike == 0 ? (setfakeLike(1), setfakeLikechoose(item.cmtId))
-                                                    : (setfakeLike(0), setfakeLikechoose(item.cmtId))
+                                                onLike(item);
                                             }}>
                                             {
 
-                                                check[index] == '../Screens/images/love.png' ?
+                                                getLikesStaus(item.likes) == true ?
                                                     (
                                                         <>
-                                                            <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
+                                                            <Text style={{ color: 'black', marginEnd: 5 }}>{item.likes.length}</Text>
                                                             <Image
                                                                 source={require('../Screens/images/heart.png')}
                                                                 style={{
@@ -186,11 +229,11 @@ const Comments = () => {
                                                                     tintColor: 'red'
                                                                 }} />
                                                         </>
+
                                                     ) :
                                                     (
                                                         <>
-                                                            <Text style={{ color: 'black', marginEnd: 5 }}>{fakeLikevalue}</Text>
-
+                                                            <Text style={{ color: 'black', marginEnd: 5 }}>{item.likes.length}</Text>
                                                             <Image
                                                                 source={require('../Screens/images/love.png')}
                                                                 style={{

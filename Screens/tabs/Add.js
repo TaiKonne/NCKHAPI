@@ -75,6 +75,7 @@ const Add = ({ onAdded }) => {
                 profilePic: profile,
                 postId: id,
                 likes: [],
+                share: [],
                 comments: [],
                 createdAt: new Date(),
             })
@@ -123,6 +124,7 @@ const Add = ({ onAdded }) => {
                 profilePic: profile,
                 postId: id,
                 likes: [],
+                share: [],
                 comments: [],
                 createdAt: new Date(),
             })

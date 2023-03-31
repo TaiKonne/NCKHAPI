@@ -90,6 +90,22 @@ const Home = (props) => {
         return status;
     };
 
+
+    const countLike = item => {
+        let tempLikes = item.share;
+        tempLikes.push(userId);
+
+
+        firestore()
+            .collection('posts')
+            .doc(item.postId)
+            .update({
+                share: tempLikes,
+            })
+            .then(() => { })
+            .catch(error => { });
+    };
+
     const [checkpost, setpost] = useState(0)
     const coverTime = (timestamp) => {
         let date = timestamp.toDate();
@@ -286,7 +302,6 @@ const Home = (props) => {
                                     <TouchableOpacity
                                         onPress={() => {
                                             settingpost == 0 ? (setsettingpost(1), setpostids(item.postId)) : (setsettingpost(0), setpostids(''))
-
                                         }}
                                     >
                                         {userId == item.userId ? (
@@ -434,9 +449,10 @@ const Home = (props) => {
                                             //     comments: item.comments,
                                             // });
                                             sharePost(item);
+                                            countLike(item);
                                         }}>
                                         <Text style={{ marginRight: 10, color: 'black' }}>
-                                            {/* {item.comments.length} */}
+                                            {item.share.length}
                                         </Text>
                                         <Image
                                             source={require('../../front_end/icons/share.png')}

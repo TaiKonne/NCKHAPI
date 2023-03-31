@@ -192,7 +192,7 @@ const Comments = () => {
                                         flexDirection: 'column',
                                     }}>
                                         <UpName cons={item.userId} />
-                                        <Text style={{ color: 'grey', fontSize: 12, marginStart: 15 }}>{item.time}</Text>
+                                        <Text style={{ color: 'grey', fontSize: 10, marginStart: 15 }}>{item.time}</Text>
                                     </View>
                                 </View>
                                 <View style={{ flexDirection: 'column', marginBottom: 10 }}>

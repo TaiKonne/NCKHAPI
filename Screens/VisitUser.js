@@ -24,7 +24,7 @@ const VisitUser = (props) => {
     const [mail, setMail] = useState('');
     const [name, setName] = useState([]);
     const [PS, setPS] = useState([]);
-    const userID = props.route.params;
+    const userId = props.route.params;
 
     //  Follow button :))) 
     const [buafl, setbuafl] = useState(0)
@@ -40,7 +40,7 @@ const VisitUser = (props) => {
     const getProfileVisit = async () => {
         firestore()
             .collection('Users')
-            .doc(userID)
+            .doc(userId)
             .get()
             .then(documentSnapshot => {
                 if (documentSnapshot.exists) {

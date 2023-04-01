@@ -45,21 +45,32 @@ const Chat = () => {
                 })
             });
     };
-    // const getFollower = async () => {
-    //     userId = await AsyncStorage.getItem('USERID');
-    //     names = await AsyncStorage.getItem('NAME');
-    //     firestore()
-    //         .collection('Users')
-    //         .doc(userId)
-    //         .get()
-    //         .then(documentSnapshot => {
-    //             if (documentSnapshot.exists) {
-    //                 setFollowers(documentSnapshot.data().followers);
-    //                 setUploadedPicUrl(documentSnapshot.data().profilePic);
-    //             }
-    //         })
-    // }
-    //
+
+    const deleteChat = async user => {
+        let temp = [];
+        let conCacToBu = [];
+        firestore()
+            .collection('Users')
+            .doc(myId)
+            .get()
+            .then(Snap => {
+                temp = Snap._data.chatList;
+                temp.map(item => {
+                    if (item.chatUserId !== user) {
+                        conCacToBu.push({
+                            chatUserId: item.chatUserId,
+                        })
+                    }
+                })
+                firestore()
+                    .collection('Users')
+                    .doc(myId)
+                    .update({
+                        chatList: conCacToBu,
+                    })
+            })
+    }
+
     return (
         <View style={{ flex: 1 }}>
             <View
@@ -124,6 +135,9 @@ const Chat = () => {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={{ marginEnd: 20 }}
+                                onPress={() => {
+                                    deleteChat(item.userId);
+                                }}
                             >
                                 <Image
                                     source={require('../../front_end/icons/trash-can.png')}
@@ -131,7 +145,7 @@ const Chat = () => {
                                 />
                             </TouchableOpacity>
                         </View>
-                        
+
                     );
                 }}
             />

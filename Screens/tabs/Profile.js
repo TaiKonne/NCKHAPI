@@ -33,7 +33,7 @@ const Profile = () => {
     //address
     const [address, setAddress] = useState('');
     // Gender
-    const [gender , setgender] = useState('');
+    const [gender, setgender] = useState('');
     // mail
     const [mail, setMail] = useState('');
     // post
@@ -132,30 +132,30 @@ const Profile = () => {
     };
     return (
         <>
-        <View
-            style={{
-                height: 60,
-                backgroundColor: 'skyblue',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-            }}>
-            <View style={{ width: 30, height: 50 }} />
-            <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
-                Trang cá nhân
-            </Text>
-            <TouchableOpacity onPress={() => {
-                navigation.navigate('Setting');
-            }}>
-                <Image source={require('../../front_end/icons/settings.png')}
-                    style={{
-                        height: 27,
-                        width: 27,
-                        marginEnd: 10,
-                        tintColor: 'white',
-                    }} />
-            </TouchableOpacity>
-        </View>
+            <View
+                style={{
+                    height: 60,
+                    backgroundColor: 'skyblue',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                }}>
+                <View style={{ width: 30, height: 50 }} />
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
+                    Trang cá nhân
+                </Text>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate('Setting');
+                }}>
+                    <Image source={require('../../front_end/icons/settings.png')}
+                        style={{
+                            height: 27,
+                            width: 27,
+                            marginEnd: 10,
+                            tintColor: 'white',
+                        }} />
+                </TouchableOpacity>
+            </View>
             <ScrollView style={{ flex: 1, marginBottom: 70 }}>
                 {imageWall == '' ?
                     (<ImageBackground
@@ -172,7 +172,7 @@ const Profile = () => {
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 marginBottom: 10,
-                                
+
                             }}>
                             {imagePicked == true && imageData != null ? (
                                 <Image
@@ -425,7 +425,7 @@ const Profile = () => {
                         data={PS}
                         renderItem={({ item, index }) => {
                             return (
-                                <GetPost cons={item} />
+                                <GetPost cons={{ item: item, myId: userId }} />
                             );
                         }} />
                 )}
@@ -544,7 +544,7 @@ const Profile = () => {
                         }} />
                 )}
             </ScrollView>
-            </>
+        </>
     );
 };
 

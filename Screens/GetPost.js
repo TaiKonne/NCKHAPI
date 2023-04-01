@@ -9,9 +9,10 @@ import UpName from './tabs/UpName';
 import UpAv from './tabs/UpAv';
 
 const GetPost = (props) => {
-    const postId = props.cons.postId;
-    const time = props.cons.time;
-    const userId = props.cons.userId;
+    const postId = props.cons.item.postId;
+    const time = props.cons.item.time;
+    const userId = props.cons.item.userId;
+    const myId = props.cons.myId;
     useEffect(() => {
         getUser();
         getPost();
@@ -112,28 +113,39 @@ const GetPost = (props) => {
     };
     const deletePost = async link_post => {
         let temp = [];
+        let userha = 0;// =0 posts cua chinh minh
+        let temp1 = [];
         firestore()
             .collection('Users')
-            .doc(userId)
+            .doc(myId)
             .get()
             .then(item => {
-                let temp1 = [];
                 temp = item._data.posts;
                 temp.map(item1 => {
                     if (item1.postId !== link_post) {
                         temp1.push(item1);
                     }
+                    if (item1.postId === link_post && item1.userId !== myId) {
+                        userha = 1;
+                    }
+                    else if (item1.postId === link_post && item1.userId === myId) {
+                        userha = 0;
+                    }
                 })
-                deletePostHome(link_post);
+                if (userha == 0)
+                    deletePostHomeAndPosts(link_post);
                 firestore()
                     .collection('Users')
-                    .doc(userId)
+                    .doc(myId)
                     .update({
                         posts: temp1,
                     })
+
+
             })
+
     }
-    const deletePostHome = async link_post => {
+    const deletePostHomeAndPosts = async link_post => {
         firestore()
             .collection('posts')
             .doc(link_post)

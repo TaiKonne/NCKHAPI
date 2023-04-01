@@ -278,12 +278,12 @@ const Profile = () => {
                         marginStart: 20,
                         marginEnd: 20,
                     }}>
-                        <Image source={require('../../front_end/icons/mail.png')}
+                        <Image source={require('../../front_end/icons/email.png')}
                             style={{
                                 height: 18,
                                 width: 18,
                                 marginStart: 10,
-                                tintColor: 'black',
+                                tintColor: '#1877f2',
                             }} />
                         <Text style={{
                             color: 'black',
@@ -298,12 +298,12 @@ const Profile = () => {
                         marginStart: 20,
                         marginEnd: 20,
                     }}>
-                        <Image source={require('../../front_end/icons/telephone.png')}
+                        <Image source={require('../../front_end/icons/phone-call.png')}
                             style={{
                                 height: 18,
                                 width: 18,
                                 marginStart: 10,
-                                tintColor: 'black',
+                                tintColor: 'green',
                             }} />
                         <Text style={{
                             color: 'black',
@@ -318,12 +318,12 @@ const Profile = () => {
                         marginStart: 20,
                         marginEnd: 20,
                     }}>
-                        <Image source={require('../../front_end/icons/location.png')}
+                        <Image source={require('../../front_end/icons/check-in.png')}
                             style={{
                                 height: 18,
                                 width: 18,
                                 marginStart: 10,
-                                tintColor: 'black',
+                                // tintColor: 'black',
                             }} />
                         <Text style={{
                             color: 'black',
@@ -338,12 +338,12 @@ const Profile = () => {
                         marginStart: 20,
                         marginEnd: 20,
                     }}>
-                        <Image source={require('../../front_end/icons/sex.png')}
+                        <Image source={require('../../front_end/icons/gender.png')}
                             style={{
                                 height: 18,
                                 width: 18,
                                 marginStart: 10,
-                                tintColor: 'black',
+                                // tintColor: 'black',
                             }} />
                         <Text style={{
                             color: 'black',

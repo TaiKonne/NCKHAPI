@@ -410,7 +410,7 @@ function Setting(props) {
                             height: 20,
                             width: 20,
                             marginStart: 10,
-                            tintColor: 'black',
+                            tintColor: '#eb660d',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -553,7 +553,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor: 'black',
+                            // tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -671,12 +671,12 @@ function Setting(props) {
                     paddingVertical: 10,
                     alignItems: 'center'
                 }} >
-                    <Image source={require('../front_end/icons/sex.png')}
+                    <Image source={require('../front_end/icons/gender.png')}
                         style={{
-                            height: 18,
-                            width: 18,
+                            height: 20,
+                            width: 20,
                             marginStart: 10,
-                            tintColor: 'black',
+                            // tintColor: 'pink',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -771,12 +771,12 @@ function Setting(props) {
                     paddingVertical: 10,
                     alignItems: 'center'
                 }} >
-                    <Image source={require('../front_end/icons/mail.png')}
+                    <Image source={require('../front_end/icons/email.png')}
                         style={{
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor: 'black',
+                            tintColor: '#1877f2',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -854,12 +854,12 @@ function Setting(props) {
                     paddingVertical: 10,
                     alignItems: 'center'
                 }} >
-                    <Image source={require('../front_end/icons/telephone.png')}
+                    <Image source={require('../front_end/icons/phone-call.png')}
                         style={{
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor: 'black',
+                            tintColor: 'green',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -941,17 +941,17 @@ function Setting(props) {
                     paddingVertical: 10,
                     alignItems: 'center'
                 }} >
-                    <Image source={require('../front_end/icons/location.png')}
+                    <Image source={require('../front_end/icons/check-in.png')}
                         style={{
-                            height: 20,
-                            width: 20,
+                            height: 22,
+                            width: 22,
                             marginStart: 10,
-                            tintColor: 'black',
+                            // tintColor: 'black',
                         }} />
                     <Text style={{
                         color: 'black',
                         fontSize: 15,
-                        paddingStart: 10,
+                        paddingStart: 5,
 
                     }}>Địa chỉ</Text>
                     <View style={{ flex: 1 }} ></View>
@@ -1050,7 +1050,7 @@ function Setting(props) {
                             height: 20,
                             width: 18,
                             marginStart: 10,
-                            tintColor: 'black',
+                            tintColor: '#f79f00',
                         }} />
                     <Text style={{
                         color: 'black',
@@ -1182,7 +1182,7 @@ function Setting(props) {
                         height: 20,
                         width: 20,
                         marginStart: 10,
-                        tintColor: 'black',
+                        // tintColor: 'black',
                     }} />
                 <Text style={{
                     color: 'black',
@@ -1215,7 +1215,7 @@ function Setting(props) {
                         height: 20,
                         width: 20,
                         marginStart: 10,
-                        tintColor: 'black',
+                        tintColor: 'blue',
                     }} />
                 <Text style={{
                     color: 'black',
@@ -1267,7 +1267,7 @@ function Setting(props) {
                             height: 18,
                             width: 18,
                             marginStart: 10,
-                            tintColor: 'black',
+                            tintColor: 'blue',
                         }} />
                     <Text style={{
                         color: 'black',

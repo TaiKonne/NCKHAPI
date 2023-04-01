@@ -8,8 +8,8 @@ let listChat = [];
 let setchat = [];
 const Chat = () => {
     useEffect(() => {
-        listChat=[];
-        setchat=[];
+        listChat = [];
+        setchat = [];
         getAllChats();
         // getFollower();
     }, []);
@@ -87,27 +87,8 @@ const Chat = () => {
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
                             }}>
-                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <Image
-                                    source={
-                                        item.profilePic == ''
-                                            ? require('../images/user.png')
-                                            : { uri: item.profilePic }
-                                    }
-                                    style={{
-                                        width: 40,
-                                        height: 40,
-                                        borderRadius: 20,
-                                        marginLeft: 20,
-                                        marginRight: 10,
-                                    }}
-                                />
-                                <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
-                                    {item.name}
-                                </Text>
-                            </View>
                             <TouchableOpacity
-                                style={{ marginRight: 20 }}
+                                // style={{ marginRight: 20 }}
                                 onPress={() => {
                                     navigation.navigate('NewMessage', {
                                         data: {
@@ -121,12 +102,36 @@ const Chat = () => {
                                         },
                                     });
                                 }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Image
+                                        source={
+                                            item.profilePic == ''
+                                                ? require('../images/user.png')
+                                                : { uri: item.profilePic }
+                                        }
+                                        style={{
+                                            width: 40,
+                                            height: 40,
+                                            borderRadius: 20,
+                                            marginLeft: 20,
+                                            marginRight: 10,
+                                        }}
+                                    />
+                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>
+                                        {item.name}
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={{ marginEnd: 20 }}
+                            >
                                 <Image
-                                    source={require('../images/chat.png')}
-                                    style={{ width: 24, height: 24, tintColor: 'orange' }}
+                                    source={require('../../front_end/icons/trash-can.png')}
+                                    style={{ width: 22, height: 22, marginLeft: 20, tintColor: 'black', }}
                                 />
                             </TouchableOpacity>
                         </View>
+                        
                     );
                 }}
             />

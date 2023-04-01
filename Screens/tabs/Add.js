@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, TextInput, PermissionsAndroid, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Image, TextInput, PermissionsAndroid, Alert , ScrollView} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
@@ -204,7 +204,7 @@ const Add = ({ onAdded }) => {
     };
 
     return (
-        <View style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1 }}>
             <View
                 style={{
                     height: 60,
@@ -284,7 +284,7 @@ const Add = ({ onAdded }) => {
             <TouchableOpacity
                 style={{
                     width: '100%',
-                    marginTop: 30,
+                    marginTop: 5,
                     height: 50,
                     borderBottomWidth: 0.2,
                     borderBottomColor: '#8e8e8e',
@@ -295,15 +295,15 @@ const Add = ({ onAdded }) => {
                     openCamera();
                 }}>
                 <Image
-                    source={require('../images/camera.png')}
-                    style={{ width: 24, height: 24, marginLeft: 20, tintColor: 'black', }}
+                    source={require('../../front_end/icons/photo-camera.png')}
+                    style={{ width: 24, height: 24, marginLeft: 20, tintColor: '#4599ff', }}
                 />
-                <Text style={{ marginLeft: 20, color: 'grey' }}>Open Camera</Text>
+                <Text style={{ marginLeft: 20, color: 'grey' }}>Camera</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={{
                     width: '100%',
-                    marginTop: 30,
+                    marginTop: 5,
                     height: 50,
                     borderBottomWidth: 0.2,
                     borderBottomColor: '#8e8e8e',
@@ -314,13 +314,151 @@ const Add = ({ onAdded }) => {
                     openGallery();
                 }}>
                 <Image
-                    source={require('../images/gallery.png')}
-                    style={{ width: 24, height: 24, marginLeft: 20, tintColor: 'black', }}
+                    source={require('../../front_end/icons/image-gallery.png')}
+                    style={{ width: 24, height: 24, marginLeft: 20, tintColor: '#45bd62', }}
                 />
-                <Text style={{ marginLeft: 20, color: 'grey' }}>Open Gallery</Text>
+                <Text style={{ marginLeft: 20, color: 'grey' }}>Ảnh</Text>
             </TouchableOpacity>
             <Loader modalVisible={modalVisible} setModalVisible={setModalVisible} />
-        </View>
+            <TouchableOpacity
+                style={{
+                    width: '100%',
+                    marginTop: 5,
+                    height: 50,
+                    borderBottomWidth: 0.2,
+                    borderBottomColor: '#8e8e8e',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                }}
+                onPress={() => {
+                    Alert.alert('','Gắn thẻ người khác')
+                }}>
+                <Image
+                    source={require('../../front_end/icons/friend.png')}
+                    style={{ width: 24, height: 24, marginLeft: 20, tintColor: '#1877f2', }}
+                />
+                <Text style={{ marginLeft: 20, color: 'grey' }}>Gắn thẻ người khác</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={{
+                    width: '100%',
+                    marginTop: 5,
+                    height: 50,
+                    borderBottomWidth: 0.2,
+                    borderBottomColor: '#8e8e8e',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                }}
+                onPress={() => {
+                    Alert.alert('','Thêm cảm xúc/hoạt động')
+                }}>
+                <Image
+                    source={require('../../front_end/icons/happy.png')}
+                    style={{ width: 24, height: 24, marginLeft: 20, tintColor: '#f7b928', }}
+                />
+                <Text style={{ marginLeft: 20, color: 'grey' }}>Cảm xúc/hoạt dộng</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={{
+                    width: '100%',
+                    marginTop: 5,
+                    height: 50,
+                    borderBottomWidth: 0.2,
+                    borderBottomColor: '#8e8e8e',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                }}
+                onPress={() => {
+                    Alert.alert('','Thêm địa điểm check in')
+                }}>
+                <Image
+                    source={require('../../front_end/icons/check-in.png')}
+                    style={{ width: 24, height: 24, marginLeft: 20, 
+                        // tintColor: '#f5533d', 
+                
+                }}
+                />
+                <Text style={{ marginLeft: 20, color: 'grey' }}>check in</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={{
+                    width: '100%',
+                    marginTop: 5,
+                    height: 50,
+                    borderBottomWidth: 0.2,
+                    borderBottomColor: '#8e8e8e',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                }}
+                onPress={() => {
+                    Alert.alert('','Phát trực tiếp')
+                }}>
+                <Image
+                    source={require('../../front_end/icons/facebook.png')}
+                    style={{ width: 24, height: 24, marginLeft: 20, 
+                        // tintColor: 'black',
+                    }}
+                />
+                <Text style={{ marginLeft: 20, color: 'grey' }}>Video trực tiếp</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={{
+                    width: '100%',
+                    marginTop: 5,
+                    height: 50,
+                    borderBottomWidth: 0.2,
+                    borderBottomColor: '#8e8e8e',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                }}
+                onPress={() => {
+                    Alert.alert('','Thêm màu nền')
+                }}>
+                <Image
+                    source={require('../../front_end/icons/font-size.png')}
+                    style={{ width: 24, height: 24, marginLeft: 20, tintColor: '#43d1be', }}
+                />
+                <Text style={{ marginLeft: 20, color: 'grey' }}>Màu nền</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={{
+                    width: '100%',
+                    marginTop: 5,
+                    height: 50,
+                    borderBottomWidth: 0.2,
+                    borderBottomColor: '#8e8e8e',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                }}
+                onPress={() => {
+                    Alert.alert('','Thêm file GIF')
+                }}>
+                <Image
+                    source={require('../../front_end/icons/gif.png')}
+                    style={{ width: 24, height: 24, marginLeft: 20, tintColor: 'black', }}
+                />
+                <Text style={{ marginLeft: 20, color: 'grey' }}>File GIF</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={{
+                    width: '100%',
+                    marginTop: 5,
+                    height: 50,
+                    borderBottomWidth: 0.2,
+                    borderBottomColor: '#8e8e8e',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                }}
+                onPress={() => {
+                    Alert.alert('','Thêm bài hát')
+                }}>
+                <Image
+                    source={require('../../front_end/icons/music.png')}
+                    style={{ width: 24, height: 24, marginLeft: 20, tintColor: 'orange', }}
+                />
+                <Text style={{ marginLeft: 20, color: 'grey' }}>Nhạc</Text>
+            </TouchableOpacity>
+        </ScrollView>
     );
 };
 

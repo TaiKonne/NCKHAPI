@@ -312,7 +312,7 @@ const Home = (props) => {
                                                     height: 22,
                                                     marginRight: 10,
                                                 }}
-                                                size={20}
+                                                // size={20}
                                                 source={require('../../front_end/icons/dots.png')} />
                                         ) : ''}
                                     </TouchableOpacity>

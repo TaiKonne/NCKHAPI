@@ -4,8 +4,6 @@ import React, { useEffect, useState } from 'react';
 import firestore from '@react-native-firebase/firestore';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
 import UpName from './UpName';
 import UpAv from './UpAv';
 import { request } from 'express';
@@ -284,11 +282,15 @@ const Home = (props) => {
                                         alignItems: 'center',
                                         marginTop: 10,
                                     }}>
-                                    <TouchableOpacity style={{
-                                        flexDirection: 'row',
-                                        alignItems: 'center',
-                                        marginTop: 10,
-                                    }}>
+                                    <TouchableOpacity
+                                        style={{
+                                            flexDirection: 'row',
+                                            alignItems: 'center',
+                                            marginTop: 10,
+                                        }}
+                                        onPress={() => {
+                                            navigation.navigate('VisitUser', item.userId)
+                                        }}>
                                         <UpAv cons={item.userId} />
                                         <View style={{ flexDirection: 'column' }}>
                                             <UpName cons={item.userId} />

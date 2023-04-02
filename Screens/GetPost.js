@@ -170,6 +170,7 @@ const GetPost = (props) => {
 
 
     const [settingpost, setsettingpost] = useState(0)
+    const [ids , setids] = useState('')
     return (
         <View
             style={{
@@ -198,7 +199,7 @@ const GetPost = (props) => {
                 {/* update posts nè chú */}
                 <TouchableOpacity
                     onPress={() => {
-                        settingpost == 0 ? setsettingpost(1) : setsettingpost(0)
+                        settingpost == 0 ? (setsettingpost(1) , setids(userId)) : (setsettingpost(0) , setids(''))
                     }}
                 >
                     <Image
@@ -226,7 +227,8 @@ const GetPost = (props) => {
                         borderRadius: 5,
                     }}>
                         <View style={{ flexDirection: 'column' }}>
-                            <TouchableOpacity
+                            {ids == myId ? 
+                            (<TouchableOpacity
                                 onPress={() => {
                                     navigation.navigate('Editpost', { post: postId, user: userId })
                                 }}
@@ -243,8 +245,10 @@ const GetPost = (props) => {
                                         tintColor: 'black',
                                     }} />
                                 <Text style={{ color: 'black', fontSize: 15 }}>Edit post</Text>
-                            </TouchableOpacity>
-                            <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', width: 123, }}></View>
+                                
+                            </TouchableOpacity>) : 
+                            ''}
+                            {/* <View style={{ flex: 1, borderWidth: 0.3, borderColor: 'grey', width: 100, marginHorizontal:10}}></View> */}
                             <TouchableOpacity
                                 onPress={() => {
                                     deletePost(postId);

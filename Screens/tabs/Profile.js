@@ -52,7 +52,7 @@ const Profile = () => {
             .get()
             .then(documentSnapshot => {
                 console.log('User exists: ', documentSnapshot.exists);
-
+                let temp=[];
                 if (documentSnapshot.exists) {
                     console.log('User data: ', documentSnapshot.data());
                     setUploadedPicUrl(documentSnapshot.data().profilePic);
@@ -63,10 +63,12 @@ const Profile = () => {
                     setAddress(documentSnapshot.data().address);
                     setMail(documentSnapshot.data().email);
                     setImageWall(documentSnapshot.data().picWal);
-                    setPS(documentSnapshot.data().posts);
+                    temp=(documentSnapshot.data().posts);
                     setName(documentSnapshot.data().name);
                     setgender(documentSnapshot.data().gender);
                     console.log('data ', documentSnapshot.data().following);
+                    temp.sort((a,b)=>b.time-a.time);
+                    setPS(temp);
                 }
             });
     };

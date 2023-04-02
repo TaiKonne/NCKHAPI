@@ -153,10 +153,7 @@ const GetPost = (props) => {
                     .update({
                         posts: temp1,
                     })
-
-
             })
-
     }
     const deletePostHomeAndPosts = async link_post => {
         firestore()
@@ -244,7 +241,7 @@ const GetPost = (props) => {
                                         marginEnd: 10,
                                         tintColor: 'black',
                                     }} />
-                                <Text style={{ color: 'black', fontSize: 15 }}>Edit post</Text>
+                                <Text style={{ color: 'black', fontSize: 15 }}>Chỉnh sửa</Text>
                                 
                             </TouchableOpacity>) : 
                             ''}
@@ -266,7 +263,7 @@ const GetPost = (props) => {
                                         marginEnd: 10,
                                         tintColor: 'black',
                                     }} />
-                                <Text style={{ color: 'black', fontSize: 15 }}>Delete post</Text>
+                                <Text style={{ color: 'black', fontSize: 15 }}>Xóa bài viết</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

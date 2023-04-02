@@ -23,6 +23,7 @@ const GetPost = (props) => {
     const [cmt, setCmt] = useState([]);
     const [image, setImage] = useState('');
     const [like, setLike] = useState([]);
+    const [share, setShare] = useState([]);
     // user
     const [name, setName] = useState('');
     const [profilePic, setProfilePic] = useState('');
@@ -44,7 +45,7 @@ const GetPost = (props) => {
             hh = '0' + hh;
         if (munis < '10')
             munis = '0' + munis;
-        date = dd + '/' + mm + '/' + yyyy +' '+ hh+':' + munis;
+        date = dd + '/' + mm + '/' + yyyy + ' ' + hh + ':' + munis;
         return date;
     }
     const getUser = async () => {
@@ -74,6 +75,10 @@ const GetPost = (props) => {
                     setImage(document.data().image);
                     setLike(document.data().likes);
                     setItem(document.data());
+                    setShare(document.data().share);
+                    // if (caption === '' && image === '') {
+                    //     setCaption('Bài viết này không tồn tại.')
+                    // }
                 }
             });
 
@@ -262,17 +267,29 @@ const GetPost = (props) => {
                         </View>
                     </View>
                 ) : ''}
-            <Text
-                style={{
-                    marginTop: 10,
-                    marginLeft: 20,
-                    marginRight: 20,
-                    marginBottom: 10,
-                    color: 'black',
-                }}>
-                {caption}
-            </Text>
-
+            {caption ==='' && image ==='' ? 
+                (<Text
+                    style={{
+                        marginTop: 10,
+                        marginLeft: 20,
+                        marginRight: 20,
+                        marginBottom: 10,
+                        color: 'grey',
+                        fontStyle:'italic',
+                    }}>
+                    {/* {caption} */}
+                    Bài viết này không tồn tại.
+                </Text>) : 
+                (<Text
+                    style={{
+                        marginTop: 10,
+                        marginLeft: 20,
+                        marginRight: 20,
+                        marginBottom: 10,
+                        color: 'black',
+                    }}>
+                    {caption}
+                </Text>)}
             <Image
                 source={{ uri: image }}
                 style={{
@@ -330,14 +347,15 @@ const GetPost = (props) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{ flexDirection: 'row', alignItems: 'center' }}
-                    onPress={() => {
-                        navigation.navigate('Comments', {
-                            postId: postId,
-                            comments: cmt,
-                        });
-                    }}>
+                    // onPress={() => {
+                    //     navigation.navigate('Comments', {
+                    //         postId: postId,
+                    //         comments: cmt,
+                    //     });
+                    // }}
+                    >
                     <Text style={{ marginRight: 10, color: 'black' }}>
-                        {cmt.length}
+                        {share.length}
                     </Text>
                     <Image
                         source={require('../front_end/icons/share.png')}

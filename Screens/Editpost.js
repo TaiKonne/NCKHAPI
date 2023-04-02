@@ -180,14 +180,14 @@ const Editpost = (props) => {
                     style={{
                         marginEnd: 10,
                         fontSize: 18,
-                        color: imageData !== null || caption !== '' ? 'blue' : '#8e8e8e',
+                        color: imageData === null || caption === '' ? 'blue' : '#8e8e8e',
                         fontWeight: 'bold'
                     }}
                     onPress={() => {
                         if (imageData !== null) {
                             uplaodImage();
                             navigation.navigate('HomeSC')
-                        } else if (imageData === null && caption !== '') {
+                        } else if ((imageData === null || caption === '')) {
                             cap(postId);
                             navigation.navigate('HomeSC')
                         }

@@ -718,10 +718,10 @@ function Setting(props) {
                         value={gender}
                         onValueChange={(itemValue) => setGender(itemValue)}
                     >
-                        <Picker.Item label="------------Options-------------" value=" " />
-                        <Picker.Item label="Male" value="Male" />
-                        <Picker.Item label="Female" value="Female" />
-                        <Picker.Item label="Others" value="Others" />
+                        <Picker.Item label="Lựa chọn" value=" " />
+                        <Picker.Item label="Nam" value="Nam" />
+                        <Picker.Item label="Nữ" value="Nữ" />
+                        <Picker.Item label="Khác" value="Khác" />
                     </Picker>
                 </View>
                 <TouchableOpacity onPress={() => {

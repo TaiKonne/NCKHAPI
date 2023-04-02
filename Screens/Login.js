@@ -35,7 +35,7 @@ const Login = ({ navigation }) => {
                             );
                             // });
                         } else {
-                            Alert.alert('Login', 'email id or password may wrong ');
+                            Alert.alert('', 'Tài khoảng email hoặc mật khẩu không đúng.');
                         }
                         console.log(
                             querySnapshot.docs[0]._data.email +
@@ -46,7 +46,7 @@ const Login = ({ navigation }) => {
                         );
                     } else {
                         console.log('account not found');
-                        Alert.alert('Login', 'account not found');
+                        Alert.alert('', 'Không tìm thấy tài khoản.');
                     }
                 })
                 .catch(error => {
@@ -54,7 +54,7 @@ const Login = ({ navigation }) => {
                     console.log(error);
                 });
         } else {
-            alert('Please Enter Details');
+            alert('Vui lòng nhập đủ thông tin.');
         }
     };
     useEffect(() => {

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, FlatList, ImageBackground, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Image, FlatList, ImageBackground, Alert, Modal } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -167,7 +167,8 @@ const GetPost = (props) => {
 
 
     const [settingpost, setsettingpost] = useState(0)
-    const [ids , setids] = useState('')
+    const [SimpleModal, setSimpleModal] = useState(false);
+    const [ids, setids] = useState('')
     return (
         <View
             style={{
@@ -196,7 +197,7 @@ const GetPost = (props) => {
                 {/* update posts nè chú */}
                 <TouchableOpacity
                     onPress={() => {
-                        settingpost == 0 ? (setsettingpost(1) , setids(userId)) : (setsettingpost(0) , setids(''))
+                        settingpost == 0 ? (setsettingpost(1), setids(userId)) : (setsettingpost(0), setids(''))
                     }}
                 >
                     <Image
@@ -224,32 +225,31 @@ const GetPost = (props) => {
                         borderRadius: 5,
                     }}>
                         <View style={{ flexDirection: 'column' }}>
-                            {ids == myId ? 
-                            (<TouchableOpacity
-                                onPress={() => {
-                                    navigation.navigate('Editpost', { post: postId, user: userId })
-                                }}
-                                style={{
-                                    flexDirection: 'row',
-                                    padding: 5,
-                                    alignItems: 'center'
-                                }}>
-                                <Image source={require('../front_end/icons/pen.png')}
+                            {ids == myId ?
+                                (<TouchableOpacity
+                                    onPress={() => {
+                                        navigation.navigate('Editpost', { post: postId, user: userId })
+                                    }}
                                     style={{
-                                        height: 18,
-                                        width: 18,
-                                        marginEnd: 10,
-                                        tintColor: 'black',
-                                    }} />
-                                <Text style={{ color: 'black', fontSize: 15 }}>Chỉnh sửa</Text>
-                                
-                            </TouchableOpacity>) : 
-                            ''}
+                                        flexDirection: 'row',
+                                        padding: 5,
+                                        alignItems: 'center'
+                                    }}>
+                                    <Image source={require('../front_end/icons/pen.png')}
+                                        style={{
+                                            height: 18,
+                                            width: 18,
+                                            marginEnd: 10,
+                                            tintColor: 'black',
+                                        }} />
+                                    <Text style={{ color: 'black', fontSize: 15 }}>Chỉnh sửa</Text>
+
+                                </TouchableOpacity>) :
+                                ''}
                             {/* <View style={{ flex: 1, borderWidth: 0.3, borderColor: 'grey', width: 100, marginHorizontal:10}}></View> */}
                             <TouchableOpacity
                                 onPress={() => {
-                                    deletePost(postId);
-                                    setsettingpost(0)
+                                    setSimpleModal(true)
                                 }}
                                 style={{
                                     flexDirection: 'row',
@@ -265,10 +265,44 @@ const GetPost = (props) => {
                                     }} />
                                 <Text style={{ color: 'black', fontSize: 15 }}>Xóa bài viết</Text>
                             </TouchableOpacity>
+                            <Modal
+                                visible={SimpleModal}
+                                animationType="fade"
+                                transparent={true}
+                            >
+                                <View
+                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <View
+                                        style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, flexDirection: 'column', borderWidth: 0.3, borderColor: 'grey' }}>
+                                        <Text
+                                            style={{ color: 'black' }}>Bạn có chắc muốn xóa bàn viết này?</Text>
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <TouchableOpacity
+                                                onPress={() => {
+                                                    setSimpleModal(false)
+                                                    setsettingpost(0)
+                                                }}>
+                                                <Text
+                                                    style={{ marginTop: 20, color: 'black', marginStart: 20, fontWeight: 'bold' }}>Hủy</Text>
+                                            </TouchableOpacity>
+                                            <View style={{ flex: 1 }}></View>
+                                            <TouchableOpacity
+                                                onPress={() => {
+                                                    setSimpleModal(false)
+                                                    deletePost(postId)
+                                                    setsettingpost(0)
+                                                }}>
+                                                <Text
+                                                    style={{ marginTop: 20, color: 'blue', marginEnd: 20, fontWeight: 'bold' }}>Xóa</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
+                                </View>
+                            </Modal>
                         </View>
                     </View>
                 ) : ''}
-            {caption ==='' && image ==='' ? 
+            {caption === '' && image === '' ?
                 (<Text
                     style={{
                         marginTop: 10,
@@ -276,11 +310,11 @@ const GetPost = (props) => {
                         marginRight: 20,
                         marginBottom: 10,
                         color: 'grey',
-                        fontStyle:'italic',
+                        fontStyle: 'italic',
                     }}>
                     {/* {caption} */}
                     Bài viết này không tồn tại.
-                </Text>) : 
+                </Text>) :
                 (<Text
                     style={{
                         marginTop: 10,
@@ -348,13 +382,13 @@ const GetPost = (props) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{ flexDirection: 'row', alignItems: 'center' }}
-                    // onPress={() => {
-                    //     navigation.navigate('Comments', {
-                    //         postId: postId,
-                    //         comments: cmt,
-                    //     });
-                    // }}
-                    >
+                // onPress={() => {
+                //     navigation.navigate('Comments', {
+                //         postId: postId,
+                //         comments: cmt,
+                //     });
+                // }}
+                >
                     <Text style={{ marginRight: 10, color: 'black' }}>
                         {share.length}
                     </Text>

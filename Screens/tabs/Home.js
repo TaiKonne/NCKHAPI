@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Image, TouchableOpacity, Alert, StyleSheet } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, Alert, Modal } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
 import firestore from '@react-native-firebase/firestore';
@@ -193,12 +193,12 @@ const Home = (props) => {
                     })
             })
     }
-
+    //setting post
     const [settingpost, setsettingpost] = useState(0)
+    const [SimpleModal, setSimpleModal] = useState(false);
     const [postids, setpostids] = useState('')
 
-    const [selectedValue, setSelectedValue] = useState(null);
-
+    const [SimpleModalshare, setSimpleModalShare] = useState(false);
 
     return (
         <View style={{ flex: 1 }}>
@@ -355,8 +355,7 @@ const Home = (props) => {
                                                 <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', width: 123, }}></View>
                                                 <TouchableOpacity
                                                     onPress={() => {
-                                                        deletePost(item.postId);
-                                                        setsettingpost(0)
+                                                        setSimpleModal(true)
                                                     }}
                                                     style={{
                                                         flexDirection: 'row',
@@ -372,6 +371,40 @@ const Home = (props) => {
                                                         }} />
                                                     <Text style={{ color: 'black', fontSize: 15 }}>Xóa bài viết</Text>
                                                 </TouchableOpacity>
+                                                <Modal
+                                                    visible={SimpleModal}
+                                                    animationType="fade"
+                                                    transparent={true}
+                                                >
+                                                    <View
+                                                        style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                                        <View
+                                                            style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, flexDirection: 'column', borderWidth: 0.3, borderColor: 'grey' }}>
+                                                            <Text
+                                                                style={{ color: 'black' }}>Bạn muốn xóa bàn viết này?</Text>
+                                                            <View style={{ flexDirection: 'row' }}>
+                                                                <TouchableOpacity
+                                                                    onPress={() => {
+                                                                        setSimpleModal(false)
+                                                                        setsettingpost(0)
+                                                                    }}>
+                                                                    <Text
+                                                                        style={{ marginTop: 20, color: 'black', marginStart: 20, fontWeight: 'bold' }}>Hủy</Text>
+                                                                </TouchableOpacity>
+                                                                <View style={{ flex: 1 }}></View>
+                                                                <TouchableOpacity
+                                                                    onPress={() => {
+                                                                        setSimpleModal(false)
+                                                                        deletePost(item.postId);
+                                                                        setsettingpost(0)
+                                                                    }}>
+                                                                    <Text
+                                                                        style={{ marginTop: 20, color: 'blue', marginEnd: 20, fontWeight: 'bold' }}>Xóa</Text>
+                                                                </TouchableOpacity>
+                                                            </View>
+                                                        </View>
+                                                    </View>
+                                                </Modal>
                                             </View>
                                         </View>
                                     ) : ''}
@@ -385,7 +418,6 @@ const Home = (props) => {
                                     }}>
                                     {item.caption}
                                 </Text>
-
                                 <Image
                                     source={{ uri: item.image }}
                                     style={{
@@ -450,8 +482,7 @@ const Home = (props) => {
                                             //     postId: item.postId,
                                             //     comments: item.comments,
                                             // });
-                                            sharePost(item);
-                                            countLike(item);
+                                            setSimpleModalShare(true)
                                         }}>
                                         <Text style={{ marginRight: 10, color: 'black' }}>
                                             {item.share.length}
@@ -461,6 +492,39 @@ const Home = (props) => {
                                             style={{ width: 22, height: 22, tintColor: 'black' }}
                                         />
                                     </TouchableOpacity>
+                                    <Modal
+                                        visible={SimpleModalshare}
+                                        animationType="fade"
+                                        transparent={true}
+                                    >
+                                        <View
+                                            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                            <View
+                                                style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, flexDirection: 'column', borderWidth: 0.3, borderColor: 'grey' }}>
+                                                <Text
+                                                    style={{ color: 'black' }}>Bạn muốn chia sẻ bài viết này?</Text>
+                                                <View style={{ flexDirection: 'row' }}>
+                                                    <TouchableOpacity
+                                                        onPress={() => {
+                                                            setSimpleModalShare(false)
+                                                        }}>
+                                                        <Text
+                                                            style={{ marginTop: 20, color: 'black', marginStart: 20, fontWeight: 'bold' }}>Hủy</Text>
+                                                    </TouchableOpacity>
+                                                    <View style={{ flex: 1 }}></View>
+                                                    <TouchableOpacity
+                                                        onPress={() => {
+                                                            setSimpleModalShare(false)
+                                                            sharePost(item);
+                                                            countLike(item);
+                                                        }}>
+                                                        <Text
+                                                            style={{ marginTop: 20, color: 'blue', marginEnd: 20, fontWeight: 'bold' }}>Chia sẻ</Text>
+                                                    </TouchableOpacity>
+                                                </View>
+                                            </View>
+                                        </View>
+                                    </Modal>
                                 </View>
                             </View>
                         );

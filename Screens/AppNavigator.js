@@ -15,6 +15,7 @@ import Setting from './Setting';
 import Introduction from './Introduction';
 import VisitUser from './VisitUser';
 import Editpost from './Editpost';
+import SimpleModal from './test';
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
@@ -84,6 +85,11 @@ const AppNavigator = () => {
                 <Stack.Screen
                     name="Editpost"
                     component={Editpost}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="SimpleModal"
+                    component={SimpleModal}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

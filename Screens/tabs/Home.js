@@ -475,56 +475,58 @@ const Home = (props) => {
                                             style={{ width: 20, height: 20, tintColor: 'black' }}
                                         />
                                     </TouchableOpacity>
-                                    <TouchableOpacity
-                                        style={{ flexDirection: 'row', alignItems: 'center' }}
-                                        onPress={() => {
-                                            // navigation.navigate('Comments', {
-                                            //     postId: item.postId,
-                                            //     comments: item.comments,
-                                            // });
-                                            setSimpleModalShare(true)
-                                        }}>
-                                        <Text style={{ marginRight: 10, color: 'black' }}>
-                                            {item.share.length}
-                                        </Text>
-                                        <Image
-                                            source={require('../../front_end/icons/share.png')}
-                                            style={{ width: 22, height: 22, tintColor: 'black' }}
-                                        />
-                                    </TouchableOpacity>
-                                    <Modal
-                                        visible={SimpleModalshare}
-                                        animationType="fade"
-                                        transparent={true}
-                                    >
-                                        <View
-                                            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                            <View
-                                                style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, flexDirection: 'column', borderWidth: 0.3, borderColor: 'grey' }}>
-                                                <Text
-                                                    style={{ color: 'black' }}>Bạn muốn chia sẻ bài viết này?</Text>
-                                                <View style={{ flexDirection: 'row' }}>
-                                                    <TouchableOpacity
-                                                        onPress={() => {
-                                                            setSimpleModalShare(false)
-                                                        }}>
+                                    {userId != item.userId ?
+                                        (<><TouchableOpacity
+                                            style={{ flexDirection: 'row', alignItems: 'center' }}
+                                            onPress={() => {
+                                                // navigation.navigate('Comments', {
+                                                //     postId: item.postId,
+                                                //     comments: item.comments,
+                                                // });
+                                                // userId  == item.userId ? setSimpleModalShare(true) : setSimpleModalShare(false)
+                                                setSimpleModalShare(true);
+                                            }}>
+                                            <Text style={{ marginRight: 10, color: 'black' }}>
+                                                {item.share.length}
+                                            </Text>
+                                            <Image
+                                                source={require('../../front_end/icons/share.png')}
+                                                style={{ width: 22, height: 22, tintColor: 'black' }} />
+                                        </TouchableOpacity><Modal
+                                            visible={SimpleModalshare}
+                                            animationType="fade"
+                                            transparent={true}
+                                        >
+                                                <View
+                                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                                    <View
+                                                        style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, flexDirection: 'column', borderWidth: 0.3, borderColor: 'grey' }}>
                                                         <Text
-                                                            style={{ marginTop: 20, color: 'black', marginStart: 20, fontWeight: 'bold' }}>Hủy</Text>
-                                                    </TouchableOpacity>
-                                                    <View style={{ flex: 1 }}></View>
-                                                    <TouchableOpacity
-                                                        onPress={() => {
-                                                            setSimpleModalShare(false)
-                                                            sharePost(item);
-                                                            countLike(item);
-                                                        }}>
-                                                        <Text
-                                                            style={{ marginTop: 20, color: 'blue', marginEnd: 20, fontWeight: 'bold' }}>Chia sẻ</Text>
-                                                    </TouchableOpacity>
+                                                            style={{ color: 'black' }}>Bạn muốn chia sẻ bài viết này?</Text>
+                                                        <View style={{ flexDirection: 'row' }}>
+                                                            <TouchableOpacity
+                                                                onPress={() => {
+                                                                    setSimpleModalShare(false);
+                                                                }}>
+                                                                <Text
+                                                                    style={{ marginTop: 20, color: 'black', marginStart: 20, fontWeight: 'bold' }}>Hủy</Text>
+                                                            </TouchableOpacity>
+                                                            <View style={{ flex: 1 }}></View>
+                                                            <TouchableOpacity
+                                                                onPress={() => {
+                                                                    setSimpleModalShare(false);
+                                                                    sharePost(item);
+                                                                    countLike(item);
+                                                                }}>
+                                                                <Text
+                                                                    style={{ marginTop: 20, color: 'blue', marginEnd: 20, fontWeight: 'bold' }}>Chia sẻ</Text>
+                                                            </TouchableOpacity>
+                                                        </View>
+                                                    </View>
                                                 </View>
-                                            </View>
-                                        </View>
-                                    </Modal>
+                                            </Modal></>) :
+                                        ''}
+
                                 </View>
                             </View>
                         );

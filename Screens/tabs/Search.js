@@ -231,7 +231,7 @@ const Search = () => {
         }}>
           <TextInput
             autoCorrect={false}
-            placeholder={'Enter search text'}
+            placeholder={'Nhập tên người dùng khác'}
             placeholderTextColor={'grey'}
             // onChangeText={(text) => {
             //   setsearchtext(text)
@@ -333,8 +333,8 @@ const Search = () => {
                     }}>
                     <Text style={{ color: '#fff', marginLeft: 10, marginRight: 10, fontWeight: 'bold' }}>
                       {getFollowStatus(item._data.followers)
-                        ? 'Unfollow'
-                        : 'Follow'}
+                        ? 'Bỏ theo dõi'
+                        : 'Theo dõi'}
                     </Text>
                   </TouchableOpacity>
                 </View>

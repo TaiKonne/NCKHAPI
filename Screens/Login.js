@@ -92,8 +92,9 @@ const Login = ({ navigation }) => {
                     fontSize: 20,
                     fontWeight: '800',
                     color: 'red',
+                    textAlign:'center'
                 }}>
-                WELCOME TO TDMU SOCIAL MEDIA
+                WELCOME TO TDMU SOCIAL NETWORK
             </Text>
             <TextInput
                 value={email}

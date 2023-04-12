@@ -52,7 +52,7 @@ const Profile = () => {
             .get()
             .then(documentSnapshot => {
                 console.log('User exists: ', documentSnapshot.exists);
-                let temp=[];
+                let temp = [];
                 if (documentSnapshot.exists) {
                     console.log('User data: ', documentSnapshot.data());
                     setUploadedPicUrl(documentSnapshot.data().profilePic);
@@ -63,11 +63,11 @@ const Profile = () => {
                     setAddress(documentSnapshot.data().address);
                     setMail(documentSnapshot.data().email);
                     setImageWall(documentSnapshot.data().picWal);
-                    temp=(documentSnapshot.data().posts);
+                    temp = (documentSnapshot.data().posts);
                     setName(documentSnapshot.data().name);
                     setgender(documentSnapshot.data().gender);
                     console.log('data ', documentSnapshot.data().following);
-                    temp.sort((a,b)=>b.time-a.time);
+                    temp.sort((a, b) => b.time - a.time);
                     setPS(temp);
                 }
             });
@@ -262,9 +262,12 @@ const Profile = () => {
                     }}
                 >
                     <View>
-                        <Text style={{ color: 'grey', fontSize: 12 }}>
+                        {morInfo == 0 ? (<Text style={{ color: 'grey', fontSize: 12 }}>
                             Xem thêm
-                        </Text>
+                        </Text>) :
+                            (<Text style={{ color: 'grey', fontSize: 12 }}>
+                                Ẩn bớt
+                            </Text>)}
                     </View>
                 </TouchableOpacity>
                 {morInfo == 1 ? (<View style={{

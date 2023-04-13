@@ -201,6 +201,8 @@ const Home = (props) => {
     const [SimpleModalshare, setSimpleModalShare] = useState(false);
 
     const [abc ,setAbc] = useState(null)
+    
+    // const [checkdots,setcheckdots] = useState(1);
 
     return (
         <View style={{ flex: 1 }}>

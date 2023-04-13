@@ -20,7 +20,7 @@ function Introduction(props) {
                 backgroundColor: 'skyblue',
             }}>
             <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
-                User Guide For Newbies
+                Hướng dẫn cho người mới
             </Text>
         </View>
         <Swiper showsButtons={true} style={{

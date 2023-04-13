@@ -502,7 +502,7 @@ const Home = (props) => {
                                                     <View
                                                         style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, flexDirection: 'column', borderWidth: 0.3, borderColor: 'grey' }}>
                                                         <Text
-                                                            style={{ color: 'black' }}>Bạn muốn chia sẻ bài viết này?</Text>
+                                                            style={{ color: 'black' }}>Bạn muốn chia sẻ bài viết này? </Text>
                                                         <View style={{ flexDirection: 'row' }}>
                                                             <TouchableOpacity
                                                                 onPress={() => {
@@ -514,9 +514,9 @@ const Home = (props) => {
                                                             <View style={{ flex: 1 }}></View>
                                                             <TouchableOpacity
                                                                 onPress={() => {
-                                                                    setSimpleModalShare(false);
                                                                     sharePost(item);
                                                                     countLike(item);
+                                                                    setSimpleModalShare(false);
                                                                 }}>
                                                                 <Text
                                                                     style={{ marginTop: 20, color: 'blue', marginEnd: 20, fontWeight: 'bold' }}>Chia sẻ</Text>

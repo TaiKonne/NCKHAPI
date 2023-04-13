@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Modal } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
@@ -11,6 +11,7 @@ const Signup = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [SimpleModal, setSimpleModal] = useState(false);
     useEffect(() => {
         getFcmToken();
     }, []);
@@ -53,7 +54,7 @@ const Signup = ({ navigation }) => {
                 setModalVisible(false);
                 console.log('User added!');
                 saveLocalData();
-                navigation.goBack();
+                // navigation.goBack();
             });
         setModalVisible(false);
     };
@@ -78,14 +79,14 @@ const Signup = ({ navigation }) => {
                     fontWeight: '800',
                     color: 'red',
                 }}>
-                Register
+                Đăng ký tài khoản
             </Text>
             <TextInput
                 value={name}
                 onChangeText={txt => {
                     setName(txt);
                 }}
-                placeholder="Enter Name"
+                placeholder="Nhập họ và tên của bạn"
                 placeholderTextColor={'grey'}
                 style={{
                     width: '84%',
@@ -103,7 +104,7 @@ const Signup = ({ navigation }) => {
                 onChangeText={txt => {
                     setEmail(txt);
                 }}
-                placeholder="Enter Email Id"
+                placeholder="Nhập email của bạn"
                 placeholderTextColor={'grey'}
                 style={{
                     width: '84%',
@@ -121,7 +122,7 @@ const Signup = ({ navigation }) => {
                 onChangeText={txt => {
                     setPassword(txt);
                 }}
-                placeholder="Enter Password"
+                placeholder="Nhập mật khẩu của bạn"
                 placeholderTextColor={'grey'}
                 style={{
                     width: '84%',
@@ -146,11 +147,45 @@ const Signup = ({ navigation }) => {
                     alignSelf: 'center',
                 }}
                 onPress={() => {
+                    setSimpleModal(true);
                     saveData();
                 }}>
-                <Text style={{ fontSize: 20, color: '#000' }}>Sign up</Text>
+                <Text style={{ fontSize: 20, color: '#000' }}>Đăng ký</Text>
             </TouchableOpacity>
-            <Loader modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <Modal
+                visible={SimpleModal}
+                animationType="fade"
+                transparent={true}
+            >
+                <View
+                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View
+                        style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, flexDirection: 'column', borderWidth: 0.3, borderColor: 'grey' }}>
+                        <Text
+                            style={{ color: 'black' }}>Xác nhận đăng ký tài khoản?</Text>
+                        <View style={{ flexDirection: 'row' }}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setSimpleModal(false)
+
+                                }}>
+                                <Text
+                                    style={{ marginTop: 20, color: 'black', marginStart: 20, fontWeight: 'bold' }}>Hủy</Text>
+                            </TouchableOpacity>
+                            <View style={{ flex: 1 }}></View>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setSimpleModal(false)
+                                    navigation.goBack()
+                                }}>
+                                <Text
+                                    style={{ marginTop: 20, color: 'blue', marginEnd: 20, fontWeight: 'bold' }}>Xác nhận</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+            {/* <Loader modalVisible={modalVisible} setModalVisible={setModalVisible} /> */}
         </View>
     );
 };

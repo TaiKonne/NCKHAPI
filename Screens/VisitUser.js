@@ -23,6 +23,7 @@ const VisitUser = (props) => {
     const [address, setAddress] = useState('');
     const [mail, setMail] = useState('');
     const [name, setName] = useState([]);
+    const [gender,setGender] = useState('');
     const [PS, setPS] = useState([]);
     const userId = props.route.params;
 
@@ -50,6 +51,7 @@ const VisitUser = (props) => {
                     setAddress(documentSnapshot.data().address);
                     setMail(documentSnapshot.data().email);
                     setName(documentSnapshot.data().name);
+                    setGender(documentSnapshot.data().gender);
                     setFollowers(documentSnapshot.data().followers);
                     setFollowing(documentSnapshot.data().following);
                     setPS(documentSnapshot.data().posts);
@@ -157,8 +159,8 @@ const VisitUser = (props) => {
                         borderRadius: 10
                     }}>
                     {buafl == 0 ?
-                        (<Text style={{ color: 'black', fontSize: 16, marginRight: 10, marginLeft: 10, marginTop: 5, marginBottom: 5 }}>Follow</Text>) :
-                        (<Text style={{ color: 'black', fontSize: 16, marginRight: 10, marginLeft: 10, marginTop: 5, marginBottom: 5 }}>Unfollow</Text>)}
+                        (<Text style={{ color: 'black', fontSize: 16, marginRight: 10, marginLeft: 10, marginTop: 5, marginBottom: 5 }}>Theo dõi</Text>) :
+                        (<Text style={{ color: 'black', fontSize: 16, marginRight: 10, marginLeft: 10, marginTop: 5, marginBottom: 5 }}>Bỏ theo dõi</Text>)}
                 </TouchableOpacity>
                 {/* More  Information */}
                 <TouchableOpacity onPress={() => {
@@ -173,9 +175,12 @@ const VisitUser = (props) => {
                     }}
                 >
                     <View>
-                        <Text style={{ color: 'grey', fontSize: 13 }}>
-                            More Information
-                        </Text>
+                        {morInfo == 0 ? (<Text style={{ color: 'grey', fontSize: 12 }}>
+                            Xem thêm
+                        </Text>) :
+                            (<Text style={{ color: 'grey', fontSize: 12 }}>
+                                Ẩn bớt
+                            </Text>)}
                     </View>
                 </TouchableOpacity>
                 {morInfo == 1 ? (<View style={{
@@ -191,12 +196,12 @@ const VisitUser = (props) => {
                         marginStart: 20,
                         marginEnd: 20,
                     }}>
-                        <Image source={require('../front_end/icons/mail.png')}
+                        <Image source={require('../front_end/icons/email.png')}
                             style={{
                                 height: 18,
                                 width: 18,
                                 marginStart: 10,
-                                tintColor: 'black',
+                                tintColor: '#1877f2',
                             }} />
                         <Text style={{
                             color: 'black',
@@ -211,12 +216,12 @@ const VisitUser = (props) => {
                         marginStart: 20,
                         marginEnd: 20,
                     }}>
-                        <Image source={require('../front_end/icons/telephone.png')}
+                        <Image source={require('../front_end/icons/phone-call.png')}
                             style={{
                                 height: 18,
                                 width: 18,
                                 marginStart: 10,
-                                tintColor: 'black',
+                                tintColor: 'green',
                             }} />
                         <Text style={{
                             color: 'black',
@@ -231,18 +236,38 @@ const VisitUser = (props) => {
                         marginStart: 20,
                         marginEnd: 20,
                     }}>
-                        <Image source={require('../front_end/icons/location.png')}
+                        <Image source={require('../front_end/icons/check-in.png')}
                             style={{
                                 height: 18,
                                 width: 18,
                                 marginStart: 10,
-                                tintColor: 'black',
+                                // tintColor: 'black',
                             }} />
                         <Text style={{
                             color: 'black',
                             fontSize: 14,
                             paddingStart: 5,
                         }}>{address}</Text>
+                    </View>
+                    <View style={{
+                        flexDirection: 'row',
+                        paddingVertical: 5,
+                        alignItems: 'center',
+                        marginStart: 20,
+                        marginEnd: 20,
+                    }}>
+                        <Image source={require('../front_end/icons/gender.png')}
+                            style={{
+                                height: 18,
+                                width: 18,
+                                marginStart: 10,
+                                // tintColor: 'black',
+                            }} />
+                        <Text style={{
+                            color: 'black',
+                            fontSize: 14,
+                            paddingStart: 5,
+                        }}>{gender}</Text>
                     </View>
                 </View>) : ""}
                 {/* follower */}
@@ -271,7 +296,7 @@ const VisitUser = (props) => {
                             setSelectedTabFollowing(0);
                             settabdefault(0);
                         }}>
-                        <Text style={{ fontSize: 16, color: 'black' }}>Bài viết của tôi</Text>
+                        <Text style={{ fontSize: 16, color: 'black' }}>Bài viết gần đây</Text>
                         {/* chiều dài của post */}
                         <Text style={{ fontSize: 15, color: 'grey' }}>{PS.length}</Text>
 

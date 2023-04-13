@@ -200,6 +200,8 @@ const Home = (props) => {
 
     const [SimpleModalshare, setSimpleModalShare] = useState(false);
 
+    const [abc ,setAbc] = useState(null)
+
     return (
         <View style={{ flex: 1 }}>
             <View
@@ -485,6 +487,9 @@ const Home = (props) => {
                                                 // });
                                                 // userId  == item.userId ? setSimpleModalShare(true) : setSimpleModalShare(false)
                                                 setSimpleModalShare(true);
+                                                setAbc(item);
+                                                // sharePost(item);
+                                                // countLike(item);
                                             }}>
                                             <Text style={{ marginRight: 10, color: 'black' }}>
                                                 {item.share.length}
@@ -492,7 +497,8 @@ const Home = (props) => {
                                             <Image
                                                 source={require('../../front_end/icons/share.png')}
                                                 style={{ width: 22, height: 22, tintColor: 'black' }} />
-                                        </TouchableOpacity><Modal
+                                        </TouchableOpacity>
+                                        <Modal
                                             visible={SimpleModalshare}
                                             animationType="fade"
                                             transparent={true}
@@ -514,8 +520,8 @@ const Home = (props) => {
                                                             <View style={{ flex: 1 }}></View>
                                                             <TouchableOpacity
                                                                 onPress={() => {
-                                                                    sharePost(item);
-                                                                    countLike(item);
+                                                                    sharePost(abc);
+                                                                    countLike(abc);
                                                                     setSimpleModalShare(false);
                                                                 }}>
                                                                 <Text
@@ -524,7 +530,9 @@ const Home = (props) => {
                                                         </View>
                                                     </View>
                                                 </View>
-                                            </Modal></>) :
+                                            </Modal>
+                                            </>
+                                            ) :
                                         ''}
 
                                 </View>

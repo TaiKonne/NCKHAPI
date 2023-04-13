@@ -23,7 +23,7 @@ const VisitUser = (props) => {
     const [address, setAddress] = useState('');
     const [mail, setMail] = useState('');
     const [name, setName] = useState([]);
-    const [gender,setGender] = useState('');
+    const [gender, setGender] = useState('');
     const [PS, setPS] = useState([]);
     const userId = props.route.params;
 
@@ -343,7 +343,7 @@ const VisitUser = (props) => {
                         data={PS}
                         renderItem={({ item, index }) => {
                             return (
-                                <GetPost cons={{ item: item, myId: userId }} />
+                                <GetPost cons={{ item: item, myId: userId, check: 0 }} />
                             );
                         }} />
                 )}

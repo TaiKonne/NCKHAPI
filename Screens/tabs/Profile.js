@@ -430,7 +430,7 @@ const Profile = () => {
                         data={PS}
                         renderItem={({ item, index }) => {
                             return (
-                                <GetPost cons={{ item: item, myId: userId }} />
+                                <GetPost cons={{ item: item, myId: userId, check: 1 }} />
                             );
                         }} />
                 )}

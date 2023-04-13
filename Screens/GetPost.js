@@ -13,6 +13,8 @@ const GetPost = (props) => {
     const time = props.cons.item.time;
     const userId = props.cons.item.userId;
     const myId = props.cons.myId;
+    const checkPost = props.cons.check;
+    // checkPost=1 là của chính mình
     useEffect(() => {
         getUser();
         getPost();
@@ -29,7 +31,7 @@ const GetPost = (props) => {
     const [profilePic, setProfilePic] = useState('');
     const [Item, setItem] = useState([]);
     const [onLikeClick, setOnLikeCLick] = useState(false);
-
+    const [checkGetPost, setCheckGetPost] = useState(0);
     const coverTime = time => {
         let date = time.toDate();
         let mm = date.getMonth() + 1;
@@ -60,12 +62,10 @@ const GetPost = (props) => {
                     setProfilePic(document.data().profilePic);
                 }
             })
-
     }
     const getPost = async () => {
-
-        firestore().
-            collection('posts')
+        firestore()
+            .collection('posts')
             .doc(postId)
             .get()
             .then(document => {
@@ -76,9 +76,6 @@ const GetPost = (props) => {
                     setLike(document.data().likes);
                     setItem(document.data());
                     setShare(document.data().share);
-                    // if (caption === '' && image === '') {
-                    //     setCaption('Bài viết này không tồn tại.')
-                    // }
                 }
             });
 
@@ -195,7 +192,7 @@ const GetPost = (props) => {
                 </View>
                 <View style={{ flex: 1 }}></View>
                 {/* update posts nè chú */}
-                <TouchableOpacity
+                {checkPost === 1 ? (<TouchableOpacity
                     onPress={() => {
                         settingpost == 0 ? (setsettingpost(1), setids(userId)) : (setsettingpost(0), setids(''))
                     }}
@@ -209,7 +206,7 @@ const GetPost = (props) => {
                         }}
                         size={20}
                         source={require('../front_end/icons/dots.png')} />
-                </TouchableOpacity>
+                </TouchableOpacity>) : ''}
             </View>
 
             {settingpost == 1 ?

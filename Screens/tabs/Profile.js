@@ -69,23 +69,56 @@ const Profile = () => {
                     console.log('data ', documentSnapshot.data().following);
                     temp.sort((a, b) => b.time - a.time);
                     setPS(temp);
+
                     let flo = followers;
-                    const unique = flo.filter((obj, index) =>
-                        flo.findIndex((item) => item.userId == obj.userId) == index
-                    );
-                    setFollowers(unique);
+                    let co = 0;
+                    for (let i = 0; i < flo.length - 1; i++) {
+                        for (let j = i + 1; j < flo.length; j++) {
+                            if (flo[i].userId == flo[j].userId) {
+                                co = 1;
+                            }
+                        }
+                    }
+                    if (co == 1) {
+                        
+                        const unique = flo.filter((obj, index) =>
+                            flo.findIndex((item) => item.userId == obj.userId) == index
+                        );
+                        if (unique != null) {
+                            
+                            firestore()
+                                .collection('Users')
+                                .doc(userId)
+                                .update({
+                                    followers: unique,
+                                })
+                            setFollowers(unique);
+                    
+                        }
+                    }
                     let flo1 = following;
-                    const unique1 = flo1.filter((obj, index) =>
-                        flo1.findIndex((item) => item.userId == obj.userId) == index
-                    );
-                    setFollowing(unique1);
-                    firestore()
-                        .collection('Users')
-                        .doc(userId)
-                        .update({
-                            followers: unique,
-                            following: unique1
-                        })
+                    let co1 = 0;
+                    for (let i = 0; i < flo1.length - 1; i++) {
+                        for (let j = i + 1; j < flo1.length; j++) {
+                            if (flo1[i].userId == flo1[j].userId) {
+                                co1 = 1;
+                            }
+                        }
+                    }
+                    if (co1 == 1) {
+                        const unique1 = flo1.filter((obj, index) =>
+                            flo1.findIndex((item) => item.userId == obj.userId) == index
+                        );
+                        if (unique1 != null) {
+                            setFollowing(unique1);
+                            firestore()
+                                .collection('Users')
+                                .doc(userId)
+                                .update({
+                                    following: unique1
+                                })
+                        }
+                    }
                 }
             });
     };

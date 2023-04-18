@@ -69,6 +69,23 @@ const Profile = () => {
                     console.log('data ', documentSnapshot.data().following);
                     temp.sort((a, b) => b.time - a.time);
                     setPS(temp);
+                    let flo = followers;
+                    const unique = flo.filter((obj, index) =>
+                        flo.findIndex((item) => item.userId == obj.userId) == index
+                    );
+                    setFollowers(unique);
+                    let flo1 = following;
+                    const unique1 = flo1.filter((obj, index) =>
+                        flo1.findIndex((item) => item.userId == obj.userId) == index
+                    );
+                    setFollowing(unique1);
+                    firestore()
+                        .collection('Users')
+                        .doc(userId)
+                        .update({
+                            followers: unique,
+                            following: unique1
+                        })
                 }
             });
     };

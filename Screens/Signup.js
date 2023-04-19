@@ -54,7 +54,7 @@ const Signup = ({ navigation }) => {
                 setModalVisible(false);
                 console.log('User added!');
                 saveLocalData();
-                // navigation.goBack();
+                navigation.goBack();
             });
         setModalVisible(false);
     };
@@ -151,7 +151,7 @@ const Signup = ({ navigation }) => {
                 }}>
                 <Text style={{ fontSize: 20, color: '#000' }}>Đăng ký</Text>
             </TouchableOpacity>
-            <Modal
+            {/* <Modal
                 visible={SimpleModal}
                 animationType="fade"
                 transparent={true}
@@ -183,8 +183,8 @@ const Signup = ({ navigation }) => {
                         </View>
                     </View>
                 </View>
-            </Modal>
-            {/* <Loader modalVisible={modalVisible} setModalVisible={setModalVisible} /> */}
+            </Modal> */}
+            <Loader modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </View>
     );
 };

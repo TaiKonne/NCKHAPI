@@ -148,7 +148,6 @@ const Signup = ({ navigation }) => {
                 }}
                 onPress={() => {
                     setSimpleModal(true);
-                    saveData();
                 }}>
                 <Text style={{ fontSize: 20, color: '#000' }}>Đăng ký</Text>
             </TouchableOpacity>
@@ -167,7 +166,6 @@ const Signup = ({ navigation }) => {
                             <TouchableOpacity
                                 onPress={() => {
                                     setSimpleModal(false)
-
                                 }}>
                                 <Text
                                     style={{ marginTop: 20, color: 'black', marginStart: 20, fontWeight: 'bold' }}>Hủy</Text>
@@ -176,7 +174,8 @@ const Signup = ({ navigation }) => {
                             <TouchableOpacity
                                 onPress={() => {
                                     setSimpleModal(false)
-                                    navigation.goBack()
+                                    saveData();
+                                    navigation.navigate('Introduction')
                                 }}>
                                 <Text
                                     style={{ marginTop: 20, color: 'blue', marginEnd: 20, fontWeight: 'bold' }}>Xác nhận</Text>

@@ -133,7 +133,7 @@ function Introduction(props) {
         </Swiper>
         <TouchableOpacity 
         onPress={() => {
-            navigation.navigate('HomeSC')
+            navigation.navigate('Login')
         }}
         style={{
             justifyContent: 'center',

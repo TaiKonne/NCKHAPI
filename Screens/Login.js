@@ -6,7 +6,7 @@ import Loader from './common/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation }) => {
-    const [email, setEmail] = useState('dung@gmail.com');
+    const [email, setEmail] = useState('2124802010067@student.tdmu.edu.vn');
     const [password, setPassword] = useState('1');
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -92,7 +92,7 @@ const Login = ({ navigation }) => {
                     fontSize: 20,
                     fontWeight: '800',
                     color: 'red',
-                    textAlign:'center'
+                    textAlign: 'center'
                 }}>
                 WELCOME TO TDMU SOCIAL NETWORK
             </Text>
@@ -144,8 +144,8 @@ const Login = ({ navigation }) => {
                     alignSelf: 'center',
                 }}
                 onPress={() => {
-                    checkSignup == 1 ? navigation.navigate('Introduction') : checkLogin();
-
+                    checkLogin();
+                    setCheckSignUp(0);
                 }}>
                 <Text style={{ fontSize: 20, color: '#000' }}>Đăng nhập</Text>
             </TouchableOpacity>

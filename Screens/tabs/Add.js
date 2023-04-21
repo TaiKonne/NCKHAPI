@@ -273,6 +273,8 @@ const Add = ({ onAdded }) => {
                 )}
                 <TextInput
                     value={caption}
+                    multiline={true}
+                    keyboardType='default'
                     onChangeText={txt => {
                         setCaption(txt);
                     }}

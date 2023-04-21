@@ -9,6 +9,9 @@ import GetPost from './GetPost';
 
 const VisitUser = (props) => {
 
+    const userId = props.route.params.userId; // userId của khách
+    const myId = props.route.params.myId;
+
     // <GetPost cons={{ item: item, myId: userId }} />
     const navigation = useNavigation();
     const [imageData, setImageData] = useState(null);
@@ -25,19 +28,22 @@ const VisitUser = (props) => {
     const [name, setName] = useState([]);
     const [gender, setGender] = useState('');
     const [PS, setPS] = useState([]);
-    const userId = props.route.params;
 
     //  Follow button :))) 
-    const [buafl, setbuafl] = useState(0)
+    const [buafl, setbuafl] = useState(0);
     //  selectedTab
     const [tabdefault, settabdefault] = useState(1)
     const [selectedTabPost, setSelectedTabPost] = useState(0);
     const [selectedTabFollower, setSelectedTabFollower] = useState(0);
     const [selectedTabFollowing, setSelectedTabFollowing] = useState(0);
 
+    //check những người mà tài khoản của mình following
+
     useEffect(() => {
         getProfileVisit();
+        checkFollow();
     }, 100);
+
     const getProfileVisit = async () => {
         firestore()
             .collection('Users')
@@ -53,9 +59,30 @@ const VisitUser = (props) => {
                     setName(documentSnapshot.data().name);
                     setGender(documentSnapshot.data().gender);
                     setFollowers(documentSnapshot.data().followers);
-                    setFollowing(documentSnapshot.data().following);
+                    setFollowing(documentSnapshot.data().following); // cần check
                     setPS(documentSnapshot.data().posts);
                 }
+            })
+    }
+
+    const checkFollow = async () => {
+        let tmpFl = [];
+        firestore()
+            .collection('Users')
+            .doc(myId)
+            .get()
+            .then(Snapshot => {
+                if (Snapshot.exists) {
+                    tmpFl = Snapshot.data().following;
+                }
+                for (let i = 0; i < tmpFl.length; i++) {
+                    if (tmpFl[i].userId == userId) {
+                        setbuafl(1);
+                        return;
+                    }
+                }
+                setbuafl(0);
+
             })
     }
 

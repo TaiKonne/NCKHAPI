@@ -180,7 +180,10 @@ const Search = () => {
         />
         <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}
           onPress={() => {
-            navigation.navigate('VisitUser', userids)
+            navigation.navigate('VisitUser',  {
+              userId: userids,
+              myId: userId,
+          })
           }}
         >
           {titles}
@@ -313,7 +316,11 @@ const Search = () => {
                       }} />
                     <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}
                       onPress={() => {
-                        navigation.navigate('VisitUser', item._data.userId);
+
+                        navigation.navigate('VisitUser',                         {
+                          userId: item._data.userId,
+                          myId: userId,
+                      });
                       }}
                     >
                       {item._data.name}

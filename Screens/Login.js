@@ -6,8 +6,8 @@ import Loader from './common/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('2124802010067@student.tdmu.edu.vn');
+    const [password, setPassword] = useState('1');
     const [modalVisible, setModalVisible] = useState(false);
 
     const [checkSignup, setCheckSignUp] = useState(0);

@@ -293,7 +293,10 @@ const Home = (props) => {
                                             marginTop: 10,
                                         }}
                                         onPress={() => {
-                                            {userId != item.userId ? (navigation.navigate('VisitUser', item.userId)) : ''}
+                                            {userId != item.userId ? (navigation.navigate('VisitUser',  {
+                                                userId: item.userId,
+                                                myId: userId,
+                                            })) : ''}
                                         }}>
                                         <UpAv cons={item.userId} />
                                         <View style={{ flexDirection: 'column' }}>

@@ -80,12 +80,12 @@ const Profile = () => {
                         }
                     }
                     if (co == 1) {
-                        
+
                         const unique = flo.filter((obj, index) =>
                             flo.findIndex((item) => item.userId == obj.userId) == index
                         );
                         if (unique != null) {
-                            
+
                             firestore()
                                 .collection('Users')
                                 .doc(userId)
@@ -93,7 +93,7 @@ const Profile = () => {
                                     followers: unique,
                                 })
                             setFollowers(unique);
-                    
+
                         }
                     }
                     let flo1 = following;
@@ -502,7 +502,11 @@ const Profile = () => {
                                         style={{ flexDirection: 'row', alignItems: 'center' }}
                                         onPress={() => {
                                             // Alert.alert('Nút vào profile người khác','Vào profile')
-                                            navigation.navigate('VisitUser', item.userId);
+                                            navigation.navigate('VisitUser',
+                                                {
+                                                    userId: item.userId,
+                                                    myId: userId,
+                                                });
                                         }}>
                                         <Image
                                             source={item.profilePic == ''
@@ -559,7 +563,10 @@ const Profile = () => {
                                         style={{ flexDirection: 'row', alignItems: 'center' }}
                                         onPress={() => {
                                             // Alert.alert('Nút vào profile người khác','Vào profile')
-                                            navigation.navigate('VisitUser', item.userId);
+                                            navigation.navigate('VisitUser',  {
+                                                userId: item.userId,
+                                                myId: userId,
+                                            });
                                         }}>
                                         <Image
                                             source={item.profilePic == ''

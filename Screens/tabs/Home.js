@@ -17,7 +17,18 @@ const Home = (props) => {
     const [upCap, setUpCap] = useState('');
     useEffect(() => {
         getUserId();
-        getData();
+        let temp = [];
+        const gett = firestore()
+            .collection('posts')
+            .orderBy('createdAt', 'desc')
+        gett.onSnapshot(Snap => {
+            const g = Snap.docs.map(S => {
+                return { ...S.data() };
+            })
+
+            setPostData(g);
+        });
+
     }, []);
 
     const getUserId = async () => {
@@ -200,8 +211,8 @@ const Home = (props) => {
 
     const [SimpleModalshare, setSimpleModalShare] = useState(false);
 
-    const [abc ,setAbc] = useState(null)
-    
+    const [abc, setAbc] = useState(null)
+
     // const [checkdots,setcheckdots] = useState(1);
 
     return (
@@ -293,10 +304,12 @@ const Home = (props) => {
                                             marginTop: 10,
                                         }}
                                         onPress={() => {
-                                            {userId != item.userId ? (navigation.navigate('VisitUser',  {
-                                                userId: item.userId,
-                                                myId: userId,
-                                            })) : ''}
+                                            {
+                                                userId != item.userId ? (navigation.navigate('VisitUser', {
+                                                    userId: item.userId,
+                                                    myId: userId,
+                                                })) : ''
+                                            }
                                         }}>
                                         <UpAv cons={item.userId} />
                                         <View style={{ flexDirection: 'column' }}>
@@ -503,11 +516,11 @@ const Home = (props) => {
                                                 source={require('../../front_end/icons/share.png')}
                                                 style={{ width: 22, height: 22, tintColor: 'black' }} />
                                         </TouchableOpacity>
-                                        <Modal
-                                            visible={SimpleModalshare}
-                                            animationType="fade"
-                                            transparent={true}
-                                        >
+                                            <Modal
+                                                visible={SimpleModalshare}
+                                                animationType="fade"
+                                                transparent={true}
+                                            >
                                                 <View
                                                     style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                                     <View
@@ -536,8 +549,8 @@ const Home = (props) => {
                                                     </View>
                                                 </View>
                                             </Modal>
-                                            </>
-                                            ) :
+                                        </>
+                                        ) :
                                         ''}
 
                                 </View>

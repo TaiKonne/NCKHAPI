@@ -20,18 +20,6 @@ const NewMessage = (props) => {
   let user2 = Data.userId;
   let chatUser = user1 > user2 ? user1 + "-" + user2 : user2 + "-" + user1
   let get = uuid.v1();
-  // 5a346a5a-b545-4dc1-a821-fdead8c1bead
-  // 9fda510a-409f-4cbe-9fa9-5ec52d6105a7
-  // user1|user2
-  //   data: {
-  //     userId: item.userId,
-  //     name: item.name,
-  //     myId: userId,
-  //     profilePic:
-  //         item.profilePic == '' || item.profilePic == null
-  //             ? ''
-  //             : item.profilePic,
-  // },
 
   const navigation = useNavigation();
   const [messages, setMessages] = useState([]);
@@ -53,6 +41,7 @@ const NewMessage = (props) => {
       });
       setMessages(allMessages);
     });
+    
   }, []);
 
   const onSend = messageArray => {

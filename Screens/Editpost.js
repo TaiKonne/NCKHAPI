@@ -232,6 +232,7 @@ const Editpost = (props) => {
                     }}
                     placeholder="type Caption here..."
                     placeholderTextColor={'grey'}
+                    multiline={true}
                     style={{ width: '70%', color: 'black' }}
                 />
             </View>

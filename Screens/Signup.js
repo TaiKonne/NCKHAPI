@@ -12,6 +12,10 @@ const Signup = ({ navigation }) => {
     const [name, setName] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const [SimpleModal, setSimpleModal] = useState(false);
+
+    const [hidepassword, setHidepassword] = useState('Hiện')
+    const [ScurePass, setScurePass] = useState(true)
+
     useEffect(() => {
         getFcmToken();
     }, []);
@@ -117,24 +121,48 @@ const Signup = ({ navigation }) => {
                     color: 'black'
                 }}
             />
-            <TextInput
-                value={password}
-                onChangeText={txt => {
-                    setPassword(txt);
-                }}
-                placeholder="Nhập mật khẩu của bạn"
-                placeholderTextColor={'grey'}
-                style={{
-                    width: '84%',
-                    height: 50,
-                    paddingLeft: 15,
-                    borderRadius: 10,
-                    borderWidth: 0.5,
-                    alignSelf: 'center',
-                    marginTop: 20,
-                    color: 'black'
-                }}
-            />
+            <View style={{
+                width: '85%',
+                height: 50,
+                paddingLeft: 15,
+                borderRadius: 10,
+                borderWidth: 0.5,
+                alignSelf: 'center',
+                marginTop: 20,
+                flexDirection:'row'
+            }}>
+                <TextInput
+                    value={password}
+                    onChangeText={txt => {
+                        setPassword(txt);
+                    }}
+                    placeholder="Nhập mật khẩu của bạn"
+                    placeholderTextColor={'grey'}
+                    secureTextEntry={ScurePass}
+                    style={{
+                        width: '85%',
+                        height: 50,
+                        color: 'black'
+                    }}
+                />
+                {password != '' ?
+                    (
+                        <TouchableOpacity
+                            style={{
+                                width: '15%',
+                                justifyContent: 'center',
+                                alignSelf: 'center',
+                                marginEnd: 10,
+                            }}
+                            onPress={() => {
+                                hidepassword == 'Ẩn' ? (setHidepassword('Hiện'), setScurePass(true)) : (setHidepassword('Ẩn'), setScurePass(false))
+                            }}>
+                            <Text style={{
+                                color: 'gray',
+                            }}>{hidepassword}</Text>
+                        </TouchableOpacity>
+                    ) : ''}
+            </View>
             <TouchableOpacity
                 style={{
                     width: '84%',

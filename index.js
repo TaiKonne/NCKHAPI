@@ -9,6 +9,7 @@ import Splash from './Screens/Splash'
 import Add from './Screens/tabs/Add'
 import Home from './Screens/tabs/Home'
 import Setting from './Screens/Setting'
+import Login from './Screens/Login'
 // messaging().setBackgroundMessageHandler(async remoteMessage => {
 //     console.log('vai lon luon', remoteMessage);
 // });

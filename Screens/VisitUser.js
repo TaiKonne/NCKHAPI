@@ -160,7 +160,8 @@ const VisitUser = (props) => {
                     }}>
                     {buafl == 0 ?
                         (<Text style={{ color: 'black', fontSize: 16, marginRight: 10, marginLeft: 10, marginTop: 5, marginBottom: 5 }}>Theo dõi</Text>) :
-                        (<Text style={{ color: 'black', fontSize: 16, marginRight: 10, marginLeft: 10, marginTop: 5, marginBottom: 5 }}>Bỏ theo dõi</Text>)}
+                        (<Text style={{ color: 'black', fontSize: 16, marginRight: 10, marginLeft: 10, marginTop: 5, marginBottom: 5 }}>Bỏ theo dõi</Text>)
+                    }
                 </TouchableOpacity>
                 {/* More  Information */}
                 <TouchableOpacity onPress={() => {
@@ -421,7 +422,7 @@ const VisitUser = (props) => {
                                             {item.name}
                                         </Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity
+                                    {/* <TouchableOpacity
                                         style={{ marginRight: 20 }}
                                         onPress={() => {
                                             navigation.navigate('NewMessage', {
@@ -438,7 +439,7 @@ const VisitUser = (props) => {
                                         <Image
                                             source={require('./images/chat.png')}
                                             style={{ width: 24, height: 24, tintColor: 'orange' }} />
-                                    </TouchableOpacity>
+                                    </TouchableOpacity> */}
                                 </View>
                             );
                         }} />

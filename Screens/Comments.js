@@ -29,7 +29,6 @@ const Comments = () => {
     useEffect(() => {
         getUserId();
         comments = route.params.comments;
-        debugger
         postId = route.params.postId;
         likes = route.params.comments.likes;
         console.log(comments);
@@ -48,7 +47,6 @@ const Comments = () => {
         if (comments != null) {
             temComments = comments;
         }
-        debugger
         let id = uuid.v4();
         temComments.push({
             userId: userId,

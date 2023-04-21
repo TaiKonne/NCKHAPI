@@ -6,12 +6,13 @@ import Loader from './common/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation }) => {
-    const [email, setEmail] = useState('2124802010067@student.tdmu.edu.vn');
-    const [password, setPassword] = useState('1');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
 
     const [checkSignup, setCheckSignUp] = useState(0);
-
+    const [hidepassword, setHidepassword] = useState('Hiện')
+    const [ScurePass, setScurePass] = useState(true)
     const checkLogin = () => {
         if (email !== '' && password !== '') {
             setModalVisible(true);
@@ -84,7 +85,7 @@ const Login = ({ navigation }) => {
     //     });
     // };
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
             <Text
                 style={{
                     alignSelf: 'center',
@@ -103,6 +104,7 @@ const Login = ({ navigation }) => {
                 }}
                 placeholder="Nhập email đã đăng ký tài khoản"
                 placeholderTextColor={'grey'}
+                keyboardType='email-address'
                 style={{
                     width: '84%',
                     height: 50,
@@ -114,24 +116,48 @@ const Login = ({ navigation }) => {
                     color: 'black',
                 }}
             />
-            <TextInput
-                value={password}
-                onChangeText={txt => {
-                    setPassword(txt);
-                }}
-                placeholder="Nhập mật khẩu của bạn"
-                placeholderTextColor={'grey'}
-                style={{
-                    width: '84%',
-                    height: 50,
-                    paddingLeft: 15,
-                    borderRadius: 10,
-                    borderWidth: 0.5,
-                    alignSelf: 'center',
-                    marginTop: 20,
-                    color: 'black',
-                }}
-            />
+            <View style={{
+                width: '84%',
+                height: 50,
+                paddingLeft: 15,
+                borderRadius: 10,
+                borderWidth: 0.5,
+                alignSelf: 'center',
+                marginTop: 20,
+                flexDirection: 'row',
+            }}>
+                <TextInput
+                    value={password}
+                    onChangeText={txt => {
+                        setPassword(txt);
+                    }}
+                    placeholder="Nhập mật khẩu của bạn"
+                    placeholderTextColor={'grey'}
+                    keyboardType='default'
+                    secureTextEntry={ScurePass}
+                    style={{
+                        width: '85%',
+                        color: 'black',
+                    }}
+                />
+                {password != '' ?
+                    (
+                        <TouchableOpacity
+                            style={{
+                                width: '15%',
+                                justifyContent: 'center',
+                                alignSelf: 'center',
+                                marginEnd: 10,
+                            }}
+                            onPress={() => {
+                                hidepassword == 'Ẩn' ? (setHidepassword('Hiện'), setScurePass(true)) : (setHidepassword('Ẩn'), setScurePass(false))
+                            }}>
+                            <Text style={{
+                                color: 'gray',
+                            }}>{hidepassword}</Text>
+                        </TouchableOpacity>
+                    ) : ''}
+            </View>
             <TouchableOpacity
                 style={{
                     width: '84%',

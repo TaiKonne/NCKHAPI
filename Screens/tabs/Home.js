@@ -272,6 +272,7 @@ const Home = (props) => {
 
         if (temp1 != null)
             setPostData(temp1);
+
     }
 
     const getFullData = async () => {

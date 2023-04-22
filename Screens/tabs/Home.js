@@ -1,15 +1,12 @@
 import { View, Text, FlatList, Image, TouchableOpacity, Alert, Modal } from 'react-native';
 import React, { useEffect, useState } from 'react';
-
 import firestore from '@react-native-firebase/firestore';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import UpName from './UpName';
 import UpAv from './UpAv';
 import { request } from 'express';
-
 import { Picker } from '@react-native-picker/picker';
-
 let userId = '';
 const Home = (props) => {
     //props;
@@ -297,8 +294,8 @@ const Home = (props) => {
                             borderWidth: 1,
                             borderColor: 'grey',
                             marginTop: 10,
-                            marginStart: 10,
-                            marginEnd: 10,
+                            marginStart: 15,
+                            marginEnd: 15,
                             borderRadius: 10,
                             justifyContent: 'space-between'
                             // marginBottom:10,
@@ -307,7 +304,7 @@ const Home = (props) => {
                                 <Text style={{ color: 'black', justifyContent: 'center', alignItems: 'center', alignSelf: 'center', marginEnd: 5, marginStart: 10 }}>Ngày</Text>
                                 <View style={{
                                     width: 30,
-                                    height: 50,
+                                    height: 25,
                                     flexDirection: 'row',
                                 }}>
                                     <Picker
@@ -321,7 +318,7 @@ const Home = (props) => {
                                             fontWeight: 'bold',
                                         }}
                                     >
-                                        <Picker.Item label="" value="" />
+                                        <Picker.Item label="Hủy" value="Hủy" />
                                         <Picker.Item label="1" value="1" />
                                         <Picker.Item label="2" value="2" />
                                         <Picker.Item label="3" value="3" />
@@ -361,7 +358,7 @@ const Home = (props) => {
                                 <Text style={{ color: 'black', justifyContent: 'center', alignItems: 'center', alignSelf: 'center', marginEnd: 5, marginStart: 10 }}>Tháng</Text>
                                 <View style={{
                                     width: 30,
-                                    height: 50,
+                                    height: 25,
                                     flexDirection: 'row',
                                 }}>
                                     <Picker
@@ -375,7 +372,7 @@ const Home = (props) => {
                                             fontWeight: 'bold',
                                         }}
                                     >
-                                        <Picker.Item label="" value="" />
+                                        <Picker.Item label="Hủy" value="Hủy" />
                                         <Picker.Item label="1" value="1" />
                                         <Picker.Item label="2" value="2" />
                                         <Picker.Item label="3" value="3" />
@@ -395,7 +392,7 @@ const Home = (props) => {
                                 <Text style={{ color: 'black', justifyContent: 'center', alignItems: 'center', alignSelf: 'center', marginEnd: 5, marginStart: 10 }}>Năm</Text>
                                 <View style={{
                                     width: 30,
-                                    height: 50,
+                                    height: 25,
                                     flexDirection: 'row',
                                 }}>
                                     <Picker
@@ -409,7 +406,7 @@ const Home = (props) => {
                                             fontWeight: 'bold',
                                         }}
                                     >
-                                        <Picker.Item label="" value="" />
+                                        <Picker.Item label="Hủy" value="Hủy" />
                                         <Picker.Item label="2023" value="2023" />
                                         <Picker.Item label="2022" value="2022" />
                                         <Picker.Item label="2021" value="2021" />
@@ -427,7 +424,7 @@ const Home = (props) => {
                             <TouchableOpacity
                                 style={{
                                     borderWidth: 1,
-                                    marginEnd: 10,
+                                    // marginEnd: 10,
                                     borderColor: 'skyblue',
                                     alignItems: 'center',
                                     alignSelf: 'center',

@@ -50,6 +50,7 @@ function Setting(props) {
 
 
     const [isEnabledChangePassword2factor, setEnabledChangePassword2factor] = useState(false)
+    const [check2factor, setCheck2factor] = useState(false)
     const [isEnabledFingerprint, setEnabledFingerprint] = useState(false)
 
     // test change avatar
@@ -317,15 +318,15 @@ function Setting(props) {
                     style={{
                         height: 25,
                         width: 25,
-                        padding:10,
-                        marginStart:10,
+                        padding: 10,
+                        marginStart: 10,
                         tintColor: 'white',
                     }} />
             </TouchableOpacity>
             <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
                 Cài đặt
             </Text>
-            <View style={{width:50 , height: 50 }} />
+            <View style={{ width: 50, height: 50 }} />
         </View>
         <ScrollView>
             {/* language */}
@@ -443,7 +444,7 @@ function Setting(props) {
                             height: 37,
                             width: 250,
                             color: 'black',
-                            borderRadius:10
+                            borderRadius: 10
                         }}
                         value={nameUser}
                         onChangeText={txt => {
@@ -460,14 +461,12 @@ function Setting(props) {
                         marginBottom: 5
                     }}>
                         <TouchableOpacity onPress={() => {
-                            if(nameUser !='')
-                            {
+                            if (nameUser != '') {
                                 setUsernames(0);
                                 updateName();
                             }
-                            else 
-                            {
-                                Alert.alert('','Username không được để trống!');
+                            else {
+                                Alert.alert('', 'Username không được để trống!');
                                 setUsernames(0);
                             }
                         }}>
@@ -621,7 +620,7 @@ function Setting(props) {
                             height: 37,
                             width: 250,
                             color: 'black',
-                            borderRadius:10,
+                            borderRadius: 10,
                         }}
                         value={upBio}
                         onChangeText={txt => {
@@ -810,7 +809,7 @@ function Setting(props) {
                             height: 37,
                             width: 250,
                             color: 'black',
-                            borderRadius:10,
+                            borderRadius: 10,
                         }}
                         autoFocus
                         placeholder='Nhập địa chỉ mail mới'
@@ -892,7 +891,7 @@ function Setting(props) {
                             height: 37,
                             width: 250,
                             color: 'black',
-                            borderRadius:10,
+                            borderRadius: 10,
                         }}
                         autoFocus
                         value={upPhone}
@@ -979,7 +978,7 @@ function Setting(props) {
                             height: 37,
                             width: 250,
                             color: 'black',
-                            borderRadius:10,
+                            borderRadius: 10,
                         }}
                         autoFocus
                         value={upAddress}
@@ -1085,7 +1084,7 @@ function Setting(props) {
                             width: 250,
                             color: 'black',
                             marginBottom: 10,
-                            borderRadius:10,
+                            borderRadius: 10,
                         }}
                         autoFocus
                         placeholder='Nhập mật khẩu cũ'
@@ -1106,7 +1105,7 @@ function Setting(props) {
                             width: 250,
                             color: 'black',
                             marginBottom: 10,
-                            borderRadius:10,
+                            borderRadius: 10,
                         }}
                         autoFocus
                         placeholder='Nhập mật khẩu mới'
@@ -1127,7 +1126,7 @@ function Setting(props) {
                             width: 250,
                             color: 'black',
                             marginBottom: 10,
-                            borderRadius:10,
+                            borderRadius: 10,
                         }}
                         autoFocus
                         placeholder='Nhập lại mật khẩu mới'
@@ -1195,7 +1194,11 @@ function Setting(props) {
                     trackColor={{ false: 'grey', true: 'skyblue' }}
                     thumbColor={isEnabledChangePassword2factor ? 'skyblue' : 'grey'}
                     onValueChange={() => {
-                        setEnabledChangePassword2factor(!isEnabledChangePassword2factor)
+                        isEnabledChangePassword2factor==false 
+                        ? (
+                            setEnabledChangePassword2factor(true),
+                            setCheck2factor(true)
+                        ) : (setEnabledChangePassword2factor(false))
                     }}
                     value={isEnabledChangePassword2factor}
                     style={{
@@ -1203,6 +1206,61 @@ function Setting(props) {
                     }}
                 />
             </View>
+            {check2factor == true ? (
+                <View style={{
+                    // backgroundColor: 'skyblue',
+                    flexDirection: 'row',
+                    // flex: 1,
+                }}>
+                    <TextInput
+                        style={{
+                            backgroundColor: 'white',
+                            borderWidth: 1,
+                            borderColor: 'gray',
+                            marginStart: 30,
+                            height: 37,
+                            width: 250,
+                            color: 'black',
+                            borderRadius: 10,
+                        }}
+                        autoFocus
+                        // value={upAddress}
+                        onChangeText={txt => {
+                            setUpAddress(txt);
+                        }}
+                        placeholder='Nhập địa chỉ mới'
+                        placeholderTextColor={'grey'}
+                    />
+                    <View style={{
+                        // backgroundColor: 'skyblue',
+                        flex: 1,
+                        // marginEnd: 5,
+                        marginBottom: 5
+                    }}>
+                        <TouchableOpacity onPress={() => {
+                            setCheck2factor(false)
+                        }}>
+                            <View style={{
+                                alignSelf: 'flex-end',
+                                borderWidth: 0.2,
+                                borderRadius: 5,
+                                backgroundColor: 'skyblue',
+                                // marginTop: 10,
+                                marginEnd: 30,
+                                height: 35,
+
+                            }}>
+                                <Text style={{
+                                    color: 'white',
+                                    fontSize: 15,
+                                    padding: 5,
+                                    fontWeight: 'bold',
+                                }}>Đặt</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            ) : ""}
             <View style={{ flex: 1, borderWidth: 0.2, borderColor: 'grey', opacity: 0.3 }}></View>
             {/* Đăng nhập bằng vân tay */}
             <View style={{

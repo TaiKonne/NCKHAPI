@@ -1,8 +1,9 @@
-import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, Modal } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { TextInput } from 'react-native-gesture-handler';
 let myId = '';
 let listChat = [];
 let setchat = [];
@@ -17,7 +18,10 @@ const Chat = () => {
     const [UploadedPicUrl, setUploadedPicUrl] = useState('');
     const [chatList, setChatList] = useState([]);
     const navigation = useNavigation();
-    // 
+    // lock messenger
+    const [SimpleModal, setSimpleModal] = useState(false);
+    const [checkLock, setCheckLock] = useState(false);
+    const [checkPassLock, setCheckPassLock] = useState('');
     const getAllChats = async () => {
         myId = await AsyncStorage.getItem('USERID');
         firestore()
@@ -75,16 +79,76 @@ const Chat = () => {
         <View style={{ flex: 1 }}>
             <View
                 style={{
-                    width: '100%',
                     height: 60,
-                    justifyContent: 'center',
-                    // paddingLeft: 20,
                     backgroundColor: 'skyblue',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
                 }}>
+                <View style={{ width: 30, height: 50 }} />
                 <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
                     Messenger
                 </Text>
+                <TouchableOpacity onPress={() => {
+                    setSimpleModal(true)
+                }}>
+                    <Image source={require('../../front_end/icons/lock.png')}
+                        style={{
+                            height: 27,
+                            width: 27,
+                            marginEnd: 10,
+                            tintColor: 'white',
+                        }} />
+                </TouchableOpacity>
             </View>
+            <Modal
+                visible={SimpleModal}
+                animationType="fade"
+                transparent={true}
+            >
+                <View
+                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View
+                        style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, flexDirection: 'column', borderWidth: 0.3, borderColor: 'grey' }}>
+                        <Text style={{ color: 'black' }}>Nhập mật khẩu để mở khóa</Text>
+                        <TextInput 
+                            style={{
+                                borderWidth:1,
+                                borderColor:'grey',
+                                borderRadius:5,
+                                height:37,
+                                marginTop:5,
+                                justifyContent:'center',
+
+                            }}
+                            value={checkPassLock}
+                            onChangeText={txt => {setCheckPassLock(txt)}}
+                            autoFocus
+                            placeholder='Nhập mật khẩu'
+                            placeholderTextColor={'grey'}
+                        >
+                            
+                        </TextInput>
+                        <View style={{ flexDirection: 'row' }}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setSimpleModal(false)
+                                }}>
+                                <Text
+                                    style={{ marginTop: 20, color: 'black', marginStart: 20, fontWeight: 'bold' }}>Hủy</Text>
+                            </TouchableOpacity>
+                            <View style={{ flex: 1 }}></View>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setSimpleModal(false)
+                                }}>
+                                <Text
+                                    style={{ marginTop: 20, color: 'blue', marginEnd: 20, fontWeight: 'bold' }}>Xác nhận</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
             <FlatList
                 data={listChat}
                 renderItem={({ item, index }) => {

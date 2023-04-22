@@ -15,6 +15,7 @@ const Home = (props) => {
     const isFocused = useIsFocused();
     const [postData, setPostData] = useState([]);
     const [upCap, setUpCap] = useState('');
+    const [postData1, setPostData1] = useState([]);
     //filter stt
     const [viewFilter, setViewFilter] = useState(0)
     const [filterDay, setFilterDay] = useState('')
@@ -23,7 +24,6 @@ const Home = (props) => {
 
     useEffect(() => {
         getUserId();
-        let temp = [];
         const gett = firestore()
             .collection('posts')
             .orderBy('createdAt', 'desc')
@@ -31,7 +31,7 @@ const Home = (props) => {
             const g = Snap.docs.map(S => {
                 return { ...S.data() };
             })
-
+            setPostData1(g);
             setPostData(g);
         });
 
@@ -214,12 +214,69 @@ const Home = (props) => {
     const [settingpost, setsettingpost] = useState(0)
     const [SimpleModal, setSimpleModal] = useState(false);
     const [postids, setpostids] = useState('')
-
     const [SimpleModalshare, setSimpleModalShare] = useState(false);
-
     const [abc, setAbc] = useState(null)
 
-    // const [checkdots,setcheckdots] = useState(1);
+    const searchFilter = async (Day, Month, Year) => {
+        let temp = postData;
+        let temp1 = [];
+        if (Day != '' && Month != '' && Year != '') { // d m y
+            for (let i = 0; i < temp.length; i++) {
+                if (temp[i].createdAt.toDate().getDate() == Day && temp[i].createdAt.toDate().getMonth() + 1 == Month && temp[i].createdAt.toDate().getFullYear() == Year) {
+                    temp1.push(temp[i]);
+                }
+            }
+        }
+        else if (Month != '' && Year != '' && Day == '') { // m y
+            for (let i = 0; i < temp.length; i++) {
+                if (temp[i].createdAt.toDate().getMonth() + 1 == Month && temp[i].createdAt.toDate().getFullYear() == Year) {
+                    temp1.push(temp[i]);
+                }
+            }
+        }
+        else if (Day != '' && Month == '' && Year != '') { // d y
+            for (let i = 0; i < temp.length; i++) {
+                if (temp[i].createdAt.toDate().getDate() == Day && temp[i].createdAt.toDate().getFullYear() == Year) {
+                    temp1.push(temp[i]);
+                }
+            }
+        }
+        else if (Day != '' && Month != '' && Year == '') { // d m
+            for (let i = 0; i < temp.length; i++) {
+                if (temp[i].createdAt.toDate().getDate() == Day && temp[i].createdAt.toDate().getMonth() + 1 == Month) {
+                    temp1.push(temp[i]);
+                }
+            }
+        }
+        else if (Day == '' && Month == '' && Year != '') { // y
+            for (let i = 0; i < temp.length; i++) {
+                if (temp[i].createdAt.toDate().getFullYear() == Year) {
+                    temp1.push(temp[i]);
+                }
+            }
+        }
+        else if (Day == '' && Month != '' && Year == '') { // m
+            for (let i = 0; i < temp.length; i++) {
+                if ((temp[i].createdAt.toDate().getMonth() + 1) == Month) {
+                    temp1.push(temp[i]);
+                }
+            }
+        }
+        else if (Day != '' && Month == '' && Year == '') { // d
+            for (let i = 0; i < temp.length; i++) {
+                if (temp[i].createdAt.toDate().getDate() == Day) {
+                    temp1.push(temp[i]);
+                }
+            }
+        }
+
+        if (temp1 != null)
+            setPostData(temp1);
+    }
+
+    const getFullData = async () => {
+        setPostData(setPostData1);
+    }
 
     return (
         <View style={{ flex: 1 }}>
@@ -432,7 +489,12 @@ const Home = (props) => {
                                     borderRadius: 10,
                                 }}
                                 onPress={() => {
-                                    setViewFilter(0)
+                                    setViewFilter(0);
+                                    searchFilter(filterDay, filterMonth, filterYear);
+                                    setFilterDay('');
+                                    setFilterMonth('');
+                                    setFilterYear('');
+                                    // getFullData();
                                 }}
                             >
                                 <Text style={{ color: 'black', margin: 10, fontSize: 18 }}>Lọc</Text>

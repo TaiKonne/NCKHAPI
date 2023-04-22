@@ -7,6 +7,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import UpName from './UpName';
 import UpAv from './UpAv';
 import { request } from 'express';
+
+import { Picker } from '@react-native-picker/picker';
+
 let userId = '';
 const Home = (props) => {
     //props;
@@ -15,6 +18,12 @@ const Home = (props) => {
     const isFocused = useIsFocused();
     const [postData, setPostData] = useState([]);
     const [upCap, setUpCap] = useState('');
+    //filter stt
+    const [viewFilter, setViewFilter] = useState(0)
+    const [filterDay, setFilterDay] = useState('')
+    const [filterMonth, setFilterMonth] = useState('')
+    const [filterYear, setFilterYear] = useState('')
+
     useEffect(() => {
         getUserId();
         let temp = [];
@@ -259,22 +268,182 @@ const Home = (props) => {
                     </View>
 
                 </TouchableOpacity>
-                <View style={{
-                    height: 35,
-                    marginTop: 3,
-                    justifyContent: 'center'
-                }}>
+                <TouchableOpacity
+                    style={{
+                        height: 35,
+                        marginTop: 3,
+                        justifyContent: 'center'
+                    }}
+                    onPress={() => {
+                        viewFilter == 0 ? setViewFilter(1) : setViewFilter(0);
+                    }}
+                >
                     <Image
-                        source={require('../../front_end/icons/image-gallery.png')}
+                        source={require('../../front_end/icons/filter-filled-tool-symbol.png')}
                         style={{
-                            width: 25,
-                            height: 25,
+                            width: 20,
+                            height: 20,
                             marginRight: 15,
-                            tintColor: 'green',
+                            tintColor: 'orange',
                         }}
                     />
-                </View>
+                </TouchableOpacity>
             </View>
+            {
+                viewFilter == 1 ?
+                    (
+                        <View style={{
+                            flexDirection: 'row',
+                            borderWidth: 1,
+                            borderColor: 'grey',
+                            marginTop: 10,
+                            marginStart: 10,
+                            marginEnd: 10,
+                            borderRadius: 10,
+                            justifyContent: 'space-between'
+                            // marginBottom:10,
+                        }}>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={{ color: 'black', justifyContent: 'center', alignItems: 'center', alignSelf: 'center', marginEnd: 5, marginStart: 10 }}>Ngày</Text>
+                                <View style={{
+                                    width: 30,
+                                    height: 50,
+                                    flexDirection: 'row',
+                                }}>
+                                    <Picker
+                                        selectedValue={filterDay}
+                                        value={filterDay}
+                                        onValueChange={(itemValue) => setFilterDay(itemValue)}
+                                        dropdownIconColor={'black'}
+                                        style={{
+                                            flex: 1,
+                                            color: 'black',
+                                            fontWeight: 'bold',
+                                        }}
+                                    >
+                                        <Picker.Item label="" value="" />
+                                        <Picker.Item label="1" value="1" />
+                                        <Picker.Item label="2" value="2" />
+                                        <Picker.Item label="3" value="3" />
+                                        <Picker.Item label="4" value="4" />
+                                        <Picker.Item label="5" value="5" />
+                                        <Picker.Item label="6" value="6" />
+                                        <Picker.Item label="7" value="7" />
+                                        <Picker.Item label="8" value="8" />
+                                        <Picker.Item label="9" value="9" />
+                                        <Picker.Item label="10" value="10" />
+                                        <Picker.Item label="11" value="11" />
+                                        <Picker.Item label="12" value="12" />
+                                        <Picker.Item label="13" value="13" />
+                                        <Picker.Item label="14" value="14" />
+                                        <Picker.Item label="15" value="15" />
+                                        <Picker.Item label="16" value="16" />
+                                        <Picker.Item label="17" value="17" />
+                                        <Picker.Item label="18" value="18" />
+                                        <Picker.Item label="19" value="19" />
+                                        <Picker.Item label="20" value="20" />
+                                        <Picker.Item label="21" value="21" />
+                                        <Picker.Item label="22" value="22" />
+                                        <Picker.Item label="23" value="23" />
+                                        <Picker.Item label="24" value="24" />
+                                        <Picker.Item label="25" value="25" />
+                                        <Picker.Item label="26" value="26" />
+                                        <Picker.Item label="27" value="27" />
+                                        <Picker.Item label="28" value="28" />
+                                        <Picker.Item label="29" value="29" />
+                                        <Picker.Item label="30" value="30" />
+                                        <Picker.Item label="31" value="31" />
+
+                                    </Picker>
+                                </View>
+                            </View>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={{ color: 'black', justifyContent: 'center', alignItems: 'center', alignSelf: 'center', marginEnd: 5, marginStart: 10 }}>Tháng</Text>
+                                <View style={{
+                                    width: 30,
+                                    height: 50,
+                                    flexDirection: 'row',
+                                }}>
+                                    <Picker
+                                        selectedValue={filterMonth}
+                                        value={filterMonth}
+                                        onValueChange={(itemValue) => setFilterMonth(itemValue)}
+                                        dropdownIconColor={'black'}
+                                        style={{
+                                            flex: 1,
+                                            color: 'black',
+                                            fontWeight: 'bold',
+                                        }}
+                                    >
+                                        <Picker.Item label="" value="" />
+                                        <Picker.Item label="1" value="1" />
+                                        <Picker.Item label="2" value="2" />
+                                        <Picker.Item label="3" value="3" />
+                                        <Picker.Item label="4" value="4" />
+                                        <Picker.Item label="5" value="5" />
+                                        <Picker.Item label="6" value="6" />
+                                        <Picker.Item label="7" value="7" />
+                                        <Picker.Item label="8" value="8" />
+                                        <Picker.Item label="9" value="9" />
+                                        <Picker.Item label="10" value="10" />
+                                        <Picker.Item label="11" value="11" />
+                                        <Picker.Item label="12" value="12" />
+                                    </Picker>
+                                </View>
+                            </View>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={{ color: 'black', justifyContent: 'center', alignItems: 'center', alignSelf: 'center', marginEnd: 5, marginStart: 10 }}>Năm</Text>
+                                <View style={{
+                                    width: 30,
+                                    height: 50,
+                                    flexDirection: 'row',
+                                }}>
+                                    <Picker
+                                        selectedValue={filterYear}
+                                        value={filterYear}
+                                        onValueChange={(itemValue) => setFilterYear(itemValue)}
+                                        dropdownIconColor={'black'}
+                                        style={{
+                                            flex: 1,
+                                            color: 'black',
+                                            fontWeight: 'bold',
+                                        }}
+                                    >
+                                        <Picker.Item label="" value="" />
+                                        <Picker.Item label="2023" value="2023" />
+                                        <Picker.Item label="2022" value="2022" />
+                                        <Picker.Item label="2021" value="2021" />
+                                        <Picker.Item label="2020" value="2020" />
+                                        <Picker.Item label="2019" value="2019" />
+                                        <Picker.Item label="2018" value="2018" />
+                                        <Picker.Item label="2017" value="2017" />
+                                        <Picker.Item label="2016" value="2016" />
+                                        <Picker.Item label="2015" value="2015" />
+                                        <Picker.Item label="2014" value="2014" />
+                                        <Picker.Item label="2013" value="2013" />
+                                    </Picker>
+                                </View>
+                            </View>
+                            <TouchableOpacity
+                                style={{
+                                    borderWidth: 1,
+                                    marginEnd: 10,
+                                    borderColor: 'skyblue',
+                                    alignItems: 'center',
+                                    alignSelf: 'center',
+                                    backgroundColor: 'skyblue',
+                                    borderRadius: 10,
+                                }}
+                                onPress={() => {
+                                    setViewFilter(0)
+                                }}
+                            >
+                                <Text style={{ color: 'black', margin: 10, fontSize: 18 }}>Lọc</Text>
+                            </TouchableOpacity>
+                        </View>
+                    )
+                    : ''
+            }
             {postData.length > 0 ? (
                 <FlatList
                     showsVerticalScrollIndicator={false}

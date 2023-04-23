@@ -269,20 +269,20 @@ const NewMessage = (props) => {
               <TouchableOpacity
                 style={{ marginRight: 10 }}
                 onPress={() => {
-                  openGallery();
+                  alert('mic clicked');
                 }}>
                 <Image
-                  source={require('../images/attach.png')}
+                  source={require('../images/mic.png')}
                   style={{ width: 20, height: 20 }}
                 />
               </TouchableOpacity>
               <TouchableOpacity
                 style={{ marginRight: 10 }}
                 onPress={() => {
-                  alert('mic clicked');
+                  openGallery();
                 }}>
                 <Image
-                  source={require('../images/mic.png')}
+                  source={require('../images/image.png')}
                   style={{ width: 20, height: 20 }}
                 />
               </TouchableOpacity>
@@ -292,8 +292,8 @@ const NewMessage = (props) => {
                   openCamera();
                 }}>
                 <Image
-                  source={require('../images/image.png')}
-                  style={{ width: 24, height: 24 }}
+                  source={require('../../front_end/icons/photo-camera.png')}
+                  style={{ width: 20, height: 20 , tintColor:'blue'}}
                 />
               </TouchableOpacity>
               <Send {...props} containerStyle={{ justifyContent: 'center' }}>

@@ -13,7 +13,7 @@ const Chat = () => {
     useEffect(() => {
 
         getAllChats();
-        // getVerify();
+        getVerify();
     }, []);
     const [followers, setFollowers] = useState([]);
     const [UploadedPicUrl, setUploadedPicUrl] = useState('');
@@ -52,7 +52,7 @@ const Chat = () => {
                 })
             });
     };
-
+    const [unLock, setUnLock] = useState(false); // xác nhận điều kiện để hiện hoặc không hiện bảng nhập mật khẩu
     const getVerify = async () => { // lấy mk 2 lớp
         myId = await AsyncStorage.getItem('USERID');
         firestore()
@@ -66,13 +66,14 @@ const Chat = () => {
                 }
             })
     }
-    const [unLock, setUnLock] = useState(false); // xác nhận điều kiện để hiện hoặc không hiện bảng nhập mật khẩu
+    
     const checkScurity = async () => { // như trên
-        getVerify();
+        // getVerify();
         if (scurity2Layer == '') {
             setUnLock(false);
         }
-        else if (scurity2Layer != '') {
+        else 
+        {
             if (checkPassLock === scurity2Layer) {
                 setUnLock(false);
             }
@@ -121,7 +122,7 @@ const Chat = () => {
                     Messenger
                 </Text>
                 <TouchableOpacity onPress={() => {
-                    setSimpleModal(true)
+                    // setSimpleModal(true)
                 }}>
                     <Image source={require('../../front_end/icons/lock.png')}
                         style={{
@@ -133,7 +134,7 @@ const Chat = () => {
                 </TouchableOpacity>
             </View>
             <Modal
-                visible={SimpleModal}
+                visible={unLock}
                 animationType="fade"
                 transparent={true}
             >
@@ -150,6 +151,7 @@ const Chat = () => {
                                 height: 37,
                                 marginTop: 5,
                                 justifyContent: 'center',
+                                color:'black',
 
                             }}
                             value={checkPassLock}
@@ -157,13 +159,15 @@ const Chat = () => {
                             autoFocus
                             placeholder='Nhập mật khẩu'
                             placeholderTextColor={'grey'}
+                            secureTextEntry={true}
                         >
 
                         </TextInput>
                         <View style={{ flexDirection: 'row' }}>
                             <TouchableOpacity
                                 onPress={() => {
-                                    setSimpleModal(false)
+                                    setUnLock(false)
+                                    listChat = [] // bu'a 
                                 }}>
                                 <Text
                                     style={{ marginTop: 20, color: 'black', marginStart: 20, fontWeight: 'bold' }}>Hủy</Text>

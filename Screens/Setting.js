@@ -48,11 +48,12 @@ function Setting(props) {
     const [addressInput, setAddressInput] = useState(0) // update address
     const [upAddress, setUpAddress] = useState('');
 
-
+    // verify chat 
     const [isEnabledChangePassword2factor, setEnabledChangePassword2factor] = useState(false)
     const [check2factor, setCheck2factor] = useState(false)
     const [isEnabledFingerprint, setEnabledFingerprint] = useState(false)
-
+    const [passClass2, setPassClass2] = useState('');
+    const [unLock, setUnLock] = useState(false);
     // test change avatar
     const [imageData, setImageData] = useState(null);
     const [imagePicked, setImagePicked] = useState(false);
@@ -64,6 +65,7 @@ function Setting(props) {
 
     useEffect(() => {
         getProfileData();
+        showLock();
     }, []);
 
     const getProfileData = async () => {
@@ -115,6 +117,33 @@ function Setting(props) {
         LưuProfileToStore(url);
         setImagePicked(false);
     };
+
+    const verifyPass2 = async () => { // update mk
+        const userId = await AsyncStorage.getItem('USERID');
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .update({
+                passSecurity2Layer: passClass2,
+            })
+    }
+
+    const showLock = async () => { //
+        // debugger
+        const userId = await AsyncStorage.getItem("USERID");
+        firestore()
+            .collection('Users')
+            .doc(userId)
+            .get()
+            .then(Snap => {
+                // debugger
+                if (Snap._data.passSecurity2Layer != '') {
+                    // debugger
+                    setUnLock(true);
+                    setEnabledChangePassword2factor(true);
+                }
+            })
+    }
 
     const LưuProfileToStore = async url => {
         const userId = await AsyncStorage.getItem('USERID');
@@ -1194,11 +1223,11 @@ function Setting(props) {
                     trackColor={{ false: 'grey', true: 'skyblue' }}
                     thumbColor={isEnabledChangePassword2factor ? 'skyblue' : 'grey'}
                     onValueChange={() => {
-                        isEnabledChangePassword2factor==false 
-                        ? (
-                            setEnabledChangePassword2factor(true),
-                            setCheck2factor(true)
-                        ) : (setEnabledChangePassword2factor(false))
+                        isEnabledChangePassword2factor == false
+                            ? (
+                                setEnabledChangePassword2factor(true),
+                                setCheck2factor(true)
+                            ) : (setEnabledChangePassword2factor(false))
                     }}
                     value={isEnabledChangePassword2factor}
                     style={{
@@ -1224,11 +1253,11 @@ function Setting(props) {
                             borderRadius: 10,
                         }}
                         autoFocus
-                        // value={upAddress}
+                        value={passClass2}
                         onChangeText={txt => {
-                            setUpAddress(txt);
+                            setPassClass2(txt); //aaa
                         }}
-                        placeholder='Nhập địa chỉ mới'
+                        placeholder='Nhập mật khẩu lớp 2'
                         placeholderTextColor={'grey'}
                     />
                     <View style={{
@@ -1239,6 +1268,7 @@ function Setting(props) {
                     }}>
                         <TouchableOpacity onPress={() => {
                             setCheck2factor(false)
+                            verifyPass2();
                         }}>
                             <View style={{
                                 alignSelf: 'flex-end',

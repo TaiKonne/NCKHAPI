@@ -45,6 +45,8 @@ const Signup = ({ navigation }) => {
                 numberPhone: '',
                 gender: '',
                 chatList: [],
+                security: false,
+                passSecurity2Layer: '',
             })
             .then(() => {
                 console.log('User added!');
@@ -129,7 +131,7 @@ const Signup = ({ navigation }) => {
                 borderWidth: 0.5,
                 alignSelf: 'center',
                 marginTop: 20,
-                flexDirection:'row'
+                flexDirection: 'row'
             }}>
                 <TextInput
                     value={password}

@@ -4,15 +4,17 @@ import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { TextInput } from 'react-native-gesture-handler';
+import { rewriteURIForGET } from '@apollo/client';
 let myId = '';
 let listChat = [];
 let setchat = [];
 const Chat = () => {
+
     useEffect(() => {
         listChat = [];
         setchat = [];
         getAllChats();
-        // getFollower();
+        getVerify();
     }, []);
     const [followers, setFollowers] = useState([]);
     const [UploadedPicUrl, setUploadedPicUrl] = useState('');
@@ -22,6 +24,7 @@ const Chat = () => {
     const [SimpleModal, setSimpleModal] = useState(false);
     const [checkLock, setCheckLock] = useState(false);
     const [checkPassLock, setCheckPassLock] = useState('');
+    const [scurity2Layer, setScurity2Layer] = useState('');
     const getAllChats = async () => {
         myId = await AsyncStorage.getItem('USERID');
         firestore()
@@ -30,7 +33,6 @@ const Chat = () => {
             .onSnapshot(documentSnapshot => {
                 console.log(documentSnapshot);
                 setchat = documentSnapshot._data.chatList;
-
                 setchat.map(item => {
                     firestore()
                         .collection('Users')
@@ -49,6 +51,32 @@ const Chat = () => {
                 })
             });
     };
+
+    const getVerify = async () => { // lấy mk 2 lớp
+        myId = await AsyncStorage.getItem('USERID');
+        firestore()
+            .collection('Users')
+            .doc(myId)
+            .get()
+            .then(Snap => {
+                setScurity2Layer(Snap._data.passSecurity2Layer);
+            })
+    }
+    const [unLock, setUnLock] = useState(false); // xác nhận điều kiện để hiện hoặc không hiện bảng nhập mật khẩu
+    const checkScurity = async () => { // như trên
+        if (scurity2Layer == '') {
+            setUnLock(true);
+        }
+        else if (scurity2Layer != '') {
+            if (checkPassLock === scurity2Layer) {
+                setSimpleModal(true);
+            }
+            else {
+                setSimpleModal(false);
+            }
+        }
+        debugger
+    }
 
     const deleteChat = async user => {
         let temp = [];
@@ -111,23 +139,23 @@ const Chat = () => {
                     <View
                         style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, flexDirection: 'column', borderWidth: 0.3, borderColor: 'grey' }}>
                         <Text style={{ color: 'black' }}>Nhập mật khẩu để mở khóa</Text>
-                        <TextInput 
+                        <TextInput
                             style={{
-                                borderWidth:1,
-                                borderColor:'grey',
-                                borderRadius:5,
-                                height:37,
-                                marginTop:5,
-                                justifyContent:'center',
+                                borderWidth: 1,
+                                borderColor: 'grey',
+                                borderRadius: 5,
+                                height: 37,
+                                marginTop: 5,
+                                justifyContent: 'center',
 
                             }}
                             value={checkPassLock}
-                            onChangeText={txt => {setCheckPassLock(txt)}}
+                            onChangeText={txt => { setCheckPassLock(txt) }}
                             autoFocus
                             placeholder='Nhập mật khẩu'
                             placeholderTextColor={'grey'}
                         >
-                            
+
                         </TextInput>
                         <View style={{ flexDirection: 'row' }}>
                             <TouchableOpacity
@@ -140,7 +168,7 @@ const Chat = () => {
                             <View style={{ flex: 1 }}></View>
                             <TouchableOpacity
                                 onPress={() => {
-                                    setSimpleModal(false)
+                                    checkScurity();
                                 }}>
                                 <Text
                                     style={{ marginTop: 20, color: 'blue', marginEnd: 20, fontWeight: 'bold' }}>Xác nhận</Text>

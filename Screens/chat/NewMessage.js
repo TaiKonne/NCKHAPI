@@ -49,6 +49,7 @@ const NewMessage = (props) => {
     let myMsg = null;
     if (imageUrl !== '') {
       const msg = messageArray[0];
+      msg.text = msg.text + " ";
       myMsg = {
         ...msg,
         senderId: route.params.data.myId,
@@ -57,6 +58,7 @@ const NewMessage = (props) => {
       };
     } else {
       const msg = messageArray[0];
+      msg.text = msg.text + " ";
       myMsg = {
         ...msg,
         senderId: route.params.data.myId,

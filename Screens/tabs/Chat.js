@@ -11,8 +11,7 @@ let setchat = [];
 const Chat = () => {
 
     useEffect(() => {
-        listChat = [];
-        setchat = [];
+
         getAllChats();
         // getVerify();
     }, []);
@@ -28,10 +27,14 @@ const Chat = () => {
 
     const getAllChats = async () => {
         myId = await AsyncStorage.getItem('USERID');
+
         firestore()
             .collection('Users')
             .doc(myId)
-            .onSnapshot(documentSnapshot => {
+            .get()
+            .then(documentSnapshot => {
+                listChat = [];
+                setchat = [];
                 console.log(documentSnapshot);
                 setchat = documentSnapshot._data.chatList;
                 setchat.map(item => {
@@ -46,7 +49,6 @@ const Chat = () => {
                                 profilePic: Snapp._data.profilePic,
                             })
                         })
-
                 })
             });
     };
@@ -59,22 +61,25 @@ const Chat = () => {
             .get()
             .then(Snap => {
                 setScurity2Layer(Snap._data.passSecurity2Layer);
+                if (Snap._data.passSecurity2Layer != '') {
+                    setUnLock(true);
+                }
             })
     }
     const [unLock, setUnLock] = useState(false); // xác nhận điều kiện để hiện hoặc không hiện bảng nhập mật khẩu
     const checkScurity = async () => { // như trên
+        getVerify();
         if (scurity2Layer == '') {
-            setUnLock(true);
+            setUnLock(false);
         }
         else if (scurity2Layer != '') {
             if (checkPassLock === scurity2Layer) {
-                setSimpleModal(true);
+                setUnLock(false);
             }
             else {
-                setSimpleModal(false);
+                setUnLock(true);
             }
         }
-        debugger
     }
 
     const deleteChat = async user => {

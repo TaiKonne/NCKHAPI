@@ -14,7 +14,7 @@ const Chat = () => {
         listChat = [];
         setchat = [];
         getAllChats();
-        getVerify();
+        // getVerify();
     }, []);
     const [followers, setFollowers] = useState([]);
     const [UploadedPicUrl, setUploadedPicUrl] = useState('');
@@ -25,6 +25,7 @@ const Chat = () => {
     const [checkLock, setCheckLock] = useState(false);
     const [checkPassLock, setCheckPassLock] = useState('');
     const [scurity2Layer, setScurity2Layer] = useState('');
+
     const getAllChats = async () => {
         myId = await AsyncStorage.getItem('USERID');
         firestore()
@@ -39,8 +40,6 @@ const Chat = () => {
                         .doc(item.chatUserId)
                         .get()
                         .then(Snapp => {
-                            let tmp = 0;
-                            console.log(Snapp);
                             listChat.push({
                                 userId: Snapp._data.userId,
                                 name: Snapp._data.name,
@@ -102,7 +101,6 @@ const Chat = () => {
                     })
             })
     }
-
     return (
         <View style={{ flex: 1 }}>
             <View

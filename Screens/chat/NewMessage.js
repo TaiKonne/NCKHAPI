@@ -41,7 +41,7 @@ const NewMessage = (props) => {
       });
       setMessages(allMessages);
     });
-    
+
   }, []);
 
   const onSend = messageArray => {
@@ -124,22 +124,25 @@ const NewMessage = (props) => {
 
   const openCamera = async () => {
     const result = await launchCamera({ mediaType: 'photo' });
-    console.log(result);
     if (result.didCancel && result.didCancel == true) {
     } else {
       setImageData(result);
       uplaodImage(result);
     }
   };
+  const openGallery = async () => {
+    const result = await launchImageLibrary({ mediaType: 'photo' });
+    setImageData(result);
+    uplaodImage(result);
+  };
 
   const uplaodImage = async imageDataa => {
     const reference = storage().ref(imageDataa.assets[0].fileName);
-    const pathToFile = imageData.assets[0].uri;
+    const pathToFile = imageDataa.assets[0].uri;
     await reference.putFile(pathToFile);
     const url = await storage()
-      .ref(imageData.assets[0].fileName)
+      .ref(imageDataa.assets[0].fileName)
       .getDownloadURL();
-    console.log('url', url);
     setImageUrl(url);
   };
 
@@ -192,7 +195,7 @@ const NewMessage = (props) => {
           bottom: 6,
         }}>
         </View> */}
-        
+
         {/* <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
           Tai con
         </Text> */}
@@ -264,7 +267,7 @@ const NewMessage = (props) => {
               <TouchableOpacity
                 style={{ marginRight: 10 }}
                 onPress={() => {
-                  alert('attach clicked');
+                  openGallery();
                 }}>
                 <Image
                   source={require('../images/attach.png')}

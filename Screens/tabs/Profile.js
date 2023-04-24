@@ -110,13 +110,13 @@ const Profile = () => {
                             flo1.findIndex((item) => item.userId == obj.userId) == index
                         );
                         if (unique1 != null) {
-                            setFollowing(unique1);
                             firestore()
-                                .collection('Users')
-                                .doc(userId)
-                                .update({
-                                    following: unique1
-                                })
+                            .collection('Users')
+                            .doc(userId)
+                            .update({
+                                following: unique1
+                            })
+                            setFollowing(unique1);
                         }
                     }
                 }

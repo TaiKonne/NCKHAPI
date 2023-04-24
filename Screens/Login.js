@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, LogBox } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
@@ -13,6 +13,7 @@ const Login = ({ navigation }) => {
     const [checkSignup, setCheckSignUp] = useState(0);
     const [hidepassword, setHidepassword] = useState('Hiện')
     const [ScurePass, setScurePass] = useState(true)
+    LogBox.ignoreAllLogs();
     const checkLogin = () => {
         if (email !== '' && password !== '') {
             setModalVisible(true);

@@ -28,7 +28,6 @@ const Search = () => {
           }
         });
         setUsersList(tempUsers);
-
       });
   };
 
@@ -128,7 +127,7 @@ const Search = () => {
           .then(res => { })
           .catch(error => {
             console.log(error);
-          });
+          }); 
       })
       .catch(error => {
         console.log;

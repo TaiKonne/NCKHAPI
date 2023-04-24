@@ -42,6 +42,7 @@ const Profile = () => {
     const [Name, setName] = useState('');
     useEffect(() => {
         getProfileData();
+        setUser();
     }, []);
 
     const getProfileData = async () => {
@@ -69,59 +70,62 @@ const Profile = () => {
                     console.log('data ', documentSnapshot.data().following);
                     temp.sort((a, b) => b.time - a.time);
                     setPS(temp);
-
-                    let flo = followers;
-                    let co = 0;
-                    for (let i = 0; i < flo.length - 1; i++) {
-                        for (let j = i + 1; j < flo.length; j++) {
-                            if (flo[i].userId == flo[j].userId) {
-                                co = 1;
-                            }
-                        }
-                    }
-                    if (co == 1) {
-
-                        const unique = flo.filter((obj, index) =>
-                            flo.findIndex((item) => item.userId == obj.userId) == index
-                        );
-                        if (unique != null) {
-
-                            firestore()
-                                .collection('Users')
-                                .doc(userId)
-                                .update({
-                                    followers: unique,
-                                })
-                            setFollowers(unique);
-
-                        }
-                    }
-                    let flo1 = following;
-                    let co1 = 0;
-                    for (let i = 0; i < flo1.length - 1; i++) {
-                        for (let j = i + 1; j < flo1.length; j++) {
-                            if (flo1[i].userId == flo1[j].userId) {
-                                co1 = 1;
-                            }
-                        }
-                    }
-                    if (co1 == 1) {
-                        const unique1 = flo1.filter((obj, index) =>
-                            flo1.findIndex((item) => item.userId == obj.userId) == index
-                        );
-                        if (unique1 != null) {
-                            firestore()
-                            .collection('Users')
-                            .doc(userId)
-                            .update({
-                                following: unique1
-                            })
-                            setFollowing(unique1);
-                        }
-                    }
+                    setUser();
                 }
             });
     };
+
+    const setUser = async () => {
+        let flo = followers;
+        let co = 0;
+        for (let i = 0; i < flo.length - 1; i++) {
+            for (let j = i + 1; j < flo.length; j++) {
+                if (flo[i].userId == flo[j].userId) {
+                    co = 1;
+                }
+            }
+        }
+        if (co == 1) {
+
+            const unique = flo.filter((obj, index) =>
+                flo.findIndex((item) => item.userId == obj.userId) == index
+            );
+            if (unique != null) {
+
+                firestore()
+                    .collection('Users')
+                    .doc(userId)
+                    .update({
+                        followers: unique,
+                    })
+                setFollowers(unique);
+
+            }
+        }
+        let flo1 = following;
+        let co1 = 0;
+        for (let i = 0; i < flo1.length - 1; i++) {
+            for (let j = i + 1; j < flo1.length; j++) {
+                if (flo1[i].userId == flo1[j].userId) {
+                    co1 = 1;
+                }
+            }
+        }
+        if (co1 == 1) {
+            const unique1 = flo1.filter((obj, index) =>
+                flo1.findIndex((item) => item.userId == obj.userId) == index
+            );
+            if (unique1 != null) {
+                firestore()
+                    .collection('Users')
+                    .doc(userId)
+                    .update({
+                        following: unique1
+                    })
+                setFollowing(unique1);
+            }
+        }
+    }
 
     const openCamera = async () => {
         const result = await launchCamera({ mediaType: 'photo' });
@@ -470,6 +474,7 @@ const Profile = () => {
                             setSelectedTabFollower(1);
                             setSelectedTabFollowing(0);
                             settabdefault(0);
+                            setUser();
                         }}>
                         <Text style={{ fontSize: 16, color: 'black' }}>Đang theo dõi</Text>
                         <Text style={{ fontSize: 15, color: 'grey' }}>{following.length}</Text>
@@ -563,7 +568,7 @@ const Profile = () => {
                                         style={{ flexDirection: 'row', alignItems: 'center' }}
                                         onPress={() => {
                                             // Alert.alert('Nút vào profile người khác','Vào profile')
-                                            navigation.navigate('VisitUser',  {
+                                            navigation.navigate('VisitUser', {
                                                 userId: item.userId,
                                                 myId: userId,
                                             });

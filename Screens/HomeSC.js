@@ -8,7 +8,9 @@ import Home from './tabs/Home'
 import Add from './tabs/Add'
 import Chat from './tabs/Chat'
 import Profile from './tabs/Profile'
+import { useEffect } from 'react'
 const HomeSC = () => {
+    
     const [sellectedTab, setSellectedTab] = useState(0);
     const [imageData, setImageData] = useState(null);
     const [imageUrl, setImageUrl] = useState('');

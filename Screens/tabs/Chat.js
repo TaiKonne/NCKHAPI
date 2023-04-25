@@ -25,6 +25,9 @@ const Chat = () => {
     const [checkPassLock, setCheckPassLock] = useState('');
     const [scurity2Layer, setScurity2Layer] = useState('');
 
+    //xoa tin nhan
+    const [openModal, setOpenModal] = useState(false);
+
     const getAllChats = async () => {
         myId = await AsyncStorage.getItem('USERID');
 
@@ -66,14 +69,13 @@ const Chat = () => {
                 }
             })
     }
-    
+
     const checkScurity = async () => { // như trên
         // getVerify();
         if (scurity2Layer == '') {
             setUnLock(false);
         }
-        else 
-        {
+        else {
             if (checkPassLock === scurity2Layer) {
                 setUnLock(false);
             }
@@ -151,7 +153,7 @@ const Chat = () => {
                                 height: 37,
                                 marginTop: 5,
                                 justifyContent: 'center',
-                                color:'black',
+                                color: 'black',
 
                             }}
                             value={checkPassLock}
@@ -235,7 +237,7 @@ const Chat = () => {
                             <TouchableOpacity
                                 style={{ marginEnd: 20 }}
                                 onPress={() => {
-                                    deleteChat(item.userId);
+                                    setOpenModal(!openModal)
                                 }}
                             >
                                 <Image
@@ -243,6 +245,38 @@ const Chat = () => {
                                     style={{ width: 22, height: 22, marginLeft: 20, tintColor: 'black', }}
                                 />
                             </TouchableOpacity>
+                            <Modal
+                                visible={openModal}
+                                animationType="fade"
+                                transparent={true}
+                            >
+                                <View
+                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <View
+                                        style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, flexDirection: 'column', borderWidth: 0.3, borderColor: 'grey' }}>
+                                        <Text
+                                            style={{ color: 'black' }}>Bạn muốn xóa tin nhắn này</Text>
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <TouchableOpacity
+                                                onPress={() => {
+                                                    setOpenModal(false)
+                                                }}>
+                                                <Text
+                                                    style={{ marginTop: 20, color: 'black', marginStart: 20, fontWeight: 'bold' }}>Hủy</Text>
+                                            </TouchableOpacity>
+                                            <View style={{ flex: 1 }}></View>
+                                            <TouchableOpacity
+                                                onPress={() => {
+                                                    deleteChat(item.userId);
+                                                    setOpenModal(false)
+                                                }}>
+                                                <Text
+                                                    style={{ marginTop: 20, color: 'blue', marginEnd: 20, fontWeight: 'bold' }}>Xóa</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
+                                </View>
+                            </Modal>
                         </View>
 
                     );

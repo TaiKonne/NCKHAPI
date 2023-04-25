@@ -515,7 +515,7 @@ function Setting(props) {
                                     padding: 5,
                                     fontWeight: 'bold',
 
-                                }}>Lưu</Text>
+                                }}> Lưu </Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -682,7 +682,7 @@ function Setting(props) {
                                     padding: 5,
                                     fontWeight: 'bold',
 
-                                }}>Lưu</Text>
+                                }}> Lưu </Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -770,7 +770,7 @@ function Setting(props) {
                             fontSize: 15,
                             padding: 5,
                             fontWeight: 'bold',
-                        }}>Lưu</Text>
+                        }}> Lưu </Text>
                     </View>
                 </TouchableOpacity>
             </View> : ""}
@@ -866,7 +866,7 @@ function Setting(props) {
                                     padding: 5,
                                     fontWeight: 'bold',
 
-                                }}>Lưu</Text>
+                                }}> Lưu </Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -953,7 +953,7 @@ function Setting(props) {
                                     padding: 5,
                                     fontWeight: 'bold',
 
-                                }}>Lưu</Text>
+                                }}> Lưu </Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -1042,7 +1042,7 @@ function Setting(props) {
                                     fontSize: 15,
                                     padding: 5,
                                     fontWeight: 'bold',
-                                }}>Lưu</Text>
+                                }}> Lưu </Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -1192,7 +1192,7 @@ function Setting(props) {
                                     padding: 5,
                                     fontWeight: 'bold',
 
-                                }}>Lưu</Text>
+                                }}> Lưu </Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -1217,7 +1217,7 @@ function Setting(props) {
                     fontSize: 15,
                     paddingStart: 5,
 
-                }}>Bảo mật hai lớp</Text>
+                }}>Bảo mật tin nhắn</Text>
                 <View style={{ flex: 1 }} ></View>
                 <Switch
                     trackColor={{ false: 'grey', true: 'skyblue' }}
@@ -1257,7 +1257,7 @@ function Setting(props) {
                         onChangeText={txt => {
                             setPassClass2(txt); //aaa
                         }}
-                        placeholder='Nhập mật khẩu lớp 2'
+                        placeholder='Nhập mật khẩu bảo mật'
                         placeholderTextColor={'grey'}
                     />
                     <View style={{
@@ -1285,7 +1285,7 @@ function Setting(props) {
                                     fontSize: 15,
                                     padding: 5,
                                     fontWeight: 'bold',
-                                }}>Đặt</Text>
+                                }}> Đặt </Text>
                             </View>
                         </TouchableOpacity>
                     </View>

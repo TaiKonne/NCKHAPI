@@ -41,39 +41,69 @@ const Profile = () => {
     // name
     const [Name, setName] = useState('');
     useEffect(() => {
-        getProfileData();
-        setUser();
-    }, []);
-
-    const getProfileData = async () => {
-        userId = await AsyncStorage.getItem('USERID');
-        firestore()
+        getuserId();
+        const getProfireData = firestore()
             .collection('Users')
-            .doc(userId)
-            .get()
-            .then(documentSnapshot => {
-                console.log('User exists: ', documentSnapshot.exists);
-                let temp = [];
-                if (documentSnapshot.exists) {
-                    console.log('User data: ', documentSnapshot.data());
-                    setUploadedPicUrl(documentSnapshot.data().profilePic);
-                    setFollowers(documentSnapshot.data().followers);
-                    setFollowing(documentSnapshot.data().following);
-                    setBio(documentSnapshot.data().bio);
-                    setNumberPhone(documentSnapshot.data().numberPhone);
-                    setAddress(documentSnapshot.data().address);
-                    setMail(documentSnapshot.data().email);
-                    setImageWall(documentSnapshot.data().picWal);
-                    temp = (documentSnapshot.data().posts);
-                    setName(documentSnapshot.data().name);
-                    setgender(documentSnapshot.data().gender);
-                    console.log('data ', documentSnapshot.data().following);
+        getProfireData.onSnapshot(Snap => {
+            let gg;
+            const g = Snap._docs.map(Snapdoc => {
+                let temp;
+                if (Snapdoc._data.userId == userId) {
+                    gg = Snapdoc._data;
+                    setUploadedPicUrl(gg.profilePic);
+                    setFollowers(gg.followers);
+                    setFollowing(gg.following);
+                    setBio(gg.bio);
+                    setNumberPhone(gg.numberPhone);
+                    setAddress(gg.address);
+                    setMail(gg.email);
+                    setImageWall(gg.picWal);
+                    temp = (gg.posts);
+                    setName(gg.name);
+                    setgender(gg.gender);
+                    console.log('data ', gg.following);
                     temp.sort((a, b) => b.time - a.time);
                     setPS(temp);
                     setUser();
                 }
-            });
-    };
+            })
+        })
+
+        // setUser();
+    }, []);
+
+    const getuserId = async () => {
+        userId = await AsyncStorage.getItem('USERID');
+    }
+    // const getProfileData = async () => {
+    //     userId = await AsyncStorage.getItem('USERID');
+    //     firestore()
+    //         .collection('Users')
+    //         .doc(userId)
+    //         .get()
+    //         .then(documentSnapshot => {
+    //             console.log('User exists: ', documentSnapshot.exists);
+    //             let temp = [];
+    //             if (documentSnapshot.exists) {
+    //                 console.log('User data: ', documentSnapshot.data());
+    //                 setUploadedPicUrl(documentSnapshot.data().profilePic);
+    //                 setFollowers(documentSnapshot.data().followers);
+    //                 setFollowing(documentSnapshot.data().following);
+    //                 setBio(documentSnapshot.data().bio);
+    //                 setNumberPhone(documentSnapshot.data().numberPhone);
+    //                 setAddress(documentSnapshot.data().address);
+    //                 setMail(documentSnapshot.data().email);
+    //                 setImageWall(documentSnapshot.data().picWal);
+    //                 temp = (documentSnapshot.data().posts);
+    //                 setName(documentSnapshot.data().name);
+    //                 setgender(documentSnapshot.data().gender);
+    //                 console.log('data ', documentSnapshot.data().following);
+    //                 temp.sort((a, b) => b.time - a.time);
+    //                 setPS(temp);
+    //                 setUser();
+    //             }
+    //         });
+    // };
 
     const setUser = async () => {
         let flo = followers;
@@ -456,6 +486,7 @@ const Profile = () => {
                             setSelectedTabFollower(0);
                             setSelectedTabFollowing(1);
                             settabdefault(0);
+                            setUser();
                         }}>
                         <Text style={{ fontSize: 16, color: 'black' }}>Người theo dõi</Text>
                         <Text style={{ fontSize: 15, color: 'grey' }}>{followers.length}</Text>

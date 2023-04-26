@@ -125,6 +125,7 @@ const NewMessage = (props) => {
   };
 
   const openCamera = async () => {
+    
     const result = await launchCamera({ mediaType: 'photo' });
     if (result.didCancel && result.didCancel == true) {
     } else {
@@ -172,35 +173,9 @@ const NewMessage = (props) => {
               tintColor: 'white',
             }} />
         </TouchableOpacity>
-        {/* <View style={{ flex: 1 }}></View> */}
-        {/* <View style={{
-          marginStart: 10,
-        }}>
-        <Image source={require('../images/user.png')}
-            style={{
-              height: 50,
-              width: 50,
-              marginEnd: 10,
-            }} />
-        </View> */}
+
         {<UpAv cons={user2} />}
 
-        {/* <View style={{
-          borderWidth: 1,
-          borderColor: '#64b72e',
-          backgroundColor: '#64b72e',
-          height: 12,
-          width: 12,
-          borderRadius: 6,
-          position: 'absolute',
-          left: 135,
-          bottom: 6,
-        }}>
-        </View> */}
-
-        {/* <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
-          Tai con
-        </Text> */}
         {<UpName cons={user2} />}
 
         <View style={{ flex: 1 }}></View>
@@ -293,7 +268,7 @@ const NewMessage = (props) => {
                 }}>
                 <Image
                   source={require('../../front_end/icons/photo-camera.png')}
-                  style={{ width: 20, height: 20 , tintColor:'blue'}}
+                  style={{ width: 20, height: 20, tintColor: 'blue' }}
                 />
               </TouchableOpacity>
               <Send {...props} containerStyle={{ justifyContent: 'center' }}>
